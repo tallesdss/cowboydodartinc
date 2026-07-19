@@ -1,0 +1,211 @@
+# Codemagic CI/CD — shipped by the Kasy `ci` feature.
+#
+# iOS and Android run as SEPARATE workflows (ios-workflow / android-workflow),
+# so you can build and publish each platform on its own. `kasy codemagic release`
+# triggers them: `--ios`, `--android`, or both.
+#
+# App keys (RevenueCat, backend URL, Sentry, Mixpanel, App Store id) arrive as
+# ENVIRONMENT VARIABLES, two ways:
+#   1. `kasy codemagic release` injects them automatically from your local .env, or
+#   2. you store them in the Codemagic UI as variable groups.
+# The "Generate .env" step below rebuilds the app's .env asset from those vars,
+# so the build always has the production RevenueCat keys (appl_/goog_) — never
+# the test_ key. ENV=prod is also passed as a dart-define (compile-time const).
+#
+# What you still set up ONCE in the Codemagic dashboard (UI-only, by design):
+#   - Connect your Git repository (Add application)
+#   - iOS: App Store Connect integration (the Apple API key)
+#   - Android: upload the keystore + the Google Play service account JSON
+
+workflows:
+  android-workflow:
+    name: Android Workflow
+    instance_type: mac_mini_m1
+    max_build_duration: 120
+    environment:
+      android_signing:
+        - keystore_reference # <-- Reference name of the keystore you upload in the Codemagic UI
+      groups:
+        - google_play # <-- Group holding GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS (and any app keys)
+      vars:
+        PACKAGE_NAME: com.cowboydodartinc.app # <-- Your Android applicationId
+        GOOGLE_PLAY_TRACK: "internal" # <-- internal | alpha | beta | production
+      flutter: stable
+    triggering:
+      cancel_previous_builds: true
+      events:
+        - push
+      branch_patterns:
+        - pattern: '*'
+          include: false
+          source: false
+        - pattern: 'main'
+          include: true
+          source: true
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Generate .env from build environment
+        script: |
+          # The app reads its config from a bundled .env asset at runtime. That
+          # file is gitignored (never in the repo), so recreate it here from the
+          # environment variables provided by `kasy codemagic release` or by a
+          # Codemagic variable group. In a release build the app uses the
+          # production RevenueCat key (appl_/goog_) from RC_*_PROD_KEY.
+          cat > "$CM_BUILD_DIR/.env" <<EOF
+          ENV=prod
+          BACKEND_URL=${BACKEND_URL:-}
+          AI_CHAT_ENDPOINT=${AI_CHAT_ENDPOINT:-}
+          RC_TEST_KEY=${RC_TEST_KEY:-}
+          RC_IOS_PROD_KEY=${RC_IOS_PROD_KEY:-}
+          RC_ANDROID_PROD_KEY=${RC_ANDROID_PROD_KEY:-}
+          MIXPANEL_TOKEN=${MIXPANEL_TOKEN:-}
+          SENTRY_DSN=${SENTRY_DSN:-}
+          APP_STORE_ID=${APP_STORE_ID:-}
+          EOF
+      - name: Unit tests
+        script: |
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json
+        test_report: test-results/flutter.json
+      - name: Build AAB with Flutter
+        script: |
+          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks="$GOOGLE_PLAY_TRACK") + 1))
+          flutter build appbundle --release \
+            --dart-define=ENV=prod \
+            --build-name=1.0.$BUILD_NUMBER \
+            --build-number=$BUILD_NUMBER
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          -  # <-- Put your email here or add others recipients
+        notify:
+          success: true
+          failure: true
+      google_play:
+        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
+        track: $GOOGLE_PLAY_TRACK
+        submit_as_draft: true
+  ios-workflow:
+    name: iOS Workflow
+    instance_type: mac_mini_m1
+    max_build_duration: 120
+    integrations:
+      app_store_connect: codemagic # <-- Name of your App Store Connect integration (Codemagic UI)
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.cowboydodartinc.app # <-- Your iOS bundle identifier
+      # APP_ID (numeric App Store Connect id) and the app keys arrive as
+      # environment variables: `kasy codemagic release` sends them from your .env.
+      # No variable group is required for iOS (App Store auth uses the integration
+      # above). For dashboard/push-triggered builds, add the keys as environment
+      # variables in the Codemagic app settings and a `groups:` entry here.
+      flutter: stable
+      xcode: latest # <-- set to specific version e.g. 15.0 to avoid unexpected updates.
+      cocoapods: default
+    triggering:
+      cancel_previous_builds: true
+      events:
+        - push
+      branch_patterns:
+        - pattern: '*'
+          include: false
+          source: false
+        - pattern: 'main'
+          include: true
+          source: true
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Validate Google Sign-In iOS URL scheme
+        script: |
+          GOOGLE_PLIST="ios/Runner/GoogleService-Info.plist"
+          INFO_PLIST="ios/Runner/Info.plist"
+          if [ -f "$GOOGLE_PLIST" ]; then
+            REVERSED_CLIENT_ID=$(/usr/libexec/PlistBuddy -c "Print :REVERSED_CLIENT_ID" "$GOOGLE_PLIST" 2>/dev/null || true)
+            if [ -z "$REVERSED_CLIENT_ID" ]; then
+              echo "REVERSED_CLIENT_ID not found in $GOOGLE_PLIST"
+              exit 1
+            fi
+            if ! /usr/libexec/PlistBuddy -c "Print :CFBundleURLTypes" "$INFO_PLIST" 2>/dev/null | grep -Fq "$REVERSED_CLIENT_ID"; then
+              echo "Google Sign-In iOS URL scheme mismatch."
+              echo "Expected CFBundleURLSchemes to include: $REVERSED_CLIENT_ID"
+              echo "Run flutterfire configure/project setup before building."
+              exit 1
+            fi
+          fi
+      - name: Generate .env from build environment
+        script: |
+          # See the Android workflow note above — recreate the bundled .env asset
+          # from environment variables so the release build gets the production
+          # RevenueCat key (appl_) instead of the test_ key.
+          cat > "$CM_BUILD_DIR/.env" <<EOF
+          ENV=prod
+          BACKEND_URL=${BACKEND_URL:-}
+          AI_CHAT_ENDPOINT=${AI_CHAT_ENDPOINT:-}
+          RC_TEST_KEY=${RC_TEST_KEY:-}
+          RC_IOS_PROD_KEY=${RC_IOS_PROD_KEY:-}
+          RC_ANDROID_PROD_KEY=${RC_ANDROID_PROD_KEY:-}
+          MIXPANEL_TOKEN=${MIXPANEL_TOKEN:-}
+          SENTRY_DSN=${SENTRY_DSN:-}
+          APP_STORE_ID=${APP_STORE_ID:-}
+          EOF
+      - name: Flutter analyze # <-- remove if you don't like flutter analyze
+        script: |
+          flutter analyze
+      - name: Flutter unit tests
+        script: |
+          flutter test
+        ignore_failure: false  # You should never build an app that has failing tests.
+      - name: Flutter build ipa and automatic versioning
+        script: |
+          flutter build ipa --release \
+            --dart-define=ENV=prod \
+            --build-name=1.0.0 \
+            --build-number=$(($(app-store-connect get-latest-app-store-build-number "$APP_ID") + 1)) \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
+      email:
+        recipients:
+          -  # <-- Put your email here or add others recipients
+        notify:
+          success: true
+          failure: true
+      app_store_connect:
+        # Use codemagic integration (easier)
+        auth: integration
+        # ====================================
+        ## Or push all keys manually here
+        ## ====================================
+        #api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        #key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        #issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        ## ====================================
+        submit_to_app_store: false # Set true to send to App Store review automatically
+        release_type: MANUAL
+        # Configuration related to TestFlight (optional)
+        # Note: This action is performed during post-processing.
+        submit_to_testflight: true
+        beta_groups: # Specify the names of beta tester groups that will get access to the build once it has passed beta review.
+          - kasy # <-- Put your beta group name here

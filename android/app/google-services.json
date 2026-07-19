@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "959185985485",
+    "project_id": "cowboydodartinc-r162vk",
+    "storage_bucket": "cowboydodartinc-r162vk.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959185985485:android:d1b118f752d0cbd86eee84",
+        "android_client_info": {
+          "package_name": "com.cowboydodartinc.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959185985485-hjubmstk6rpdvdif2i7orosffnfq5v6c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cowboydodartinc.app",
+            "certificate_hash": "f4fb1ef082dc37cc8ce4f532e8b898897c697637"
+          }
+        },
+        {
+          "client_id": "959185985485-amppl9k8v8jlrcuo36kup3q7akkht118.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNNiC9SVslqZyFbqyUdYMLJ1yrDMWyY24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959185985485-amppl9k8v8jlrcuo36kup3q7akkht118.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "959185985485-pune2u670af1fo299aaqk80h7ei8rsj1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cowboydodartinc.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

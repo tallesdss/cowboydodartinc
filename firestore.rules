@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // True when the signed-in user has role == "admin" on their OWN user doc.
+    // `role` is writable only server-side (see the users rules below), so a
+    // client cannot forge it — this check is trustworthy and server-evaluated.
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') == 'admin';
+    }
+
+    match /users/{id} {
+      allow read, delete: if request.auth.uid != null && request.auth.uid == id;
+      // Owners update their own profile, but NEVER their own `role`
+      // (no self-promotion to admin). `role` is set only server-side
+      // (Cloud Function / console), never from the client.
+      allow update: if request.auth.uid != null && request.auth.uid == id
+                    && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']);
+      allow create: if false;
+    }
+    match /users/{id}/{document=**} {
+    	allow read, update, create, delete: if request.auth.uid != null && request.auth.uid == id;
+    }
+    // Explicit rule for notifications subcollection (count() queries need this)
+    match /users/{id}/notifications/{notId} {
+      allow read: if request.auth.uid != null && request.auth.uid == id;
+      allow create, update, delete: if false;
+    }
+    match /subscriptions/{userId} {
+      allow read: if request.auth.uid != null && request.auth.uid == userId;
+      allow create, update, delete: if false;
+    }
+    match /feature_requests/{featureId} {
+      allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid != null
+                    && request.resource.data.active == false
+                    && request.resource.data.votes == 0;
+      // Either a normal ±1 vote by any signed-in user, OR full moderation
+      // (toggle visibility, edit translations) by an admin.
+      allow update: if request.auth.uid != null
+                    && (
+                      (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['votes', 'last_update_date'])
+                        && (request.resource.data.votes == resource.data.votes + 1
+                            || request.resource.data.votes == resource.data.votes - 1))
+                      || isAdmin()
+                    );
+      allow delete: if false;
+    }
+    match /feature_requests/{featureId}/votes/{id} {
+      allow create: if request.auth.uid != null && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if request.auth.uid != null && request.auth.uid == resource.data.userId;
+    }
+    // Collection group rules for votes
+    match /{path=**}/votes/{voteId} {
+      allow create: if request.auth.uid != null && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth.uid != null && request.auth.uid == resource.data.userId ;
+      allow update, delete: if request.auth.uid != null && request.auth.uid == resource.data.userId;
+    }
+    match /user_feature_requests/{id} {
+      allow create: if request.auth.uid != null;
+      allow read, update, delete: if request.auth.uid != null && request.auth.uid == resource.data.userId;
+    }
+
+    match /kanban_columns/{columnId} {
+      allow read: if request.auth.uid != null;
+      allow create, update, delete: if isAdmin();
+    }
+    match /kanban_tasks/{taskId} {
+      allow read: if request.auth.uid != null;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

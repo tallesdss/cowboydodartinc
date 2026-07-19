@@ -1,0 +1,388 @@
+<!DOCTYPE html><html><head>
+   <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="kasy">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Browser chrome color (Safari address bar / status bar tint). Uses the
+       `surface` token — the SAME colour as the app bar that sits directly below
+       the status bar — so there is no seam between the Safari bar and the app bar.
+       Two media-query metas are the reliable baseline: iOS Safari honours these at
+       load and follows the SYSTEM light/dark automatically. At runtime the app
+       appends a higher-priority dynamic meta (web_background_sync_web.dart) so a
+       theme FORCED inside the app (different from the system) is reflected too. -->
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#18181B" media="(prefers-color-scheme: dark)">
+
+  <script id="theme-pref-fix">
+    // Resolve the theme to apply BEFORE Flutter boots, reading the preference the
+    // app saved (shared_preferences -> localStorage under "flutter.themeMode",
+    // JSON-encoded e.g. "dark"). This drives the splash background + splash logo
+    // via the data-theme attribute (CSS reacts to it reliably). "system" or a
+    // missing value falls back to the OS preference.
+    //
+    // NOTE: this does NOT touch <meta name="theme-color">. iOS Safari ignores
+    // theme-color created/changed via JS and only honours the STATIC media-query
+    // metas above — so removing them made Safari fall back to the page background
+    // (the wrong colour). We keep the static metas as the source of truth for the
+    // Safari status-bar tint; the Flutter sync still appends a dynamic meta for
+    // Chromium-based browsers, which DO honour it.
+    (function () {
+      var mode = 'system';
+      try {
+        var raw = window.localStorage.getItem('flutter.themeMode');
+        if (raw) { mode = JSON.parse(raw); }
+      } catch (e) {}
+      var dark = mode === 'dark'
+        ? true
+        : mode === 'light'
+          ? false
+          : !!(window.matchMedia &&
+               window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      // When the web device preview frame is showing (debug-web only), the page
+      // background behind the device IS the preview canvas, and that canvas
+      // follows the preview's OWN light/dark toggle (the sun/moon button), NOT
+      // the app/OS theme. So a hot restart (capital R) must not flash the app/OS
+      // colour behind the frame before Flutter repaints.
+      //
+      // The Dart side writes its resolved decision to a single, self-owned key
+      // ('kasy.web_preview_chrome' = 'dark' | 'light' | 'off') — see
+      // web_device_preview.dart / boot_prefs_web.dart. We read ONLY that here, so
+      // this never depends on shared_preferences' internal storage format.
+      // 'off'/absent => preview isn't driving (or this is a release build, which
+      // never writes it) => keep the app theme computed above.
+      try {
+        var pv = window.localStorage.getItem('kasy.web_preview_chrome');
+        if (pv === 'dark') { dark = true; }
+        else if (pv === 'light') { dark = false; }
+      } catch (e) {}
+
+      // Drives the splash background + which splash logo shows (see CSS below).
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    })();
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <title>kasy</title>
+  <link rel="manifest" href="manifest.json">
+  
+  
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script id="app-height-fix">
+    // Flutter engine on iOS reads documentElement.clientHeight (not visualViewport)
+    // to size the canvas (full_page_dimensions_provider.dart). On iOS Safari,
+    // window.innerHeight is the "large viewport" (address bar hidden) which is
+    // LARGER than the visible area — causing white bands top/bottom. The correct
+    // value is window.visualViewport.height, which tracks the real visible height.
+    (function () {
+      function visH() {
+        return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      }
+      function visW() {
+        return window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      }
+
+      // Override clientHeight/Width on the <html> element so the Flutter engine
+      // receives the real visible viewport size on every measurement.
+      try {
+        Object.defineProperty(document.documentElement, 'clientHeight', {
+          configurable: true,
+          get: visH,
+        });
+        Object.defineProperty(document.documentElement, 'clientWidth', {
+          configurable: true,
+          get: visW,
+        });
+      } catch (e) {
+        // If Safari refuses the override, the CSS --vh fallback below takes over.
+      }
+
+      // --vh drives html { height: calc(var(--vh,1vh)*100) } in the CSS above.
+      // This is the CSS-level fallback: even if Object.defineProperty is blocked,
+      // the html element's rendered height equals visualViewport.height, so
+      // clientHeight resolves correctly after layout.
+      function setVh() {
+        document.documentElement.style.setProperty('--vh', (visH() * 0.01) + 'px');
+      }
+      setVh();
+
+      // Keep --vh in sync as the address bar shows/hides.
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', setVh);
+      }
+      window.addEventListener('resize', setVh);
+      window.addEventListener('orientationchange', function () {
+        // Give the browser 300 ms to settle after rotation before re-measuring.
+        setTimeout(setVh, 300);
+      });
+    })();
+  </script>
+  
+  
+  
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!--
+    Kasy splash overrides (kept outside splash-screen-style so
+    `dart run flutter_native_splash:create` does not wipe them).
+
+    Root cause of horizontal scroll: generated splash PNGs are 500 CSS px
+    wide (1x). On phone viewports (~390px) the unconstrained <img class="center">
+    overflows and the page scrolls sideways.
+  -->
+  <style id="kasy-splash-fix">
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    /* App/forced theme wins over prefers-color-scheme (set by theme-pref-fix). */
+    html[data-theme="light"] body {
+      background-color: #FAFAFA;
+    }
+    html[data-theme="dark"] body {
+      background-color: #0A0A0C;
+    }
+
+    #splash {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* Cap splash logo well below the narrowest phone width. */
+    #splash img.center {
+      max-width: min(240px, 42vw);
+      max-height: min(240px, 42vw);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #FAFAFA;
+          background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display:block;
+      width:100%; height:100%;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    .cover {
+      display:block;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0A0A0C;
+          }
+    }
+  </style>
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
+</head>
+<body>
+  <picture id="splash">
+      <source id="splash-source-light" srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+      <source id="splash-source-dark" srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+      <img id="splash-logo" class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+  </picture>
+  
+  
+  
+  
+  
+  
+  
+  <script id="kasy-splash-logo-script">
+    // Show exactly one splash logo for the resolved data-theme (light OR dark).
+    // Picture media queries alone follow the OS, which can disagree with the
+    // app theme saved in localStorage / preview chrome. That mismatch was the
+    // blue wordmark on a dark splash (light PNG + data-theme=dark).
+    //
+    // flutter_native_splash:create may strip the ids below; fall back to
+    // #splash source/img so the swap still works after regenerate.
+    (function () {
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var lightSrc = 'splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x';
+      var darkSrc = 'splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x';
+      var picture = document.getElementById('splash');
+      var lightEl = document.getElementById('splash-source-light')
+        || (picture && picture.querySelector('source[media*="light"]'));
+      var darkEl = document.getElementById('splash-source-dark')
+        || (picture && picture.querySelector('source[media*="dark"]'));
+      var img = document.getElementById('splash-logo')
+        || (picture && picture.querySelector('img'));
+      if (!img) return;
+      if (dark) {
+        if (lightEl) lightEl.remove();
+        if (darkEl) {
+          darkEl.removeAttribute('media');
+          darkEl.setAttribute('srcset', darkSrc);
+        }
+        img.setAttribute('src', 'splash/img/dark-1x.png');
+        img.setAttribute('srcset', darkSrc);
+      } else {
+        if (darkEl) darkEl.remove();
+        if (lightEl) {
+          lightEl.removeAttribute('media');
+          lightEl.setAttribute('srcset', lightSrc);
+        }
+        img.setAttribute('src', 'splash/img/light-1x.png');
+        img.setAttribute('srcset', lightSrc);
+      }
+    })();
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="flutter_bootstrap.js" async=""></script>
+  <script src="./local_notifications.js"></script>
+
+
+</body></html>

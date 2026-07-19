@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Brief-flash layout shown for ~200ms while Glance composes the real
+     widget. Just the gradient — no text — so the user never sees the
+     gray default loading layout from the home_widget library. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_gradient_bg" />

@@ -1,0 +1,37 @@
+{
+  "appName": "cowboydodartinc",
+  "bundleId": "com.cowboydodartinc.app",
+  "backendProvider": "supabase",
+  "functionsRegion": "us-central1",
+  "subscriptionModule": true,
+  "stripeModule": true,
+  "feedbackModule": true,
+  "useFirebaseAuth": true,
+  "useFirebaseFirestore": false,
+  "storageProvider": "supabase",
+  "webCompat": true,
+  "revenuecatKeys": {
+    "test": false,
+    "iosProd": false,
+    "androidProd": false
+  },
+  "internationalization": true,
+  "useSentry": true,
+  "withOnboarding": true,
+  "remoteConfigProvider": null,
+  "analyticsProvider": "mixpanel",
+  "anonymousSignup": true,
+  "withFacebookPixel": false,
+  "socialAuthList": [
+    "google",
+    "googlePlay",
+    "facebook",
+    "apple"
+  ],
+  "firebaseProjectId": "cowboydodartinc-r162vk",
+  "supabaseProjectId": "ocrpybzdjrcldvlpgccw",
+  "withDashboard": false,
+  "supabasePublishableKey": "https://ocrpybzdjrcldvlpgccw.supabase.co",
+  "templateVersion": "1.0.0",
+  "cliVersion": "1.50.2"
+}

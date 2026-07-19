@@ -1,0 +1,95 @@
+# Kasy — Flutter Guidelines
+
+## Project description
+
+[Describe your project here and remove this line.]
+
+## Expected workflow
+- Review feature requirements
+- Plan implementation
+- Update schema if needed
+- Implement core functionality
+- Ensure new features don't break existing ones
+
+## Dart General Guidelines
+
+### Basic Principles
+- Use English for all code and documentation
+- Always declare the type of each variable and function (parameters and return value)
+- Name variables to reflect how they are used
+- Avoid using type `dynamic`
+- Create necessary types
+- Don't leave blank lines within a function
+- One export per file
+- Prefer super constructor
+
+### Nomenclature
+- Use PascalCase for classes
+- Use camelCase for variables, functions, and methods
+- Use underscores_case for file and directory names
+- Avoid magic numbers — define constants
+- Start each function with a verb
+- Use verbs for boolean variables: isLoading, hasError, canDelete
+- Use complete words instead of abbreviations (except: API, URL, i, j, err, ctx)
+- Prefer noun for class names, verb for methods
+
+### Imports
+- Always use package imports: `import 'package:kasy_kit/core/data/entities/upload_result.dart';`
+- Package name is `kasy_kit`
+- Never use relative imports for files in `lib/`
+
+## Architecture (3 layers)
+
+### Folder structure
+
+```
+lib
+├── core
+│   ├── bottom_menu
+│   ├── data
+│   │   ├── api
+│   │   ├── entities
+│   │   └── models
+│   ├── guards
+│   ├── initializer
+│   ├── security
+│   ├── shared_preferences
+│   ├── states
+│   └── widgets
+└── modules
+    └── module_name
+        ├── api
+        │   └── entities
+        ├── domain
+        ├── providers
+        │   └── models
+        ├── repositories
+        └── ui
+            ├── component
+            └── widgets
+```
+
+### Layer 1 — Data (API)
+- Fetches data from Firebase, Supabase, or REST API
+- Returns entities (not domain models)
+- Not covered by unit tests
+- Only repositories can use API classes
+
+### Layer 2 — Domain
+- Repositories transform entities into domain models
+- Business logic lives here
+- Use `@freezed` for immutability and union types
+- Prefer typed value objects (e.g., `Email` instead of `String`)
+
+### Layer 3 — Presentation
+- Pages listen to Riverpod notifiers via `ref.watch`
+- Notifier state uses `@freezed`
+- Views only trigger actions — no business logic in widgets
+
+## Unit Tests
+
+- Use fakes, not mocks: implement the API class as an interface
+- Tests describe: `[CONTEXT], [ACTION] => [EXPECTED RESULT]`
+- Use `pumpPage` from `test/test_utils.dart` to inject fakes
+- Test from the user's point of view (tap a button, not call a function directly)
+- Fakes go in `test/test_utils.dart` via provider overrides

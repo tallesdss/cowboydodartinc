@@ -1,0 +1,1 @@
+export 'package:cowboydodartinc/features/subscriptions/ui/component/paywall_compare_config.dart';

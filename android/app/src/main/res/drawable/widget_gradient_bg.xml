@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background used by the static preview / loading layouts (RemoteViews
+     XML rendered by the launcher BEFORE Glance composes the real widget).
+     Includes the corner radius because the launcher doesn't clip these
+     layouts the same way it clips the live Glance widget.
+     To restyle the brand gradient, edit res/values/colors.xml. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:startColor="@color/widget_gradient_start"
+        android:endColor="@color/widget_gradient_end"
+        android:type="linear" />
+    <corners android:radius="24dp" />
+</shape>

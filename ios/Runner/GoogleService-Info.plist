@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>959185985485-pune2u670af1fo299aaqk80h7ei8rsj1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.959185985485-pune2u670af1fo299aaqk80h7ei8rsj1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>959185985485-hjubmstk6rpdvdif2i7orosffnfq5v6c.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBLadwKyVlQ6b8npVvYsRVDC0LqP5q_w5E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>959185985485</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cowboydodartinc.app</string>
+	<key>PROJECT_ID</key>
+	<string>cowboydodartinc-r162vk</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cowboydodartinc-r162vk.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:959185985485:ios:e37f977a0e1e1ab86eee84</string>
+</dict>
+</plist>

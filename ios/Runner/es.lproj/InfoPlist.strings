@@ -1,0 +1,10 @@
+/* Localized Info.plist strings — es resources for system picker/camera UI (iOS). */
+"CFBundleDisplayName" = "cowboydodartinc";
+"NSCameraUsageDescription" = "Necesitamos la cámara para tomar fotos y vídeos.";
+"NSPhotoLibraryAddUsageDescription" = "Necesitamos acceso para guardar fotos y vídeos en la galería.";
+"NSPhotoLibraryUsageDescription" = "Necesitamos acceso para mostrar tus fotos recientes y abrir la galería desde la cámara.";
+"NSMicrophoneUsageDescription" = "Necesitamos el micrófono para grabar vídeos.";
+"NSLocationWhenInUseUsageDescription" = "Necesitamos la ubicación para guardar datos de ubicación en las fotos (EXIF).";
+"NSLocationAlwaysUsageDescription" = "Necesitamos la ubicación para guardar datos de ubicación en las fotos (EXIF).";
+"NSUserTrackingUsageDescription" = "Esto nos ayuda a mejorar nuestras campañas publicitarias y llegar a más personas.";
+"NSFaceIDUsageDescription" = "El bloqueo de la app usa Face ID o Touch ID para verificar tu identidad.";

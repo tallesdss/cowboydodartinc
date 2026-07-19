@@ -1,0 +1,150 @@
+# Supabase backend: replaces Firebase pubspec dependencies.
+# Firebase-specific: firebase_auth, cloud_firestore, firebase_storage, cloud_functions, home_widget
+# Supabase: supabase_flutter
+# Shared: firebase_core, firebase_messaging, firebase_remote_config (FCM + Remote Config)
+
+name: cowboydodartinc
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  animations: ^2.1.1
+  another_flushbar: ^1.12.32
+  audioplayers: ^6.1.0
+  background_fetch: ^1.5.0
+  bart: ^1.4.1
+  better_skeleton: ^0.1.0
+  cross_file: ^0.3.5+2
+  crypto: ^3.0.7
+  cupertino_icons: ^1.0.8
+  device_info_plus: ^12.3.0
+  device_preview: ^1.3.1
+  dio: ^5.9.2
+  facebook_app_events: ^0.24.0
+  firebase_app_installations: ^0.4.0+7
+  # Web-only Google sign-in: on web, google_sign_in v7 can't do imperative auth, so we
+  # get the Google ID token via Firebase's popup (zero manual config, reuses the
+  # Firebase web client + authorized domains) and hand it to Supabase signInWithIdToken.
+  # Supabase stays the auth backend; mobile keeps the native google_sign_in flow.
+  # Kept before firebase_core so the deps stay alphabetical (sort_pub_dependencies).
+  firebase_auth: ^6.1.4
+  firebase_core: ^4.5.0
+  firebase_messaging: ^16.1.2
+  firebase_remote_config: ^6.2.0
+  flutter:
+    sdk: flutter
+  flutter_animate: ^4.5.2
+  flutter_dotenv: ^6.0.0
+  flutter_facebook_auth: ^7.1.5
+  flutter_local_notifications: ^20.1.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_native_splash: ^2.4.7
+  flutter_riverpod: ^3.1.0
+  flutter_secure_storage: ^9.2.4
+  flutter_svg: ^2.3.0
+  flutter_timezone: ^5.0.1
+  flutter_web_plugins:
+    sdk: flutter
+  freezed_annotation: ^3.1.0
+  gal: ^1.3.0
+  go_router: ^17.1.0
+  google_fonts: ^8.0.2
+  google_mobile_ads: ^9.0.0
+  google_sign_in: ^7.2.0
+  home_widget: ^0.9.0
+  image: ^4.8.0
+  image_picker: ^1.2.1
+  in_app_review: ^2.0.11
+  intl: ^0.20.2
+  jiffy: ^6.4.4
+  json_annotation: ^4.9.0
+  local_auth: ^3.0.1
+  logger: ^2.6.2
+  lucide_icons_flutter: ^3.1.14
+  mixpanel_flutter: ^2.5.0
+  open_filex: ^4.7.0
+  package_info_plus: ^8.3.0
+  path_provider: ^2.1.5
+  # Pin the Apple impl of path_provider below 2.6.0/2.5.0. Those versions pull in
+  # objective_c via "native assets", whose build hook is unquoted and breaks every
+  # build on Windows when the username has a space (C:\Users\John Silva) — even a
+  # Chrome/web run, where the Apple-only hook is dead weight. 2.5.1 is the last
+  # release without objective_c (added in 2.5.0, reverted in 2.5.1, re-added in
+  # 2.6.0). Drop this pin once the upstream web-target regression is fixed.
+  path_provider_foundation: 2.5.1
+  permission_handler: ^12.0.1
+  provider: ^6.1.0
+  pub_semver: ^2.2.0
+  purchases_flutter: ^9.12.3
+  riverpod_annotation: ^4.0.0
+  sentry_flutter: ^9.14.0
+  shared_preferences: ^2.5.4
+  sign_in_with_apple: ^7.0.1
+  slang: ^4.12.1
+  slang_flutter: ^4.12.1
+  supabase_flutter: ^2.12.0
+  timezone: ^0.10.1
+  universal_html: ^2.3.0
+  universal_io: ^2.3.1
+  url_launcher: ^6.3.2
+  video_player: ^2.11.1
+  web: ^1.1.1
+
+dev_dependencies:
+  build_runner: ^2.11.1
+  change_app_package_name: ^1.5.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
+  flutter_local_notifications_platform_interface: any
+  flutter_test:
+    sdk: flutter
+  freezed: ^3.2.3
+  json_serializable: ^6.11.2
+  lint: ^2.8.0
+  permission_handler_platform_interface: any
+  riverpod_generator: ^4.0.0+1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/images/
+    - assets/branding/
+    - assets/icons/
+    - assets/sounds/
+    - assets/video-background.mp4
+flutter_launcher_icons:
+  image_path: assets/branding/app-icon.png
+  android: ic_launcher
+  ios: true
+  remove_alpha_ios: true
+  adaptive_icon_background: assets/branding/app-icon.png
+  adaptive_icon_foreground: assets/images/icon_foreground_empty.png
+  web:
+    generate: true
+    # Single web favicon (no light/dark pair). Rounded corners baked into PNG.
+    image_path: assets/branding/favicon.png
+    background_color: "#01171f"
+    theme_color: "#01171f"
+flutter_native_splash:
+  # Match KasyColors.background (light / dark) so the splash → app transition
+  # has zero white/black flash on web, iOS and Android.
+  color: "#FAFAFA"
+  color_dark: "#0A0A0C"
+  fullscreen: false
+  ios: true
+  android: true
+  # Splash-only artwork (extra padding). Keep logo-light/dark.png for in-app
+  # KasyBrandLogo so login/signup sizing stays unchanged.
+  image: assets/branding/splash-logo-light.png
+  image_dark: assets/branding/splash-logo-dark.png
+  android_12:
+    color: "#FAFAFA"
+    color_dark: "#0A0A0C"
+    image: assets/branding/splash-logo-light-android12.png
+    image_dark: assets/branding/splash-logo-dark-android12.png

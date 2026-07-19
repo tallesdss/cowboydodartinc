@@ -1,0 +1,10 @@
+/* Localized Info.plist strings — presence of pt-BR resources lets iOS use Portuguese for system UI (e.g. image picker). */
+"CFBundleDisplayName" = "cowboydodartinc";
+"NSCameraUsageDescription" = "Precisamos da câmera para tirar fotos e vídeos.";
+"NSPhotoLibraryAddUsageDescription" = "Precisamos de acesso para salvar fotos e vídeos na galeria.";
+"NSPhotoLibraryUsageDescription" = "Precisamos de acesso para mostrar suas fotos recentes e abrir a galeria a partir da câmera.";
+"NSMicrophoneUsageDescription" = "Precisamos do microfone para gravar vídeos.";
+"NSLocationWhenInUseUsageDescription" = "Precisamos de localização para salvar dados de local nas fotos (EXIF).";
+"NSLocationAlwaysUsageDescription" = "Precisamos de localização para salvar dados de local nas fotos (EXIF).";
+"NSUserTrackingUsageDescription" = "Isso nos ajuda a melhorar nossas campanhas publicitárias e alcançar mais pessoas.";
+"NSFaceIDUsageDescription" = "O bloqueio do app usa Face ID ou Touch ID para confirmar que é você.";

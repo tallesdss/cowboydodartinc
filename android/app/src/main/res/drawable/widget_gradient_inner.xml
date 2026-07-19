@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background of the live Glance widget. No corners here — the OS already
+     clips the widget with its corner radius, so adding rounded corners
+     would produce a visible double-radius edge. To restyle the brand
+     gradient, edit res/values/colors.xml. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:startColor="@color/widget_gradient_start"
+        android:endColor="@color/widget_gradient_end"
+        android:type="linear" />
+</shape>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Brand colors for the MyWidget home widget — single source of truth on Android.
+
+  To rebrand the widget, edit ONLY this file. Every Android XML asset under
+  res/drawable/widget_* and res/layout/widget_* references these names instead
+  of inlining hex values.
+
+  Keep in sync with iOS counterparts in:
+    Firebase/ios/HomeWidgetExtension/MyWidget.swift  (enum WidgetBrand)
+-->
+<resources>
+    <!-- Background gradient used behind every widget surface. -->
+    <color name="widget_gradient_start">#FF140829</color>
+    <color name="widget_gradient_end">#FF33176B</color>
+
+    <!-- PRO plan pill (gold). _bg is the soft fill behind the gold text. -->
+    <color name="widget_pro_gold">#FFFFD700</color>
+    <color name="widget_pro_pill_bg">#2EFFD700</color>
+
+    <!-- Free plan pill — low-emphasis translucent white. -->
+    <color name="widget_free_pill_bg">#14FFFFFF</color>
+
+    <!-- "+" circular button on medium/large widgets. -->
+    <color name="widget_add_button_bg">#2EFFFFFF</color>
+    <color name="widget_add_button_stroke">#FFFFFFFF</color>
+
+    <!-- Text colors used in the preview layout (gallery only). The Glance
+         runtime applies these via Compose, not XML. -->
+    <color name="widget_text_subtle">#8CFFFFFF</color>
+    <color name="widget_text_strong">#FFFFFFFF</color>
+</resources>

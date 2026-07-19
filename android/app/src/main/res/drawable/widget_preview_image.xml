@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fallback preview shown in the widget gallery on launchers that don't
+     honor android:previewLayout (Android < 12, or some OEM launchers).
+     Layer list: rounded gradient + a hint star to suggest the PRO badge.
+     The actual widget overrides this once placed. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:startColor="@color/widget_gradient_start"
+                android:endColor="@color/widget_gradient_end"
+                android:type="linear" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</layer-list>

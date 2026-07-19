@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Static preview shown in the widget gallery (Android 12+).
+     Only uses Views allowed by RemoteViews — no <Space>, no
+     paddingHorizontal/Vertical, no fontFamily. Anything outside
+     the allowlist makes the launcher silently fall back to a gray box. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_gradient_bg"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Boa noite"
+        android:textColor="@color/widget_text_subtle"
+        android:textSize="11sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Olá!"
+        android:textColor="@color/widget_text_strong"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Filler row uses TextView with empty text + weight to push the pill
+         to the bottom (Space isn't on the RemoteViews allowlist). -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_pro_pill_bg"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="⭐ PRO"
+        android:textColor="@color/widget_pro_gold"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

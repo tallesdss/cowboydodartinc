@@ -1,0 +1,93 @@
+import 'package:cowboydodartinc/core/data/api/base_api_exceptions.dart';
+
+class SignupException {
+  final int? code;
+  final String? message;
+
+  SignupException({
+    this.code,
+    this.message,
+  });
+
+  factory SignupException.fromApiError(ApiError error) {
+    return SignupException(
+      code: error.code,
+      message: error.message,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'SignupException(code: $code, message: $message)';
+  }
+}
+
+class SigninException {
+  final int? code;
+  final String? message;
+
+  SigninException({
+    this.code,
+    this.message,
+  });
+
+  factory SigninException.fromApiError(ApiError error) {
+    return SigninException(
+      code: error.code,
+      message: error.message,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'SigninException(code: $code, message: $message)';
+  }
+}
+
+class RecoverPasswordException {
+  final int? code;
+  final String? message;
+
+  RecoverPasswordException({
+    this.code,
+    this.message,
+  });
+
+  factory RecoverPasswordException.fromApiError(ApiError error) {
+    return RecoverPasswordException(
+      code: error.code,
+      message: error.message,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'SigninException(code: $code, message: $message)';
+  }
+}
+
+class UserCancelledSignInException implements Exception {
+  const UserCancelledSignInException();
+}
+
+/// Thrown when a social sign-in is attempted with an email that already has an
+/// account created with a different method (e.g. email/password or another
+/// social provider). Lets the UI show a clear "email already in use" message
+/// instead of a generic error, and avoids creating a duplicate account.
+class EmailAlreadyRegisteredException implements Exception {
+  const EmailAlreadyRegisteredException();
+}
+
+class PhoneAuthException extends ApiError {
+  PhoneAuthException({
+    required super.code,
+    required super.message,
+  });
+
+  factory PhoneAuthException.fromApiError(ApiError error) {
+    return PhoneAuthException(
+      code: error.code,
+      message: error.message,
+    );
+  }
+}

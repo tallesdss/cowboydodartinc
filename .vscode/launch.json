@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "cowboydodartinc (desenv)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=ENV=dev",
+        "--dart-define=BACKEND_URL=https://ocrpybzdjrcldvlpgccw.supabase.co",
+        "--dart-define=SUPABASE_TOKEN=https://ocrpybzdjrcldvlpgccw.supabase.co",
+        "--dart-define=RC_ANDROID_API_KEY=YOUR_REVENUECAT_ANDROID_KEY",
+        "--dart-define=RC_IOS_API_KEY=YOUR_REVENUECAT_IOS_KEY",
+        "--dart-define=MIXPANEL_TOKEN=YOUR_MIXPANEL_TOKEN",
+        "--dart-define=AI_CHAT_ENDPOINT=https://ocrpybzdjrcldvlpgccw.supabase.co/functions/v1/ai-chat"
+      ]
+    },
+    {
+      "name": "cowboydodartinc (prod)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=ENV=prod",
+        "--dart-define=BACKEND_URL=https://ocrpybzdjrcldvlpgccw.supabase.co",
+        "--dart-define=SUPABASE_TOKEN=https://ocrpybzdjrcldvlpgccw.supabase.co",
+        "--dart-define=RC_ANDROID_API_KEY=YOUR_REVENUECAT_ANDROID_KEY",
+        "--dart-define=RC_IOS_API_KEY=YOUR_REVENUECAT_IOS_KEY",
+        "--dart-define=SENTRY_DSN=YOUR_SENTRY_DSN",
+        "--dart-define=MIXPANEL_TOKEN=YOUR_MIXPANEL_TOKEN",
+        "--dart-define=AI_CHAT_ENDPOINT=https://ocrpybzdjrcldvlpgccw.supabase.co/functions/v1/ai-chat"
+      ]
+    }
+  ]
+}

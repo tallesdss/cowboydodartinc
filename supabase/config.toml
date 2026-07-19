@@ -1,0 +1,74 @@
+# Supabase project config (supabase link will use project ref)
+# See: https://supabase.com/docs/guides/cli/config
+
+project_id = "default"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+
+[db]
+port = 54322
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+# Allow anonymous sign-in (required for the anonymous user flow)
+enable_anonymous_sign_ins = true
+
+[auth.email]
+# Disable email confirmation — users sign in directly after signup.
+# On mobile you don't want users leaving the app to confirm email.
+# If you re-enable this, the anonymous → email conversion flow will
+# require the user to click a confirmation link before the account is converted.
+enable_confirmations = false
+double_confirm_changes = false
+
+# Edge Functions — every function skips the platform JWT gate (verify_jwt = false)
+# and authenticates ITSELF inside the handler. This is the authoritative setting:
+# `supabase functions deploy` reads it (the legacy --no-verify-jwt flag is deprecated
+# and silently ignored by recent CLIs). Two reasons every function needs it:
+#   1. Browser-invoked functions receive a CORS preflight (OPTIONS, no Authorization
+#      header). With the gate ON the platform rejects the preflight before our CORS
+#      handler runs, so the web app sees "Failed to fetch".
+#   2. Webhooks (Stripe, RevenueCat) are called server-to-server with a provider
+#      signature/key, never a Supabase user JWT.
+# Security is preserved: each handler checks the user token (getUser) or the webhook
+# signature/key before doing any work. Keep this list in sync with edge-functions/ —
+# cli/test/supabase-verify-jwt.test.js fails the publish if a function is missing.
+[functions.admin-list-users]
+verify_jwt = false
+
+[functions.ai-chat]
+verify_jwt = false
+
+[functions.delete-user-account]
+verify_jwt = false
+
+[functions.meta-track-event]
+verify_jwt = false
+
+[functions.revenuecat-webhook]
+verify_jwt = false
+
+[functions.send-push-notification]
+verify_jwt = false
+
+[functions.stripe-create-checkout-session]
+verify_jwt = false
+
+[functions.stripe-create-portal-session]
+verify_jwt = false
+
+[functions.stripe-list-prices]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.verify-ad-reward]
+verify_jwt = false

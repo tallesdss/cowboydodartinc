@@ -1,0 +1,2 @@
+-- User suggestions now go directly to feature_requests with active=false.
+-- This migration intentionally left empty (table awaiting_feature_requests removed).
