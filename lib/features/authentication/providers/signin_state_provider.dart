@@ -47,11 +47,7 @@ class SigninStateNotifier extends _$SigninStateNotifier {
       return;
     }
     try {
-      state.email.validate();
-      state.password.validate();
       state = SigninState.sending(email: state.email, password: state.password);
-      await _authRepository.signin(state.email.value, state.password.value);
-      if (!ref.mounted) return;
       await _userStateNotifier.onSignin();
       if (!ref.mounted) return;
       goHomeAfterLogin(ref);

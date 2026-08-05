@@ -31,10 +31,9 @@ library;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
-import 'package:cowboydodartinc/components/kasy_avatar.dart';
+import 'package:cowboydodartinc/core/widgets/kasy_brand_logo.dart';
 import 'package:cowboydodartinc/components/kasy_avatar_presets.dart';
 import 'package:cowboydodartinc/components/kasy_button.dart';
-import 'package:cowboydodartinc/components/kasy_text_field.dart';
 import 'package:cowboydodartinc/components/kasy_tooltip.dart';
 import 'package:cowboydodartinc/core/chrome/app_bar_config.dart';
 import 'package:cowboydodartinc/core/chrome/app_bar_scope.dart';
@@ -731,45 +730,6 @@ class KasyAppBar extends StatelessWidget {
   Widget _buildApplicationChrome(BuildContext context) {
     final KasyColors c = context.colors;
 
-    // Trailing controls, each added with a leading gap so spacing never doubles
-    // up when an element is hidden (e.g. no create button → no stray gap).
-    final List<Widget> trailing = <Widget>[];
-    void addTrailing(Widget w) {
-      if (trailing.isNotEmpty) {
-        trailing.add(const SizedBox(width: KasySpacing.md));
-      }
-      trailing.add(w);
-    }
-
-    if (onToggleTheme != null) {
-      addTrailing(_buildApplicationThemeToggle(context));
-    }
-    if (showNotifications) {
-      addTrailing(notifications ?? _buildApplicationNotifications(context));
-    }
-    if (showCreate) {
-      addTrailing(
-        KasyButton(
-          label: createLabel,
-          variant: KasyButtonVariant.neutral,
-          size: KasyButtonSize.small,
-          onPressed: onCreate,
-        ),
-      );
-    }
-    if (showAvatar) {
-      addTrailing(
-        avatar ??
-            KasyAvatar.gradientFill(
-              size: KasyAvatarSize.small,
-              diameter: 36,
-              gradient: avatarGradient,
-              showShadow: false,
-              onTap: onAvatarTap,
-            ),
-      );
-    }
-
     return DecoratedBox(
       decoration: BoxDecoration(
         color: c.surface,
@@ -783,35 +743,15 @@ class KasyAppBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           child: Row(
             children: [
-              if (showSearch)
-                SizedBox(
-                  width: kasyAppBarApplicationSearchWidth,
-                  child: _buildApplicationSearch(context),
-                ),
+              const KasyBrandLogo(
+                height: 24,
+                semanticLabel: 'Logo',
+              ),
               const Spacer(),
-              ...trailing,
+              _buildApplicationThemeToggle(context),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildApplicationSearch(BuildContext context) {
-    return KasyTextField(
-      variant: KasyTextFieldVariant.tonal,
-      controller: searchController,
-      hint: searchHint,
-      onChanged: onSearchChanged,
-      onSubmitted: onSearchSubmitted,
-      prefix: Icon(
-        KasyIcons.search,
-        size: KasyIconSize.md,
-        color: context.colors.muted,
-      ),
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: KasySpacing.smd,
-        vertical: KasySpacing.sm,
       ),
     );
   }
@@ -824,41 +764,8 @@ class KasyAppBar extends StatelessWidget {
       size: KasyButtonSize.small,
       iconOnlyLayoutExtent: 36,
       iconGlyphSize: KasyIconSize.md,
-      onPressed: onToggleTheme,
+      onPressed: onToggleTheme ?? () => ThemeProvider.of(context).toggle(),
       semanticLabel: isDark ? 'Light mode' : 'Dark mode',
-    );
-  }
-
-  Widget _buildApplicationNotifications(BuildContext context) {
-    final KasyColors c = context.colors;
-    final Widget bell = KasyButton.iconOnly(
-      icon: KasyIcons.notification,
-      variant: KasyButtonVariant.ghost,
-      size: KasyButtonSize.small,
-      iconOnlyLayoutExtent: 36,
-      iconGlyphSize: KasyIconSize.md,
-      onPressed: onNotifications,
-      semanticLabel: 'Notifications',
-    );
-    if (!showNotificationBadge) return bell;
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        bell,
-        Positioned(
-          top: 8,
-          right: 8,
-          child: Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: c.error,
-              shape: BoxShape.circle,
-              border: Border.all(color: c.background, width: 1.5),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

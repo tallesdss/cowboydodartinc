@@ -168,30 +168,6 @@ const List<_NavItem> _kShowcaseItems = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Connected (real navigation) nav data — kept so the live app keeps working,
-// including the Income submenu the host still relies on.
-// ─────────────────────────────────────────────────────────────────────────────
-
-const List<_NavItem> _kMainItems = [
-  _NavItem(id: 'dashboard', icon: KasyIcons.home, label: 'Dashboard'),
-  _NavItem(id: 'audience', icon: KasyIcons.person, label: 'Audience'),
-  _NavItem(id: 'posts', icon: KasyIcons.note, label: 'Posts'),
-  _NavItem(id: 'schedules', icon: KasyIcons.calendar, label: 'Schedules'),
-  _NavItem(
-    id: 'income',
-    icon: KasyIcons.book,
-    label: 'Income',
-    subItems: ['Earnings', 'Refunds', 'Declines', 'Payouts'],
-  ),
-];
-
-const _NavItem _kHelpItem = _NavItem(
-  id: 'help',
-  icon: KasyIcons.help,
-  label: 'Help',
-);
-
-// ─────────────────────────────────────────────────────────────────────────────
 // KasySidebar — public widget
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -989,11 +965,6 @@ class _KasySidebarState extends State<KasySidebar> {
   ) {
     final int settingsIndex = widget.routes!.length - 1;
     final nav = context.t.navigation;
-    final List<({IconData icon, String label})> meta = [
-      (icon: KasyIcons.home, label: nav.home),
-      (icon: KasyIcons.help, label: nav.support),
-      (icon: KasyIcons.notification, label: nav.notifications),
-    ];
     final int mainCount = widget.routes!.length - 1; // exclude settings (last)
 
     return SizedBox.expand(
@@ -1021,21 +992,12 @@ class _KasySidebarState extends State<KasySidebar> {
                     for (int i = 0; i < mainCount; i++)
                       _buildItemRow(
                         c,
-                        icon: i < meta.length
-                            ? meta[i].icon
-                            : (widget.routes![i].icon ?? KasyIcons.note),
-                        label: i < meta.length
-                            ? meta[i].label
-                            : (widget.routes![i].label ?? ''),
+                        icon: widget.routes![i].icon ?? KasyIcons.note,
+                        label: widget.routes![i].label ?? '',
                         isActive: _activeItemId.isEmpty && currentIndex == i,
                         onTap: () => _navigateTo(i),
-                        showBadge: i < meta.length &&
-                            meta[i].icon == KasyIcons.notification &&
-                            widget.notificationsUnread > 0,
+                        showBadge: false,
                       ),
-                    // Static showcase extras (incl. the Income submenu).
-                    for (final item in _kMainItems.skip(1))
-                      _buildNavItem(context, item, c),
                     const SizedBox(height: _kDividerGap),
                     if (!_collapsed) ...[
                       _buildSectionLabel('SETTINGS', c),
@@ -1061,7 +1023,6 @@ class _KasySidebarState extends State<KasySidebar> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildNavItem(context, _kHelpItem, c),
                 _buildItemRow(
                   c,
                   icon: KasyIcons.logout,
@@ -1544,102 +1505,9 @@ class _KasySidebarState extends State<KasySidebar> {
   // ── Sub-items tree ────────────────────────────────────────────────────────
 
   Widget _buildSubItemsTree(_SidebarColors c) {
-    final subItems = _kMainItems.firstWhere((i) => i.id == 'income').subItems;
-    final double lineH = _treeLineHeight(subItems.length);
-
-    return Padding(
-      padding: const EdgeInsets.only(left: _kSubIndent, top: _kSubTreeTopGap),
-      child: SizedBox(
-        width: 172,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Positioned(
-              left: -_kTreeConnectorW,
-              top: 0,
-              child: Container(
-                width: 1.5,
-                height: lineH,
-                decoration: BoxDecoration(
-                  color: c.divider,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            Column(
-              children: subItems.asMap().entries.map((entry) {
-                final i = entry.key;
-                final label = entry.value;
-                final isLast = i == subItems.length - 1;
-                return _buildSubItem(label, isLast, c);
-              }).toList(),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const SizedBox.shrink();
   }
 
-  Widget _buildSubItem(String label, bool isLast, _SidebarColors c) {
-    final bool isActive = _activeSubItem == label;
-    final Color textColor = isActive ? c.textActive : c.textMuted;
-
-    return Padding(
-      padding: EdgeInsets.only(bottom: isLast ? 0 : _kSubItemGap),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            left: -_kTreeConnectorW,
-            top: _kSubItemH / 2 - 4,
-            child: Container(
-              width: _kTreeConnectorW,
-              height: 8,
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(color: c.divider, width: 1.5),
-                  bottom: BorderSide(color: c.divider, width: 1.5),
-                ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(8),
-                ),
-              ),
-            ),
-          ),
-          KasyHover(
-            borderRadius: BorderRadius.circular(_kItemRadius),
-            hoverColor: c.activeBg,
-            pressColor: c.textActive,
-            focusable: true,
-            focusGapColor: c.bg,
-            onTap: () => _activateSubItem(label),
-            child: Container(
-              height: _kSubItemH,
-              padding: const EdgeInsets.symmetric(
-                horizontal: _kItemHPad,
-                vertical: 8,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(_kItemRadius),
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  label,
-                  style: context.textTheme.labelLarge?.copyWith(
-                    fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-                    color: textColor,
-                    letterSpacing: -0.24,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

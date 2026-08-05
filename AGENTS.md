@@ -6,11 +6,13 @@ code. Claude Code users: `CLAUDE.md` points here.
 
 ## What this is
 
-A production-ready Flutter app (web, iOS, Android) built on the **Kasy design
-system** and a **feature-first** architecture. It was generated with **one**
-backend — Firebase, Supabase, or a REST API. Only the **data layer** differs
-between backends; the UI, state, i18n and design system are identical. So almost
-everything below is backend-agnostic.
+A Flutter Web library system built on the **Kasy design system** and a **feature-first** architecture.
+**CRITICAL PROJECT RULE:** This project is exclusively frontend with mock data (using LocalStorage/memory for simulated persistence). There is no real backend database or API.
+
+Currently, we are beginning the implementation of the **first and second phases** of the system:
+1. **Fase 1**: Biblioteca de PDFs com categorias, Login mockado + Home autenticada, Menu lateral dinâmico por perfil, Seletor de troca de perfil, Comentários/avaliações em PDFs (Perfis: Admin/Desenvolvedor e Cliente).
+2. **Fase 2**: As per requirements in the roadmap.
+
 
 ## Golden rules (every time)
 

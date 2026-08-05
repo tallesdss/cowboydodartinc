@@ -669,8 +669,10 @@ class DevInspectorService {
     // Drop zero-width / BOM chars that `trim()` leaves behind, so invisible
     // baseline anchors don't become empty `""` context entries.
     final StringBuffer cleaned = StringBuffer();
-    for (final int unit in value.runes) {
-      if (!_zeroWidthCodeUnits.contains(unit)) cleaned.writeCharCode(unit);
+    if (value != null) {
+      for (final int unit in value.runes) {
+        if (!_zeroWidthCodeUnits.contains(unit)) cleaned.writeCharCode(unit);
+      }
     }
     final String result = cleaned.toString().trim();
     if (result.isEmpty || _isIconFontGlyph(result)) return null;

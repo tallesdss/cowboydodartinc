@@ -1,17 +1,17 @@
 import 'package:bart/bart.dart';
 import 'package:cowboydodartinc/core/bottom_menu/bart_inner_navigation.dart';
-import 'package:cowboydodartinc/core/bottom_menu/notification_bottom_item.dart';
 import 'package:cowboydodartinc/core/bottom_menu/web_content_wrapper.dart';
 import 'package:cowboydodartinc/core/config/features.dart';
 import 'package:cowboydodartinc/core/navigation/kasy_navigation_config.dart';
 import 'package:cowboydodartinc/core/navigation/kasy_route_transition.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
-import 'package:cowboydodartinc/features/ai_chat/ai_chat_page.dart';
 import 'package:cowboydodartinc/features/feedbacks/ui/feedback_page.dart';
-import 'package:cowboydodartinc/features/home/home_page.dart';
 import 'package:cowboydodartinc/features/local_reminders/ui/reminder_page.dart';
-import 'package:cowboydodartinc/features/notifications/ui/notifications_page.dart';
 import 'package:cowboydodartinc/features/settings/settings_page.dart';
+import 'package:cowboydodartinc/features/library/ui/explore_page.dart';
+import 'package:cowboydodartinc/features/library/ui/library_page.dart';
+import 'package:cowboydodartinc/features/library/ui/profiles_page.dart';
+import 'package:cowboydodartinc/features/library/ui/my_profile_page.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 
@@ -22,30 +22,38 @@ import 'package:flutter/material.dart';
 List<BartMenuRoute> subRoutes() {
   return [
     BartMenuRoute.bottomBar(
-      label: t.navigation.home,
-      icon: KasyIcons.home,
+      label: t.library.title,
+      icon: Icons.menu_book,
       path: 'home',
       pageBuilder: (_, _, settings) =>
-          const WebContentWrapper(child: HomePage()),
+          const WebContentWrapper(child: LibraryPage()),
       transitionDuration: bottomBarTransitionDuration,
       transitionsBuilder: bottomBarTransition,
     ),
-    if (withAiChat)
-      BartMenuRoute.bottomBar(
-        label: t.navigation.support,
-        icon: KasyIcons.help,
-        path: 'support',
-        pageBuilder: (_, _, settings) =>
-            const WebContentWrapper(child: AiChatPage(isRootTab: true)),
-        transitionDuration: bottomBarTransitionDuration,
-        transitionsBuilder: bottomBarTransition,
-      ),
-    BartMenuRoute.bottomBarBuilder(
-      label: t.navigation.notifications,
-      builder: (_, isActive) => const BottomItemNotification(),
-      path: 'notifications',
+    BartMenuRoute.bottomBar(
+      label: t.library.explore,
+      icon: Icons.explore,
+      path: 'explore',
       pageBuilder: (_, _, settings) =>
-          WebContentWrapper(child: NotificationsPage()),
+          const WebContentWrapper(child: ExplorePage()),
+      transitionDuration: bottomBarTransitionDuration,
+      transitionsBuilder: bottomBarTransition,
+    ),
+    BartMenuRoute.bottomBar(
+      label: t.library.public_profile,
+      icon: Icons.people,
+      path: 'library/profiles',
+      pageBuilder: (_, _, settings) =>
+          const WebContentWrapper(child: ProfilesPage()),
+      transitionDuration: bottomBarTransitionDuration,
+      transitionsBuilder: bottomBarTransition,
+    ),
+    BartMenuRoute.bottomBar(
+      label: t.library.my_pdfs,
+      icon: Icons.account_circle,
+      path: 'library/my-profile',
+      pageBuilder: (_, _, settings) =>
+          const WebContentWrapper(child: MyProfilePage()),
       transitionDuration: bottomBarTransitionDuration,
       transitionsBuilder: bottomBarTransition,
     ),
