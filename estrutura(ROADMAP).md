@@ -4,8 +4,8 @@
 
 Sistema web para gerenciamento de uma biblioteca digital de PDFs, organizados por categorias, com controle de acesso por perfil de usuário (Desenvolvedor e Cliente) onde cada usuário possui seu próprio perfil, pode postar PDFs, comentar, ler, baixar e navegar pelos perfis dos demais usuários.
 
-**Status:** Fase 1 — Módulo de Biblioteca (MVP) concluído.
-**Próximo Passo:** Fase 2 — Recursos de Comunidade, Perfis e Exploração por Temas.
+**Status:** Fase 1 e Fase 2 concluídas (Recursos de Comunidade, Perfis e Exploração por Temas).
+**Próximo Passo:** Fases futuras a definir conforme evolução do projeto.
 
 ---
 
@@ -173,15 +173,26 @@ Usuario
 - [x] Seção "Meus PDFs" na página de início (com os PDFs enviados pelos clientes)
 - [x] Botão "Enviar PDF" na página de início que leva à tela de cadastro de PDF
 
-**Fase 2 (Faltante - Desenvolvimento):**
-- [ ] **Upload universal**: Permitir que o perfil Cliente/Usuário Comum também envie PDFs (associando ao seu perfil de uploader).
-- [ ] **Navegação de perfis**: Criar página para listar todos os usuários ativos/uploaders e permitir navegar por perfis.
-- [ ] **Perfis públicos de usuários**: Página do uploader visitado mostrando estatísticas (PDFs enviados, curtidas/avaliações) e a grade de PDFs publicados por ele.
-- [ ] **Exploração avançada por temas**: Refinar a aba "Explorar" com filtros visuais por temas (categorias) e tags de interesse.
-- [ ] **Meu Perfil**: Implementar a aba "Meu Perfil" do usuário logado atual, com listagem exclusiva de seus PDFs enviados e estatísticas.
-- [ ] **Persistência estendida**: Garantir persistência completa em LocalStorage (com dados mockados) para novos uploads, comentários e favoritos.
+**Fase 2 (Concluída):**
+- [x] **Upload universal**: Permitir que o perfil Cliente/Usuário Comum também envie PDFs (associando ao seu perfil de uploader).
+- [x] **Navegação de perfis**: Criar página para listar todos os usuários ativos/uploaders e permitir navegar por perfis.
+- [x] **Perfis públicos de usuários**: Página do uploader visitado mostrando estatísticas (PDFs enviados, curtidas/avaliações) e a grade de PDFs publicados por ele.
+- [x] **Exploração avançada por temas**: Refinar a aba "Explorar" com filtros visuais por temas (categorias) e tags de interesse.
+- [x] **Meu Perfil**: Implementar a aba "Meu Perfil" do usuário logado atual, com listagem exclusiva de seus PDFs enviados e estatísticas.
+- [x] **Persistência estendida**: Garantir persistência completa em LocalStorage (com dados mockados) para novos uploads, comentários e favoritos.
+
+**Fase 3 (Faltante - Aperfeiçoamentos e Área Admin):**
+- [ ] **Painel de Dashboard (Admin)**: Tela de estatísticas gerais (total de PDFs, acessos, downloads e ranking de uploaders).
+- [ ] **Gerenciamento de Usuários (Admin)**: Tabela de dados (Data Table) para listar, bloquear e alterar papéis/roles dos usuários.
+- [ ] **Gerenciamento de Categorias (Admin)**: Interface (CRUD) para que o Admin crie, edite cor/ícone e remova categorias oficiais.
+- [ ] **Edição de Perfil Avançada**: Tela de configurações para o usuário alterar bio, e-mail e preferências (com persistência no mock).
+- [ ] **Central de Notificações**: Dropdown/Modal no cabeçalho alertando sobre novos comentários nos próprios PDFs ou novas avaliações.
+- [ ] **Busca Global Avançada**: Componente de barra de pesquisa na AppBar (Header) pesquisando simultaneamente em Autores, PDFs e Temas.
+- [ ] **Widgets de Feedback Refinados**: Implementar componentes de Loading States (Skeletons) ao carregar PDFs e listas.
+- [ ] **Refinamento Responsivo Mobile/Tablet**: Adaptar componentes como a grade de PDFs, barra lateral (Drawer vs Sidebar fixa) e leitor de PDF para telas menores.
+- [ ] **Integração de Dark Mode**: Revisão dos tokens do Kasy Design System nas novas páginas para garantir legibilidade no tema escuro.
 
 **Fases futuras:**
-- A definir conforme evolução do projeto
+- A definir conforme novas necessidades.
 
 ---
