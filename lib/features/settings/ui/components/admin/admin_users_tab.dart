@@ -2,16 +2,20 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:cowboydodartinc/components/kasy_avatar.dart';
+import 'package:cowboydodartinc/components/kasy_bottom_sheet.dart';
 import 'package:cowboydodartinc/components/kasy_button.dart';
 import 'package:cowboydodartinc/components/kasy_card.dart';
 import 'package:cowboydodartinc/components/kasy_drop_down.dart';
 import 'package:cowboydodartinc/components/kasy_empty_state.dart';
+import 'package:cowboydodartinc/components/kasy_menu.dart';
+import 'package:cowboydodartinc/components/kasy_popover.dart';
 import 'package:cowboydodartinc/components/kasy_skeleton.dart';
 import 'package:cowboydodartinc/components/kasy_status_tag.dart';
 import 'package:cowboydodartinc/components/kasy_text_field.dart';
 import 'package:cowboydodartinc/components/kasy_tooltip.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/core/widgets/kasy_hover.dart';
+import 'package:cowboydodartinc/core/widgets/responsive_layout.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_routes.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_users_api.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
@@ -31,7 +35,7 @@ const int _pageSize = 10;
 
 /// Which column the table is sorted by. `null` means the smart default order:
 /// active first → subscribers first → newest first (what the admin asked for).
-enum _SortCol { user, status, plan, joined }
+enum _SortCol { user, status, joined }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Tab root
@@ -67,7 +71,6 @@ class _AdminUsersTabState extends ConsumerState<AdminUsersTab> {
     return switch (_sortCol!) {
       _SortCol.user => AdminUsersSort.user,
       _SortCol.status => AdminUsersSort.status,
-      _SortCol.plan => AdminUsersSort.plan,
       _SortCol.joined => AdminUsersSort.joined,
     };
   }
@@ -737,10 +740,10 @@ class _TableHeader extends StatelessWidget {
           Expanded(
             flex: 2,
             child: _HeaderCell(
-              label: u.col_plan,
-              active: sortCol == _SortCol.plan,
+              label: u.col_role,
+              active: false,
               asc: asc,
-              onTap: () => onSort(_SortCol.plan),
+              onTap: () {},
             ),
           ),
           SizedBox(
@@ -751,6 +754,10 @@ class _TableHeader extends StatelessWidget {
               asc: asc,
               onTap: () => onSort(_SortCol.joined),
             ),
+          ),
+          const SizedBox(
+            width: 48,
+            child: SizedBox.shrink(),
           ),
         ],
       ),
@@ -1126,12 +1133,12 @@ class _NavBtn extends StatelessWidget {
 // User row
 // ─────────────────────────────────────────────────────────────────────────────
 
-class _UserRow extends StatelessWidget {
+class _UserRow extends ConsumerWidget {
   final AdminUser user;
   const _UserRow({required this.user});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final u = t.admin_console.users;
     final hasName = user.name?.isNotEmpty == true;
     final hasEmail = user.email?.isNotEmpty == true;
@@ -1215,21 +1222,21 @@ class _UserRow extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: KasyStatusTag(
-                label: hasEmail ? u.status_active : u.status_inactive,
-                tone: hasEmail
-                    ? KasyStatusTagTone.success
-                    : KasyStatusTagTone.neutral,
+                label: user.blocked ? u.status_blocked : (hasEmail ? u.status_active : u.status_inactive),
+                tone: user.blocked 
+                    ? KasyStatusTagTone.danger 
+                    : (hasEmail ? KasyStatusTagTone.success : KasyStatusTagTone.neutral),
               ),
             ),
           ),
-          // ── Plan cell
+          // ── Role cell
           Expanded(
             flex: 2,
             child: Align(
               alignment: Alignment.centerLeft,
               child: KasyStatusTag(
-                label: user.subscriber ? u.plan_subscriber : u.plan_free,
-                tone: user.subscriber
+                label: user.role == 'admin' ? u.role_admin : u.role_user,
+                tone: user.role == 'admin'
                     ? KasyStatusTagTone.primary
                     : KasyStatusTagTone.neutral,
               ),
@@ -1245,11 +1252,95 @@ class _UserRow extends StatelessWidget {
               ),
             ),
           ),
+          // ── Actions cell
+          SizedBox(
+            width: 48,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: _UserActionMenu(user: user),
+            ),
+          ),
         ],
       ),
     );
   }
+}
 
+class _UserActionMenu extends ConsumerWidget {
+  final AdminUser user;
+  const _UserActionMenu({required this.user});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final u = t.admin_console.users;
+    final isAdmin = user.role == 'admin';
+    final isDesktop = MediaQuery.sizeOf(context).width >= DeviceType.large.breakpoint;
+
+    Future<void> toggleRole() async {
+      await ref.read(adminUsersApiProvider).updateRole(user.id, isAdmin ? 'user' : 'admin');
+      ref.invalidate(_usersPageProvider);
+    }
+
+    Future<void> toggleBlock() async {
+      await ref.read(adminUsersApiProvider).toggleBlock(user.id, !user.blocked);
+      ref.invalidate(_usersPageProvider);
+    }
+
+    if (isDesktop) {
+      return KasyMenuAnchor(
+        width: 180,
+        align: KasyPopoverAlign.end,
+        sections: [
+          KasyMenuSection(
+            items: [
+              KasyMenuItem(
+                title: isAdmin ? u.action_remove_admin : u.action_make_admin,
+                icon: KasyIcons.shieldCheck,
+                onTap: toggleRole,
+              ),
+              KasyMenuItem(
+                title: user.blocked ? u.action_unblock : u.action_block,
+                icon: KasyIcons.close,
+                tone: user.blocked ? KasyMenuItemTone.initial : KasyMenuItemTone.danger,
+                onTap: toggleBlock,
+              ),
+            ],
+          ),
+        ],
+        builder: (ctx, open) => KasyButton.iconOnly(
+          icon: KasyIcons.moreVert,
+          variant: KasyButtonVariant.ghost,
+          size: KasyButtonSize.small,
+          onPressed: open,
+          semanticLabel: u.col_action,
+        ),
+      );
+    }
+
+    return KasyButton.iconOnly(
+      icon: KasyIcons.moreVert,
+      variant: KasyButtonVariant.ghost,
+      size: KasyButtonSize.small,
+      onPressed: () => showKasyChoiceSheet(
+        context: context,
+        title: user.name ?? user.email ?? u.anonymous,
+        options: [
+          KasyBottomSheetOption(
+            icon: KasyIcons.shieldCheck,
+            label: isAdmin ? u.action_remove_admin : u.action_make_admin,
+            onTap: toggleRole,
+          ),
+          KasyBottomSheetOption(
+            icon: KasyIcons.close,
+            label: user.blocked ? u.action_unblock : u.action_block,
+            danger: !user.blocked,
+            onTap: toggleBlock,
+          ),
+        ],
+      ),
+      semanticLabel: u.col_action,
+    );
+  }
 }
 
 /// Mobile card for a single user — the same data as a table row, stacked
@@ -1321,6 +1412,7 @@ class _UserCard extends StatelessWidget {
                   ],
                 ),
               ),
+              _UserActionMenu(user: user),
             ],
           ),
           const SizedBox(height: KasySpacing.smd),
@@ -1337,14 +1429,14 @@ class _UserCard extends StatelessWidget {
                   runSpacing: KasySpacing.xs,
                   children: [
                     KasyStatusTag(
-                      label: hasEmail ? u.status_active : u.status_inactive,
-                      tone: hasEmail
-                          ? KasyStatusTagTone.success
-                          : KasyStatusTagTone.neutral,
+                      label: user.blocked ? u.status_blocked : (hasEmail ? u.status_active : u.status_inactive),
+                      tone: user.blocked 
+                          ? KasyStatusTagTone.danger 
+                          : (hasEmail ? KasyStatusTagTone.success : KasyStatusTagTone.neutral),
                     ),
                     KasyStatusTag(
-                      label: user.subscriber ? u.plan_subscriber : u.plan_free,
-                      tone: user.subscriber
+                      label: user.role == 'admin' ? u.role_admin : u.role_user,
+                      tone: user.role == 'admin'
                           ? KasyStatusTagTone.primary
                           : KasyStatusTagTone.neutral,
                     ),

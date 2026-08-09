@@ -28,10 +28,6 @@
 
 library;
 
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show SystemUiOverlayStyle;
-import 'package:cowboydodartinc/core/widgets/kasy_brand_logo.dart';
 import 'package:cowboydodartinc/components/kasy_avatar_presets.dart';
 import 'package:cowboydodartinc/components/kasy_button.dart';
 import 'package:cowboydodartinc/components/kasy_tooltip.dart';
@@ -39,8 +35,12 @@ import 'package:cowboydodartinc/core/chrome/app_bar_config.dart';
 import 'package:cowboydodartinc/core/chrome/app_bar_scope.dart';
 import 'package:cowboydodartinc/core/chrome/chrome_visibility.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
+import 'package:cowboydodartinc/core/widgets/kasy_brand_logo.dart';
 import 'package:cowboydodartinc/core/widgets/kasy_focus_ring.dart';
 import 'package:cowboydodartinc/core/widgets/responsive_layout.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 
 /// Inner toolbar band height (orbit hit targets, title baseline).
 const double kasyAppBarToolbarRowHeight = 44;

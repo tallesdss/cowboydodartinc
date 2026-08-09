@@ -71,6 +71,7 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsHomeWidgetPt home_widget = _TranslationsHomeWidgetPt._(_root);
 	@override late final _TranslationsKanbanPt kanban = _TranslationsKanbanPt._(_root);
 	@override late final _TranslationsLibraryPt library = _TranslationsLibraryPt._(_root);
+	@override late final _TranslationsSearchPt search = _TranslationsSearchPt._(_root);
 }
 
 // Path: common
@@ -100,6 +101,7 @@ class _TranslationsAdminConsolePt extends TranslationsAdminConsoleEn {
 	@override late final _TranslationsAdminConsoleOverviewPt overview = _TranslationsAdminConsoleOverviewPt._(_root);
 	@override late final _TranslationsAdminConsoleUsersPt users = _TranslationsAdminConsoleUsersPt._(_root);
 	@override late final _TranslationsAdminConsoleRequestsPt requests = _TranslationsAdminConsoleRequestsPt._(_root);
+	@override late final _TranslationsAdminConsoleCategoriesPt categories = _TranslationsAdminConsoleCategoriesPt._(_root);
 	@override late final _TranslationsAdminConsoleGroupsPt groups = _TranslationsAdminConsoleGroupsPt._(_root);
 	@override late final _TranslationsAdminConsolePaywallsPt paywalls = _TranslationsAdminConsolePaywallsPt._(_root);
 	@override late final _TranslationsAdminConsoleSettingsEntryPt settings_entry = _TranslationsAdminConsoleSettingsEntryPt._(_root);
@@ -505,6 +507,12 @@ class _TranslationsSettingsPt extends TranslationsSettingsEn {
 	@override String get edit_name_cancel => 'Cancelar';
 	@override String get edit_name_success => 'Nome atualizado';
 	@override String get edit_name_error => 'Não foi possível atualizar seu nome. Tente novamente.';
+	@override String get bio_label => 'Bio';
+	@override String get bio_hint => 'Escreva algo sobre você...';
+	@override String get edit_profile_title => 'Editar perfil';
+	@override String get edit_profile_save => 'Salvar';
+	@override String get edit_profile_success => 'Perfil atualizado';
+	@override String get edit_profile_error => 'Não foi possível atualizar seu perfil. Tente novamente.';
 	@override String get reminders => 'Lembretes';
 	@override String get admin_panel => 'Painel Admin';
 	@override String get admin_debug_section_label => 'ADMIN (SÓ EM DEBUG)';
@@ -556,6 +564,8 @@ class _TranslationsNotificationsPt extends TranslationsNotificationsEn {
 	@override String get cancel_action => 'Cancelar';
 	@override String get deleted_one => 'Notificação excluída';
 	@override String get deleted_all => 'Todas as notificações foram excluídas';
+	@override String get new_comment_title => 'Novo Comentário';
+	@override String get new_comment_body => 'Um novo comentário foi adicionado ao seu PDF: "{pdfTitle}"';
 }
 
 // Path: bottom_router
@@ -854,6 +864,21 @@ class _TranslationsLibraryPt extends TranslationsLibraryEn {
 	@override String get view_all_pdfs => 'Ver todos os PDFs enviados por este usuário';
 }
 
+// Path: search
+class _TranslationsSearchPt extends TranslationsSearchEn {
+	_TranslationsSearchPt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Busca Global';
+	@override String get hint => 'Pesquisar autores, temas e PDFs...';
+	@override String get authors => 'Autores';
+	@override String get categories => 'Temas';
+	@override String get pdfs => 'PDFs';
+	@override String get empty => 'Nenhum resultado encontrado para "{query}".';
+}
+
 // Path: admin_console.tabs
 class _TranslationsAdminConsoleTabsPt extends TranslationsAdminConsoleTabsEn {
 	_TranslationsAdminConsoleTabsPt._(TranslationsPt root) : this._root = root, super.internal(root);
@@ -864,6 +889,7 @@ class _TranslationsAdminConsoleTabsPt extends TranslationsAdminConsoleTabsEn {
 	@override String get overview => 'Visão geral';
 	@override String get users => 'Usuários';
 	@override String get requests => 'Solicitações';
+	@override String get categories => 'Categorias';
 	@override String get tools => 'Ferramentas';
 	@override String get debug => 'Depuração';
 }
@@ -912,9 +938,18 @@ class _TranslationsAdminConsoleUsersPt extends TranslationsAdminConsoleUsersEn {
 	@override String get col_user => 'Usuário';
 	@override String get col_status => 'Status';
 	@override String get col_plan => 'Plano';
+	@override String get col_role => 'Papel';
+	@override String get col_action => 'Ações';
 	@override String get col_joined => 'Cadastro';
 	@override String get status_active => 'Ativo';
 	@override String get status_inactive => 'Inativo';
+	@override String get status_blocked => 'Bloqueado';
+	@override String get role_admin => 'Admin';
+	@override String get role_user => 'Usuário';
+	@override String get action_make_admin => 'Tornar Administrador';
+	@override String get action_remove_admin => 'Remover Admin';
+	@override String get action_block => 'Bloquear Acesso';
+	@override String get action_unblock => 'Desbloquear';
 	@override String get plan_subscriber => 'Assinante';
 	@override String get plan_free => 'Grátis';
 	@override String get empty => 'Nenhum usuário encontrado';
@@ -964,6 +999,31 @@ class _TranslationsAdminConsoleRequestsPt extends TranslationsAdminConsoleReques
 	@override String get visibility => 'Visível para os usuários';
 	@override String get save => 'Salvar';
 	@override String get cancel => 'Cancelar';
+}
+
+// Path: admin_console.categories
+class _TranslationsAdminConsoleCategoriesPt extends TranslationsAdminConsoleCategoriesEn {
+	_TranslationsAdminConsoleCategoriesPt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Categorias';
+	@override String get subtitle => 'Gerencie as categorias oficiais da biblioteca. PDFs vinculados a uma categoria excluída não serão apagados.';
+	@override String get add => 'Nova Categoria';
+	@override String get edit => 'Editar';
+	@override String get delete => 'Excluir';
+	@override String get delete_confirm => 'Tem certeza que deseja excluir esta categoria?';
+	@override String get save => 'Salvar';
+	@override String get cancel => 'Cancelar';
+	@override String get name => 'Nome';
+	@override String get description => 'Descrição';
+	@override String get icon => 'Ícone';
+	@override String get color => 'Cor';
+	@override String get empty => 'Nenhuma categoria cadastrada.';
+	@override String get success_saved => 'Categoria salva com sucesso!';
+	@override String get success_deleted => 'Categoria excluída!';
+	@override String get error_empty_fields => 'Preencha todos os campos obrigatórios.';
 }
 
 // Path: admin_console.groups
@@ -1691,6 +1751,7 @@ extension on TranslationsPt {
 			'admin_console.tabs.overview' => 'Visão geral',
 			'admin_console.tabs.users' => 'Usuários',
 			'admin_console.tabs.requests' => 'Solicitações',
+			'admin_console.tabs.categories' => 'Categorias',
 			'admin_console.tabs.tools' => 'Ferramentas',
 			'admin_console.tabs.debug' => 'Depuração',
 			'admin_console.back_to_app' => 'Voltar ao app',
@@ -1722,9 +1783,18 @@ extension on TranslationsPt {
 			'admin_console.users.col_user' => 'Usuário',
 			'admin_console.users.col_status' => 'Status',
 			'admin_console.users.col_plan' => 'Plano',
+			'admin_console.users.col_role' => 'Papel',
+			'admin_console.users.col_action' => 'Ações',
 			'admin_console.users.col_joined' => 'Cadastro',
 			'admin_console.users.status_active' => 'Ativo',
 			'admin_console.users.status_inactive' => 'Inativo',
+			'admin_console.users.status_blocked' => 'Bloqueado',
+			'admin_console.users.role_admin' => 'Admin',
+			'admin_console.users.role_user' => 'Usuário',
+			'admin_console.users.action_make_admin' => 'Tornar Administrador',
+			'admin_console.users.action_remove_admin' => 'Remover Admin',
+			'admin_console.users.action_block' => 'Bloquear Acesso',
+			'admin_console.users.action_unblock' => 'Desbloquear',
 			'admin_console.users.plan_subscriber' => 'Assinante',
 			'admin_console.users.plan_free' => 'Grátis',
 			'admin_console.users.empty' => 'Nenhum usuário encontrado',
@@ -1765,6 +1835,22 @@ extension on TranslationsPt {
 			'admin_console.requests.visibility' => 'Visível para os usuários',
 			'admin_console.requests.save' => 'Salvar',
 			'admin_console.requests.cancel' => 'Cancelar',
+			'admin_console.categories.title' => 'Categorias',
+			'admin_console.categories.subtitle' => 'Gerencie as categorias oficiais da biblioteca. PDFs vinculados a uma categoria excluída não serão apagados.',
+			'admin_console.categories.add' => 'Nova Categoria',
+			'admin_console.categories.edit' => 'Editar',
+			'admin_console.categories.delete' => 'Excluir',
+			'admin_console.categories.delete_confirm' => 'Tem certeza que deseja excluir esta categoria?',
+			'admin_console.categories.save' => 'Salvar',
+			'admin_console.categories.cancel' => 'Cancelar',
+			'admin_console.categories.name' => 'Nome',
+			'admin_console.categories.description' => 'Descrição',
+			'admin_console.categories.icon' => 'Ícone',
+			'admin_console.categories.color' => 'Cor',
+			'admin_console.categories.empty' => 'Nenhuma categoria cadastrada.',
+			'admin_console.categories.success_saved' => 'Categoria salva com sucesso!',
+			'admin_console.categories.success_deleted' => 'Categoria excluída!',
+			'admin_console.categories.error_empty_fields' => 'Preencha todos os campos obrigatórios.',
 			'admin_console.groups.actions' => 'Ações',
 			'admin_console.groups.features' => 'Recursos',
 			'admin_console.groups.preview' => 'Preview',
@@ -2168,6 +2254,8 @@ extension on TranslationsPt {
 			'time_picker.confirm' => 'OK',
 			'time_picker.cancel' => 'Cancelar',
 			'dailyReminder.title' => 'Lembrete',
+			_ => null,
+		} ?? switch (path) {
 			'dailyReminder.body' => 'Está na hora de beber água.',
 			'settings.title' => 'Configurações',
 			'settings.avatar.title' => 'Foto do perfil',
@@ -2194,8 +2282,6 @@ extension on TranslationsPt {
 			'settings.biometric_subtitle_android_fingerprint' => 'Exige impressão digital ao abrir com sessão ativa.',
 			'settings.biometric_subtitle_android_face_and_fingerprint' => 'Exige impressão digital ou desbloqueio facial ao abrir com sessão ativa.',
 			'settings.biometric_disable_title' => 'Desligar bloqueio?',
-			_ => null,
-		} ?? switch (path) {
 			'settings.biometric_disable_message' => 'Sem bloqueio, quem pegar no celular desbloqueado abre o app até você sair da conta.',
 			'settings.biometric_disable_confirm' => 'Desligar',
 			'settings.biometric_disable_cancel' => 'Cancelar',
@@ -2257,6 +2343,12 @@ extension on TranslationsPt {
 			'settings.edit_name_cancel' => 'Cancelar',
 			'settings.edit_name_success' => 'Nome atualizado',
 			'settings.edit_name_error' => 'Não foi possível atualizar seu nome. Tente novamente.',
+			'settings.bio_label' => 'Bio',
+			'settings.bio_hint' => 'Escreva algo sobre você...',
+			'settings.edit_profile_title' => 'Editar perfil',
+			'settings.edit_profile_save' => 'Salvar',
+			'settings.edit_profile_success' => 'Perfil atualizado',
+			'settings.edit_profile_error' => 'Não foi possível atualizar seu perfil. Tente novamente.',
 			'settings.reminders' => 'Lembretes',
 			'settings.admin_panel' => 'Painel Admin',
 			'settings.admin_debug_section_label' => 'ADMIN (SÓ EM DEBUG)',
@@ -2364,6 +2456,8 @@ extension on TranslationsPt {
 			'notifications.cancel_action' => 'Cancelar',
 			'notifications.deleted_one' => 'Notificação excluída',
 			'notifications.deleted_all' => 'Todas as notificações foram excluídas',
+			'notifications.new_comment_title' => 'Novo Comentário',
+			'notifications.new_comment_body' => 'Um novo comentário foi adicionado ao seu PDF: "{pdfTitle}"',
 			'bottom_router.fake_page_text' => 'Esta é uma página de exemplo',
 			'ai_chat.title' => 'Assistente IA',
 			'ai_chat.empty_state' => 'Inicie uma conversa com seu assistente.',
@@ -2561,6 +2655,12 @@ extension on TranslationsPt {
 			'library.sent_by' => 'Enviado por',
 			'library.public_profile' => 'Perfil Público',
 			'library.view_all_pdfs' => 'Ver todos os PDFs enviados por este usuário',
+			'search.title' => 'Busca Global',
+			'search.hint' => 'Pesquisar autores, temas e PDFs...',
+			'search.authors' => 'Autores',
+			'search.categories' => 'Temas',
+			'search.pdfs' => 'PDFs',
+			'search.empty' => 'Nenhum resultado encontrado para "{query}".',
 			_ => null,
 		};
 	}

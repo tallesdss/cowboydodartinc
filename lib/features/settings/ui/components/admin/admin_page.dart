@@ -30,11 +30,12 @@ import 'package:cowboydodartinc/features/feedbacks/api/feature_request_api.dart'
 import 'package:cowboydodartinc/features/home/components_navigation.dart';
 import 'package:cowboydodartinc/features/home/home_components_page.dart';
 import 'package:cowboydodartinc/features/kanban/ui/kanban_page.dart';
+import 'package:cowboydodartinc/features/library/providers/library_stats_provider.dart';
 import 'package:cowboydodartinc/features/notifications/api/local_notifier.dart';
 import 'package:cowboydodartinc/features/notifications/providers/models/notification.dart'
     as kasy_kit;
+import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_categories_tab.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_routes.dart';
-import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_users_api.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_users_tab.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/admin/send_push_notification_page.dart';
 import 'package:cowboydodartinc/features/settings/ui/widgets/kasy_user_avatar.dart';
@@ -67,6 +68,7 @@ enum AdminSection {
   requests,
   kanban,
   sendPush,
+  categories,
   paywalls,
   components,
   debug,
@@ -130,6 +132,13 @@ List<AdminSectionDef> adminSections() => [
     inToolsGroup: true,
   ),
   AdminSectionDef(
+    id: AdminSection.categories,
+    path: adminRouteCategories,
+    icon: KasyIcons.folder,
+    build: () => const AdminCategoriesTab(),
+    inToolsGroup: true,
+  ),
+  AdminSectionDef(
     id: AdminSection.paywalls,
     path: adminRoutePaywalls,
     icon: KasyIcons.payment,
@@ -174,6 +183,7 @@ String adminSectionLabel(AdminSection id) {
     AdminSection.requests => tabs.requests,
     AdminSection.kanban => t.kanban.title,
     AdminSection.sendPush => t.home.features_page.send_push_title,
+    AdminSection.categories => tabs.categories,
     AdminSection.paywalls => t.settings.admin.paywalls,
     AdminSection.components => t.home.dashboard.components_title,
     AdminSection.debug => tabs.debug,
@@ -477,12 +487,7 @@ final _adminRequestsProvider =
       return ref.read(featureRequestApiProvider).getAll();
     });
 
-/// Bounded user metrics for the Overview panel (aggregates only, no full list).
-final _adminUsersOverviewProvider =
-    FutureProvider.autoDispose<AdminUsersOverviewStats>((ref) {
-      ref.keepAlive();
-      return ref.read(adminUsersApiProvider).fetchOverview();
-    });
+// Removed unused provider
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Layout primitives
@@ -722,7 +727,7 @@ class _OverviewTab extends ConsumerWidget {
         // split. Non-admins (debug builds only) skip straight to the session
         // card — the metrics need the server function, which gates by role.
         if (isAdmin) ...[
-          const _OverviewMetricsPanel(),
+          const _LibraryOverviewMetricsPanel(),
           const SizedBox(height: KasySpacing.lg),
         ],
         _GroupLabel(ov.session_title),
@@ -808,81 +813,69 @@ class _OverviewTab extends ConsumerWidget {
   }
 }
 
-/// Live data panel for the Overview (admins): KPI cards, the 14-day sign-up
-/// chart and the free/subscriber split. Reads the same bounded user set as the
-/// Users tab; shows a skeleton while it loads and degrades to the requests KPI
-/// alone if the user function fails.
-class _OverviewMetricsPanel extends ConsumerWidget {
-  const _OverviewMetricsPanel();
+class _LibraryOverviewMetricsPanel extends ConsumerWidget {
+  const _LibraryOverviewMetricsPanel();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final stats = ref.watch(libraryStatsProvider);
     final ov = t.admin_console.overview;
-    final AsyncValue<AdminUsersOverviewStats> usersAsync = ref.watch(
-      _adminUsersOverviewProvider,
-    );
-    final String requests = ref
-        .watch(_adminRequestsProvider)
-        .maybeWhen(data: (l) => '${l.length}', orElse: () => '…');
 
-    return usersAsync.when(
-      loading: () => const _OverviewSkeleton(),
-      error: (_, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _GroupLabel(ov.summary),
-          _ResponsiveGrid(
-            minItemWidth: 168,
-            children: [
-              _StatCard(
-                icon: KasyIcons.voteUp,
-                value: requests,
-                label: ov.requests_metric,
-              ),
-            ],
-          ),
-        ],
-      ),
-      data: (stats) {
-        final m = _OverviewMetrics.from(stats);
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _GroupLabel(ov.summary),
+        _ResponsiveGrid(
+          minItemWidth: 168,
           children: [
-            _GroupLabel(ov.summary),
-            _ResponsiveGrid(
-              minItemWidth: 168,
-              children: [
-                _StatCard(
-                  icon: KasyIcons.users,
-                  value: _compactCount(m.total),
-                  label: ov.total_users,
-                ),
-                _StatCard(
-                  icon: KasyIcons.payment,
-                  value: _compactCount(m.subscribers),
-                  label: ov.subscribers,
-                ),
-                _StatCard(
-                  icon: KasyIcons.northEast,
-                  value: _compactCount(m.new7d),
-                  label: ov.new_7d,
-                ),
-                _StatCard(
-                  icon: KasyIcons.voteUp,
-                  value: requests,
-                  label: ov.requests_metric,
-                ),
-              ],
+            _StatCard(
+              icon: KasyIcons.book,
+              value: _compactCount(stats.totalPdfs),
+              label: 'Total de PDFs',
             ),
-            const SizedBox(height: KasySpacing.lg),
-            _GroupLabel(ov.signups_title),
-            _SignupsCard(metrics: m),
-            const SizedBox(height: KasySpacing.lg),
-            _GroupLabel(ov.plan_split_title),
-            _PlanSplitCard(metrics: m),
+            _StatCard(
+              icon: KasyIcons.eye,
+              value: _compactCount(stats.totalViews),
+              label: 'Acessos',
+            ),
+            _StatCard(
+              icon: KasyIcons.download,
+              value: _compactCount(stats.totalDownloads),
+              label: 'Downloads',
+            ),
           ],
-        );
-      },
+        ),
+        const SizedBox(height: KasySpacing.lg),
+        const _GroupLabel('Top Uploaders'),
+        _CardShell(
+          padding: EdgeInsets.zero,
+          child: ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: stats.uploaderRanking.length,
+            separatorBuilder: (context, index) => const SettingsDivider(),
+            itemBuilder: (context, index) {
+              final rank = stats.uploaderRanking[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: context.colors.primary,
+                  child: Text(
+                    '${index + 1}',
+                    style: TextStyle(color: context.colors.onPrimary),
+                  ),
+                ),
+                title: Text(rank.author),
+                trailing: Text(
+                  '${rank.pdfCount} PDFs',
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -898,508 +891,6 @@ String _compactCount(int n) {
   return '${v.toStringAsFixed(1).replaceAll('.0', '')}M';
 }
 
-/// Derives the Overview's numbers from server-side aggregates.
-class _OverviewMetrics {
-  final int total;
-  final int subscribers;
-  final int new7d;
-  final List<int> daily;
-  final DateTime firstDay;
-  final DateTime lastDay;
-
-  const _OverviewMetrics({
-    required this.total,
-    required this.subscribers,
-    required this.new7d,
-    required this.daily,
-    required this.firstDay,
-    required this.lastDay,
-  });
-
-  int get loaded => total;
-  int get free => (total - subscribers).clamp(0, total);
-  int get signups14 => daily.fold(0, (a, b) => a + b);
-  int get conversionPercent =>
-      total == 0 ? 0 : (subscribers / total * 100).round();
-
-  factory _OverviewMetrics.from(AdminUsersOverviewStats stats) {
-    return _OverviewMetrics(
-      total: stats.totalUsers,
-      subscribers: stats.subscribers,
-      new7d: stats.new7d,
-      daily: stats.daily,
-      firstDay: stats.firstDay,
-      lastDay: stats.lastDay,
-    );
-  }
-}
-
-/// Sign-up chart card: a heading with the 14-day total and the bar chart.
-class _SignupsCard extends StatelessWidget {
-  final _OverviewMetrics metrics;
-  const _SignupsCard({required this.metrics});
-
-  @override
-  Widget build(BuildContext context) {
-    final ov = t.admin_console.overview;
-    final bool empty = metrics.signups14 == 0;
-    return _CardShell(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      ov.signups_subtitle,
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: context.colors.muted,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      ov.signups_total(count: metrics.signups14),
-                      style: context.textTheme.titleMedium?.copyWith(
-                        color: context.colors.onSurface,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: KasySpacing.md),
-          if (empty)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: KasySpacing.lg),
-              child: Center(
-                child: Text(
-                  ov.signups_empty,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: context.colors.muted,
-                  ),
-                ),
-              ),
-            )
-          else
-            _SignupsChart(metrics: metrics),
-        ],
-      ),
-    );
-  }
-}
-
-/// Interactive bar chart (no dependency): one bar per day. Hover (web) or
-/// tap/scrub (touch) over a bar to highlight it and read that day's date and
-/// count in a floating label — the professional dashboard behaviour.
-class _SignupsChart extends StatefulWidget {
-  final _OverviewMetrics metrics;
-  const _SignupsChart({required this.metrics});
-
-  @override
-  State<_SignupsChart> createState() => _SignupsChartState();
-}
-
-class _SignupsChartState extends State<_SignupsChart> {
-  static const double _height = 124;
-  int? _active;
-
-  String _dm(DateTime d) =>
-      '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}';
-
-  @override
-  Widget build(BuildContext context) {
-    final daily = widget.metrics.daily;
-    final int count = daily.length;
-    final int maxV = daily.fold(0, (a, b) => b > a ? b : a);
-    final double safeMax = maxV <= 0 ? 1 : maxV.toDouble();
-    final Color tone = context.colors.primary;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SizedBox(
-          height: _height,
-          child: LayoutBuilder(
-            builder: (context, c) {
-              final double w = c.maxWidth;
-              void hit(double dx) {
-                final int i = (dx / w * count).floor().clamp(0, count - 1);
-                if (i != _active) setState(() => _active = i);
-              }
-
-              final int? active = _active;
-              final double activeFactor = active == null
-                  ? 0
-                  : (daily[active] / safeMax).clamp(0.0, 1.0);
-
-              return TapRegion(
-                onTapOutside: (_) {
-                  if (_active != null) setState(() => _active = null);
-                },
-                child: MouseRegion(
-                  onHover: (e) => hit(e.localPosition.dx),
-                  onExit: (_) => setState(() => _active = null),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTapDown: (d) => hit(d.localPosition.dx),
-                    onHorizontalDragStart: (d) => hit(d.localPosition.dx),
-                    onHorizontalDragUpdate: (d) => hit(d.localPosition.dx),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        // Baseline behind the bars grounds the timeline.
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          child: Container(
-                            height: 1,
-                            color: context.colors.outline.withValues(
-                              alpha: 0.35,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            for (int i = 0; i < count; i++)
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 3,
-                                  ),
-                                  child: _Bar(
-                                    factor: daily[i] / safeMax,
-                                    tone: tone,
-                                    active: active == i,
-                                    dimmed: active != null && active != i,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                        if (active != null)
-                          _tooltip(
-                            context,
-                            active,
-                            daily[active],
-                            activeFactor,
-                            w,
-                            count,
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: KasySpacing.xs),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(_dm(widget.metrics.firstDay), style: _axis(context)),
-            Text(_dm(widget.metrics.lastDay), style: _axis(context)),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _tooltip(
-    BuildContext context,
-    int index,
-    int value,
-    double factor,
-    double w,
-    int count,
-  ) {
-    const double tipW = 78;
-    final double cell = w / count;
-    final double centerX = cell * (index + 0.5);
-    final double left = (centerX - tipW / 2).clamp(0.0, w - tipW);
-    final double bottom = (factor * _height + 10).clamp(0.0, _height - 44);
-    final DateTime date = widget.metrics.firstDay.add(Duration(days: index));
-    return Positioned(
-      left: left,
-      bottom: bottom,
-      child: IgnorePointer(
-        child: Container(
-          width: tipW,
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-          decoration: BoxDecoration(
-            color: context.colors.onSurface,
-            borderRadius: BorderRadius.circular(KasyRadius.sm),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.18),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '$value',
-                style: context.textTheme.titleSmall?.copyWith(
-                  color: context.colors.surface,
-                  fontWeight: FontWeight.w800,
-                  height: 1,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                _dm(date),
-                style: context.textTheme.labelSmall?.copyWith(
-                  color: context.colors.surface.withValues(alpha: 0.7),
-                  height: 1,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  TextStyle? _axis(BuildContext context) =>
-      context.textTheme.labelSmall?.copyWith(color: context.colors.muted);
-}
-
-class _Bar extends StatelessWidget {
-  final double factor; // 0..1 of the tallest bar
-  final Color tone;
-  final bool active;
-  final bool dimmed;
-  const _Bar({
-    required this.factor,
-    required this.tone,
-    required this.active,
-    required this.dimmed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final double f = factor.clamp(0.0, 1.0);
-    final double a = active ? 1.0 : (dimmed ? 0.32 : 0.82);
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: FractionallySizedBox(
-        heightFactor: f <= 0 ? null : f,
-        widthFactor: 1,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 120),
-          curve: Curves.easeOut,
-          // Zero days keep a faint nub so the axis still reads as a timeline.
-          height: f <= 0 ? 3 : null,
-          decoration: BoxDecoration(
-            gradient: f <= 0
-                ? null
-                : LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      tone.withValues(alpha: a),
-                      tone.withValues(alpha: a * 0.6),
-                    ],
-                  ),
-            color: f <= 0
-                ? context.colors.outline.withValues(alpha: 0.5)
-                : null,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Free vs subscriber split: a conversion headline, a proportion bar and a
-/// legend with the exact counts.
-class _PlanSplitCard extends StatelessWidget {
-  final _OverviewMetrics metrics;
-  const _PlanSplitCard({required this.metrics});
-
-  @override
-  Widget build(BuildContext context) {
-    final ov = t.admin_console.overview;
-    final int subs = metrics.subscribers;
-    final int free = metrics.free;
-    final Color subColor = context.colors.success;
-    final Color track = context.colors.surfaceNeutralSoft;
-
-    return _CardShell(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            ov.conversion(percent: '${metrics.conversionPercent}%'),
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colors.onSurface,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: KasySpacing.smd),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(KasyRadius.sm),
-            child: SizedBox(
-              height: 12,
-              child: Row(
-                children: [
-                  if (subs > 0)
-                    Expanded(
-                      flex: subs,
-                      child: ColoredBox(color: subColor),
-                    ),
-                  if (free > 0)
-                    Expanded(
-                      flex: free,
-                      child: ColoredBox(color: track),
-                    ),
-                  if (subs == 0 && free == 0)
-                    Expanded(child: ColoredBox(color: track)),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: KasySpacing.smd),
-          Row(
-            children: [
-              _LegendDot(color: subColor, label: ov.subscriber, value: subs),
-              const SizedBox(width: KasySpacing.lg),
-              _LegendDot(
-                color: track,
-                borderColor: context.colors.outline,
-                label: ov.free,
-                value: free,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LegendDot extends StatelessWidget {
-  final Color color;
-  final Color? borderColor;
-  final String label;
-  final int value;
-  const _LegendDot({
-    required this.color,
-    required this.label,
-    required this.value,
-    this.borderColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            border: borderColor != null
-                ? Border.all(color: borderColor!)
-                : null,
-          ),
-        ),
-        const SizedBox(width: 6),
-        Text(
-          label,
-          style: context.textTheme.bodySmall?.copyWith(
-            color: context.colors.muted,
-          ),
-        ),
-        const SizedBox(width: 4),
-        Text(
-          '$value',
-          style: context.textTheme.bodySmall?.copyWith(
-            color: context.colors.onSurface,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Loading placeholder for the metrics panel — skeleton KPI cards plus a chart
-/// block, matching the real layout so nothing jumps when data arrives.
-class _OverviewSkeleton extends StatelessWidget {
-  const _OverviewSkeleton();
-
-  @override
-  Widget build(BuildContext context) {
-    final ov = t.admin_console.overview;
-    return KasySkeletonGroup(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _GroupLabel(ov.summary),
-          const _ResponsiveGrid(
-            minItemWidth: 168,
-            children: [
-              _StatCardSkeleton(),
-              _StatCardSkeleton(),
-              _StatCardSkeleton(),
-              _StatCardSkeleton(),
-            ],
-          ),
-          const SizedBox(height: KasySpacing.lg),
-          _GroupLabel(ov.signups_title),
-          const _CardShell(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                KasySkeleton(width: 120, height: 12),
-                SizedBox(height: 8),
-                KasySkeleton(width: 70, height: 18),
-                SizedBox(height: KasySpacing.md),
-                KasySkeleton(width: double.infinity, height: 116),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StatCardSkeleton extends StatelessWidget {
-  const _StatCardSkeleton();
-
-  @override
-  Widget build(BuildContext context) {
-    return const _CardShell(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          KasySkeleton.circle(size: 40),
-          SizedBox(height: KasySpacing.smd),
-          KasySkeleton(width: 56, height: 18),
-          SizedBox(height: 6),
-          KasySkeleton(width: 84, height: 11),
-        ],
-      ),
-    );
-  }
-}
 
 class _InfoRow extends StatelessWidget {
   final String label;

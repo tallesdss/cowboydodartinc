@@ -71,6 +71,7 @@ class TranslationsEs extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsHomeWidgetEs home_widget = _TranslationsHomeWidgetEs._(_root);
 	@override late final _TranslationsKanbanEs kanban = _TranslationsKanbanEs._(_root);
 	@override late final _TranslationsLibraryEs library = _TranslationsLibraryEs._(_root);
+	@override late final _TranslationsSearchEs search = _TranslationsSearchEs._(_root);
 }
 
 // Path: common
@@ -100,6 +101,7 @@ class _TranslationsAdminConsoleEs extends TranslationsAdminConsoleEn {
 	@override late final _TranslationsAdminConsoleOverviewEs overview = _TranslationsAdminConsoleOverviewEs._(_root);
 	@override late final _TranslationsAdminConsoleUsersEs users = _TranslationsAdminConsoleUsersEs._(_root);
 	@override late final _TranslationsAdminConsoleRequestsEs requests = _TranslationsAdminConsoleRequestsEs._(_root);
+	@override late final _TranslationsAdminConsoleCategoriesEs categories = _TranslationsAdminConsoleCategoriesEs._(_root);
 	@override late final _TranslationsAdminConsoleGroupsEs groups = _TranslationsAdminConsoleGroupsEs._(_root);
 	@override late final _TranslationsAdminConsolePaywallsEs paywalls = _TranslationsAdminConsolePaywallsEs._(_root);
 	@override late final _TranslationsAdminConsoleSettingsEntryEs settings_entry = _TranslationsAdminConsoleSettingsEntryEs._(_root);
@@ -505,6 +507,12 @@ class _TranslationsSettingsEs extends TranslationsSettingsEn {
 	@override String get edit_name_cancel => 'Cancelar';
 	@override String get edit_name_success => 'Nombre actualizado';
 	@override String get edit_name_error => 'No se pudo actualizar tu nombre. Inténtalo de nuevo.';
+	@override String get bio_label => 'Bio';
+	@override String get bio_hint => 'Escribe algo sobre ti...';
+	@override String get edit_profile_title => 'Editar perfil';
+	@override String get edit_profile_save => 'Guardar';
+	@override String get edit_profile_success => 'Perfil actualizado';
+	@override String get edit_profile_error => 'No se pudo actualizar tu perfil. Inténtalo de nuevo.';
 	@override String get reminders => 'Recordatorios';
 	@override String get admin_panel => 'Panel de Administración';
 	@override String get admin_debug_section_label => 'ADMIN (SOLO DEBUG)';
@@ -556,6 +564,8 @@ class _TranslationsNotificationsEs extends TranslationsNotificationsEn {
 	@override String get cancel_action => 'Cancelar';
 	@override String get deleted_one => 'Notificación eliminada';
 	@override String get deleted_all => 'Todas las notificaciones eliminadas';
+	@override String get new_comment_title => 'Nuevo Comentario';
+	@override String get new_comment_body => 'Se ha añadido un nuevo comentario a tu PDF: "{pdfTitle}"';
 }
 
 // Path: bottom_router
@@ -851,7 +861,22 @@ class _TranslationsLibraryEs extends TranslationsLibraryEn {
 	@override String get uploaded_by => 'Enviado por';
 	@override String get sent_by => 'Enviado por';
 	@override String get public_profile => 'Perfil Público';
-	@override String get view_all_pdfs => 'Ver todos los PDFs enviados por este usuario';
+	@override String get view_all_pdfs => 'Ver todos los PDFs subidos por este usuario';
+}
+
+// Path: search
+class _TranslationsSearchEs extends TranslationsSearchEn {
+	_TranslationsSearchEs._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Búsqueda Global';
+	@override String get hint => 'Buscar autores, temas y PDFs...';
+	@override String get authors => 'Autores';
+	@override String get categories => 'Temas';
+	@override String get pdfs => 'PDFs';
+	@override String get empty => 'No se encontraron resultados para "{query}".';
 }
 
 // Path: admin_console.tabs
@@ -864,6 +889,7 @@ class _TranslationsAdminConsoleTabsEs extends TranslationsAdminConsoleTabsEn {
 	@override String get overview => 'Resumen';
 	@override String get users => 'Usuarios';
 	@override String get requests => 'Solicitudes';
+	@override String get categories => 'Categorías';
 	@override String get tools => 'Herramientas';
 	@override String get debug => 'Depuración';
 }
@@ -912,9 +938,18 @@ class _TranslationsAdminConsoleUsersEs extends TranslationsAdminConsoleUsersEn {
 	@override String get col_user => 'Usuario';
 	@override String get col_status => 'Estado';
 	@override String get col_plan => 'Plan';
+	@override String get col_role => 'Rol';
+	@override String get col_action => 'Acciones';
 	@override String get col_joined => 'Registro';
 	@override String get status_active => 'Activo';
 	@override String get status_inactive => 'Inactivo';
+	@override String get status_blocked => 'Bloqueado';
+	@override String get role_admin => 'Admin';
+	@override String get role_user => 'Usuario';
+	@override String get action_make_admin => 'Hacer Administrador';
+	@override String get action_remove_admin => 'Quitar Admin';
+	@override String get action_block => 'Bloquear Acceso';
+	@override String get action_unblock => 'Desbloquear';
 	@override String get plan_subscriber => 'Suscriptor';
 	@override String get plan_free => 'Gratis';
 	@override String get empty => 'No se encontraron usuarios';
@@ -964,6 +999,31 @@ class _TranslationsAdminConsoleRequestsEs extends TranslationsAdminConsoleReques
 	@override String get visibility => 'Visible para los usuarios';
 	@override String get save => 'Guardar';
 	@override String get cancel => 'Cancelar';
+}
+
+// Path: admin_console.categories
+class _TranslationsAdminConsoleCategoriesEs extends TranslationsAdminConsoleCategoriesEn {
+	_TranslationsAdminConsoleCategoriesEs._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Categorías';
+	@override String get subtitle => 'Administre las categorías oficiales de la biblioteca. Los PDF vinculados a una categoría eliminada no se borrarán.';
+	@override String get add => 'Nueva Categoría';
+	@override String get edit => 'Editar';
+	@override String get delete => 'Eliminar';
+	@override String get delete_confirm => '¿Está seguro de que desea eliminar esta categoría?';
+	@override String get save => 'Guardar';
+	@override String get cancel => 'Cancelar';
+	@override String get name => 'Nombre';
+	@override String get description => 'Descripción';
+	@override String get icon => 'Icono';
+	@override String get color => 'Color';
+	@override String get empty => 'No hay categorías.';
+	@override String get success_saved => '¡Categoría guardada con éxito!';
+	@override String get success_deleted => '¡Categoría eliminada!';
+	@override String get error_empty_fields => 'Por favor, complete todos los campos requeridos.';
 }
 
 // Path: admin_console.groups
@@ -1691,6 +1751,7 @@ extension on TranslationsEs {
 			'admin_console.tabs.overview' => 'Resumen',
 			'admin_console.tabs.users' => 'Usuarios',
 			'admin_console.tabs.requests' => 'Solicitudes',
+			'admin_console.tabs.categories' => 'Categorías',
 			'admin_console.tabs.tools' => 'Herramientas',
 			'admin_console.tabs.debug' => 'Depuración',
 			'admin_console.back_to_app' => 'Volver a la app',
@@ -1722,9 +1783,18 @@ extension on TranslationsEs {
 			'admin_console.users.col_user' => 'Usuario',
 			'admin_console.users.col_status' => 'Estado',
 			'admin_console.users.col_plan' => 'Plan',
+			'admin_console.users.col_role' => 'Rol',
+			'admin_console.users.col_action' => 'Acciones',
 			'admin_console.users.col_joined' => 'Registro',
 			'admin_console.users.status_active' => 'Activo',
 			'admin_console.users.status_inactive' => 'Inactivo',
+			'admin_console.users.status_blocked' => 'Bloqueado',
+			'admin_console.users.role_admin' => 'Admin',
+			'admin_console.users.role_user' => 'Usuario',
+			'admin_console.users.action_make_admin' => 'Hacer Administrador',
+			'admin_console.users.action_remove_admin' => 'Quitar Admin',
+			'admin_console.users.action_block' => 'Bloquear Acceso',
+			'admin_console.users.action_unblock' => 'Desbloquear',
 			'admin_console.users.plan_subscriber' => 'Suscriptor',
 			'admin_console.users.plan_free' => 'Gratis',
 			'admin_console.users.empty' => 'No se encontraron usuarios',
@@ -1765,6 +1835,22 @@ extension on TranslationsEs {
 			'admin_console.requests.visibility' => 'Visible para los usuarios',
 			'admin_console.requests.save' => 'Guardar',
 			'admin_console.requests.cancel' => 'Cancelar',
+			'admin_console.categories.title' => 'Categorías',
+			'admin_console.categories.subtitle' => 'Administre las categorías oficiales de la biblioteca. Los PDF vinculados a una categoría eliminada no se borrarán.',
+			'admin_console.categories.add' => 'Nueva Categoría',
+			'admin_console.categories.edit' => 'Editar',
+			'admin_console.categories.delete' => 'Eliminar',
+			'admin_console.categories.delete_confirm' => '¿Está seguro de que desea eliminar esta categoría?',
+			'admin_console.categories.save' => 'Guardar',
+			'admin_console.categories.cancel' => 'Cancelar',
+			'admin_console.categories.name' => 'Nombre',
+			'admin_console.categories.description' => 'Descripción',
+			'admin_console.categories.icon' => 'Icono',
+			'admin_console.categories.color' => 'Color',
+			'admin_console.categories.empty' => 'No hay categorías.',
+			'admin_console.categories.success_saved' => '¡Categoría guardada con éxito!',
+			'admin_console.categories.success_deleted' => '¡Categoría eliminada!',
+			'admin_console.categories.error_empty_fields' => 'Por favor, complete todos los campos requeridos.',
 			'admin_console.groups.actions' => 'Acciones',
 			'admin_console.groups.features' => 'Funciones',
 			'admin_console.groups.preview' => 'Vista previa',
@@ -2168,6 +2254,8 @@ extension on TranslationsEs {
 			'time_picker.confirm' => 'OK',
 			'time_picker.cancel' => 'Cancelar',
 			'dailyReminder.title' => 'Recordatorio',
+			_ => null,
+		} ?? switch (path) {
 			'dailyReminder.body' => 'Es hora de beber un vaso de agua.',
 			'settings.title' => 'Configuración',
 			'settings.avatar.title' => 'Foto de perfil',
@@ -2194,8 +2282,6 @@ extension on TranslationsEs {
 			'settings.biometric_subtitle_android_fingerprint' => 'Exige huella digital al abrir con sesión iniciada.',
 			'settings.biometric_subtitle_android_face_and_fingerprint' => 'Exige huella digital o desbloqueo facial al abrir con sesión iniciada.',
 			'settings.biometric_disable_title' => '¿Desactivar bloqueo?',
-			_ => null,
-		} ?? switch (path) {
 			'settings.biometric_disable_message' => 'Sin bloqueo, quien tenga el teléfono desbloqueado puede usar la app hasta que cierres sesión.',
 			'settings.biometric_disable_confirm' => 'Desactivar',
 			'settings.biometric_disable_cancel' => 'Cancelar',
@@ -2257,6 +2343,12 @@ extension on TranslationsEs {
 			'settings.edit_name_cancel' => 'Cancelar',
 			'settings.edit_name_success' => 'Nombre actualizado',
 			'settings.edit_name_error' => 'No se pudo actualizar tu nombre. Inténtalo de nuevo.',
+			'settings.bio_label' => 'Bio',
+			'settings.bio_hint' => 'Escribe algo sobre ti...',
+			'settings.edit_profile_title' => 'Editar perfil',
+			'settings.edit_profile_save' => 'Guardar',
+			'settings.edit_profile_success' => 'Perfil actualizado',
+			'settings.edit_profile_error' => 'No se pudo actualizar tu perfil. Inténtalo de nuevo.',
 			'settings.reminders' => 'Recordatorios',
 			'settings.admin_panel' => 'Panel de Administración',
 			'settings.admin_debug_section_label' => 'ADMIN (SOLO DEBUG)',
@@ -2364,6 +2456,8 @@ extension on TranslationsEs {
 			'notifications.cancel_action' => 'Cancelar',
 			'notifications.deleted_one' => 'Notificación eliminada',
 			'notifications.deleted_all' => 'Todas las notificaciones eliminadas',
+			'notifications.new_comment_title' => 'Nuevo Comentario',
+			'notifications.new_comment_body' => 'Se ha añadido un nuevo comentario a tu PDF: "{pdfTitle}"',
 			'bottom_router.fake_page_text' => 'Esta es una página de prueba',
 			'ai_chat.title' => 'Asistente IA',
 			'ai_chat.empty_state' => 'Inicia una conversación con tu asistente.',
@@ -2560,7 +2654,13 @@ extension on TranslationsEs {
 			'library.uploaded_by' => 'Enviado por',
 			'library.sent_by' => 'Enviado por',
 			'library.public_profile' => 'Perfil Público',
-			'library.view_all_pdfs' => 'Ver todos los PDFs enviados por este usuario',
+			'library.view_all_pdfs' => 'Ver todos los PDFs subidos por este usuario',
+			'search.title' => 'Búsqueda Global',
+			'search.hint' => 'Buscar autores, temas y PDFs...',
+			'search.authors' => 'Autores',
+			'search.categories' => 'Temas',
+			'search.pdfs' => 'PDFs',
+			'search.empty' => 'No se encontraron resultados para "{query}".',
 			_ => null,
 		};
 	}

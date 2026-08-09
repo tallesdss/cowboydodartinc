@@ -131,20 +131,18 @@ class _NavItem {
     required this.id,
     required this.icon,
     required this.label,
-    this.subItems = const [],
     this.trailingControls = false,
   });
 
   final String id;
   final IconData icon;
   final String label;
-  final List<String> subItems;
 
   /// When true, the expanded row shows the lock + eye trailing controls
   /// (matches the active "Object 2" layer item in the Figma reference).
   final bool trailingControls;
 
-  bool get hasSubmenu => subItems.isNotEmpty;
+  bool get hasSubmenu => false;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -996,7 +994,6 @@ class _KasySidebarState extends State<KasySidebar> {
                         label: widget.routes![i].label ?? '',
                         isActive: _activeItemId.isEmpty && currentIndex == i,
                         onTap: () => _navigateTo(i),
-                        showBadge: false,
                       ),
                     const SizedBox(height: _kDividerGap),
                     if (!_collapsed) ...[
@@ -1284,9 +1281,6 @@ class _KasySidebarState extends State<KasySidebar> {
   // ── Nav item dispatch ───────────────────────────────────────────────────────
 
   Widget _buildNavItem(BuildContext context, _NavItem item, _SidebarColors c) {
-    if (item.hasSubmenu) {
-      return _buildDropdownItem(context, item, c);
-    }
     final bool isActive = _activeItemId == item.id;
     return _buildItemRow(
       c,
@@ -1423,6 +1417,7 @@ class _KasySidebarState extends State<KasySidebar> {
 
   // ── Dropdown item (submenu — used by connected Income) ───────────────────────
 
+  // ignore: unused_element
   Widget _buildDropdownItem(
     BuildContext context,
     _NavItem item,
@@ -1439,7 +1434,7 @@ class _KasySidebarState extends State<KasySidebar> {
           icon: item.icon,
           iconBg: bg,
           iconColor: iconColor,
-          subItems: item.subItems,
+          subItems: const [],
           activeSubItem: _activeSubItem,
           colors: c,
           anchoredLeft: widget.side == KasySidebarSide.left,

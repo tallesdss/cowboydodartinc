@@ -6,12 +6,12 @@ import 'package:cowboydodartinc/core/navigation/kasy_navigation_config.dart';
 import 'package:cowboydodartinc/core/navigation/kasy_route_transition.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/features/feedbacks/ui/feedback_page.dart';
-import 'package:cowboydodartinc/features/local_reminders/ui/reminder_page.dart';
-import 'package:cowboydodartinc/features/settings/settings_page.dart';
 import 'package:cowboydodartinc/features/library/ui/explore_page.dart';
 import 'package:cowboydodartinc/features/library/ui/library_page.dart';
-import 'package:cowboydodartinc/features/library/ui/profiles_page.dart';
 import 'package:cowboydodartinc/features/library/ui/my_profile_page.dart';
+import 'package:cowboydodartinc/features/library/ui/profiles_page.dart';
+import 'package:cowboydodartinc/features/local_reminders/ui/reminder_page.dart';
+import 'package:cowboydodartinc/features/settings/settings_page.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 

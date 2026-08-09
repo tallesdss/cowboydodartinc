@@ -21,6 +21,7 @@ const String adminKanbanPath = '$adminBasePath/kanban';
 const bool kDebugAdminOpensKanban = true;
 
 const String adminRouteSendPush = '/admin/tools/send-push';
+const String adminRouteCategories = '/admin/tools/categories';
 const String adminRoutePaywalls = '/admin/tools/paywalls';
 const String adminRouteComponents = '/admin/tools/components';
 

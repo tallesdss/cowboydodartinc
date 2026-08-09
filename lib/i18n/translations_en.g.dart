@@ -72,6 +72,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final TranslationsHomeWidgetEn home_widget = TranslationsHomeWidgetEn.internal(_root);
 	late final TranslationsKanbanEn kanban = TranslationsKanbanEn.internal(_root);
 	late final TranslationsLibraryEn library = TranslationsLibraryEn.internal(_root);
+	late final TranslationsSearchEn search = TranslationsSearchEn.internal(_root);
 }
 
 // Path: common
@@ -116,6 +117,7 @@ class TranslationsAdminConsoleEn {
 	late final TranslationsAdminConsoleOverviewEn overview = TranslationsAdminConsoleOverviewEn.internal(_root);
 	late final TranslationsAdminConsoleUsersEn users = TranslationsAdminConsoleUsersEn.internal(_root);
 	late final TranslationsAdminConsoleRequestsEn requests = TranslationsAdminConsoleRequestsEn.internal(_root);
+	late final TranslationsAdminConsoleCategoriesEn categories = TranslationsAdminConsoleCategoriesEn.internal(_root);
 	late final TranslationsAdminConsoleGroupsEn groups = TranslationsAdminConsoleGroupsEn.internal(_root);
 	late final TranslationsAdminConsolePaywallsEn paywalls = TranslationsAdminConsolePaywallsEn.internal(_root);
 	late final TranslationsAdminConsoleSettingsEntryEn settings_entry = TranslationsAdminConsoleSettingsEntryEn.internal(_root);
@@ -965,6 +967,24 @@ class TranslationsSettingsEn {
 	/// en: 'Couldn't update your name. Please try again.'
 	String get edit_name_error => 'Couldn\'t update your name. Please try again.';
 
+	/// en: 'Bio'
+	String get bio_label => 'Bio';
+
+	/// en: 'Write something about yourself...'
+	String get bio_hint => 'Write something about yourself...';
+
+	/// en: 'Edit profile'
+	String get edit_profile_title => 'Edit profile';
+
+	/// en: 'Save'
+	String get edit_profile_save => 'Save';
+
+	/// en: 'Profile updated'
+	String get edit_profile_success => 'Profile updated';
+
+	/// en: 'Couldn't update your profile. Please try again.'
+	String get edit_profile_error => 'Couldn\'t update your profile. Please try again.';
+
 	/// en: 'Reminders'
 	String get reminders => 'Reminders';
 
@@ -1078,6 +1098,12 @@ class TranslationsNotificationsEn {
 
 	/// en: 'All notifications deleted'
 	String get deleted_all => 'All notifications deleted';
+
+	/// en: 'New Comment'
+	String get new_comment_title => 'New Comment';
+
+	/// en: 'A new comment was added to your PDF: "{pdfTitle}"'
+	String get new_comment_body => 'A new comment was added to your PDF: "{pdfTitle}"';
 }
 
 // Path: bottom_router
@@ -1766,8 +1792,35 @@ class TranslationsLibraryEn {
 	/// en: 'Public Profile'
 	String get public_profile => 'Public Profile';
 
-	/// en: 'View all PDFs uploaded by this user'
-	String get view_all_pdfs => 'View all PDFs uploaded by this user';
+	/// en: 'View all PDFs from this user'
+	String get view_all_pdfs => 'View all PDFs from this user';
+}
+
+// Path: search
+class TranslationsSearchEn {
+	TranslationsSearchEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Global Search'
+	String get title => 'Global Search';
+
+	/// en: 'Search authors, themes and PDFs...'
+	String get hint => 'Search authors, themes and PDFs...';
+
+	/// en: 'Authors'
+	String get authors => 'Authors';
+
+	/// en: 'Themes'
+	String get categories => 'Themes';
+
+	/// en: 'PDFs'
+	String get pdfs => 'PDFs';
+
+	/// en: 'No results found for "{query}".'
+	String get empty => 'No results found for "{query}".';
 }
 
 // Path: admin_console.tabs
@@ -1786,6 +1839,9 @@ class TranslationsAdminConsoleTabsEn {
 
 	/// en: 'Requests'
 	String get requests => 'Requests';
+
+	/// en: 'Categories'
+	String get categories => 'Categories';
 
 	/// en: 'Tools'
 	String get tools => 'Tools';
@@ -1895,6 +1951,12 @@ class TranslationsAdminConsoleUsersEn {
 	/// en: 'Plan'
 	String get col_plan => 'Plan';
 
+	/// en: 'Role'
+	String get col_role => 'Role';
+
+	/// en: 'Actions'
+	String get col_action => 'Actions';
+
 	/// en: 'Joined'
 	String get col_joined => 'Joined';
 
@@ -1903,6 +1965,27 @@ class TranslationsAdminConsoleUsersEn {
 
 	/// en: 'Inactive'
 	String get status_inactive => 'Inactive';
+
+	/// en: 'Blocked'
+	String get status_blocked => 'Blocked';
+
+	/// en: 'Admin'
+	String get role_admin => 'Admin';
+
+	/// en: 'User'
+	String get role_user => 'User';
+
+	/// en: 'Make Admin'
+	String get action_make_admin => 'Make Admin';
+
+	/// en: 'Remove Admin'
+	String get action_remove_admin => 'Remove Admin';
+
+	/// en: 'Block Access'
+	String get action_block => 'Block Access';
+
+	/// en: 'Unblock Access'
+	String get action_unblock => 'Unblock Access';
 
 	/// en: 'Subscriber'
 	String get plan_subscriber => 'Subscriber';
@@ -2032,6 +2115,63 @@ class TranslationsAdminConsoleRequestsEn {
 
 	/// en: 'Cancel'
 	String get cancel => 'Cancel';
+}
+
+// Path: admin_console.categories
+class TranslationsAdminConsoleCategoriesEn {
+	TranslationsAdminConsoleCategoriesEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Categories'
+	String get title => 'Categories';
+
+	/// en: 'Manage official library categories. PDFs linked to a deleted category will not be removed.'
+	String get subtitle => 'Manage official library categories. PDFs linked to a deleted category will not be removed.';
+
+	/// en: 'New Category'
+	String get add => 'New Category';
+
+	/// en: 'Edit'
+	String get edit => 'Edit';
+
+	/// en: 'Delete'
+	String get delete => 'Delete';
+
+	/// en: 'Are you sure you want to delete this category?'
+	String get delete_confirm => 'Are you sure you want to delete this category?';
+
+	/// en: 'Save'
+	String get save => 'Save';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+
+	/// en: 'Name'
+	String get name => 'Name';
+
+	/// en: 'Description'
+	String get description => 'Description';
+
+	/// en: 'Icon'
+	String get icon => 'Icon';
+
+	/// en: 'Color'
+	String get color => 'Color';
+
+	/// en: 'No categories found.'
+	String get empty => 'No categories found.';
+
+	/// en: 'Category saved successfully!'
+	String get success_saved => 'Category saved successfully!';
+
+	/// en: 'Category deleted!'
+	String get success_deleted => 'Category deleted!';
+
+	/// en: 'Please fill all required fields.'
+	String get error_empty_fields => 'Please fill all required fields.';
 }
 
 // Path: admin_console.groups
@@ -3437,6 +3577,7 @@ extension on Translations {
 			'admin_console.tabs.overview' => 'Overview',
 			'admin_console.tabs.users' => 'Users',
 			'admin_console.tabs.requests' => 'Requests',
+			'admin_console.tabs.categories' => 'Categories',
 			'admin_console.tabs.tools' => 'Tools',
 			'admin_console.tabs.debug' => 'Debug',
 			'admin_console.back_to_app' => 'Back to app',
@@ -3468,9 +3609,18 @@ extension on Translations {
 			'admin_console.users.col_user' => 'User',
 			'admin_console.users.col_status' => 'Status',
 			'admin_console.users.col_plan' => 'Plan',
+			'admin_console.users.col_role' => 'Role',
+			'admin_console.users.col_action' => 'Actions',
 			'admin_console.users.col_joined' => 'Joined',
 			'admin_console.users.status_active' => 'Active',
 			'admin_console.users.status_inactive' => 'Inactive',
+			'admin_console.users.status_blocked' => 'Blocked',
+			'admin_console.users.role_admin' => 'Admin',
+			'admin_console.users.role_user' => 'User',
+			'admin_console.users.action_make_admin' => 'Make Admin',
+			'admin_console.users.action_remove_admin' => 'Remove Admin',
+			'admin_console.users.action_block' => 'Block Access',
+			'admin_console.users.action_unblock' => 'Unblock Access',
 			'admin_console.users.plan_subscriber' => 'Subscriber',
 			'admin_console.users.plan_free' => 'Free',
 			'admin_console.users.empty' => 'No users found',
@@ -3511,6 +3661,22 @@ extension on Translations {
 			'admin_console.requests.visibility' => 'Visible to users',
 			'admin_console.requests.save' => 'Save',
 			'admin_console.requests.cancel' => 'Cancel',
+			'admin_console.categories.title' => 'Categories',
+			'admin_console.categories.subtitle' => 'Manage official library categories. PDFs linked to a deleted category will not be removed.',
+			'admin_console.categories.add' => 'New Category',
+			'admin_console.categories.edit' => 'Edit',
+			'admin_console.categories.delete' => 'Delete',
+			'admin_console.categories.delete_confirm' => 'Are you sure you want to delete this category?',
+			'admin_console.categories.save' => 'Save',
+			'admin_console.categories.cancel' => 'Cancel',
+			'admin_console.categories.name' => 'Name',
+			'admin_console.categories.description' => 'Description',
+			'admin_console.categories.icon' => 'Icon',
+			'admin_console.categories.color' => 'Color',
+			'admin_console.categories.empty' => 'No categories found.',
+			'admin_console.categories.success_saved' => 'Category saved successfully!',
+			'admin_console.categories.success_deleted' => 'Category deleted!',
+			'admin_console.categories.error_empty_fields' => 'Please fill all required fields.',
 			'admin_console.groups.actions' => 'Actions',
 			'admin_console.groups.features' => 'Features',
 			'admin_console.groups.preview' => 'Preview',
@@ -3914,6 +4080,8 @@ extension on Translations {
 			'time_picker.confirm' => 'OK',
 			'time_picker.cancel' => 'Cancel',
 			'dailyReminder.title' => 'Reminder',
+			_ => null,
+		} ?? switch (path) {
 			'dailyReminder.body' => 'Time to drink a glass of water.',
 			'settings.title' => 'Settings',
 			'settings.avatar.title' => 'Profile photo',
@@ -3940,8 +4108,6 @@ extension on Translations {
 			'settings.biometric_subtitle_android_fingerprint' => 'Require fingerprint unlock when you open the app while signed in.',
 			'settings.biometric_subtitle_android_face_and_fingerprint' => 'Require fingerprint or face unlock when you open while signed in.',
 			'settings.biometric_disable_title' => 'Turn off lock?',
-			_ => null,
-		} ?? switch (path) {
 			'settings.biometric_disable_message' => 'Anyone with your unlocked phone can open the app until you sign out.',
 			'settings.biometric_disable_confirm' => 'Turn off',
 			'settings.biometric_disable_cancel' => 'Cancel',
@@ -4003,6 +4169,12 @@ extension on Translations {
 			'settings.edit_name_cancel' => 'Cancel',
 			'settings.edit_name_success' => 'Name updated',
 			'settings.edit_name_error' => 'Couldn\'t update your name. Please try again.',
+			'settings.bio_label' => 'Bio',
+			'settings.bio_hint' => 'Write something about yourself...',
+			'settings.edit_profile_title' => 'Edit profile',
+			'settings.edit_profile_save' => 'Save',
+			'settings.edit_profile_success' => 'Profile updated',
+			'settings.edit_profile_error' => 'Couldn\'t update your profile. Please try again.',
 			'settings.reminders' => 'Reminders',
 			'settings.admin_panel' => 'Admin Panel',
 			'settings.admin_debug_section_label' => 'ADMIN (DEBUG ONLY)',
@@ -4110,6 +4282,8 @@ extension on Translations {
 			'notifications.cancel_action' => 'Cancel',
 			'notifications.deleted_one' => 'Notification deleted',
 			'notifications.deleted_all' => 'All notifications deleted',
+			'notifications.new_comment_title' => 'New Comment',
+			'notifications.new_comment_body' => 'A new comment was added to your PDF: "{pdfTitle}"',
 			'bottom_router.fake_page_text' => 'This is a fake page',
 			'ai_chat.title' => 'AI Assistant',
 			'ai_chat.empty_state' => 'Start a conversation with your assistant.',
@@ -4306,7 +4480,13 @@ extension on Translations {
 			'library.uploaded_by' => 'Uploaded by',
 			'library.sent_by' => 'Sent by',
 			'library.public_profile' => 'Public Profile',
-			'library.view_all_pdfs' => 'View all PDFs uploaded by this user',
+			'library.view_all_pdfs' => 'View all PDFs from this user',
+			'search.title' => 'Global Search',
+			'search.hint' => 'Search authors, themes and PDFs...',
+			'search.authors' => 'Authors',
+			'search.categories' => 'Themes',
+			'search.pdfs' => 'PDFs',
+			'search.empty' => 'No results found for "{query}".',
 			_ => null,
 		};
 	}

@@ -12,6 +12,7 @@
       "overview": "Overview",
       "users": "Users",
       "requests": "Requests",
+      "categories": "Categories",
       "tools": "Tools",
       "debug": "Debug"
     },
@@ -47,9 +48,18 @@
       "col_user": "User",
       "col_status": "Status",
       "col_plan": "Plan",
+      "col_role": "Role",
+      "col_action": "Actions",
       "col_joined": "Joined",
       "status_active": "Active",
       "status_inactive": "Inactive",
+      "status_blocked": "Blocked",
+      "role_admin": "Admin",
+      "role_user": "User",
+      "action_make_admin": "Make Admin",
+      "action_remove_admin": "Remove Admin",
+      "action_block": "Block Access",
+      "action_unblock": "Unblock Access",
       "plan_subscriber": "Subscriber",
       "plan_free": "Free",
       "empty": "No users found",
@@ -92,6 +102,24 @@
       "visibility": "Visible to users",
       "save": "Save",
       "cancel": "Cancel"
+    },
+    "categories": {
+      "title": "Categories",
+      "subtitle": "Manage official library categories. PDFs linked to a deleted category will not be removed.",
+      "add": "New Category",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Are you sure you want to delete this category?",
+      "save": "Save",
+      "cancel": "Cancel",
+      "name": "Name",
+      "description": "Description",
+      "icon": "Icon",
+      "color": "Color",
+      "empty": "No categories found.",
+      "success_saved": "Category saved successfully!",
+      "success_deleted": "Category deleted!",
+      "error_empty_fields": "Please fill all required fields."
     },
     "groups": {
       "actions": "Actions",
@@ -697,6 +725,12 @@
     "edit_name_cancel": "Cancel",
     "edit_name_success": "Name updated",
     "edit_name_error": "Couldn't update your name. Please try again.",
+    "bio_label": "Bio",
+    "bio_hint": "Write something about yourself...",
+    "edit_profile_title": "Edit profile",
+    "edit_profile_save": "Save",
+    "edit_profile_success": "Profile updated",
+    "edit_profile_error": "Couldn't update your profile. Please try again.",
     "reminders": "Reminders",
     "admin_panel": "Admin Panel",
     "admin_debug_section_label": "ADMIN (DEBUG ONLY)",
@@ -811,7 +845,9 @@
     "delete_action": "Yes, delete",
     "cancel_action": "Cancel",
     "deleted_one": "Notification deleted",
-    "deleted_all": "All notifications deleted"
+    "deleted_all": "All notifications deleted",
+    "new_comment_title": "New Comment",
+    "new_comment_body": "A new comment was added to your PDF: \"{pdfTitle}\""
   },
   "bottom_router": {
     "fake_page_text": "This is a fake page"
@@ -1030,6 +1066,14 @@
     "uploaded_by": "Uploaded by",
     "sent_by": "Sent by",
     "public_profile": "Public Profile",
-    "view_all_pdfs": "View all PDFs uploaded by this user"
+    "view_all_pdfs": "View all PDFs from this user"
+  },
+  "search": {
+    "title": "Global Search",
+    "hint": "Search authors, themes and PDFs...",
+    "authors": "Authors",
+    "categories": "Themes",
+    "pdfs": "PDFs",
+    "empty": "No results found for \"{query}\"."
   }
 }

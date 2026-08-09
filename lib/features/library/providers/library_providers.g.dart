@@ -93,7 +93,7 @@ final class CategoriesProvider
   }
 }
 
-String _$categoriesHash() => r'5944f6bf26f193493d85c8b527a8cc1da1cce468';
+String _$categoriesHash() => r'3e7e7d7ae8598357f7f3a6b968dbe28beba75960';
 
 abstract class _$Categories extends $Notifier<List<LibraryCategory>> {
   List<LibraryCategory> build();

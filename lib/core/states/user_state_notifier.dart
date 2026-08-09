@@ -454,7 +454,7 @@ class UserStateNotifier extends _$UserStateNotifier implements OnStartService {
         if (authEmail != null && authEmail.isNotEmpty) {
           final authName = await _authenticationRepository
               .getCurrentUserDisplayName();
-          await _userRepository.updateEmailAndName(
+          await _userRepository.updateProfile(
             userId: credentials.id,
             email: authEmail,
             name: authName,

@@ -122,10 +122,10 @@ return loading(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String? name,  String? id,  DateTime? creationDate,  DateTime? lastUpdateDate,  String? avatarPath,  bool onboarded,  String? role,  Subscription? subscription)?  authenticated,TResult Function( String? id,  bool? onboarded,  Subscription? subscription,  DateTime? creationDate,  DateTime? lastUpdateDate)?  anonymous,TResult Function()?  loading,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String? name,  String? bio,  String? id,  DateTime? creationDate,  DateTime? lastUpdateDate,  String? avatarPath,  bool onboarded,  String? role,  Subscription? subscription)?  authenticated,TResult Function( String? id,  bool? onboarded,  Subscription? subscription,  DateTime? creationDate,  DateTime? lastUpdateDate)?  anonymous,TResult Function()?  loading,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case AuthenticatedUserData() when authenticated != null:
-return authenticated(_that.email,_that.name,_that.id,_that.creationDate,_that.lastUpdateDate,_that.avatarPath,_that.onboarded,_that.role,_that.subscription);case AnonymousUserData() when anonymous != null:
+return authenticated(_that.email,_that.name,_that.bio,_that.id,_that.creationDate,_that.lastUpdateDate,_that.avatarPath,_that.onboarded,_that.role,_that.subscription);case AnonymousUserData() when anonymous != null:
 return anonymous(_that.id,_that.onboarded,_that.subscription,_that.creationDate,_that.lastUpdateDate);case LoadingUserData() when loading != null:
 return loading();case _:
   return orElse();
@@ -145,10 +145,10 @@ return loading();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String? name,  String? id,  DateTime? creationDate,  DateTime? lastUpdateDate,  String? avatarPath,  bool onboarded,  String? role,  Subscription? subscription)  authenticated,required TResult Function( String? id,  bool? onboarded,  Subscription? subscription,  DateTime? creationDate,  DateTime? lastUpdateDate)  anonymous,required TResult Function()  loading,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String? name,  String? bio,  String? id,  DateTime? creationDate,  DateTime? lastUpdateDate,  String? avatarPath,  bool onboarded,  String? role,  Subscription? subscription)  authenticated,required TResult Function( String? id,  bool? onboarded,  Subscription? subscription,  DateTime? creationDate,  DateTime? lastUpdateDate)  anonymous,required TResult Function()  loading,}) {final _that = this;
 switch (_that) {
 case AuthenticatedUserData():
-return authenticated(_that.email,_that.name,_that.id,_that.creationDate,_that.lastUpdateDate,_that.avatarPath,_that.onboarded,_that.role,_that.subscription);case AnonymousUserData():
+return authenticated(_that.email,_that.name,_that.bio,_that.id,_that.creationDate,_that.lastUpdateDate,_that.avatarPath,_that.onboarded,_that.role,_that.subscription);case AnonymousUserData():
 return anonymous(_that.id,_that.onboarded,_that.subscription,_that.creationDate,_that.lastUpdateDate);case LoadingUserData():
 return loading();}
 }
@@ -164,10 +164,10 @@ return loading();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String? name,  String? id,  DateTime? creationDate,  DateTime? lastUpdateDate,  String? avatarPath,  bool onboarded,  String? role,  Subscription? subscription)?  authenticated,TResult? Function( String? id,  bool? onboarded,  Subscription? subscription,  DateTime? creationDate,  DateTime? lastUpdateDate)?  anonymous,TResult? Function()?  loading,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String? name,  String? bio,  String? id,  DateTime? creationDate,  DateTime? lastUpdateDate,  String? avatarPath,  bool onboarded,  String? role,  Subscription? subscription)?  authenticated,TResult? Function( String? id,  bool? onboarded,  Subscription? subscription,  DateTime? creationDate,  DateTime? lastUpdateDate)?  anonymous,TResult? Function()?  loading,}) {final _that = this;
 switch (_that) {
 case AuthenticatedUserData() when authenticated != null:
-return authenticated(_that.email,_that.name,_that.id,_that.creationDate,_that.lastUpdateDate,_that.avatarPath,_that.onboarded,_that.role,_that.subscription);case AnonymousUserData() when anonymous != null:
+return authenticated(_that.email,_that.name,_that.bio,_that.id,_that.creationDate,_that.lastUpdateDate,_that.avatarPath,_that.onboarded,_that.role,_that.subscription);case AnonymousUserData() when anonymous != null:
 return anonymous(_that.id,_that.onboarded,_that.subscription,_that.creationDate,_that.lastUpdateDate);case LoadingUserData() when loading != null:
 return loading();case _:
   return null;
@@ -181,11 +181,12 @@ return loading();case _:
 
 
 class AuthenticatedUserData extends User {
-  const AuthenticatedUserData({required this.email, this.name, this.id, this.creationDate, this.lastUpdateDate, this.avatarPath, required this.onboarded, this.role, this.subscription}): super._();
+  const AuthenticatedUserData({required this.email, this.name, this.bio, this.id, this.creationDate, this.lastUpdateDate, this.avatarPath, required this.onboarded, this.role, this.subscription}): super._();
   
 
  final  String email;
  final  String? name;
+ final  String? bio;
  final  String? id;
  final  DateTime? creationDate;
  final  DateTime? lastUpdateDate;
@@ -206,16 +207,16 @@ $AuthenticatedUserDataCopyWith<AuthenticatedUserData> get copyWith => _$Authenti
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthenticatedUserData&&(identical(other.email, email) || other.email == email)&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id)&&(identical(other.creationDate, creationDate) || other.creationDate == creationDate)&&(identical(other.lastUpdateDate, lastUpdateDate) || other.lastUpdateDate == lastUpdateDate)&&(identical(other.avatarPath, avatarPath) || other.avatarPath == avatarPath)&&(identical(other.onboarded, onboarded) || other.onboarded == onboarded)&&(identical(other.role, role) || other.role == role)&&(identical(other.subscription, subscription) || other.subscription == subscription));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthenticatedUserData&&(identical(other.email, email) || other.email == email)&&(identical(other.name, name) || other.name == name)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.id, id) || other.id == id)&&(identical(other.creationDate, creationDate) || other.creationDate == creationDate)&&(identical(other.lastUpdateDate, lastUpdateDate) || other.lastUpdateDate == lastUpdateDate)&&(identical(other.avatarPath, avatarPath) || other.avatarPath == avatarPath)&&(identical(other.onboarded, onboarded) || other.onboarded == onboarded)&&(identical(other.role, role) || other.role == role)&&(identical(other.subscription, subscription) || other.subscription == subscription));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,name,id,creationDate,lastUpdateDate,avatarPath,onboarded,role,subscription);
+int get hashCode => Object.hash(runtimeType,email,name,bio,id,creationDate,lastUpdateDate,avatarPath,onboarded,role,subscription);
 
 @override
 String toString() {
-  return 'User.authenticated(email: $email, name: $name, id: $id, creationDate: $creationDate, lastUpdateDate: $lastUpdateDate, avatarPath: $avatarPath, onboarded: $onboarded, role: $role, subscription: $subscription)';
+  return 'User.authenticated(email: $email, name: $name, bio: $bio, id: $id, creationDate: $creationDate, lastUpdateDate: $lastUpdateDate, avatarPath: $avatarPath, onboarded: $onboarded, role: $role, subscription: $subscription)';
 }
 
 
@@ -226,7 +227,7 @@ abstract mixin class $AuthenticatedUserDataCopyWith<$Res> implements $UserCopyWi
   factory $AuthenticatedUserDataCopyWith(AuthenticatedUserData value, $Res Function(AuthenticatedUserData) _then) = _$AuthenticatedUserDataCopyWithImpl;
 @useResult
 $Res call({
- String email, String? name, String? id, DateTime? creationDate, DateTime? lastUpdateDate, String? avatarPath, bool onboarded, String? role, Subscription? subscription
+ String email, String? name, String? bio, String? id, DateTime? creationDate, DateTime? lastUpdateDate, String? avatarPath, bool onboarded, String? role, Subscription? subscription
 });
 
 
@@ -243,10 +244,11 @@ class _$AuthenticatedUserDataCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? name = freezed,Object? id = freezed,Object? creationDate = freezed,Object? lastUpdateDate = freezed,Object? avatarPath = freezed,Object? onboarded = null,Object? role = freezed,Object? subscription = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? name = freezed,Object? bio = freezed,Object? id = freezed,Object? creationDate = freezed,Object? lastUpdateDate = freezed,Object? avatarPath = freezed,Object? onboarded = null,Object? role = freezed,Object? subscription = freezed,}) {
   return _then(AuthenticatedUserData(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,bio: freezed == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,creationDate: freezed == creationDate ? _self.creationDate : creationDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,lastUpdateDate: freezed == lastUpdateDate ? _self.lastUpdateDate : lastUpdateDate // ignore: cast_nullable_to_non_nullable

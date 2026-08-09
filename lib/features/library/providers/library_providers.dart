@@ -42,14 +42,26 @@ class Categories extends _$Categories {
     state = _storage.getCategories();
   }
 
-  Future<void> addCategory(String name, String description) async {
+  Future<void> addCategory({
+    required String name,
+    required String description,
+    required String icon,
+    required String color,
+  }) async {
     final category = LibraryCategory(
       id: 'cat_${DateTime.now().millisecondsSinceEpoch}',
       name: name,
       description: description,
+      icon: icon,
+      color: color,
       createdAt: DateTime.now(),
     );
     await _storage.addCategory(category);
+    refresh();
+  }
+
+  Future<void> updateCategory(LibraryCategory category) async {
+    await _storage.updateCategory(category);
     refresh();
   }
 

@@ -19,7 +19,7 @@ import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_page
 import 'package:cowboydodartinc/features/settings/ui/components/avatar_component.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/create_password_sheet.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/delete_user_component.dart';
-import 'package:cowboydodartinc/features/settings/ui/components/edit_name_sheet.dart';
+import 'package:cowboydodartinc/features/settings/ui/components/edit_profile_sheet.dart';
 import 'package:cowboydodartinc/features/settings/ui/components/language_switcher.dart';
 import 'package:cowboydodartinc/features/settings/ui/widgets/settings_tile.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
@@ -119,6 +119,10 @@ class SettingsPage extends ConsumerWidget {
       final AuthenticatedUserData u => u.name ?? '',
       _ => '',
     };
+    final String editableBio = switch (user) {
+      final AuthenticatedUserData u => u.bio ?? '',
+      _ => '',
+    };
 
     final double width = MediaQuery.sizeOf(context).width;
     // Two-pane master/detail (Vercel/Stripe/Claude) spans the whole desktop
@@ -150,6 +154,7 @@ class SettingsPage extends ConsumerWidget {
                       userId: userId,
                       name: displayName,
                       editableName: editableName,
+                      editableBio: editableBio,
                       email: displayEmail,
                       isAuthenticated: isAuthenticated,
                       onRegister: () => context.push('/signup'),
@@ -179,6 +184,7 @@ class SettingsPage extends ConsumerWidget {
                 userId: userId,
                 name: displayName,
                 editableName: editableName,
+                editableBio: editableBio,
                 email: displayEmail,
                 isAuthenticated: isAuthenticated,
                 isAdmin: user.isAdmin,
@@ -327,6 +333,7 @@ List<Widget> _accountFields(
   required String? userId,
   required String name,
   required String editableName,
+  required String editableBio,
   required String email,
   required bool isAuthenticated,
   required VoidCallback onRegister,
@@ -353,13 +360,28 @@ List<Widget> _accountFields(
         value: name,
         onTap: userId == null
             ? null
-            : () => showEditNameSheet(
-                context,
-                userId: userId,
-                email: email,
-                currentName: editableName,
-              ),
+            : () => showEditProfileSheet(
+                  context,
+                  userId: userId,
+                  currentEmail: email,
+                  currentName: editableName,
+                  currentBio: editableBio,
+                ),
       ),
+      if (editableBio.isNotEmpty)
+        _FieldRow(
+          label: tr.bio_label,
+          value: editableBio,
+          onTap: userId == null
+              ? null
+              : () => showEditProfileSheet(
+                  context,
+                  userId: userId,
+                  currentEmail: email,
+                  currentName: editableName,
+                  currentBio: editableBio,
+                ),
+        ),
       ..._accountTrailingRows(
         context,
         email: email,
@@ -430,6 +452,7 @@ List<Widget> _accountBlock(
   required String? userId,
   required String name,
   required String editableName,
+  required String editableBio,
   required String email,
   required bool isAuthenticated,
   required VoidCallback onRegister,
@@ -444,6 +467,7 @@ List<Widget> _accountBlock(
         userId: userId,
         name: name,
         editableName: editableName,
+        editableBio: editableBio,
         email: email,
         linkedProviders: linkedProviders,
         linkableProviders: linkableProviders,
@@ -457,6 +481,7 @@ List<Widget> _accountBlock(
     userId: userId,
     name: name,
     editableName: editableName,
+    editableBio: editableBio,
     email: email,
     isAuthenticated: isAuthenticated,
     onRegister: onRegister,
@@ -475,6 +500,7 @@ class _EditableAccountFields extends ConsumerStatefulWidget {
   final String? userId;
   final String name;
   final String editableName;
+  final String editableBio;
   final String email;
   final List<String> linkedProviders;
   final List<String> linkableProviders;
@@ -488,6 +514,7 @@ class _EditableAccountFields extends ConsumerStatefulWidget {
     required this.userId,
     required this.name,
     required this.editableName,
+    required this.editableBio,
     required this.email,
     this.linkedProviders = const [],
     this.linkableProviders = const [],
@@ -505,24 +532,32 @@ class _EditableAccountFieldsState
   late final TextEditingController _nameCtrl = TextEditingController(
     text: widget.editableName,
   );
+  late final TextEditingController _emailCtrl = TextEditingController(
+    text: widget.email,
+  );
+  late final TextEditingController _bioCtrl = TextEditingController(
+    text: widget.editableBio,
+  );
   bool _editing = false;
   bool _saving = false;
 
   @override
   void initState() {
     super.initState();
-    // Re-render so "Save" tracks whether the name actually changed.
+    // Re-render so "Save" tracks whether the fields actually changed.
     _nameCtrl.addListener(_onChanged);
+    _emailCtrl.addListener(_onChanged);
+    _bioCtrl.addListener(_onChanged);
   }
 
   @override
   void didUpdateWidget(covariant _EditableAccountFields oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Reflect an external name change (e.g. another device) while idle.
-    if (!_editing &&
-        !_saving &&
-        widget.editableName != oldWidget.editableName) {
-      _nameCtrl.text = widget.editableName;
+    // Reflect an external name/bio change (e.g. another device) while idle.
+    if (!_editing && !_saving) {
+      if (widget.editableName != oldWidget.editableName) _nameCtrl.text = widget.editableName;
+      if (widget.editableBio != oldWidget.editableBio) _bioCtrl.text = widget.editableBio;
+      if (widget.email != oldWidget.email) _emailCtrl.text = widget.email;
     }
   }
 
@@ -530,6 +565,10 @@ class _EditableAccountFieldsState
   void dispose() {
     _nameCtrl.removeListener(_onChanged);
     _nameCtrl.dispose();
+    _emailCtrl.removeListener(_onChanged);
+    _emailCtrl.dispose();
+    _bioCtrl.removeListener(_onChanged);
+    _bioCtrl.dispose();
     super.dispose();
   }
 
@@ -537,23 +576,30 @@ class _EditableAccountFieldsState
     if (mounted) setState(() {});
   }
 
-  bool get _dirty => _nameCtrl.text.trim() != widget.editableName.trim();
+  bool get _dirty => 
+      _nameCtrl.text.trim() != widget.editableName.trim() ||
+      _emailCtrl.text.trim() != widget.email.trim() ||
+      _bioCtrl.text.trim() != widget.editableBio.trim();
 
   void _cancel() {
     _nameCtrl.text = widget.editableName;
+    _emailCtrl.text = widget.email;
+    _bioCtrl.text = widget.editableBio;
     setState(() => _editing = false);
   }
 
   Future<void> _save() async {
     final String name = _nameCtrl.text.trim();
+    final String email = _emailCtrl.text.trim();
+    final String bio = _bioCtrl.text.trim();
     final String? userId = widget.userId;
-    if (name.isEmpty || _saving || userId == null) return;
+    if (email.isEmpty || _saving || userId == null) return;
     setState(() => _saving = true);
     final tr = context.t.settings;
     try {
       await ref
           .read(userRepositoryProvider)
-          .updateEmailAndName(userId: userId, email: widget.email, name: name);
+          .updateProfile(userId: userId, email: email, name: name, bio: bio);
       await ref.read(userStateNotifierProvider.notifier).refresh();
       if (!mounted) return;
       setState(() {
@@ -562,7 +608,7 @@ class _EditableAccountFieldsState
       });
       showKasyToast(
         context,
-        title: tr.edit_name_success,
+        title: tr.edit_profile_success,
         tone: KasyToastTone.success,
       );
     } catch (_) {
@@ -570,7 +616,7 @@ class _EditableAccountFieldsState
       setState(() => _saving = false);
       showKasyToast(
         context,
-        title: tr.edit_name_error,
+        title: tr.edit_profile_error,
         tone: KasyToastTone.danger,
       );
     }
@@ -639,23 +685,40 @@ class _EditableAccountFieldsState
           ),
         ),
         _settingsGroup([
-          if (_editing)
+          if (_editing) ...[
             _InlineFieldRow(
               label: tr.name_label,
               controller: _nameCtrl,
               hint: tr.edit_name_hint,
               enabled: !_saving,
               onSubmitted: _save,
-            )
-          else
+            ),
+            _InlineFieldRow(
+              label: tr.email_label,
+              controller: _emailCtrl,
+              hint: 'E-mail',
+              enabled: !_saving,
+              onSubmitted: _save,
+            ),
+            _InlineFieldRow(
+              label: tr.bio_label,
+              controller: _bioCtrl,
+              hint: tr.bio_hint,
+              enabled: !_saving,
+              onSubmitted: _save,
+            ),
+          ] else ...[
             _FieldRow(label: tr.name_label, value: widget.name),
-          ..._accountTrailingRows(
-            context,
-            email: widget.email,
-            linkedProviders: widget.linkedProviders,
-            linkableProviders: widget.linkableProviders,
-            onLinkProvider: widget.onLinkProvider,
-          ),
+            if (widget.editableBio.isNotEmpty)
+              _FieldRow(label: tr.bio_label, value: widget.editableBio),
+            ..._accountTrailingRows(
+              context,
+              email: widget.email,
+              linkedProviders: widget.linkedProviders,
+              linkableProviders: widget.linkableProviders,
+              onLinkProvider: widget.onLinkProvider,
+            ),
+          ],
         ]),
       ],
     );
@@ -905,6 +968,7 @@ class _SettingsDesktopView extends ConsumerStatefulWidget {
   final String? userId;
   final String name;
   final String editableName;
+  final String editableBio;
   final String email;
   final bool isAuthenticated;
   final bool isAdmin;
@@ -914,6 +978,7 @@ class _SettingsDesktopView extends ConsumerStatefulWidget {
     required this.userId,
     required this.name,
     required this.editableName,
+    required this.editableBio,
     required this.email,
     required this.isAuthenticated,
     required this.isAdmin,
@@ -948,6 +1013,7 @@ class _SettingsDesktopViewState extends ConsumerState<_SettingsDesktopView> {
       userId: widget.userId,
       name: widget.name,
       editableName: widget.editableName,
+      editableBio: widget.editableBio,
       email: widget.email,
       isAuthenticated: widget.isAuthenticated,
       isPhone: widget.isPhone,
@@ -1132,6 +1198,7 @@ class _DesktopDetail extends ConsumerWidget {
   final String? userId;
   final String name;
   final String editableName;
+  final String editableBio;
   final String email;
   final bool isAuthenticated;
   final bool isPhone;
@@ -1141,6 +1208,7 @@ class _DesktopDetail extends ConsumerWidget {
     required this.userId,
     required this.name,
     required this.editableName,
+    required this.editableBio,
     required this.email,
     required this.isAuthenticated,
     required this.isPhone,
@@ -1229,6 +1297,7 @@ class _DesktopDetail extends ConsumerWidget {
         userId: userId,
         name: name,
         editableName: editableName,
+        editableBio: editableBio,
         email: email,
         isAuthenticated: isAuthenticated,
         onRegister: () => context.push('/signup'),

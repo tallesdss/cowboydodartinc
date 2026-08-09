@@ -82,7 +82,6 @@ class MyProfilePage extends ConsumerWidget {
           KasyButton(
             label: t.library.send_pdf,
             icon: Icons.cloud_upload,
-            variant: KasyButtonVariant.primary,
             onPressed: () => context.push('/library/admin/cadastrar-pdf'),
           ),
           const SizedBox(height: KasySpacing.xl),
@@ -124,7 +123,7 @@ class MyProfilePage extends ConsumerWidget {
                           width: 50,
                           height: 70,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
+                          errorBuilder: (context, error, stackTrace) => Container(
                             width: 50,
                             height: 70,
                             color: context.colors.surfaceSecondary,

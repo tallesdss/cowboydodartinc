@@ -12,6 +12,7 @@
       "overview": "Resumen",
       "users": "Usuarios",
       "requests": "Solicitudes",
+      "categories": "Categorías",
       "tools": "Herramientas",
       "debug": "Depuración"
     },
@@ -47,9 +48,18 @@
       "col_user": "Usuario",
       "col_status": "Estado",
       "col_plan": "Plan",
+      "col_role": "Rol",
+      "col_action": "Acciones",
       "col_joined": "Registro",
       "status_active": "Activo",
       "status_inactive": "Inactivo",
+      "status_blocked": "Bloqueado",
+      "role_admin": "Admin",
+      "role_user": "Usuario",
+      "action_make_admin": "Hacer Administrador",
+      "action_remove_admin": "Quitar Admin",
+      "action_block": "Bloquear Acceso",
+      "action_unblock": "Desbloquear",
       "plan_subscriber": "Suscriptor",
       "plan_free": "Gratis",
       "empty": "No se encontraron usuarios",
@@ -92,6 +102,24 @@
       "visibility": "Visible para los usuarios",
       "save": "Guardar",
       "cancel": "Cancelar"
+    },
+    "categories": {
+      "title": "Categorías",
+      "subtitle": "Administre las categorías oficiales de la biblioteca. Los PDF vinculados a una categoría eliminada no se borrarán.",
+      "add": "Nueva Categoría",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "delete_confirm": "¿Está seguro de que desea eliminar esta categoría?",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "name": "Nombre",
+      "description": "Descripción",
+      "icon": "Icono",
+      "color": "Color",
+      "empty": "No hay categorías.",
+      "success_saved": "¡Categoría guardada con éxito!",
+      "success_deleted": "¡Categoría eliminada!",
+      "error_empty_fields": "Por favor, complete todos los campos requeridos."
     },
     "groups": {
       "actions": "Acciones",
@@ -697,6 +725,12 @@
     "edit_name_cancel": "Cancelar",
     "edit_name_success": "Nombre actualizado",
     "edit_name_error": "No se pudo actualizar tu nombre. Inténtalo de nuevo.",
+    "bio_label": "Bio",
+    "bio_hint": "Escribe algo sobre ti...",
+    "edit_profile_title": "Editar perfil",
+    "edit_profile_save": "Guardar",
+    "edit_profile_success": "Perfil actualizado",
+    "edit_profile_error": "No se pudo actualizar tu perfil. Inténtalo de nuevo.",
     "reminders": "Recordatorios",
     "admin_panel": "Panel de Administración",
     "admin_debug_section_label": "ADMIN (SOLO DEBUG)",
@@ -811,7 +845,9 @@
     "delete_action": "Sí, eliminar",
     "cancel_action": "Cancelar",
     "deleted_one": "Notificación eliminada",
-    "deleted_all": "Todas las notificaciones eliminadas"
+    "deleted_all": "Todas las notificaciones eliminadas",
+    "new_comment_title": "Nuevo Comentario",
+    "new_comment_body": "Se ha añadido un nuevo comentario a tu PDF: \"{pdfTitle}\""
   },
   "bottom_router": {
     "fake_page_text": "Esta es una página de prueba"
@@ -1030,6 +1066,14 @@
     "uploaded_by": "Enviado por",
     "sent_by": "Enviado por",
     "public_profile": "Perfil Público",
-    "view_all_pdfs": "Ver todos los PDFs enviados por este usuario"
+    "view_all_pdfs": "Ver todos los PDFs subidos por este usuario"
+  },
+  "search": {
+    "title": "Búsqueda Global",
+    "hint": "Buscar autores, temas y PDFs...",
+    "authors": "Autores",
+    "categories": "Temas",
+    "pdfs": "PDFs",
+    "empty": "No se encontraron resultados para \"{query}\"."
   }
 }

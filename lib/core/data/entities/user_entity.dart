@@ -13,6 +13,7 @@ sealed class UserEntity with _$UserEntity {
     @JsonKey(name: 'last_update_date') DateTime? lastUpdateDate,
     String? email,
     String? name,
+    String? bio,
     @JsonKey(name: 'avatar_url') String? avatarPath,
     bool? onboarded,
     String? locale,

@@ -182,12 +182,12 @@ Usuario
 - [x] **Persistência estendida**: Garantir persistência completa em LocalStorage (com dados mockados) para novos uploads, comentários e favoritos.
 
 **Fase 3 (Faltante - Aperfeiçoamentos e Área Admin):**
-- [ ] **Painel de Dashboard (Admin)**: Tela de estatísticas gerais (total de PDFs, acessos, downloads e ranking de uploaders).
-- [ ] **Gerenciamento de Usuários (Admin)**: Tabela de dados (Data Table) para listar, bloquear e alterar papéis/roles dos usuários.
-- [ ] **Gerenciamento de Categorias (Admin)**: Interface (CRUD) para que o Admin crie, edite cor/ícone e remova categorias oficiais.
-- [ ] **Edição de Perfil Avançada**: Tela de configurações para o usuário alterar bio, e-mail e preferências (com persistência no mock).
-- [ ] **Central de Notificações**: Dropdown/Modal no cabeçalho alertando sobre novos comentários nos próprios PDFs ou novas avaliações.
-- [ ] **Busca Global Avançada**: Componente de barra de pesquisa na AppBar (Header) pesquisando simultaneamente em Autores, PDFs e Temas.
+- [x] **Painel de Dashboard (Admin)**: Tela de estatísticas gerais (total de PDFs, acessos, downloads e ranking de uploaders).
+- [x] **Gerenciamento de Usuários (Admin)**: Tabela com bloqueio/desbloqueio e atribuição de papel (admin/user).
+- [x] **Gerenciamento de Categorias (Admin)**: Interface (CRUD) para que o Admin crie, edite cor/ícone e remova categorias oficiais.
+- [x] **Edição de Perfil Avançada**: Tela de configurações para o usuário alterar bio, e-mail e preferências (com persistência no mock).
+- [x] **Central de Notificações**: Dropdown/Modal no cabeçalho alertando sobre novos comentários nos próprios PDFs ou novas avaliações.
+- [x] **Busca Global Avançada**: Componente de barra de pesquisa na AppBar (Header) pesquisando simultaneamente em Autores, PDFs e Temas.
 - [ ] **Widgets de Feedback Refinados**: Implementar componentes de Loading States (Skeletons) ao carregar PDFs e listas.
 - [ ] **Refinamento Responsivo Mobile/Tablet**: Adaptar componentes como a grade de PDFs, barra lateral (Drawer vs Sidebar fixa) e leitor de PDF para telas menores.
 - [ ] **Integração de Dark Mode**: Revisão dos tokens do Kasy Design System nas novas páginas para garantir legibilidade no tema escuro.

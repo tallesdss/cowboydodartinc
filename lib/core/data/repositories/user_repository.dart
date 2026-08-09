@@ -91,12 +91,13 @@ class UserRepository {
   /// Update the email and optionally the display name of a user in Firestore.
   /// Called after linking a social provider to an anonymous account so that the
   /// Firestore document reflects the authenticated identity.
-  Future<void> updateEmailAndName({
+  Future<void> updateProfile({
     required String userId,
     required String email,
     String? name,
+    String? bio,
   }) async {
-    final entity = UserEntity(id: userId, email: email, name: name);
+    final entity = UserEntity(id: userId, email: email, name: name, bio: bio);
     await _userApi.update(entity);
   }
 

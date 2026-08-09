@@ -1,7 +1,7 @@
 import 'package:cowboydodartinc/core/data/api/base_api_exceptions.dart';
+import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_users_mock_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// One row of the admin Users table, as returned by the `admin-list-users` Edge
 /// Function. The function verifies the caller is `role == "admin"` and only then
@@ -16,6 +16,8 @@ class AdminUser {
   final DateTime? createdAt;
   final String? avatarPath;
   final bool subscriber;
+  final String? role;
+  final bool blocked;
 
   const AdminUser({
     required this.id,
@@ -24,6 +26,8 @@ class AdminUser {
     this.name,
     this.createdAt,
     this.avatarPath,
+    this.role = 'user',
+    this.blocked = false,
   });
 
   factory AdminUser.fromMap(Map<String, dynamic> m) {
@@ -37,6 +41,8 @@ class AdminUser {
           : null,
       avatarPath: m['avatarPath'] as String?,
       subscriber: m['subscriber'] == true,
+      role: m['role'] as String? ?? 'user',
+      blocked: m['blocked'] == true,
     );
   }
 }
@@ -184,32 +190,19 @@ class AdminUsersOverviewStats {
       totalUsers == 0 ? 0 : (subscribers / totalUsers * 100).round();
 }
 
+
 final adminUsersApiProvider = Provider<AdminUsersApi>(
-  (ref) => AdminUsersApi(client: Supabase.instance.client),
+  (ref) => AdminUsersApi(mockStorage: AdminUsersMockStorage.instance),
 );
 
 class AdminUsersApi {
-  final SupabaseClient _client;
+  final AdminUsersMockStorage _mockStorage;
 
-  AdminUsersApi({required SupabaseClient client}) : _client = client;
+  AdminUsersApi({required AdminUsersMockStorage mockStorage}) : _mockStorage = mockStorage;
 
   Future<AdminUsersPage> fetchPage(AdminUsersQuery query) async {
     try {
-      final res = await _client.functions.invoke(
-        'admin-list-users',
-        body: query.toJson(),
-      );
-      if (res.status != 200) {
-        final msg = res.data is Map && res.data != null
-            ? (res.data as Map)['error'] as String? ?? 'Error listing users'
-            : 'Error listing users';
-        throw ApiError(code: res.status, message: msg);
-      }
-      return AdminUsersPage.fromMap(
-        Map<String, dynamic>.from(res.data as Map),
-      );
-    } on ApiError {
-      rethrow;
+      return await _mockStorage.fetchPage(query);
     } catch (e, stacktrace) {
       throw ApiError(code: 0, message: '$e: $stacktrace');
     }
@@ -217,21 +210,23 @@ class AdminUsersApi {
 
   Future<AdminUsersOverviewStats> fetchOverview() async {
     try {
-      final res = await _client.functions.invoke(
-        'admin-list-users',
-        body: <String, dynamic>{'overview': true},
-      );
-      if (res.status != 200) {
-        final msg = res.data is Map && res.data != null
-            ? (res.data as Map)['error'] as String? ?? 'Error loading overview'
-            : 'Error loading overview';
-        throw ApiError(code: res.status, message: msg);
-      }
-      return AdminUsersOverviewStats.fromMap(
-        Map<String, dynamic>.from(res.data as Map),
-      );
-    } on ApiError {
-      rethrow;
+      return await _mockStorage.fetchOverview();
+    } catch (e, stacktrace) {
+      throw ApiError(code: 0, message: '$e: $stacktrace');
+    }
+  }
+
+  Future<void> updateRole(String id, String role) async {
+    try {
+      await _mockStorage.updateRole(id, role);
+    } catch (e, stacktrace) {
+      throw ApiError(code: 0, message: '$e: $stacktrace');
+    }
+  }
+
+  Future<void> toggleBlock(String id, bool blocked) async {
+    try {
+      await _mockStorage.toggleBlock(id, blocked);
     } catch (e, stacktrace) {
       throw ApiError(code: 0, message: '$e: $stacktrace');
     }

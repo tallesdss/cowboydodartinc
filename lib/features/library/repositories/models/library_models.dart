@@ -5,12 +5,16 @@ class LibraryCategory {
   final String id;
   final String name;
   final String description;
+  final String icon;
+  final String color;
   final DateTime createdAt;
 
   const LibraryCategory({
     required this.id,
     required this.name,
     required this.description,
+    this.icon = '',
+    this.color = '',
     required this.createdAt,
   });
 
@@ -18,12 +22,16 @@ class LibraryCategory {
     String? id,
     String? name,
     String? description,
+    String? icon,
+    String? color,
     DateTime? createdAt,
   }) {
     return LibraryCategory(
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
+      icon: icon ?? this.icon,
+      color: color ?? this.color,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -33,6 +41,8 @@ class LibraryCategory {
       'id': id,
       'name': name,
       'description': description,
+      'icon': icon,
+      'color': color,
       'createdAt': createdAt.toIso8601String(),
     };
   }
@@ -42,6 +52,8 @@ class LibraryCategory {
       id: map['id'] as String,
       name: map['name'] as String,
       description: map['description'] as String,
+      icon: map['icon'] as String? ?? '',
+      color: map['color'] as String? ?? '',
       createdAt: DateTime.parse(map['createdAt'] as String),
     );
   }
@@ -59,6 +71,8 @@ class PdfDocument {
   final List<String> tags;
   final DateTime createdAt;
   final String createdBy;
+  final int views;
+  final int downloads;
 
   const PdfDocument({
     required this.id,
@@ -71,6 +85,8 @@ class PdfDocument {
     required this.tags,
     required this.createdAt,
     required this.createdBy,
+    this.views = 0,
+    this.downloads = 0,
   });
 
   PdfDocument copyWith({
@@ -84,6 +100,8 @@ class PdfDocument {
     List<String>? tags,
     DateTime? createdAt,
     String? createdBy,
+    int? views,
+    int? downloads,
   }) {
     return PdfDocument(
       id: id ?? this.id,
@@ -96,6 +114,8 @@ class PdfDocument {
       tags: tags ?? this.tags,
       createdAt: createdAt ?? this.createdAt,
       createdBy: createdBy ?? this.createdBy,
+      views: views ?? this.views,
+      downloads: downloads ?? this.downloads,
     );
   }
 
@@ -111,6 +131,8 @@ class PdfDocument {
       'tags': tags,
       'createdAt': createdAt.toIso8601String(),
       'createdBy': createdBy,
+      'views': views,
+      'downloads': downloads,
     };
   }
 
@@ -126,6 +148,8 @@ class PdfDocument {
       tags: List<String>.from(map['tags'] as List),
       createdAt: DateTime.parse(map['createdAt'] as String),
       createdBy: map['createdBy'] as String,
+      views: map['views'] as int? ?? 0,
+      downloads: map['downloads'] as int? ?? 0,
     );
   }
 }

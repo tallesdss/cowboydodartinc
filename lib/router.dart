@@ -18,8 +18,8 @@ import 'package:cowboydodartinc/features/home/design_system_page.dart';
 import 'package:cowboydodartinc/features/home/home_components_page.dart';
 import 'package:cowboydodartinc/features/home/home_components_preview_page.dart';
 import 'package:cowboydodartinc/features/home/home_components_preview_registry.dart';
-import 'package:cowboydodartinc/features/library/ui/admin/manage_categories_page.dart';
 import 'package:cowboydodartinc/features/library/ui/admin/manage_pdfs_page.dart';
+import 'package:cowboydodartinc/features/library/ui/global_search_page.dart';
 import 'package:cowboydodartinc/features/library/ui/pdf_detail_page.dart';
 import 'package:cowboydodartinc/features/library/ui/pdf_reader_page.dart';
 import 'package:cowboydodartinc/features/library/ui/uploader_profile_page.dart';
@@ -152,6 +152,17 @@ GoRouter generateRouter({
           key: state.pageKey,
           child: const DesignSystemPage(),
         ),
+      ),
+      GoRoute(
+        name: 'search',
+        path: '/search',
+        pageBuilder: (context, state) {
+          final q = state.uri.queryParameters['q'];
+          return kasyTransitionPage(
+            key: state.pageKey,
+            child: GlobalSearchPage(initialQuery: q),
+          );
+        },
       ),
       GoRoute(
         name: 'components',
@@ -383,14 +394,6 @@ GoRouter generateRouter({
         pageBuilder: (context, state) => kasyTransitionPage(
           key: state.pageKey,
           child: const ManagePdfsPage(),
-        ),
-      ),
-      GoRoute(
-        name: 'admin_categorias',
-        path: '/library/admin/categorias',
-        pageBuilder: (context, state) => kasyTransitionPage(
-          key: state.pageKey,
-          child: const ManageCategoriesPage(),
         ),
       ),
       GoRoute(

@@ -104,7 +104,7 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                   child: Image.network(
                     pdf.thumbnailUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
+                    errorBuilder: (context, error, stackTrace) => ColoredBox(
                       color: context.colors.surfaceSecondary,
                       child: Icon(
                         Icons.picture_as_pdf,
@@ -175,7 +175,6 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                 child: KasyButton(
                   label: t.library.read,
                   icon: Icons.chrome_reader_mode,
-                  variant: KasyButtonVariant.primary,
                   onPressed: () => context.push('/library/pdf/${pdf.id}/read'),
                 ),
               ),

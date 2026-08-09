@@ -1,7 +1,7 @@
 import 'package:cowboydodartinc/components/components.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
-import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
+import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -196,17 +196,14 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
               padding: const EdgeInsets.all(KasySpacing.lg),
               alignment: Alignment.center,
               child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Transform.scale(
                     scale: _zoom,
-                    alignment: Alignment.center,
                     child: SizedBox(
                       width: 500,
                       height: 650,
                       child: KasyCard(
-                        variant: KasyCardVariant.elevated,
                         padding: const EdgeInsets.all(KasySpacing.xl),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,17 +1,23 @@
 import 'dart:convert';
 import 'package:cowboydodartinc/core/shared_preferences/shared_preferences.dart';
 import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
+import 'package:cowboydodartinc/features/notifications/api/entities/notifications_entity.dart';
+import 'package:cowboydodartinc/features/notifications/providers/models/notification.dart';
+import 'package:cowboydodartinc/features/notifications/repositories/mock_notifications_repository.dart';
+import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final libraryMockStorageProvider = Provider<LibraryMockStorage>((ref) {
   final prefsBuilder = ref.watch(sharedPreferencesProvider);
-  return LibraryMockStorage(prefsBuilder);
+  final notifRepo = ref.watch(mockNotificationRepositoryProvider) as MockNotificationsRepository;
+  return LibraryMockStorage(prefsBuilder, notifRepo);
 });
 
 class LibraryMockStorage {
   final SharedPreferencesBuilder _prefsBuilder;
+  final MockNotificationsRepository _notifRepo;
 
-  LibraryMockStorage(this._prefsBuilder);
+  LibraryMockStorage(this._prefsBuilder, this._notifRepo);
 
   static const _keyCategories = 'library_mock_categories';
   static const _keyPdfs = 'library_mock_pdfs';
@@ -59,6 +65,15 @@ class LibraryMockStorage {
     final list = getCategories();
     list.removeWhere((c) => c.id == id);
     await saveCategories(list);
+  }
+
+  Future<void> updateCategory(LibraryCategory updated) async {
+    final list = getCategories();
+    final index = list.indexWhere((c) => c.id == updated.id);
+    if (index != -1) {
+      list[index] = updated;
+      await saveCategories(list);
+    }
   }
 
   // ----------------------------------------------------
@@ -123,6 +138,28 @@ class LibraryMockStorage {
     }
     allComments.add(comment);
     await saveComments(allComments);
+
+    // Enviar notificação se for em PDF de outro usuário
+    final pdfs = getPdfs();
+    final pdfIndex = pdfs.indexWhere((p) => p.id == comment.pdfId);
+    if (pdfIndex != -1) {
+      final pdf = pdfs[pdfIndex];
+      if (pdf.createdBy != comment.userName) {
+        final notification = Notification.withData(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          title: t.notifications.new_comment_title,
+          body: t.notifications.new_comment_body.replaceAll('{pdfTitle}', pdf.title),
+          createdAt: DateTime.now(),
+          type: NotificationTypes.OTHER,
+          data: {
+            'route': '/library/${pdf.id}',
+            'pdfId': pdf.id,
+            'commentId': comment.id,
+          },
+        );
+        await _notifRepo.createNotification(pdf.createdBy, notification);
+      }
+    }
   }
 
   // ----------------------------------------------------
@@ -151,18 +188,24 @@ class LibraryMockStorage {
         id: 'cat_dev',
         name: 'Desenvolvimento de Software',
         description: 'Tudo sobre programação, Flutter, arquitetura e clean code.',
+        icon: 'code',
+        color: 'primary',
         createdAt: DateTime.now(),
       ),
       LibraryCategory(
         id: 'cat_design',
         name: 'Design & UX',
         description: 'Guias visuais, teoria das cores, usabilidade e design systems.',
+        icon: 'design',
+        color: 'warning',
         createdAt: DateTime.now(),
       ),
       LibraryCategory(
         id: 'cat_business',
         name: 'Negócios & Gestão',
         description: 'Metodologias ágeis, liderança, empreendedorismo e estratégia.',
+        icon: 'trendingUp',
+        color: 'success',
         createdAt: DateTime.now(),
       ),
     ];
@@ -174,37 +217,43 @@ class LibraryMockStorage {
         id: 'pdf_flutter_init',
         title: 'Flutter para Iniciantes',
         description: 'Aprenda Flutter do zero, construindo seu primeiro aplicativo móvel e web passo a passo com design moderno.',
-        categoryIds: ['cat_dev'],
+        categoryIds: const ['cat_dev'],
         author: 'Elena Park',
         fileUrl: 'assets/docs/flutter_init.pdf',
         thumbnailUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
-        tags: ['Flutter', 'Dart', 'Mobile', 'Web'],
+        tags: const ['Flutter', 'Dart', 'Mobile', 'Web'],
         createdAt: DateTime.now().subtract(const Duration(days: 10)),
         createdBy: 'admin',
+        views: 1250,
+        downloads: 340,
       ),
       PdfDocument(
         id: 'pdf_kasy_ds',
         title: 'Kasy Design System Guide',
         description: 'Guia completo de tokens, componentes e responsividade do Kasy Design System para criar telas de alto padrão visual.',
-        categoryIds: ['cat_design'],
+        categoryIds: const ['cat_design'],
         author: 'Marcus Vale',
         fileUrl: 'assets/docs/kasy_ds_guide.pdf',
         thumbnailUrl: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&q=80',
-        tags: ['Design System', 'UI/UX', 'Figma'],
+        tags: const ['Design System', 'UI/UX', 'Figma'],
         createdAt: DateTime.now().subtract(const Duration(days: 5)),
         createdBy: 'admin',
+        views: 845,
+        downloads: 120,
       ),
       PdfDocument(
         id: 'pdf_agile',
         title: 'Metodologias Ágeis no Dia a Dia',
         description: 'Como aplicar Scrum e Kanban para aumentar a produtividade e o foco das equipes de tecnologia.',
-        categoryIds: ['cat_business'],
+        categoryIds: const ['cat_business'],
         author: 'Sofia Reis',
         fileUrl: 'assets/docs/agile_methods.pdf',
         thumbnailUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80',
-        tags: ['Agile', 'Scrum', 'Kanban', 'Management'],
+        tags: const ['Agile', 'Scrum', 'Kanban', 'Management'],
         createdAt: DateTime.now().subtract(const Duration(days: 2)),
         createdBy: 'admin',
+        views: 432,
+        downloads: 50,
       ),
     ];
   }

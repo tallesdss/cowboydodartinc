@@ -10,6 +10,7 @@ sealed class User with _$User {
   const factory User.authenticated({
     required String email,
     String? name,
+    String? bio,
     String? id,
     DateTime? creationDate,
     DateTime? lastUpdateDate,
@@ -50,6 +51,7 @@ sealed class User with _$User {
         id: entity.id,
         email: entity.email!,
         name: entity.name,
+        bio: entity.bio,
         onboarded: entity.onboarded ?? false,
         avatarPath: entity.avatarPath,
         role: entity.role,
@@ -68,6 +70,7 @@ sealed class User with _$User {
         id: value.id,
         email: value.email,
         name: value.name ?? '',
+        bio: value.bio ?? '',
         onboarded: value.onboarded,
         avatarPath: value.avatarPath,
         role: value.role,
