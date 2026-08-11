@@ -34,11 +34,11 @@
     - [x] Permitir gestão total sobre a coleção `categories` (criar e excluir categorias oficiais).
 
 ## 4. Configuração de Armazenamento (Firebase Storage)
-- [ ] Criar as pastas (paths) no Firebase Storage: `/pdfs`, `/avatars` e `/thumbnails`.
-- [ ] Configurar as **Firebase Storage Rules**:
-  - [ ] **Leitura:** Permitida para todos os usuários autenticados.
-  - [ ] **Escrita (Cliente):** Pode fazer upload, e só pode deletar arquivos localizados no caminho contendo o seu próprio UID (ex: `/pdfs/{uid}/{filename}`).
-  - [ ] **Escrita (Admin):** Pode gerenciar, excluir ou mover qualquer arquivo de qualquer usuário.
+- [x] Criar as pastas (paths) no Firebase Storage: `/pdfs`, `/avatars` e `/thumbnails`.
+- [x] Configurar as **Firebase Storage Rules**:
+  - [x] **Leitura:** Permitida para todos os usuários autenticados.
+  - [x] **Escrita (Cliente):** Pode fazer upload, e só pode deletar arquivos localizados no caminho contendo o seu próprio UID (ex: `/pdfs/{uid}/{filename}`).
+  - [x] **Escrita (Admin):** Pode gerenciar, excluir ou mover qualquer arquivo de qualquer usuário.
 
 ## 5. Lógica de Servidor (Firebase Cloud Functions)
 - [ ] Inicializar o ambiente Node.js/TypeScript para Firebase Functions.
