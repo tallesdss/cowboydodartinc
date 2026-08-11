@@ -72,6 +72,27 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // ─── Library (Categorias, PDFs, Comentários e Favoritos) ───────────────────
+    match /categories/{categoryId} {
+      allow read: if request.auth.uid != null;
+      allow create, update, delete: if isAdmin();
+    }
+    match /pdfs/{pdfId} {
+      allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid != null && request.resource.data.autor_id == request.auth.uid;
+      allow update, delete: if isAdmin() || (request.auth.uid != null && resource.data.autor_id == request.auth.uid);
+    }
+    match /comments/{commentId} {
+      allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid != null && request.resource.data.usuario_id == request.auth.uid;
+      allow update, delete: if isAdmin() || (request.auth.uid != null && resource.data.usuario_id == request.auth.uid);
+    }
+    match /bookmarks/{bookmarkId} {
+      allow read, delete: if request.auth.uid != null && resource.data.usuario_id == request.auth.uid;
+      allow create: if request.auth.uid != null && request.resource.data.usuario_id == request.auth.uid;
+      allow update: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

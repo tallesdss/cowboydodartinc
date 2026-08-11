@@ -14,24 +14,24 @@
   - **Cliente:** Pode explorar, ler e baixar PDFs, avaliar/comentar, e enviar seus próprios PDFs. Só pode gerenciar/excluir o seu próprio conteúdo e perfil.
 
 ## 2. Modelagem do Banco de Dados (Firestore NoSQL)
-- [ ] Criar o projeto no Firebase Console.
-- [ ] Criar a coleção `users` (id do documento = UID do Auth, nome, email, perfil [ENUM: admin, cliente], avatar_url, bio, criado_em).
-- [ ] Criar a coleção `categories` (id gerado, nome, descricao, icone_cor, criado_em).
-- [ ] Criar a coleção `pdfs` (id gerado, titulo, descricao, autor_id, arquivo_url, thumbnail_url, categoryIds [array], tags [array], criado_em).
-- [ ] Criar a coleção `comments` (id gerado, pdf_id, usuario_id, texto, nota, criado_em).
-- [ ] Criar a coleção `bookmarks` (id gerado, pdf_id, usuario_id, criado_em).
+- [x] Criar o projeto no Firebase Console.
+- [x] Criar a coleção `users` (id do documento = UID do Auth, nome, email, perfil [ENUM: admin, cliente], avatar_url, bio, criado_em).
+- [x] Criar a coleção `categories` (id gerado, nome, descricao, icone_cor, criado_em).
+- [x] Criar a coleção `pdfs` (id gerado, titulo, descricao, autor_id, arquivo_url, thumbnail_url, categoryIds [array], tags [array], criado_em).
+- [x] Criar a coleção `comments` (id gerado, pdf_id, usuario_id, texto, nota, criado_em).
+- [x] Criar a coleção `bookmarks` (id gerado, pdf_id, usuario_id, criado_em).
 
 ## 3. Autenticação e Autorização (Firebase Auth)
-- [ ] Configurar o Firebase Auth (Login por E-mail/Senha).
-- [ ] Implementar a separação dos dois papéis usando **Custom Claims** no token do Firebase Auth (ou, alternativamente, checando o campo `perfil` no documento da coleção `users`).
-- [ ] Configurar as **Firestore Security Rules**:
+- [x] Configurar o Firebase Auth (Login por E-mail/Senha).
+- [x] Implementar a separação dos dois papéis usando **Custom Claims** no token do Firebase Auth (ou, alternativamente, checando o campo `perfil` no documento da coleção `users`).
+- [x] Configurar as **Firestore Security Rules**:
   - **Para Clientes:**
-    - [ ] Permitir `read` nas coleções `pdfs` e `categories` para qualquer usuário autenticado.
-    - [ ] Permitir `create` de novos `pdfs` forçando que o campo `autor_id` seja o `request.auth.uid`.
-    - [ ] Permitir `update` e `delete` de PDFs, Comentários e Dados Pessoais EXCLUSIVAMENTE se `request.auth.uid == resource.data.autor_id` (ou `usuario_id`).
+    - [x] Permitir `read` nas coleções `pdfs` e `categories` para qualquer usuário autenticado.
+    - [x] Permitir `create` de novos `pdfs` forçando que o campo `autor_id` seja o `request.auth.uid`.
+    - [x] Permitir `update` e `delete` de PDFs, Comentários e Dados Pessoais EXCLUSIVAMENTE se `request.auth.uid == resource.data.autor_id` (ou `usuario_id`).
   - **Para Administradores:**
-    - [ ] Permitir `read`, `create`, `update`, `delete` globalmente (bypass nas regras baseadas no *claim* de admin).
-    - [ ] Permitir gestão total sobre a coleção `categories` (criar e excluir categorias oficiais).
+    - [x] Permitir `read`, `create`, `update`, `delete` globalmente (bypass nas regras baseadas no *claim* de admin).
+    - [x] Permitir gestão total sobre a coleção `categories` (criar e excluir categorias oficiais).
 
 ## 4. Configuração de Armazenamento (Firebase Storage)
 - [ ] Criar as pastas (paths) no Firebase Storage: `/pdfs`, `/avatars` e `/thumbnails`.
