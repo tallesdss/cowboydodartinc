@@ -2,14 +2,14 @@
 
 ## 0. PREBACK (Ajustes Finais de Front-end)
 *Antes de conectar o Firebase, é essencial finalizar as pendências do front-end (Fase 3 do Roadmap) para garantir que a interface esteja madura para lidar com dados assíncronos e latência de rede:*
-- [ ] **Skeletons / Loading States:** Implementar indicadores de carregamento visuais (Skeletons) nas listas e ao abrir o leitor de PDF (preparando para a latência real de internet).
-- [ ] **Refinamento Responsivo (Mobile/Tablet):** Ajustar o layout da grade de PDFs, o menu lateral (Drawer no mobile, Sidebar fixa no desktop) e o leitor de PDF para telas menores.
-- [ ] **Integração de Dark Mode:** Revisar e garantir a aplicação correta dos tokens do Kasy Design System para suportar leitura confortável no tema escuro.
+- [x] **Skeletons / Loading States:** Implementar indicadores de carregamento visuais (Skeletons) nas listas e ao abrir o leitor de PDF (preparando para a latência real de internet).
+- [x] **Refinamento Responsivo (Mobile/Tablet):** Ajustar o layout da grade de PDFs, o menu lateral (Drawer no mobile, Sidebar fixa no desktop) e o leitor de PDF para telas menores.
+- [x] **Integração de Dark Mode:** Revisar e garantir a aplicação correta dos tokens do Kasy Design System para suportar leitura confortável no tema escuro.
 
 ## 1. Planejamento e Arquitetura
-- [ ] Definir a stack tecnológica do backend exclusivamente como **Firebase** (Firestore, Firebase Auth, Firebase Storage, Cloud Functions).
-- [ ] Mapear as entidades do modelo de dados para o modelo NoSQL do Firestore (Coleções e Subcoleções).
-- [ ] Definir regras de segurança (Firebase Security Rules) baseadas estritamente em 2 perfis: **Administrador** e **Cliente**.
+- [x] Definir a stack tecnológica do backend exclusivamente como **Firebase** (Firestore, Firebase Auth, Firebase Storage, Cloud Functions).
+- [x] Mapear as entidades do modelo de dados para o modelo NoSQL do Firestore (Coleções e Subcoleções).
+- [x] Definir regras de segurança (Firebase Security Rules) baseadas estritamente em 2 perfis: **Administrador** e **Cliente**.
   - **Administrador:** Acesso total (CRUD) a todas as coleções (usuários, categorias, PDFs, comentários). Possui acesso a dados analíticos do Dashboard.
   - **Cliente:** Pode explorar, ler e baixar PDFs, avaliar/comentar, e enviar seus próprios PDFs. Só pode gerenciar/excluir o seu próprio conteúdo e perfil.
 

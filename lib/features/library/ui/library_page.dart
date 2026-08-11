@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:cowboydodartinc/components/components.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
+import 'package:cowboydodartinc/core/widgets/responsive_layout.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,53 @@ class _HomeCategoryFavorites {
 class _LibraryPageState extends ConsumerState<LibraryPage> {
   String _searchQuery = '';
   String _selectedCategoryId = _HomeCategoryAll.id;
+  bool _isLoading = true;
+  Timer? _debounceTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _simulateLoading(1200);
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    super.dispose();
+  }
+
+  void _simulateLoading(int ms) {
+    setState(() {
+      _isLoading = true;
+    });
+    Future.delayed(Duration(milliseconds: ms), () {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
+  void _onSearchChanged(String val) {
+    if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() {
+          _searchQuery = val;
+        });
+        _simulateLoading(400);
+      }
+    });
+  }
+
+  void _selectCategory(String categoryId) {
+    if (_selectedCategoryId == categoryId) return;
+    setState(() {
+      _selectedCategoryId = categoryId;
+    });
+    _simulateLoading(500);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,224 +145,282 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
                       title: '${t.library.profile_switcher}: ${nextProfile == 'admin' ? t.library.admin_dev : t.library.client}',
                       tone: KasyToastTone.success,
                     );
+                    _simulateLoading(600);
                   },
                 ),
               ],
             ),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Search Bar
-            KasyTextField(
-              hint: t.library.search_hint,
-              prefix: Icon(
-                Icons.search,
-                size: KasyTextField.iconGlyphSize,
-                color: context.colors.muted,
-              ),
-              onChanged: (val) {
-                setState(() {
-                  _searchQuery = val;
-                });
-              },
-            ),
-            const SizedBox(height: KasySpacing.lg),
+        child: DeviceSizeBuilder(
+          builder: (device) {
+            final isSmall = device == DeviceType.small;
+            final isMedium = device == DeviceType.medium;
 
-            // Categories Row
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  KasySelectableChip(
-                    key: const ValueKey('cat-all'),
-                    label: 'Todos',
-                    selected: _selectedCategoryId == _HomeCategoryAll.id,
-                    onTap: () {
-                      setState(() {
-                        _selectedCategoryId = _HomeCategoryAll.id;
-                      });
-                    },
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Search Bar
+                KasyTextField(
+                  hint: t.library.search_hint,
+                  prefix: Icon(
+                    Icons.search,
+                    size: KasyTextField.iconGlyphSize,
+                    color: context.colors.muted,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: KasySpacing.sm),
-                    child: KasySelectableChip(
-                      key: const ValueKey('cat-favorites'),
-                      label: t.library.favorites,
-                      selected: _selectedCategoryId == _HomeCategoryFavorites.id,
-                      onTap: () {
-                        setState(() {
-                          _selectedCategoryId = _HomeCategoryFavorites.id;
-                        });
-                      },
-                    ),
-                  ),
-                  ...categories.map((cat) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: KasySpacing.sm),
-                      child: KasySelectableChip(
-                        key: ValueKey(cat.id),
-                        label: cat.name,
-                        selected: _selectedCategoryId == cat.id,
-                        onTap: () {
-                          setState(() {
-                            _selectedCategoryId = cat.id;
-                          });
-                        },
+                  onChanged: _onSearchChanged,
+                ),
+                const SizedBox(height: KasySpacing.lg),
+
+                // Categories Row
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      KasySelectableChip(
+                        key: const ValueKey('cat-all'),
+                        label: 'Todos',
+                        selected: _selectedCategoryId == _HomeCategoryAll.id,
+                        onTap: () => _selectCategory(_HomeCategoryAll.id),
                       ),
-                    );
-                  }),
-                ],
-              ),
-            ),
-            const SizedBox(height: KasySpacing.lg),
-
-            // Admin buttons if Admin/Dev
-            if (isAdmin) ...[
-              Row(
-                children: [
-                  Expanded(
-                    child: KasyButton(
-                      label: t.library.add_pdf,
-                      icon: Icons.add,
-                      onPressed: () => context.push('/library/admin/cadastrar-pdf'),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: KasySpacing.sm),
+                        child: KasySelectableChip(
+                          key: const ValueKey('cat-favorites'),
+                          label: t.library.favorites,
+                          selected: _selectedCategoryId == _HomeCategoryFavorites.id,
+                          onTap: () => _selectCategory(_HomeCategoryFavorites.id),
+                        ),
+                      ),
+                      ...categories.map((cat) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: KasySpacing.sm),
+                          child: KasySelectableChip(
+                            key: ValueKey(cat.id),
+                            label: cat.name,
+                            selected: _selectedCategoryId == cat.id,
+                            onTap: () => _selectCategory(cat.id),
+                          ),
+                        );
+                      }),
+                    ],
                   ),
-                  const SizedBox(width: KasySpacing.md),
-                  Expanded(
-                    child: KasyButton(
-                      label: t.library.manage_categories,
-                      icon: Icons.category,
-                      variant: KasyButtonVariant.secondary,
-                      onPressed: () => context.push('/library/admin/categorias'),
-                    ),
+                ),
+                const SizedBox(height: KasySpacing.lg),
+
+                // Admin buttons if Admin/Dev
+                if (isAdmin) ...[
+                  Row(
+                    children: [
+                      Expanded(
+                        child: KasyButton(
+                          label: t.library.add_pdf,
+                          icon: Icons.add,
+                          onPressed: () => context.push('/library/admin/cadastrar-pdf'),
+                        ),
+                      ),
+                      const SizedBox(width: KasySpacing.md),
+                      Expanded(
+                        child: KasyButton(
+                          label: t.library.manage_categories,
+                          icon: Icons.category,
+                          variant: KasyButtonVariant.secondary,
+                          onPressed: () => context.push('/library/admin/categorias'),
+                        ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: KasySpacing.lg),
+                ] else ...[
+                  KasyButton(
+                    label: t.library.send_pdf,
+                    icon: Icons.cloud_upload,
+                    onPressed: () => context.push('/library/admin/cadastrar-pdf'),
+                  ),
+                  const SizedBox(height: KasySpacing.lg),
                 ],
-              ),
-              const SizedBox(height: KasySpacing.lg),
-            ] else ...[
-              KasyButton(
-                label: t.library.send_pdf,
-                icon: Icons.cloud_upload,
-                onPressed: () => context.push('/library/admin/cadastrar-pdf'),
-              ),
-              const SizedBox(height: KasySpacing.lg),
-            ],
 
-            // PDF Documents Grid
-            if (filteredPdfs.isEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: KasySpacing.xl),
-                child: KasyEmptyState(
-                  title: t.library.no_pdfs,
-                  subtitle: 'Tente mudar o filtro de categoria ou termo de busca.',
-                  icon: Icons.picture_as_pdf_outlined,
-                ),
-              )
-            else
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 320,
-                  mainAxisSpacing: KasySpacing.md,
-                  crossAxisSpacing: KasySpacing.md,
-                  childAspectRatio: 0.75,
-                ),
-                itemCount: filteredPdfs.length,
-                itemBuilder: (context, index) {
-                  final pdf = filteredPdfs[index];
-                  final isFav = favorites.contains(pdf.id);
+                // PDF Documents Grid
+                if (_isLoading)
+                  const _PdfsGridSkeleton()
+                else if (filteredPdfs.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: KasySpacing.xl),
+                    child: KasyEmptyState(
+                      title: t.library.no_pdfs,
+                      subtitle: 'Tente mudar o filtro de categoria ou termo de busca.',
+                      icon: Icons.picture_as_pdf_outlined,
+                    ),
+                  )
+                else
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: isSmall ? 2 : (isMedium ? 3 : 4),
+                      mainAxisSpacing: KasySpacing.md,
+                      crossAxisSpacing: KasySpacing.md,
+                      childAspectRatio: isSmall ? 0.7 : 0.75,
+                    ),
+                    itemCount: filteredPdfs.length,
+                    itemBuilder: (context, index) {
+                      final pdf = filteredPdfs[index];
+                      final isFav = favorites.contains(pdf.id);
 
-                  return KasyCard(
-                    onTap: () => context.push('/library/pdf/${pdf.id}'),
-                    padding: EdgeInsets.zero,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Thumbnail
-                        Expanded(
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              ClipRRect(
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(KasyRadius.lg),
-                                ),
-                                child: Image.network(
-                                  pdf.thumbnailUrl,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) => ColoredBox(
-                                    color: context.colors.surfaceSecondary,
-                                    child: Icon(
-                                      Icons.picture_as_pdf,
-                                      size: KasyIconSize.xl,
-                                      color: context.colors.muted,
+                      return KasyCard(
+                        onTap: () => context.push('/library/pdf/${pdf.id}'),
+                        padding: EdgeInsets.zero,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            // Thumbnail
+                            Expanded(
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(KasyRadius.lg),
+                                    ),
+                                    child: Image.network(
+                                      pdf.thumbnailUrl,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) => ColoredBox(
+                                        color: context.colors.surfaceSecondary,
+                                        child: Icon(
+                                          Icons.picture_as_pdf,
+                                          size: KasyIconSize.xl,
+                                          color: context.colors.muted,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Positioned(
-                                top: KasySpacing.xs,
-                                right: KasySpacing.xs,
-                                child: IconButton(
-                                  icon: Icon(
-                                    isFav ? Icons.bookmark : Icons.bookmark_border,
-                                    color: isFav ? context.colors.primary : context.colors.muted,
+                                  Positioned(
+                                    top: KasySpacing.xs,
+                                    right: KasySpacing.xs,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        isFav ? Icons.bookmark : Icons.bookmark_border,
+                                        color: isFav ? context.colors.primary : context.colors.muted,
+                                      ),
+                                      onPressed: () {
+                                        ref.read(favoritesProvider.notifier).toggleFavorite(pdf.id);
+                                        showKasyToast(
+                                          context,
+                                          title: isFav ? 'Removido dos favoritos' : 'Adicionado aos favoritos',
+                                          tone: KasyToastTone.success,
+                                        );
+                                      },
+                                    ),
                                   ),
-                                  onPressed: () {
-                                    ref.read(favoritesProvider.notifier).toggleFavorite(pdf.id);
-                                    showKasyToast(
-                                      context,
-                                      title: isFav ? 'Removido dos favoritos' : 'Adicionado aos favoritos',
-                                      tone: KasyToastTone.success,
-                                    );
-                                  },
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            // Details
+                            Padding(
+                              padding: const EdgeInsets.all(KasySpacing.sm),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    pdf.title,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: context.kasyTextTheme.cardTitle,
+                                  ),
+                                  const SizedBox(height: KasySpacing.xs),
+                                  Text(
+                                    pdf.author,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: context.kasyTextTheme.cardSubtitle,
+                                  ),
+                                  const SizedBox(height: KasySpacing.xs),
+                                  Wrap(
+                                    spacing: KasySpacing.xs,
+                                    runSpacing: KasySpacing.xs,
+                                    children: pdf.tags.take(2).map((t) {
+                                      return KasyTag(label: t);
+                                    }).toList(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        // Details
-                        Padding(
-                          padding: const EdgeInsets.all(KasySpacing.sm),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                pdf.title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: context.kasyTextTheme.cardTitle,
-                              ),
-                              const SizedBox(height: KasySpacing.xs),
-                              Text(
-                                pdf.author,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: context.kasyTextTheme.cardSubtitle,
-                              ),
-                              const SizedBox(height: KasySpacing.xs),
-                              Wrap(
-                                spacing: KasySpacing.xs,
-                                runSpacing: KasySpacing.xs,
-                                children: pdf.tags.take(2).map((t) {
-                                  return KasyTag(label: t);
-                                }).toList(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-          ],
+                      );
+                    },
+                  ),
+              ],
+            );
+          },
         ),
       ),
+    );
+  }
+}
+
+class _PdfsGridSkeleton extends StatelessWidget {
+  const _PdfsGridSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return DeviceSizeBuilder(
+      builder: (device) {
+        final isSmall = device == DeviceType.small;
+        final isMedium = device == DeviceType.medium;
+
+        return KasySkeletonGroup(
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: isSmall ? 2 : (isMedium ? 3 : 4),
+              mainAxisSpacing: KasySpacing.md,
+              crossAxisSpacing: KasySpacing.md,
+              childAspectRatio: isSmall ? 0.7 : 0.75,
+            ),
+            itemCount: 6,
+            itemBuilder: (context, index) {
+              return const KasyCard(
+                padding: EdgeInsets.zero,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: KasySkeleton(
+                        width: double.infinity,
+                        height: 100, // height parameter is required, will be stretched in Expanded
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(KasySpacing.sm),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          KasySkeleton(width: 140, height: 16),
+                          SizedBox(height: KasySpacing.xs),
+                          KasySkeleton(width: 80, height: 12),
+                          SizedBox(height: KasySpacing.xs),
+                          Row(
+                            children: [
+                              KasySkeleton(width: 50, height: 18),
+                              SizedBox(width: KasySpacing.xs),
+                              KasySkeleton(width: 50, height: 18),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

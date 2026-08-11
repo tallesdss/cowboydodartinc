@@ -20,12 +20,33 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
   int _currentPage = 1;
   final int _totalPages = 5;
   double _zoom = 1.0;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _simulateLoading();
+  }
+
+  void _simulateLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
 
   void _prevPage() {
     if (_currentPage > 1) {
       setState(() {
         _currentPage--;
       });
+      _simulateLoading();
     }
   }
 
@@ -34,6 +55,7 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
       setState(() {
         _currentPage++;
       });
+      _simulateLoading();
     }
   }
 
@@ -115,6 +137,11 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
         ),
       );
     }
+
+    final double viewportWidth = MediaQuery.of(context).size.width;
+    final bool isMobile = viewportWidth < 768;
+    final double baseWidth = isMobile ? (viewportWidth - KasySpacing.md * 2).clamp(280.0, 500.0) : 550.0;
+    final double baseHeight = baseWidth * 1.35;
 
     return KasyScreen(
       appBar: PreferredSize(
@@ -198,49 +225,56 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
               child: SingleChildScrollView(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Transform.scale(
-                    scale: _zoom,
-                    child: SizedBox(
-                      width: 500,
-                      height: 650,
-                      child: KasyCard(
-                        padding: const EdgeInsets.all(KasySpacing.xl),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  pdf.title.toUpperCase(),
-                                  style: context.kasyTextTheme.caption.copyWith(
-                                    color: context.colors.muted,
-                                    fontWeight: FontWeight.bold,
+                  child: _isLoading
+                      ? _PdfReaderSkeleton(width: baseWidth, height: baseHeight)
+                      : Transform.scale(
+                          scale: _zoom,
+                          child: SizedBox(
+                            width: baseWidth,
+                            height: baseHeight,
+                            child: KasyCard(
+                              padding: const EdgeInsets.all(KasySpacing.xl),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          pdf.title.toUpperCase(),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: context.kasyTextTheme.caption.copyWith(
+                                            color: context.colors.muted,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: KasySpacing.xs),
+                                      Text(
+                                        'Pág. $_currentPage / $_totalPages',
+                                        style: context.kasyTextTheme.caption.copyWith(
+                                          color: context.colors.muted,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                Text(
-                                  'Pág. $_currentPage / $_totalPages',
-                                  style: context.kasyTextTheme.caption.copyWith(
-                                    color: context.colors.muted,
+                                  const Divider(height: KasySpacing.lg),
+                                  Expanded(
+                                    child: Text(
+                                      _getPageContent(pdf.title, _currentPage),
+                                      style: context.kasyTextTheme.bodyMedium.copyWith(
+                                        fontSize: 14, // design-check: ignore
+                                        height: 1.5,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const Divider(height: KasySpacing.lg),
-                            Expanded(
-                              child: Text(
-                                _getPageContent(pdf.title, _currentPage),
-                                style: context.kasyTextTheme.bodyMedium.copyWith(
-                                  fontSize: 14, // design-check: ignore
-                                  height: 1.5,
-                                ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -250,3 +284,53 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
     );
   }
 }
+
+class _PdfReaderSkeleton extends StatelessWidget {
+  final double width;
+  final double height;
+
+  const _PdfReaderSkeleton({required this.width, required this.height});
+
+  @override
+  Widget build(BuildContext context) {
+    return KasySkeletonGroup(
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: const KasyCard(
+          padding: EdgeInsets.all(KasySpacing.xl),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  KasySkeleton(width: 120, height: 12),
+                  KasySkeleton(width: 60, height: 12),
+                ],
+              ),
+              Divider(height: KasySpacing.lg),
+              SizedBox(height: KasySpacing.md),
+              KasySkeleton(width: 200, height: 20),
+              SizedBox(height: KasySpacing.lg),
+              KasySkeleton(width: double.infinity, height: 14),
+              SizedBox(height: KasySpacing.sm),
+              KasySkeleton(width: double.infinity, height: 14),
+              SizedBox(height: KasySpacing.sm),
+              KasySkeleton(width: double.infinity, height: 14),
+              SizedBox(height: KasySpacing.sm),
+              KasySkeleton(width: 250, height: 14),
+              SizedBox(height: KasySpacing.lg),
+              KasySkeleton(width: double.infinity, height: 14),
+              SizedBox(height: KasySpacing.sm),
+              KasySkeleton(width: double.infinity, height: 14),
+              SizedBox(height: KasySpacing.sm),
+              KasySkeleton(width: 180, height: 14),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
