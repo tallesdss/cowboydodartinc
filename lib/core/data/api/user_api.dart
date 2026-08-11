@@ -1,38 +1,49 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cowboydodartinc/core/data/api/base_api_exceptions.dart';
 import 'package:cowboydodartinc/core/data/api/storage_api.dart';
 import 'package:cowboydodartinc/core/data/entities/upload_result.dart';
 import 'package:cowboydodartinc/core/data/entities/user_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final userApiProvider = Provider<UserApi>(
   (ref) => UserApi(
-    client: Supabase.instance.client,
+    firestore: FirebaseFirestore.instance,
     storageApi: ref.read(storageApiProvider),
   ),
 );
 
 class UserApi {
-  final SupabaseClient _client;
+  final FirebaseFirestore _firestore;
   final StorageApi _storageApi;
 
   UserApi({
-    required SupabaseClient client,
+    required FirebaseFirestore firestore,
     required StorageApi storageApi,
-  }) : _client = client,_storageApi = storageApi;
+  }) : _firestore = firestore,_storageApi = storageApi;
 
   Future<UserEntity?> get(String id) async {
     try {
-      final res = await _client
-          .from('users') //
-          .select()
-          .eq('id', id);
-      if (res.isEmpty) {
+      final doc = await _firestore.collection('users').doc(id).get();
+      if (!doc.exists) {
+        final fbUser = fb_auth.FirebaseAuth.instance.currentUser;
+        if (fbUser != null && fbUser.uid == id) {
+          final newUser = UserEntity(
+            id: id,
+            email: fbUser.email,
+            name: fbUser.displayName ?? fbUser.email?.split('@').first,
+            creationDate: DateTime.now(),
+            lastUpdateDate: DateTime.now(),
+            onboarded: false,
+          );
+          await create(newUser);
+          return newUser;
+        }
         return null;
       }
-      return UserEntity.fromJson(res.first);
+      return UserEntity.fromJson(doc.data()!);
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -42,20 +53,17 @@ class UserApi {
   }
 
   Stream<String?> watchRole(String id) {
-    return _client
-        .from('users')
-        .stream(primaryKey: ['id'])
-        .eq('id', id)
-        .map((rows) => rows.isEmpty ? null : rows.first['role'] as String?);
+    return _firestore
+        .collection('users')
+        .doc(id)
+        .snapshots()
+        .map((snapshot) => snapshot.data()?['role'] as String?);
   }
 
   Future<void> update(UserEntity user) async {
     try {
       final data = user.toJson()..removeWhere((_, v) => v == null);
-      await _client
-          .from('users') //
-          .update(data)
-          .eq('id', user.id!);
+      await _firestore.collection('users').doc(user.id).update(data);
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -66,10 +74,7 @@ class UserApi {
 
   Future<void> delete(String userId) async {
     try {
-      await _client
-          .from('users') //
-          .delete()
-          .eq('id', userId);
+      await _firestore.collection('users').doc(userId).delete();
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -78,21 +83,15 @@ class UserApi {
     }
   }
 
-  /// Delete the current user account from auth.users.
-  /// Uses an Edge Function because auth.admin.deleteUser requires service_role.
-  /// When auth.users is deleted, public.users and all related data (devices,
-  /// subscriptions, etc.) are removed via ON DELETE CASCADE.
+  /// Delete the current user account from auth and database.
   Future<void> deleteMe() async {
     try {
-      final res = await _client.functions.invoke('delete-user-account');
-      if (res.status != 200) {
-        final msg = res.data is Map && res.data != null
-            ? (res.data as Map)['error'] as String? ?? 'Error while deleting user'
-            : 'Error while deleting user';
-        throw ApiError(code: res.status, message: msg);
+      final user = fb_auth.FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final userId = user.uid;
+        await delete(userId);
+        await user.delete();
       }
-    } on ApiError {
-      rethrow;
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -103,9 +102,7 @@ class UserApi {
 
   Future<void> create(UserEntity user) async {
     try {
-      await _client
-          .from('users') //
-          .insert([user.toJson()]);
+      await _firestore.collection('users').doc(user.id).set(user.toJson());
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -126,10 +123,10 @@ class UserApi {
     );
     await for (final res in task) {
       if (res case UploadResultCompleted()) {
-        await _client
-            .from('users') //
-            .update({'avatar_url': res.imagePublicUrl}) //
-            .eq('id', userId);
+        await _firestore
+            .collection('users')
+            .doc(userId)
+            .update({'avatar_url': res.imagePublicUrl});
       }
       yield res;
     }
@@ -137,16 +134,16 @@ class UserApi {
 
   Future<void> deleteAvatar(String userId) async {
     await _storageApi.deleteFile('users/$userId/avatar/thumb.jpg');
-    await _client
-        .from('users')
-        .update({'avatar_url': null})
-        .eq('id', userId);
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .update({'avatar_url': null});
   }
 
   Future<void> updateLocale(String userId, String locale)  {
-    return _client
-        .from('users') //
-        .update({'locale': locale}) //
-        .eq('id', userId);
+    return _firestore
+        .collection('users')
+        .doc(userId)
+        .update({'locale': locale});
   }
 }

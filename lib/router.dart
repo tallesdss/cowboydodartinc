@@ -4,6 +4,7 @@ import 'package:cowboydodartinc/core/bottom_menu/web_url.dart';
 import 'package:cowboydodartinc/core/chrome/chrome_visibility.dart';
 import 'package:cowboydodartinc/core/config/features.dart';
 import 'package:cowboydodartinc/core/data/api/analytics_api.dart';
+import 'package:cowboydodartinc/core/data/models/user.dart';
 import 'package:cowboydodartinc/core/navigation/dev_route_memory.dart';
 import 'package:cowboydodartinc/core/navigation/kasy_navigation_config.dart';
 import 'package:cowboydodartinc/core/navigation/kasy_page_transition.dart';
@@ -90,13 +91,33 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 
 
-/// Single source of truth for "where should this user be allowed to go".
-///
-/// Replaces the old widget-tree guards. Driven reactively by GoRouter via the
-/// [goRouterProvider] refresh listenable, so a logout (or sign-in, or onboarding
-/// completion) navigates immediately without depending on a post-frame callback.
 String? _authRedirect(Ref ref, GoRouterState state) {
-  // Navigation directly without requirements (bypassing auth redirect rules)
+  final userState = ref.read(userStateNotifierProvider);
+  final user = userState.user;
+
+  if (user is LoadingUserData) {
+    return null;
+  }
+
+  final isAuthPath = state.uri.path == '/signin' ||
+      state.uri.path == '/signup' ||
+      state.uri.path == '/signinWithPhone' ||
+      state.uri.path == '/recover';
+
+  final isAnonymous = user is AnonymousUserData;
+  final notifier = ref.read(userStateNotifierProvider.notifier);
+  final isAuthRequired = notifier.mode == AuthenticationMode.authRequired;
+
+  if (isAnonymous && isAuthRequired) {
+    if (!isAuthPath) {
+      return '/signin';
+    }
+  } else if (user is AuthenticatedUserData) {
+    if (isAuthPath) {
+      return '/';
+    }
+  }
+
   return null;
 }
 
@@ -227,6 +248,14 @@ GoRouter generateRouter({
           key: state.pageKey,
           transition: KasyNavigationConfig.authPeer,
           child: const SigninPage(),
+        ),
+      ),
+      GoRoute(
+        name: 'recover_password',
+        path: '/recover_password',
+        pageBuilder: (context, state) => kasyTransitionPage(
+          key: state.pageKey,
+          child: const RecoverPasswordPage(),
         ),
       ),
       GoRoute(
@@ -396,14 +425,7 @@ GoRouter generateRouter({
           child: const ManagePdfsPage(),
         ),
       ),
-      GoRoute(
-        name: 'recover_password',
-        path: '/recover_password',
-        pageBuilder: (context, state) => kasyTransitionPage(
-          key: state.pageKey,
-          child: const RecoverPasswordPage(),
-        ),
-      ),
+
       // Admin console: a StatefulShellRoute so every section is a real,
       // URL-addressable screen that keeps its own state while the navigation
       // rail persists across them. The top-level sections (/admin, /admin/users,

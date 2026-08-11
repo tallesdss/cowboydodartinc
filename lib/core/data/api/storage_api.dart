@@ -2,13 +2,12 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:cowboydodartinc/core/data/entities/upload_result.dart';
+import 'package:firebase_storage/firebase_storage.dart' as fb_storage;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final storageApiProvider = Provider<StorageApi>(
-  (ref) => SupabaseStorageApi(
-    client: Supabase.instance.client,
-    storageBucket: 'storage',
+  (ref) => FirebaseStorageApi(
+    storage: fb_storage.FirebaseStorage.instance,
   ),
 );
 
@@ -26,22 +25,23 @@ abstract class StorageApi {
   Future<void> deleteFile(String? path);
 }
 
-class SupabaseStorageApi implements StorageApi {
-  final SupabaseClient _client;
-  final String _storageBucket;
+class FirebaseStorageApi implements StorageApi {
+  final fb_storage.FirebaseStorage _storage;
 
-  SupabaseStorageApi({
-    required SupabaseClient client,
-    required String storageBucket,
-  })  : _client = client,
-        _storageBucket = storageBucket;
+  FirebaseStorageApi({
+    required fb_storage.FirebaseStorage storage,
+  }) : _storage = storage;
 
   @override
-  Future<void> deleteFile(String? imagePath) {
-    if (imagePath == null) {
-      return Future.value();
+  Future<void> deleteFile(String? imagePath) async {
+    if (imagePath == null || imagePath.isEmpty) {
+      return;
     }
-    return _client.storage.from(_storageBucket).remove([imagePath]);
+    try {
+      await _storage.ref(imagePath).delete();
+    } catch (_) {
+      // Ignore if file doesn't exist
+    }
   }
 
   @override
@@ -53,26 +53,22 @@ class SupabaseStorageApi implements StorageApi {
     bool isPublic = true,
   }) async* {
     final path = '$folder/$filename';
-    yield UploadResultProgress(0);
-    final result = await _client.storage.from(_storageBucket).uploadBinary(
-          path,
-          data,
-          retryAttempts: 3,
-          fileOptions: FileOptions(contentType: mimeType, upsert: true),
-        );
-    if (!isPublic) {
-      yield UploadResultCompleted(
-        imagePath: result,
-        imagePublicUrl: '',
-      );
-      return;
+    yield UploadResultProgress(0.0);
+    final ref = _storage.ref(path);
+    final metadata = mimeType != null ? fb_storage.SettableMetadata(contentType: mimeType) : null;
+    final uploadTask = ref.putData(data, metadata);
+
+    await for (final snapshot in uploadTask.snapshotEvents) {
+      if (snapshot.totalBytes > 0) {
+        final progress = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+        yield UploadResultProgress(progress);
+      }
     }
-    final publicUrl = _client.storage
-        .from(_storageBucket)
-        .getPublicUrl(path);
+
+    final downloadUrl = await ref.getDownloadURL();
     yield UploadResultCompleted(
-      imagePath: result,
-      imagePublicUrl: publicUrl,
+      imagePath: path,
+      imagePublicUrl: downloadUrl,
     );
   }
 }

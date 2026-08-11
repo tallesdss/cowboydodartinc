@@ -44,7 +44,6 @@ import 'package:jiffy/jiffy.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   final widgetsBinding = KasyBinding.ensureInitialized();
@@ -86,11 +85,6 @@ void main() async {
   } else {
     LocaleSettings.useDeviceLocale();
   }
-  // initialize Supabase
-  await Supabase.initialize(
-    url: AppEnv.backendUrl,
-    publishableKey: AppEnv.supabaseToken,
-  );
 
   // initialize firebase app for notifications
   await switch (env) {

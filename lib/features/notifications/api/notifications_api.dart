@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cowboydodartinc/core/data/api/base_api_exceptions.dart';
 import 'package:cowboydodartinc/features/notifications/api/entities/notifications_entity.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -5,22 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final notificationsApiProvider = Provider<NotificationsApi>(
   (ref) => FirebaseNotificationsApi(
     messaging: FirebaseMessaging.instance,
     logger: Logger(),
-    client: Supabase.instance.client,
+    firestore: FirebaseFirestore.instance,
   ),
 );
 
-/// This class is responsible for listening from firebase notifications
-/// As I like repositories to not depend on external libraries
-/// I wrapped some of the firebase messaging methods
-///
-/// You could use directly the firebase messaging methods but making a fake implementation
-/// of this class would be harder.
 abstract class NotificationsApi {
   /// Request permission to receive notifications
   Future<void> requestPermission();
@@ -98,15 +92,15 @@ typedef OnRemoteMessage = Future<void> Function(RemoteMessage message);
 
 class FirebaseNotificationsApi implements NotificationsApi {
   final FirebaseMessaging _messaging;
-  final SupabaseClient _client;
+  final FirebaseFirestore _firestore;
   final Logger _logger;
 
   FirebaseNotificationsApi({
     required FirebaseMessaging messaging,
-    required SupabaseClient client,
+    required FirebaseFirestore firestore,
     required Logger logger,
   })  : _messaging = messaging,
-        _client = client,
+        _firestore = firestore,
         _logger = logger;
 
   @override
@@ -148,7 +142,6 @@ class FirebaseNotificationsApi implements NotificationsApi {
     _messaging.unsubscribeFromTopic(topic);
   }
 
-  // Used to get the past notifications from the server
   @override
   Future<List<NotificationEntity>> get(
     String userId, {
@@ -157,19 +150,19 @@ class FirebaseNotificationsApi implements NotificationsApi {
     int page = 0,
   }) async {
     try {
-      final response = await _client
-          .from('notifications')
-          .select()
-          .eq('user_id', userId)
-          .order('creation_date', ascending: false)
-          .range(page * limit, (page + 1) * limit - 1);
-      if (response.isEmpty) {
-        return [];
-      }
-      return response
-          .map((e) {
+      final query = _firestore
+          .collection('notifications')
+          .where('user_id', isEqualTo: userId)
+          .orderBy('creation_date', descending: true)
+          .limit(limit);
+
+      final snapshot = await query.get();
+      return snapshot.docs
+          .map((doc) {
             try {
-              return NotificationEntity.fromJson(e);
+              final data = doc.data();
+              data['id'] = doc.id;
+              return NotificationEntity.fromJson(data);
             } catch (e) {
               return null;
             }
@@ -187,11 +180,10 @@ class FirebaseNotificationsApi implements NotificationsApi {
   @override
   Future<void> read(String userId, String notificationId) async {
     try {
-      await _client
-          .from('notifications')
-          .update({'read_date': DateTime.now().toString()})
-          .eq('user_id', userId)
-          .eq('id', notificationId);
+      await _firestore
+          .collection('notifications')
+          .doc(notificationId)
+          .update({'read_date': DateTime.now().toString()});
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -203,11 +195,7 @@ class FirebaseNotificationsApi implements NotificationsApi {
   @override
   Future<void> delete(String userId, String notificationId) async {
     try {
-      await _client
-          .from('notifications')
-          .delete()
-          .eq('user_id', userId)
-          .eq('id', notificationId);
+      await _firestore.collection('notifications').doc(notificationId).delete();
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,
@@ -219,14 +207,12 @@ class FirebaseNotificationsApi implements NotificationsApi {
   @override
   Stream<int> unreadNotifications(String userId) {
     try {
-      return _client
-          .from('notifications')
-          .stream(primaryKey: ['id'])
-          .eq('user_id', userId)
-          .order('creation_date')
-          .limit(10)
-          .map((el) => el.where((item) => item['read_date'] == null))
-          .map((event) => event.length);
+      return _firestore
+          .collection('notifications')
+          .where('user_id', isEqualTo: userId)
+          .where('read_date', isNull: true)
+          .snapshots()
+          .map((snap) => snap.docs.length);
     } catch (e, stacktrace) {
       debugPrint('$e: $stacktrace');
       throw ApiError(
@@ -244,13 +230,13 @@ class FirebaseNotificationsApi implements NotificationsApi {
   @override
   Future<String?> findUserByEmail(String email) async {
     try {
-      final result = await _client
-          .from('users')
-          .select('id')
-          .eq('email', email)
-          .limit(1);
-      if (result.isEmpty) return null;
-      return result.first['id'] as String?;
+      final result = await _firestore
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .limit(1)
+          .get();
+      if (result.docs.isEmpty) return null;
+      return result.docs.first.id;
     } catch (e, s) {
       _logger.e('findUserByEmail error: $e: $s');
       return null;
@@ -265,13 +251,16 @@ class FirebaseNotificationsApi implements NotificationsApi {
     String? imageUrl,
     String? route,
   }) async {
-    await _client.from('notifications').insert({
+    final docRef = _firestore.collection('notifications').doc();
+    await docRef.set({
+      'id': docRef.id,
       'user_id': userId,
       'title': title,
       'body': body,
       if (imageUrl != null && imageUrl.isNotEmpty) 'image_url': imageUrl,
       if (route != null && route.isNotEmpty) 'data': {'route': route},
       'type': 'OTHER',
+      'creation_date': DateTime.now().toIso8601String(),
     });
   }
 
@@ -302,22 +291,13 @@ class FirebaseNotificationsApi implements NotificationsApi {
     String? imageUrl,
     String? route,
   }) async {
-    // Paginate in chunks of 1000 (PostgREST default page size) to avoid
-    // silently dropping users when the devices table exceeds 1000 rows.
-    const int pageSize = 1000;
-    int offset = 0;
+    final snapshot = await _firestore.collection('devices').get();
     final Set<String> userIds = {};
-    while (true) {
-      final page = await _client
-          .from('devices')
-          .select('user_id')
-          .order('user_id')
-          .range(offset, offset + pageSize - 1);
-      for (final r in page) {
-        userIds.add(r['user_id'] as String);
+    for (final doc in snapshot.docs) {
+      final uid = doc.data()['user_id'] as String?;
+      if (uid != null) {
+        userIds.add(uid);
       }
-      if (page.length < pageSize) break;
-      offset += pageSize;
     }
     await Future.wait(
       userIds.map(

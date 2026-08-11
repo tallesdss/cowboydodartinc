@@ -1,34 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cowboydodartinc/core/data/api/base_api_exceptions.dart';
 import 'package:cowboydodartinc/features/feedbacks/api/entities/feature_vote_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final featureVoteApiProvider = Provider<FeatureVoteApi>(
-  (ref) => FeatureVoteApi(
-    client: Supabase.instance.client,
+  (ref) => UserFeatureVoteApi(
+    firestore: FirebaseFirestore.instance,
   ),
 );
 
-const _kFeatureVoteTable = 'feature_votes';
+abstract class FeatureVoteApi {
+  Future<List<UserFeatureVoteEntity>> getUserVotes(String userId);
+  Future<UserFeatureVoteEntity> create(String userId, String featureId);
+  Future<void> delete(String featureId, String voteId);
+}
 
-class FeatureVoteApi {
-  final SupabaseClient _client;
+const _kFeatureVoteCollection = 'feature_votes';
 
-  FeatureVoteApi({
-    required SupabaseClient client,
-  }) : _client = client;
+class UserFeatureVoteApi implements FeatureVoteApi {
+  final FirebaseFirestore _firestore;
 
+  UserFeatureVoteApi({
+    required FirebaseFirestore firestore,
+  }) : _firestore = firestore;
+
+  @override
   Future<List<UserFeatureVoteEntity>> getUserVotes(String userId) async {
     try {
-      final res = await _client
-          .from(_kFeatureVoteTable)
-          .select()
-          .eq('user_uid', userId);
-      if (res.isEmpty) {
-        return [];
-      }
-      return res.map((e) => UserFeatureVoteEntity.fromJson(e)).toList();
+      final snapshot = await _firestore
+          .collection(_kFeatureVoteCollection)
+          .where('user_uid', isEqualTo: userId)
+          .get();
+      return snapshot.docs.map((doc) => UserFeatureVoteEntity.fromJson(doc.data())).toList();
     } catch (e, stacktrace) {
       Logger().e('$e: $stacktrace');
       throw ApiError(
@@ -38,26 +42,19 @@ class FeatureVoteApi {
     }
   }
 
+  @override
   Future<UserFeatureVoteEntity> create(String userId, String featureId) async {
     try {
-      final res = await _client
-          .from(_kFeatureVoteTable)
-          .upsert(
-            UserFeatureVoteEntity(
-              creationDate: DateTime.now(),
-              userId: userId,
-              featureId: featureId,
-            ).toJson()
-              ..remove('id'),
-          )
-          .select();
-      if (res.isEmpty) {
-        throw ApiError(
-          code: 0,
-          message: 'Failed to create vote',
-        );
-      }
-      return UserFeatureVoteEntity.fromJson(res.first);
+      final docId = '${userId}_$featureId';
+      final docRef = _firestore.collection(_kFeatureVoteCollection).doc(docId);
+      final vote = UserFeatureVoteEntity(
+        id: docId,
+        creationDate: DateTime.now(),
+        userId: userId,
+        featureId: featureId,
+      );
+      await docRef.set(vote.toJson());
+      return vote;
     } catch (e, stacktrace) {
       Logger().e('$e: $stacktrace');
       throw ApiError(
@@ -67,13 +64,10 @@ class FeatureVoteApi {
     }
   }
 
+  @override
   Future<void> delete(String featureId, String voteId) async {
     try {
-      await _client
-          .from(_kFeatureVoteTable)
-          .delete()
-          .eq('id', voteId)
-          .eq('feature_id', featureId);
+      await _firestore.collection(_kFeatureVoteCollection).doc(voteId).delete();
     } catch (e, stacktrace) {
       Logger().e('$e: $stacktrace');
       throw ApiError(

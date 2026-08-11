@@ -90,7 +90,7 @@ dependencies:
   sign_in_with_apple: ^7.0.1
   slang: ^4.12.1
   slang_flutter: ^4.12.1
-  supabase_flutter: ^2.12.0
+
   timezone: ^0.10.1
   universal_html: ^2.3.0
   universal_io: ^2.3.1

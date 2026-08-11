@@ -7,9 +7,9 @@ import 'package:cowboydodartinc/features/ai_chat/api/ai_chat_api.dart';
 import 'package:cowboydodartinc/features/ai_chat/api/ai_chat_message_entity.dart';
 import 'package:cowboydodartinc/features/ai_chat/providers/ai_conversations_notifier.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 const int _kMaxContextMessages = 20;
 
@@ -131,7 +131,7 @@ class AiChatNotifier extends AsyncNotifier<AiChatState> {
     }
 
     final accessToken =
-        Supabase.instance.client.auth.currentSession?.accessToken;
+        await FirebaseAuth.instance.currentUser?.getIdToken();
     if (accessToken == null) {
       _finalizeAssistantMessage(t.error_not_configured);
       return;

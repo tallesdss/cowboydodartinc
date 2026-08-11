@@ -365,7 +365,11 @@ class HttpAuthenticationRepository implements AuthenticationRepository {
   Future<void> logout() async {
     _logger.d('Logging out');
     _httpClient.authToken = null;
-    await _authenticationApi.signout();
+    try {
+      await _authenticationApi.signout();
+    } catch (e) {
+      _logger.e('Supabase signout failed (safe to ignore for local signout): $e');
+    }
     await _storage.clear();
   }
 

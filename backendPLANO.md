@@ -71,3 +71,24 @@
 - [ ] Remover permanentemente todo o código dos Mock Repositories e arquivos JSON locais do projeto Flutter.
 - [ ] Configurar CI/CD ou Deploy via Firebase Hosting e Firebase CLI.
 - [ ] Lançamento oficial e monitoramento via Firebase Crashlytics / Analytics.
+
+## 9. Plano de Migração Técnica: Supabase ➔ Firebase no Código
+- [x] **Ajuste de Dependências (`pubspec.yaml`):**
+  - [x] Remover `supabase_flutter`.
+  - [x] Garantir/Adicionar `firebase_core`, `firebase_auth`, `cloud_firestore`, `firebase_storage` e `cloud_functions`.
+- [x] **Alterações na Inicialização (`lib/main.dart`):**
+  - [x] Remover a inicialização do Supabase (`await Supabase.initialize(...)`).
+  - [x] Garantir que o Firebase esteja inicializado corretamente para todas as plataformas.
+- [x] **Migração da API de Autenticação (`lib/features/authentication/api/authentication_api.dart`):**
+  - [x] Criar a classe `FirebaseAuthenticationApi` implementando `AuthenticationApi`.
+  - [x] Substituir o provider `authenticationApiProvider` para injetar `FirebaseAuthenticationApi` com `FirebaseAuth.instance`.
+  - [x] Implementar os métodos usando `FirebaseAuth` (`signInWithEmailAndPassword`, `createUserWithEmailAndPassword`, `signOut`, etc.).
+  - [x] Tratar e mapear as exceções do Firebase Auth para que a UI continue exibindo erros amigáveis.
+- [x] **Migração das APIs de Dados para Firestore/Firebase Storage:**
+  - [x] **User API (`lib/core/data/api/user_api.dart`):** Substituir chamadas a `_client.from('users')` por consultas à coleção `'users'` no Firestore.
+  - [x] **Storage API (`lib/core/data/api/storage_api.dart`):** Substituir envios e leituras de arquivos do Supabase Storage pelo Firebase Storage.
+  - [x] **Stripe Backend API (`lib/features/subscriptions/api/stripe_backend_api.dart`):** Mudar invocação de Supabase Edge Functions para Firebase Cloud Functions.
+- [x] **Atualização de Variáveis de Ambiente (`.env` e `app_env.dart`):**
+  - [x] Remover chaves exclusivas do Supabase (`BACKEND_URL` e `SUPABASE_TOKEN`).
+  - [x] Configurar e gerar os arquivos `firebase_options_dev.dart` (e prod) via FlutterFire CLI para não depender de chaves cruas no `.env`.
+

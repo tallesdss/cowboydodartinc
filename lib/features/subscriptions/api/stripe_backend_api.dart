@@ -1,27 +1,31 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cowboydodartinc/features/subscriptions/api/stripe_product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final stripeBackendApiProvider = Provider<StripeBackendApi>(
-  (ref) => StripeBackendApi(client: Supabase.instance.client),
+  (ref) => StripeBackendApi(functions: FirebaseFunctions.instance),
 );
 
-/// Talks to the Stripe backend (Supabase Edge Functions). The user identity is
+/// Talks to the Stripe backend (Firebase Cloud Functions). The user identity is
 /// taken server-side from the verified JWT — never trusted from the client.
-/// This file replaces the Firebase version so the rest of the Stripe client
-/// code stays backend-agnostic.
 class StripeBackendApi {
-  final SupabaseClient _client;
+  final FirebaseFunctions _functions;
 
-  StripeBackendApi({required SupabaseClient client}) : _client = client;
+  StripeBackendApi({required FirebaseFunctions functions}) : _functions = functions;
 
   /// Active recurring prices, mapped to paywall offers.
   Future<List<StripeProduct>> listPrices() async {
-    final res = await _client.functions.invoke('stripe-list-prices');
-    final list = (res.data as List).cast<dynamic>();
-    return list
-        .map((e) => StripeProduct.fromJson(Map<String, dynamic>.from(e as Map)))
-        .toList();
+    try {
+      final callable = _functions.httpsCallable('stripe-list-prices');
+      final res = await callable.call();
+      final list = (res.data as List).cast<dynamic>();
+      return list
+          .map((e) => StripeProduct.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+    } catch (e) {
+      // Retorna lista vazia em vez de quebrar a inicialização do app caso a API não responda
+      return [];
+    }
   }
 
   /// Create a hosted Checkout session for [priceId] and return its URL.
@@ -32,16 +36,14 @@ class StripeBackendApi {
     String? locale,
     bool? allowPromoCodes,
   }) async {
-    final res = await _client.functions.invoke(
-      'stripe-create-checkout-session',
-      body: {
-        'priceId': priceId,
-        if (successUrl != null) 'successUrl': successUrl,
-        if (cancelUrl != null) 'cancelUrl': cancelUrl,
-        if (locale != null) 'locale': locale,
-        if (allowPromoCodes != null) 'allowPromoCodes': allowPromoCodes,
-      },
-    );
+    final callable = _functions.httpsCallable('stripe-create-checkout-session');
+    final res = await callable.call({
+      'priceId': priceId,
+      if (successUrl != null) 'successUrl': successUrl,
+      if (cancelUrl != null) 'cancelUrl': cancelUrl,
+      if (locale != null) 'locale': locale,
+      if (allowPromoCodes != null) 'allowPromoCodes': allowPromoCodes,
+    });
     return (res.data as Map)['url'] as String;
   }
 
@@ -52,13 +54,11 @@ class StripeBackendApi {
     String? returnUrl,
     bool? planSwitching,
   }) async {
-    final res = await _client.functions.invoke(
-      'stripe-create-portal-session',
-      body: {
-        if (returnUrl != null) 'returnUrl': returnUrl,
-        if (planSwitching != null) 'planSwitching': planSwitching,
-      },
-    );
+    final callable = _functions.httpsCallable('stripe-create-portal-session');
+    final res = await callable.call({
+      if (returnUrl != null) 'returnUrl': returnUrl,
+      if (planSwitching != null) 'planSwitching': planSwitching,
+    });
     return (res.data as Map)['url'] as String;
   }
 }

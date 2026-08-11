@@ -1,40 +1,18 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final metaAdsApiProvider = Provider<MetaAdsApi>(
-  (ref) => MetaAdsApi(client: Supabase.instance.client),
+  (ref) => MetaAdsApi(functions: FirebaseFunctions.instance),
 );
 
 /// Sends server-side events to Meta Conversions API via the
-/// `meta-track-event` Supabase Edge Function.
-///
-/// Subscription events (Subscribe, StartTrial, Purchase) are sent
-/// automatically by the `revenuecat-webhook` edge function — do not
-/// duplicate them here.
-///
-/// Typical usage:
-/// ```dart
-/// // On first launch / install
-/// ref.read(metaAdsApiProvider).trackInstall();
-///
-/// // On email/social registration
-/// ref.read(metaAdsApiProvider).trackRegistration();
-///
-/// // Custom events
-/// ref.read(metaAdsApiProvider).trackEvent(
-///   'AchieveLevel',
-///   customData: {'level': '5'},
-/// );
-/// ```
-///
-/// Events are fire-and-forget: failures are logged but never rethrown,
-/// so they never affect the user-facing flow.
+/// `meta-track-event` Firebase Cloud Function.
 class MetaAdsApi {
-  final SupabaseClient _client;
+  final FirebaseFunctions _functions;
   final _logger = Logger();
 
-  MetaAdsApi({required SupabaseClient client}) : _client = client;
+  MetaAdsApi({required FirebaseFunctions functions}) : _functions = functions;
 
   /// Track a `CompleteRegistration` event.
   /// Call this immediately after a user creates a new permanent account
@@ -47,25 +25,16 @@ class MetaAdsApi {
   Future<void> trackInstall() => trackEvent('MobileAppInstall');
 
   /// Track any supported Meta event by name.
-  ///
-  /// [eventName] must be a valid Meta app event name, e.g.:
-  ///   'CompleteRegistration', 'MobileAppInstall', 'AchieveLevel',
-  ///   'UnlockAchievement', 'SpendCredits', 'ViewContent', 'Search'.
-  ///
-  /// [customData] is an optional map of string key-value pairs sent as
-  /// Meta `custom_data` (e.g. `{'level': '5', 'currency': 'USD'}`).
   Future<void> trackEvent(
     String eventName, {
     Map<String, String>? customData,
   }) async {
     try {
-      await _client.functions.invoke(
-        'meta-track-event',
-        body: {
-          'event_name': eventName,
-          if (customData != null) 'custom_data': customData,
-        },
-      );
+      final callable = _functions.httpsCallable('meta-track-event');
+      await callable.call({
+        'event_name': eventName,
+        if (customData != null) 'custom_data': customData,
+      });
       _logger.d('[MetaAdsApi] $eventName sent');
     } catch (e, s) {
       // Never let tracking errors surface to the user.

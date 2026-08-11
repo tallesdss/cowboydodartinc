@@ -8,9 +8,6 @@ const String _kEnvFromDefine = String.fromEnvironment(
 const String _kBackendUrlFromDefine = String.fromEnvironment(
   'BACKEND_URL',
 );
-const String _kSupabaseTokenFromDefine = String.fromEnvironment(
-  'SUPABASE_TOKEN',
-);
 const String _kRcAndroidApiKeyFromDefine = String.fromEnvironment(
   'RC_ANDROID_API_KEY',
 );
@@ -85,10 +82,6 @@ class AppEnv {
   static String get backendUrl =>
       _resolve(key: 'BACKEND_URL', dartDefineValue: _kBackendUrlFromDefine);
 
-  static String get supabaseToken => _resolve(
-    key: 'SUPABASE_TOKEN',
-    dartDefineValue: _kSupabaseTokenFromDefine,
-  );
 
   /// RevenueCat "Test Store" public key (`test_…`). Works only against the
   /// RevenueCat fake store (simulator/emulator); the native SDK rejects it in
