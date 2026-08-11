@@ -41,21 +41,21 @@
   - [x] **Escrita (Admin):** Pode gerenciar, excluir ou mover qualquer arquivo de qualquer usuário.
 
 ## 5. Lógica de Servidor (Firebase Cloud Functions)
-- [ ] Inicializar o ambiente Node.js/TypeScript para Firebase Functions.
-- [ ] Criar Cloud Functions globais (Acessíveis a todos):
-  - [ ] Função para busca avançada (caso necessário integrar com Algolia, ou realizar agregações).
-  - [ ] Triggers (gatilhos `onWrite`, `onCreate`) para atualizar dados desnormalizados (ex: calcular a avaliação média de um PDF e salvar no documento do PDF ao receber um novo `comment`).
-- [ ] Criar Cloud Functions restritas de **Administrador**:
-  - [ ] Atribuir Custom Claims (ex: promover um usuário a Admin).
-  - [ ] Obter métricas globais para o Dashboard (total de PDFs, downloads totais, ranking de uploaders) usando agregações ou contadores distribuídos no Firestore.
-  - [ ] Excluir fisicamente usuários no Firebase Auth.
+- [x] Inicializar o ambiente Node.js/TypeScript para Firebase Functions.
+- [x] Criar Cloud Functions globais (Acessíveis a todos):
+  - [x] Função para busca avançada (caso necessário integrar com Algolia, ou realizar agregações).
+  - [x] Triggers (gatilhos `onWrite`, `onCreate`) para atualizar dados desnormalizados (ex: calcular a avaliação média de um PDF e salvar no documento do PDF ao receber um novo `comment`).
+- [x] Criar Cloud Functions restritas de **Administrador**:
+  - [x] Atribuir Custom Claims (ex: promover um usuário a Admin).
+  - [x] Obter métricas globais para o Dashboard (total de PDFs, downloads totais, ranking de uploaders) usando agregações ou contadores distribuídos no Firestore.
+  - [x] Excluir fisicamente usuários no Firebase Auth.
 
 ## 6. Integração com o Front-end (Substituição de Mocks)
-- [ ] Adicionar as dependências (`firebase_core`, `firebase_auth`, `cloud_firestore`, `firebase_storage`, `cloud_functions`) no `pubspec.yaml`.
-- [ ] **Desacoplar Mocks:** Substituir sistematicamente toda a camada de `api` mockada (`mock_..._api.dart`) por repositórios reais conectados ao Firebase. Toda geração de dados falsos locais na interface deve ser trocada por chamadas de rede.
-- [ ] Refatorar a interface para checar os Custom Claims do Firebase e exibir o menu de "Dashboard" e "Categorias" apenas se o usuário for *admin*.
-- [ ] Integrar a tela de envio de PDFs para realizar o upload via pacote `firebase_storage`, obter a URL final, e depois salvar o documento no Firestore.
-- [ ] Adaptar a UI do Kasy para reagir aos _streams_ do Firestore (realtime updates, se desejado).
+- [x] Adicionar as dependências (`firebase_core`, `firebase_auth`, `cloud_firestore`, `firebase_storage`, `cloud_functions`) no `pubspec.yaml`.
+- [x] **Desacoplar Mocks:** Substituir sistematicamente toda a camada de `api` mockada (`mock_..._api.dart`) por repositórios reais conectados ao Firebase. Toda geração de dados falsos locais na interface deve ser trocada por chamadas de rede.
+- [x] Refatorar a interface para checar os Custom Claims do Firebase e exibir o menu de "Dashboard" e "Categorias" apenas se o usuário for *admin*.
+- [x] Integrar a tela de envio de PDFs para realizar o upload via pacote `firebase_storage`, obter a URL final, e depois salvar o documento no Firestore.
+- [x] Adaptar a UI do Kasy para reagir aos _streams_ do Firestore (realtime updates, se desejado).
 
 ## 7. Validação, Testes e Segurança
 - [ ] Fluxo Cliente: Testar o Auth, upload de arquivo (Storage) + criação de documento (Firestore), edição de seus dados, e comentar.

@@ -32,3 +32,7 @@ exports.aiChat = require("./ai_chat").aiChat;
 
 // ads: rewarded Server-Side Verification (activated when the ads module is on)
 exports.ads = require("./ads/ads_functions");
+
+// library functions
+exports.library = require("./library/triggers");
+

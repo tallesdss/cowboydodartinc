@@ -41,7 +41,7 @@ final class ActiveProfileProvider
   }
 }
 
-String _$activeProfileHash() => r'5e375c1971ee797d5e86c20fd01e73b7bfd7b525';
+String _$activeProfileHash() => r'871e3c1f52d1f7af52adf2e4b93bc338a3ec0071';
 
 abstract class _$ActiveProfile extends $Notifier<String> {
   String build();
@@ -93,7 +93,7 @@ final class CategoriesProvider
   }
 }
 
-String _$categoriesHash() => r'3e7e7d7ae8598357f7f3a6b968dbe28beba75960';
+String _$categoriesHash() => r'd9637fef02fbe730ea8f7a0f229a1fdd5bc69972';
 
 abstract class _$Categories extends $Notifier<List<LibraryCategory>> {
   List<LibraryCategory> build();
@@ -144,7 +144,7 @@ final class PdfsProvider extends $NotifierProvider<Pdfs, List<PdfDocument>> {
   }
 }
 
-String _$pdfsHash() => r'ed2d2afd58c8416c2238ccf398ab471b4471cad7';
+String _$pdfsHash() => r'2c7410d3f04a018be2a61927801c445c205f0593';
 
 abstract class _$Pdfs extends $Notifier<List<PdfDocument>> {
   List<PdfDocument> build();
@@ -213,7 +213,7 @@ final class CommentsProvider
   }
 }
 
-String _$commentsHash() => r'152419da9d3c4b6a8c8e71b34808e58b9504ba5a';
+String _$commentsHash() => r'279907d952f1f955718415792ca1d7999e475ac7';
 
 final class CommentsFamily extends $Family
     with
@@ -293,7 +293,7 @@ final class FavoritesProvider
   }
 }
 
-String _$favoritesHash() => r'406fe99b27735ec453e4f2079b27d31f58837125';
+String _$favoritesHash() => r'661986b6b82fc284c14d9a53fab6df84c8e02e28';
 
 abstract class _$Favorites extends $Notifier<List<String>> {
   List<String> build();

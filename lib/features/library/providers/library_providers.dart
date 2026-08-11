@@ -1,4 +1,4 @@
-import 'package:cowboydodartinc/features/library/repositories/library_mock_storage.dart';
+import 'package:cowboydodartinc/features/library/repositories/library_firebase_repository.dart';
 import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,16 +9,26 @@ part 'library_providers.g.dart';
 // ----------------------------------------------------
 @riverpod
 class ActiveProfile extends _$ActiveProfile {
-  late final LibraryMockStorage _storage;
+  late final LibraryFirebaseRepository _repository;
 
   @override
   String build() {
-    _storage = ref.watch(libraryMockStorageProvider);
-    return _storage.getActiveProfile();
+    _repository = ref.watch(libraryFirebaseRepositoryProvider);
+    _fetchProfile();
+    return 'cliente'; // Perfil padrão inicial
   }
 
-  void setProfile(String profile) {
-    _storage.saveActiveProfile(profile);
+  Future<void> _fetchProfile() async {
+    try {
+      final profile = await _repository.getActiveProfile();
+      state = profile;
+    } catch (_) {
+      // Falha silenciosa em caso de erro, mantendo o padrão
+    }
+  }
+
+  Future<void> setProfile(String profile) async {
+    // Para fins de teste de front-end mockado em tempo de execução
     state = profile;
   }
 
@@ -30,16 +40,26 @@ class ActiveProfile extends _$ActiveProfile {
 // ----------------------------------------------------
 @riverpod
 class Categories extends _$Categories {
-  late final LibraryMockStorage _storage;
+  late final LibraryFirebaseRepository _repository;
 
   @override
   List<LibraryCategory> build() {
-    _storage = ref.watch(libraryMockStorageProvider);
-    return _storage.getCategories();
+    _repository = ref.watch(libraryFirebaseRepositoryProvider);
+    _fetchCategories();
+    return [];
   }
 
-  void refresh() {
-    state = _storage.getCategories();
+  Future<void> _fetchCategories() async {
+    try {
+      final list = await _repository.getCategories();
+      state = list;
+    } catch (_) {
+      state = [];
+    }
+  }
+
+  Future<void> refresh() async {
+    await _fetchCategories();
   }
 
   Future<void> addCategory({
@@ -56,18 +76,18 @@ class Categories extends _$Categories {
       color: color,
       createdAt: DateTime.now(),
     );
-    await _storage.addCategory(category);
-    refresh();
+    await _repository.addCategory(category);
+    await refresh();
   }
 
   Future<void> updateCategory(LibraryCategory category) async {
-    await _storage.updateCategory(category);
-    refresh();
+    await _repository.updateCategory(category);
+    await refresh();
   }
 
   Future<void> deleteCategory(String id) async {
-    await _storage.deleteCategory(id);
-    refresh();
+    await _repository.deleteCategory(id);
+    await refresh();
   }
 }
 
@@ -76,16 +96,26 @@ class Categories extends _$Categories {
 // ----------------------------------------------------
 @riverpod
 class Pdfs extends _$Pdfs {
-  late final LibraryMockStorage _storage;
+  late final LibraryFirebaseRepository _repository;
 
   @override
   List<PdfDocument> build() {
-    _storage = ref.watch(libraryMockStorageProvider);
-    return _storage.getPdfs();
+    _repository = ref.watch(libraryFirebaseRepositoryProvider);
+    _fetchPdfs();
+    return [];
   }
 
-  void refresh() {
-    state = _storage.getPdfs();
+  Future<void> _fetchPdfs() async {
+    try {
+      final list = await _repository.getPdfs();
+      state = list;
+    } catch (_) {
+      state = [];
+    }
+  }
+
+  Future<void> refresh() async {
+    await _fetchPdfs();
   }
 
   Future<void> addPdf({
@@ -98,8 +128,7 @@ class Pdfs extends _$Pdfs {
     required List<String> tags,
     required String createdBy,
   }) async {
-    final pdf = PdfDocument(
-      id: 'pdf_${DateTime.now().millisecondsSinceEpoch}',
+    await _repository.addPdf(
       title: title,
       description: description,
       categoryIds: categoryIds,
@@ -107,16 +136,14 @@ class Pdfs extends _$Pdfs {
       fileUrl: fileUrl,
       thumbnailUrl: thumbnailUrl,
       tags: tags,
-      createdAt: DateTime.now(),
       createdBy: createdBy,
     );
-    await _storage.addPdf(pdf);
-    refresh();
+    await refresh();
   }
 
   Future<void> deletePdf(String id) async {
-    await _storage.deletePdf(id);
-    refresh();
+    await _repository.deletePdf(id);
+    await refresh();
   }
 }
 
@@ -125,16 +152,26 @@ class Pdfs extends _$Pdfs {
 // ----------------------------------------------------
 @riverpod
 class Comments extends _$Comments {
-  late final LibraryMockStorage _storage;
+  late final LibraryFirebaseRepository _repository;
 
   @override
   List<LibraryComment> build(String pdfId) {
-    _storage = ref.watch(libraryMockStorageProvider);
-    return _storage.getComments(pdfId);
+    _repository = ref.watch(libraryFirebaseRepositoryProvider);
+    _fetchComments();
+    return [];
   }
 
-  void refresh() {
-    state = _storage.getComments(pdfId);
+  Future<void> _fetchComments() async {
+    try {
+      final list = await _repository.getComments(pdfId);
+      state = list;
+    } catch (_) {
+      state = [];
+    }
+  }
+
+  Future<void> refresh() async {
+    await _fetchComments();
   }
 
   Future<void> addComment({
@@ -150,8 +187,8 @@ class Comments extends _$Comments {
       rating: rating,
       createdAt: DateTime.now(),
     );
-    await _storage.addComment(comment);
-    refresh();
+    await _repository.addComment(comment);
+    await refresh();
   }
 }
 
@@ -160,20 +197,31 @@ class Comments extends _$Comments {
 // ----------------------------------------------------
 @riverpod
 class Favorites extends _$Favorites {
-  late final LibraryMockStorage _storage;
+  late final LibraryFirebaseRepository _repository;
 
   @override
   List<String> build() {
-    _storage = ref.watch(libraryMockStorageProvider);
-    return _storage.getFavorites();
+    _repository = ref.watch(libraryFirebaseRepositoryProvider);
+    _fetchFavorites();
+    return [];
   }
 
-  void refresh() {
-    state = _storage.getFavorites();
+  Future<void> _fetchFavorites() async {
+    try {
+      final list = await _repository.getFavorites();
+      state = list;
+    } catch (_) {
+      state = [];
+    }
+  }
+
+  Future<void> refresh() async {
+    await _fetchFavorites();
   }
 
   Future<void> toggleFavorite(String pdfId) async {
-    await _storage.toggleFavorite(pdfId);
-    refresh();
+    await _repository.toggleFavorite(pdfId);
+    await refresh();
   }
 }
+

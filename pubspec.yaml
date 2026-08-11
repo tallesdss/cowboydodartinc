@@ -18,6 +18,8 @@ dependencies:
   background_fetch: ^1.5.0
   bart: ^1.4.1
   better_skeleton: ^0.1.0
+  cloud_firestore: ^6.8.0
+  cloud_functions: ^6.3.6
   cross_file: ^0.3.5+2
   crypto: ^3.0.7
   cupertino_icons: ^1.0.8
@@ -35,6 +37,7 @@ dependencies:
   firebase_core: ^4.5.0
   firebase_messaging: ^16.1.2
   firebase_remote_config: ^6.2.0
+  firebase_storage: ^13.4.6
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.2
