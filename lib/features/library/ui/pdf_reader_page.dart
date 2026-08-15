@@ -124,7 +124,7 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
     if (pdf == null) {
       return KasyScreen(
         appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(kasyAppBarToolbarRowHeight),
+          preferredSize: Size.fromHeight(kasyAppBarPreferredHeight),
           child: KasyAppBar(
             title: 'Documento não encontrado',
           ),
@@ -145,7 +145,7 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
 
     return KasyScreen(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kasyAppBarToolbarRowHeight),
+        preferredSize: const Size.fromHeight(kasyAppBarPreferredHeight),
         child: KasyAppBar(
           title: '${t.library.read_sim}: ${pdf.title}',
           onBack: () => context.pop(),

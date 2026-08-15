@@ -59,7 +59,7 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
     if (pdf == null) {
       return KasyScreen(
         appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(kasyAppBarToolbarRowHeight),
+          preferredSize: Size.fromHeight(kasyAppBarPreferredHeight),
           child: KasyAppBar(
             title: 'Documento não encontrado',
           ),
@@ -83,7 +83,7 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
 
     return KasyScreen(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kasyAppBarToolbarRowHeight),
+        preferredSize: const Size.fromHeight(kasyAppBarPreferredHeight),
         child: KasyAppBar(
           title: pdf.title,
           onBack: () => context.pop(),

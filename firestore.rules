@@ -18,7 +18,8 @@ service cloud.firestore {
       // (Cloud Function / console), never from the client.
       allow update: if request.auth.uid != null && request.auth.uid == id
                     && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']);
-      allow create: if false;
+      allow create: if request.auth.uid != null && request.auth.uid == id
+                    && !request.resource.data.keys().hasAny(['role']);
     }
     match /users/{id}/{document=**} {
     	allow read, update, create, delete: if request.auth.uid != null && request.auth.uid == id;

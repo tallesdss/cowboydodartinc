@@ -189,7 +189,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
 
     return KasyScreen(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kasyAppBarToolbarRowHeight),
+        preferredSize: const Size.fromHeight(kasyAppBarPreferredHeight),
         child: KasyAppBar(
           title: isAdmin ? t.library.add_pdf : t.library.send_pdf,
           onBack: () => context.pop(),

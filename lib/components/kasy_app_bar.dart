@@ -65,6 +65,11 @@ const double kasyAppBarApplicationSearchWidth = 220;
 const double kasyAppBarChromePaddingTop = KasySpacing.xs;
 const double kasyAppBarChromePaddingBottom = KasySpacing.sm;
 
+/// The true visual height of the page bar: toolbar band + top/bottom frost padding.
+/// Use this when wrapping [KasyAppBar] in a [PreferredSize] (e.g. for [Scaffold.appBar]).
+const double kasyAppBarPreferredHeight =
+    kasyAppBarToolbarRowHeight + kasyAppBarChromePaddingTop + kasyAppBarChromePaddingBottom;
+
 /// How [KasyAppBar] interacts with vertically scrolling siblings.
 ///
 /// - [overlay]: put the bar in a [Stack] on top of the scrolling body and pad

@@ -581,17 +581,30 @@ class _WebDevicePreviewState extends State<WebDevicePreview>
     }
   }
 
+  int _failedPolls = 0;
+
   void _startDevStatusPolling() {
     _devStatusTimer?.cancel();
     _devStatusTimer = Timer.periodic(
       const Duration(milliseconds: 1500),
-      (_) => unawaited(_pollDevBridgeStatus()),
+      (_) {
+        if (_failedPolls > 5) {
+          _devStatusTimer?.cancel();
+          return;
+        }
+        unawaited(_pollDevBridgeStatus());
+      },
     );
   }
 
   Future<void> _pollDevBridgeStatus() async {
     final DevBridgeStatus status = await fetchDevBridgeStatus(_devBridgePort);
     if (!mounted) return;
+    if (!status.available) {
+      _failedPolls++;
+    } else {
+      _failedPolls = 0;
+    }
     setState(() {
       _devBridgeAvailable = status.available;
       _devBridgeStatus = status.available ? status : null;

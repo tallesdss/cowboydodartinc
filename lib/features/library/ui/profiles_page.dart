@@ -18,7 +18,7 @@ class ProfilesPage extends ConsumerWidget {
 
     return KasyScreen(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kasyAppBarToolbarRowHeight),
+        preferredSize: const Size.fromHeight(kasyAppBarPreferredHeight),
         child: KasyAppBar(
           title: t.library.public_profile,
         ),

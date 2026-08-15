@@ -49,7 +49,7 @@ class UserApi {
   Future<void> update(UserEntity user) async {
     try {
       final data = user.toJson()..removeWhere((_, v) => v == null);
-      await _firestore.collection('users').doc(user.id).update(data);
+      await _firestore.collection('users').doc(user.id).set(data, SetOptions(merge: true));
     } catch (e, stacktrace) {
       throw ApiError(
         code: 0,

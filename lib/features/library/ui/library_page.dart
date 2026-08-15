@@ -110,7 +110,7 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
       ),
       child: KasyScreen(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kasyAppBarToolbarRowHeight),
+          preferredSize: const Size.fromHeight(kasyAppBarPreferredHeight),
           child: KasyAppBar(
             title: t.library.title,
             trailing: Row(
