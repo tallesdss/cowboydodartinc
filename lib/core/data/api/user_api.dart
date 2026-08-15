@@ -7,6 +7,7 @@ import 'package:cowboydodartinc/core/data/entities/upload_result.dart';
 import 'package:cowboydodartinc/core/data/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 final userApiProvider = Provider<UserApi>(
   (ref) => UserApi(
