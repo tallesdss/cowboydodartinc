@@ -368,7 +368,7 @@ class HttpAuthenticationRepository implements AuthenticationRepository {
     try {
       await _authenticationApi.signout();
     } catch (e) {
-      _logger.e('Supabase signout failed (safe to ignore for local signout): $e');
+      _logger.e('Firebase signout failed (safe to ignore for local signout): $e');
     }
     await _storage.clear();
   }

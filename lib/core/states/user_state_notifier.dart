@@ -443,7 +443,21 @@ class UserStateNotifier extends _$UserStateNotifier implements OnStartService {
           '    If this is a new project, run: kasy deploy\n'
           '    to deploy the backend and create the user document.',
         );
-        state = state.copyWith(user: User.anonymous(id: credentials.id));
+        final authEmail = await _authenticationRepository.getCurrentUserEmail();
+        if (authEmail != null && authEmail.isNotEmpty) {
+          state = state.copyWith(
+            user: User.authenticated(
+              id: credentials.id,
+              email: authEmail,
+              name: await _authenticationRepository.getCurrentUserDisplayName(),
+              onboarded: false,
+              creationDate: DateTime.now(),
+              lastUpdateDate: DateTime.now(),
+            )
+          );
+        } else {
+          state = state.copyWith(user: User.anonymous(id: credentials.id));
+        }
         return;
       }
       // If the Firestore document is anonymous (no email) but Firebase Auth

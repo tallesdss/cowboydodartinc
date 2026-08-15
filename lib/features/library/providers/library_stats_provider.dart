@@ -1,4 +1,5 @@
-import 'package:cowboydodartinc/features/library/repositories/library_mock_storage.dart';
+import 'package:cowboydodartinc/features/library/repositories/library_firebase_repository.dart';
+import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LibraryStats {
@@ -25,9 +26,9 @@ class UploaderRank {
   });
 }
 
-final libraryStatsProvider = Provider<LibraryStats>((ref) {
-  final storage = ref.watch(libraryMockStorageProvider);
-  final pdfs = storage.getPdfs();
+final libraryStatsProvider = FutureProvider<LibraryStats>((ref) async {
+  final repository = ref.watch(libraryFirebaseRepositoryProvider);
+  final List<PdfDocument> pdfs = await repository.getPdfs();
 
   int views = 0;
   int downloads = 0;

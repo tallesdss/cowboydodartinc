@@ -48,11 +48,13 @@ class SigninStateNotifier extends _$SigninStateNotifier {
     }
     try {
       state = SigninState.sending(email: state.email, password: state.password);
+      await _authRepository.signin(state.email.value, state.password.value);
+      if (!ref.mounted) return;
       await _userStateNotifier.onSignin();
       if (!ref.mounted) return;
       goHomeAfterLogin(ref);
     } catch (e, trace) {
-      debugPrint("Error while signing up: $e, $trace");
+      debugPrint("Error while signing in: $e, $trace");
       if (!ref.mounted) return;
       state = SigninState(email: state.email, password: state.password);
       final t = ref.read(translationsProvider);

@@ -1,5 +1,5 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:cowboydodartinc/core/data/api/base_api_exceptions.dart';
-import 'package:cowboydodartinc/features/settings/ui/components/admin/admin_users_mock_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -192,17 +192,19 @@ class AdminUsersOverviewStats {
 
 
 final adminUsersApiProvider = Provider<AdminUsersApi>(
-  (ref) => AdminUsersApi(mockStorage: AdminUsersMockStorage.instance),
+  (ref) => AdminUsersApi(functions: FirebaseFunctions.instance),
 );
 
 class AdminUsersApi {
-  final AdminUsersMockStorage _mockStorage;
+  final FirebaseFunctions _functions;
 
-  AdminUsersApi({required AdminUsersMockStorage mockStorage}) : _mockStorage = mockStorage;
+  AdminUsersApi({required FirebaseFunctions functions}) : _functions = functions;
 
   Future<AdminUsersPage> fetchPage(AdminUsersQuery query) async {
     try {
-      return await _mockStorage.fetchPage(query);
+      final callable = _functions.httpsCallable('adminFunctions-listUsers');
+      final result = await callable.call<Map<String, dynamic>>(query.toJson());
+      return AdminUsersPage.fromMap(result.data);
     } catch (e, stacktrace) {
       throw ApiError(code: 0, message: '$e: $stacktrace');
     }
@@ -210,7 +212,9 @@ class AdminUsersApi {
 
   Future<AdminUsersOverviewStats> fetchOverview() async {
     try {
-      return await _mockStorage.fetchOverview();
+      final callable = _functions.httpsCallable('adminFunctions-listUsers');
+      final result = await callable.call<Map<String, dynamic>>({'overview': true});
+      return AdminUsersOverviewStats.fromMap(result.data);
     } catch (e, stacktrace) {
       throw ApiError(code: 0, message: '$e: $stacktrace');
     }
@@ -218,7 +222,8 @@ class AdminUsersApi {
 
   Future<void> updateRole(String id, String role) async {
     try {
-      await _mockStorage.updateRole(id, role);
+      final callable = _functions.httpsCallable('adminFunctions-updateUserRole');
+      await callable.call<Map<String, dynamic>>({'userId': id, 'role': role});
     } catch (e, stacktrace) {
       throw ApiError(code: 0, message: '$e: $stacktrace');
     }
@@ -226,7 +231,8 @@ class AdminUsersApi {
 
   Future<void> toggleBlock(String id, bool blocked) async {
     try {
-      await _mockStorage.toggleBlock(id, blocked);
+      final callable = _functions.httpsCallable('adminFunctions-toggleUserBlock');
+      await callable.call<Map<String, dynamic>>({'userId': id, 'blocked': blocked});
     } catch (e, stacktrace) {
       throw ApiError(code: 0, message: '$e: $stacktrace');
     }

@@ -17,6 +17,8 @@ export interface AdminUser {
   createdAt: number | null;
   avatarPath: string | null;
   subscriber: boolean;
+  role: string | null;
+  blocked: boolean;
 }
 
 export interface ListUsersRequest {
@@ -130,6 +132,8 @@ function mapUserSnap(
     createdAt: createdAt ? createdAt.toMillis() : null,
     avatarPath: (doc.get("avatarPath") as string) || null,
     subscriber: activeSubscribers.has(doc.id),
+    role: (doc.get("role") as string) || null,
+    blocked: doc.get("blocked") === true,
   };
 }
 

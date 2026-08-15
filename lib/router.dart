@@ -102,7 +102,8 @@ String? _authRedirect(Ref ref, GoRouterState state) {
   final isAuthPath = state.uri.path == '/signin' ||
       state.uri.path == '/signup' ||
       state.uri.path == '/signinWithPhone' ||
-      state.uri.path == '/recover';
+      state.uri.path == '/recover' ||
+      state.uri.path == '/recover_password';
 
   final isAnonymous = user is AnonymousUserData;
   final notifier = ref.read(userStateNotifierProvider.notifier);

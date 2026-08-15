@@ -818,64 +818,80 @@ class _LibraryOverviewMetricsPanel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stats = ref.watch(libraryStatsProvider);
+    final asyncStats = ref.watch(libraryStatsProvider);
     final ov = t.admin_console.overview;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _GroupLabel(ov.summary),
-        _ResponsiveGrid(
-          minItemWidth: 168,
-          children: [
-            _StatCard(
-              icon: KasyIcons.book,
-              value: _compactCount(stats.totalPdfs),
-              label: 'Total de PDFs',
-            ),
-            _StatCard(
-              icon: KasyIcons.eye,
-              value: _compactCount(stats.totalViews),
-              label: 'Acessos',
-            ),
-            _StatCard(
-              icon: KasyIcons.download,
-              value: _compactCount(stats.totalDownloads),
-              label: 'Downloads',
-            ),
-          ],
-        ),
-        const SizedBox(height: KasySpacing.lg),
-        const _GroupLabel('Top Uploaders'),
-        _CardShell(
-          padding: EdgeInsets.zero,
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: stats.uploaderRanking.length,
-            separatorBuilder: (context, index) => const SettingsDivider(),
-            itemBuilder: (context, index) {
-              final rank = stats.uploaderRanking[index];
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: context.colors.primary,
-                  child: Text(
-                    '${index + 1}',
-                    style: TextStyle(color: context.colors.onPrimary),
-                  ),
-                ),
-                title: Text(rank.author),
-                trailing: Text(
-                  '${rank.pdfCount} PDFs',
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            },
+    return asyncStats.when(
+      loading: () => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _GroupLabel(ov.summary),
+          _ResponsiveGrid(
+            minItemWidth: 168,
+            children: List.generate(3, (_) => const KasySkeleton(height: 88)),
           ),
-        ),
-      ],
+          const SizedBox(height: KasySpacing.lg),
+          const _GroupLabel('Top Uploaders'),
+          const KasySkeleton(height: 120),
+        ],
+      ),
+      error: (_, _) => const SizedBox.shrink(),
+      data: (stats) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _GroupLabel(ov.summary),
+          _ResponsiveGrid(
+            minItemWidth: 168,
+            children: [
+              _StatCard(
+                icon: KasyIcons.book,
+                value: _compactCount(stats.totalPdfs),
+                label: 'Total de PDFs',
+              ),
+              _StatCard(
+                icon: KasyIcons.eye,
+                value: _compactCount(stats.totalViews),
+                label: 'Acessos',
+              ),
+              _StatCard(
+                icon: KasyIcons.download,
+                value: _compactCount(stats.totalDownloads),
+                label: 'Downloads',
+              ),
+            ],
+          ),
+          const SizedBox(height: KasySpacing.lg),
+          const _GroupLabel('Top Uploaders'),
+          _CardShell(
+            padding: EdgeInsets.zero,
+            child: ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: stats.uploaderRanking.length,
+              separatorBuilder: (context, index) => const SettingsDivider(),
+              itemBuilder: (context, index) {
+                final rank = stats.uploaderRanking[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: context.colors.primary,
+                    child: Text(
+                      '${index + 1}',
+                      style: TextStyle(color: context.colors.onPrimary),
+                    ),
+                  ),
+                  title: Text(rank.author),
+                  trailing: Text(
+                    '${rank.pdfCount} PDFs',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

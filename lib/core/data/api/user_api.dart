@@ -28,27 +28,12 @@ class UserApi {
     try {
       final doc = await _firestore.collection('users').doc(id).get();
       if (!doc.exists) {
-        final fbUser = fb_auth.FirebaseAuth.instance.currentUser;
-        if (fbUser != null && fbUser.uid == id) {
-          final newUser = UserEntity(
-            id: id,
-            email: fbUser.email,
-            name: fbUser.displayName ?? fbUser.email?.split('@').first,
-            creationDate: DateTime.now(),
-            lastUpdateDate: DateTime.now(),
-            onboarded: false,
-          );
-          await create(newUser);
-          return newUser;
-        }
         return null;
       }
       return UserEntity.fromJson(doc.data()!);
     } catch (e, stacktrace) {
-      throw ApiError(
-        code: 0,
-        message: '$e: $stacktrace',
-      );
+      Logger().e('Error fetching user $id: $e', stackTrace: stacktrace);
+      return null;
     }
   }
 
