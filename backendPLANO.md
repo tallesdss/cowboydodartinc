@@ -38,9 +38,9 @@ Este guia transforma o planejamento em etapas sequenciais e acionáveis para a c
 
 ## Etapa 5: Lógica de Servidor (Firebase Cloud Functions)
 **Objetivo:** Automatizar regras de negócio e ações privilegiadas.
-- [ ] **Inicializar o Ambiente Functions:** Rodar `firebase init functions` na raiz do projeto (TypeScript/Node).
-- [ ] **Criar Funções de Triggers (Automação):** `onWrite`/`onCreate` em `comments` para recalcular a nota média de um PDF automaticamente.
-- [ ] **Criar Funções Restritas (Acesso Admin):** Promover usuário a Admin, obter métricas pesadas do Dashboard, deletar conta permanentemente (GDPR).
+- [x] **Inicializar o Ambiente Functions:** Rodar `firebase init functions` na raiz do projeto (TypeScript/Node).
+- [x] **Criar Funções de Triggers (Automação):** `onWrite`/`onCreate` em `comments` para recalcular a nota média de um PDF automaticamente.
+- [x] **Criar Funções Restritas (Acesso Admin):** Promover usuário a Admin, obter métricas pesadas do Dashboard, deletar conta permanentemente (GDPR).
 - [ ] **Deploy das Funções:** Rodar `firebase deploy --only functions`.
 
 ## Etapa 6: Integração Final e Remoção Completa de Mocks
