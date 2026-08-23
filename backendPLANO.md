@@ -29,12 +29,12 @@ Este guia transforma o planejamento em etapas sequenciais e acionáveis para a c
 
 ## Etapa 4: Armazenamento de Arquivos (Firebase Storage)
 **Objetivo:** Permitir o upload seguro de PDFs e Avatares.
-- [ ] **Configurar as Pastas no Storage:** Padronizar caminhos: `/pdfs/{uid}/`, `/avatars/{uid}/`.
-- [ ] **Aplicar Firebase Storage Rules:**
+- [x] **Configurar as Pastas no Storage:** Padronizar caminhos: `/pdfs/{uid}/`, `/avatars/{uid}/`.
+- [x] **Aplicar Firebase Storage Rules:**
   - **Leitura:** Permitida para todos.
   - **Escrita (Cliente):** Somente no seu próprio diretório, validando pelo UID no caminho.
   - **Escrita (Admin):** Acesso global de deleção e modificação.
-- [ ] **Implementar o Upload no App:** Integrar pacote `firebase_storage` nas lógicas de envio (repositório), obtendo o link final antes de salvar no Firestore.
+- [x] **Implementar o Upload no App:** Integrar pacote `firebase_storage` nas lógicas de envio (repositório), obtendo o link final antes de salvar no Firestore.
 
 ## Etapa 5: Lógica de Servidor (Firebase Cloud Functions)
 **Objetivo:** Automatizar regras de negócio e ações privilegiadas.
