@@ -1,4 +1,6 @@
 import 'package:cowboydodartinc/components/components.dart';
+import 'package:cowboydodartinc/core/data/models/user.dart';
+import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
@@ -11,14 +13,16 @@ class MyProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activeProfile = ref.watch(activeProfileProvider);
+    final userState = ref.watch(userStateNotifierProvider).user;
     final pdfs = ref.watch(pdfsProvider);
 
-    final isAdmin = activeProfile == 'admin';
-    final profileName = isAdmin ? 'Admin / Dev' : 'Cliente';
+    final isAdmin = userState.isAdmin;
+    final profileName = (userState is AuthenticatedUserData && userState.name != null)
+        ? userState.name!
+        : (isAdmin ? 'Admin / Dev' : 'Cliente');
 
     // Get PDFs uploaded by this profile
-    final myPdfs = pdfs.where((pdf) => pdf.createdBy == activeProfile).toList();
+    final myPdfs = pdfs.where((pdf) => pdf.createdBy == userState.idOrNull).toList();
 
     return KasyScreen(
       appBar: PreferredSize(

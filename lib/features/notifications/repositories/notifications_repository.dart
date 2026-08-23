@@ -5,11 +5,11 @@ import 'package:cowboydodartinc/features/notifications/api/local_notifier.dart';
 import 'package:cowboydodartinc/features/notifications/api/notifications_api.dart';
 import 'package:cowboydodartinc/features/notifications/providers/models/notification.dart';
 import 'package:cowboydodartinc/features/notifications/repositories/background_notification_handler.dart';
-import 'package:cowboydodartinc/features/notifications/repositories/mock_notifications_repository.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:cowboydodartinc/router.dart';
 import 'package:firebase_messaging/firebase_messaging.dart' show RemoteMessage;
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -35,7 +35,15 @@ abstract class NotificationsRepository implements OnStartService {
   Future<NotificationPermission> getPermissionStatus();
 }
 
-final notificationRepositoryProvider = mockNotificationRepositoryProvider;
+final notificationRepositoryProvider = Provider<NotificationsRepository>((ref) {
+  return AppNotificationsRepository(
+    notificationsApi: ref.watch(notificationsApiProvider),
+    notificationPublisher: ref.watch(notificationPublisherProvider),
+    localNotifier: ref.watch(localNotifierProvider),
+    notificationSettings: ref.watch(notificationsSettingsProvider),
+    facebookEventApi: ref.watch(facebookEventApiProvider),
+  );
+});
 
 class AppNotificationsRepository implements NotificationsRepository {
   final NotificationsApi _notificationsApi;

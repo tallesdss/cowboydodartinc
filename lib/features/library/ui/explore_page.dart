@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cowboydodartinc/components/components.dart';
+import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/core/widgets/responsive_layout.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
@@ -68,14 +69,14 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
 
   @override
   Widget build(BuildContext context) {
-    final activeProfile = ref.watch(activeProfileProvider);
+    final userId = ref.watch(userStateNotifierProvider).user.idOrNull;
     final pdfs = ref.watch(pdfsProvider);
     final favorites = ref.watch(favoritesProvider);
     final categories = ref.watch(categoriesProvider);
 
-    // Other users: any PDF where createdBy != activeProfile
+    // Other users: any PDF where createdBy != userId
     final otherUsersPdfs = pdfs.where((pdf) {
-      final isFromOther = pdf.createdBy != activeProfile;
+      final isFromOther = pdf.createdBy != userId;
       final matchesSearch = pdf.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
           pdf.author.toLowerCase().contains(_searchQuery.toLowerCase()) ||
           pdf.tags.any((t) => t.toLowerCase().contains(_searchQuery.toLowerCase()));

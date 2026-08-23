@@ -117,6 +117,11 @@ String? _authRedirect(Ref ref, GoRouterState state) {
     if (isAuthPath) {
       return '/';
     }
+    final path = state.uri.path;
+    final isAdminRoute = path.startsWith('/admin') || path.startsWith('/library/admin');
+    if (isAdminRoute && !user.isAdmin) {
+      return '/library';
+    }
   }
 
   return null;

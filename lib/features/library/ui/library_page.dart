@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cowboydodartinc/components/components.dart';
+import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/core/widgets/responsive_layout.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
@@ -76,12 +77,11 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final activeProfile = ref.watch(activeProfileProvider);
     final categories = ref.watch(categoriesProvider);
     final pdfs = ref.watch(pdfsProvider);
     final favorites = ref.watch(favoritesProvider);
 
-    final isAdmin = activeProfile == 'admin';
+    final isAdmin = ref.watch(userStateNotifierProvider).user.isAdmin;
 
     // Filter PDFs
     final filteredPdfs = pdfs.where((pdf) {
@@ -131,22 +131,6 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
                     color: context.colors.primary,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
-                const SizedBox(width: KasySpacing.xs),
-                KasyChromeOrbIconButton(
-                  icon: Icons.swap_horiz,
-                  iconSize: 20,
-                  foregroundColor: context.colors.primary,
-                  onPressed: () {
-                    final nextProfile = isAdmin ? 'cliente' : 'admin';
-                    ref.read(activeProfileProvider.notifier).setProfile(nextProfile);
-                    showKasyToast(
-                      context,
-                      title: '${t.library.profile_switcher}: ${nextProfile == 'admin' ? t.library.admin_dev : t.library.client}',
-                      tone: KasyToastTone.success,
-                    );
-                    _simulateLoading(600);
-                  },
                 ),
               ],
             ),

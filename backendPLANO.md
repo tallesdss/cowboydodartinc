@@ -43,7 +43,7 @@ Este guia transforma o planejamento em etapas sequenciais e acionáveis para a c
 - [x] **Criar Funções Restritas (Acesso Admin):** Promover usuário a Admin, obter métricas pesadas do Dashboard, deletar conta permanentemente (GDPR).
 - [ ] **Deploy das Funções:** Rodar `firebase deploy --only functions`.
 
-## Etapa 6: Integração Final e Remoção Completa de Mocks
+ Etapa 6:## Integração Final e Remoção Completa de Mocks
 **Objetivo:** Conectar o Flutter integralmente aos novos serviços e limpar arquivos falsos.
 - [ ] **REMOVER TODOS OS DADOS MOCKADOS:** É expressamente necessário excluir ou limpar completamente qualquer código de geração de dados falsos locais e arquivos de mock da interface (ex: `mock_..._api.dart`), substituindo 100% pelas chamadas que trazem dados reais do Firebase Firestore.
 - [ ] **Ajustar UI para Dados Reais e Streams:** Atualizar as listagens para consumir os dados provindos do backend real, usando paginação e reatividade onde necessário.

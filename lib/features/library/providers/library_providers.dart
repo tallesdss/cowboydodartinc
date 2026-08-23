@@ -4,36 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'library_providers.g.dart';
 
-// ----------------------------------------------------
-// ACTIVE PROFILE PROVIDER
-// ----------------------------------------------------
-@riverpod
-class ActiveProfile extends _$ActiveProfile {
-  late final LibraryFirebaseRepository _repository;
-
-  @override
-  String build() {
-    _repository = ref.watch(libraryFirebaseRepositoryProvider);
-    _fetchProfile();
-    return 'cliente'; // Perfil padrão inicial
-  }
-
-  Future<void> _fetchProfile() async {
-    try {
-      final profile = await _repository.getActiveProfile();
-      state = profile;
-    } catch (_) {
-      // Falha silenciosa em caso de erro, mantendo o padrão
-    }
-  }
-
-  Future<void> setProfile(String profile) async {
-    // Para fins de teste de front-end mockado em tempo de execução
-    state = profile;
-  }
-
-  bool get isAdmin => state == 'admin';
-}
 
 // ----------------------------------------------------
 // CATEGORIES PROVIDER

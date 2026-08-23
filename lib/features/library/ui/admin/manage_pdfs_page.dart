@@ -1,4 +1,5 @@
 import 'package:cowboydodartinc/components/components.dart';
+import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
@@ -63,7 +64,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         .where((e) => e.isNotEmpty)
         .toList();
 
-    final activeProfile = ref.read(activeProfileProvider);
+    final userId = ref.read(userStateNotifierProvider).user.idOrNull ?? 'unknown';
 
     ref.read(pdfsProvider.notifier).addPdf(
       title: _titleController.text,
@@ -75,7 +76,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
           ? _thumbController.text
           : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
       tags: tags,
-      createdBy: activeProfile,
+      createdBy: userId,
     );
 
     showKasyToast(
@@ -151,7 +152,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
                           .replaceAll('_', ' ');
                       if (_authorController.text.isEmpty) {
                         _authorController.text =
-                            ref.read(activeProfileProvider) == 'admin'
+                            ref.read(userStateNotifierProvider).user.isAdmin
                                 ? 'Admin / Dev'
                                 : 'Cliente';
                       }
@@ -179,8 +180,8 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   @override
   Widget build(BuildContext context) {
     final categories = ref.watch(categoriesProvider);
-    final activeProfile = ref.watch(activeProfileProvider);
-    final isAdmin = activeProfile == 'admin';
+    final userState = ref.watch(userStateNotifierProvider).user;
+    final isAdmin = userState.isAdmin;
 
     // Auto-fill author if empty
     if (_authorController.text.isEmpty) {
