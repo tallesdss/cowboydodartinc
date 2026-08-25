@@ -24,6 +24,9 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Run build_runner
+        run: dart run build_runner build -d
+
       - name: Build Web
         run: flutter build web --base-href "/cowboydodartinc/"
 
