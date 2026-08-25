@@ -45,9 +45,9 @@ Este guia transforma o planejamento em etapas sequenciais e acionáveis para a c
 
  Etapa 6:## Integração Final e Remoção Completa de Mocks
 **Objetivo:** Conectar o Flutter integralmente aos novos serviços e limpar arquivos falsos.
-- [ ] **REMOVER TODOS OS DADOS MOCKADOS:** É expressamente necessário excluir ou limpar completamente qualquer código de geração de dados falsos locais e arquivos de mock da interface (ex: `mock_..._api.dart`), substituindo 100% pelas chamadas que trazem dados reais do Firebase Firestore.
-- [ ] **Ajustar UI para Dados Reais e Streams:** Atualizar as listagens para consumir os dados provindos do backend real, usando paginação e reatividade onde necessário.
-- [ ] **Proteção de Rotas e Telas no App:** Limitar exibição dos itens "Dashboard" e gestão de categorias apenas para contas reais mapeadas como Admin no banco.
+- [x] **REMOVER TODOS OS DADOS MOCKADOS:** É expressamente necessário excluir ou limpar completamente qualquer código de geração de dados falsos locais e arquivos de mock da interface (ex: `mock_..._api.dart`), substituindo 100% pelas chamadas que trazem dados reais do Firebase Firestore.
+- [x] **Ajustar UI para Dados Reais e Streams:** Atualizar as listagens para consumir os dados provindos do backend real, usando paginação e reatividade onde necessário.
+- [x] **Proteção de Rotas e Telas no App:** Limitar exibição dos itens "Dashboard" e gestão de categorias apenas para contas reais mapeadas como Admin no banco.
 
 ## Etapa 7: Validação e Deploy
 **Objetivo:** Testar a segurança e lançar.

@@ -26,8 +26,8 @@ GlobalSearchResults globalSearchResults(Ref ref, String query) {
   
   final q = query.trim().toLowerCase();
   
-  final allPdfs = ref.watch(pdfsProvider);
-  final allCategories = ref.watch(categoriesProvider);
+  final allPdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
+  final allCategories = ref.watch(categoriesProvider).valueOrNull ?? [];
   
   final List<PdfDocument> pdfs = allPdfs.where((PdfDocument pdf) => 
     pdf.title.toLowerCase().contains(q) ||

@@ -13,8 +13,8 @@ class UploaderProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pdfs = ref.watch(pdfsProvider);
-    final favorites = ref.watch(favoritesProvider);
+    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
+    final favorites = ref.watch(favoritesProvider).valueOrNull ?? [];
 
     // Get all PDFs by this author
     final uploaderPdfs = pdfs.where((pdf) {

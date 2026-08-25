@@ -2,7 +2,9 @@ import 'package:cowboydodartinc/components/components.dart';
 import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
+import 'package:cowboydodartinc/features/library/repositories/library_firebase_repository.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,10 +26,12 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
 
   final List<String> _selectedCategoryIds = [];
 
-  // Mock Upload Fields
+  // Real Upload Fields
+  String? _selectedFilePath;
   String? _selectedFileName;
   double? _selectedFileSize;
-  int? _selectedPageCount;
+  
+  bool _isUploading = false;
 
   @override
   void dispose() {
@@ -39,8 +43,8 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
     super.dispose();
   }
 
-  void _savePdf() {
-    if (_selectedFileName == null) {
+  Future<void> _savePdf() async {
+    if (_selectedFilePath == null) {
       showKasyToast(
         context,
         title: 'Faça upload de um arquivo PDF primeiro!',
@@ -58,128 +62,87 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
       return;
     }
 
-    final tags = _tagsController.text
-        .split(',')
-        .map((e) => e.trim())
-        .where((e) => e.isNotEmpty)
-        .toList();
+    setState(() => _isUploading = true);
 
-    final userId = ref.read(userStateNotifierProvider).user.idOrNull ?? 'unknown';
+    try {
+      final userId = ref.read(userStateNotifierProvider).user.idOrNull ?? 'unknown';
+      final repo = ref.read(libraryFirebaseRepositoryProvider);
+      
+      final downloadUrl = await repo.uploadPdfFile(_selectedFilePath!, _selectedFileName!);
 
-    ref.read(pdfsProvider.notifier).addPdf(
-      title: _titleController.text,
-      description: _descController.text,
-      categoryIds: _selectedCategoryIds,
-      author: _authorController.text,
-      fileUrl: 'assets/docs/$_selectedFileName',
-      thumbnailUrl: _thumbController.text.isNotEmpty
-          ? _thumbController.text
-          : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
-      tags: tags,
-      createdBy: userId,
-    );
+      final tags = _tagsController.text
+          .split(',')
+          .map((e) => e.trim())
+          .where((e) => e.isNotEmpty)
+          .toList();
 
-    showKasyToast(
-      context,
-      title: 'PDF cadastrado com sucesso!',
-      tone: KasyToastTone.success,
-    );
+      await ref.read(pdfsProvider.notifier).addPdf(
+        title: _titleController.text,
+        description: _descController.text,
+        categoryIds: _selectedCategoryIds,
+        author: _authorController.text,
+        fileUrl: downloadUrl,
+        thumbnailUrl: _thumbController.text.isNotEmpty
+            ? _thumbController.text
+            : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
+        tags: tags,
+        createdBy: userId,
+      );
 
-    context.pop();
+      if (mounted) {
+        showKasyToast(
+          context,
+          title: 'PDF cadastrado com sucesso!',
+          tone: KasyToastTone.success,
+        );
+        context.pop();
+      }
+    } catch (e) {
+      if (mounted) {
+        showKasyToast(
+          context,
+          title: 'Erro ao fazer upload: $e',
+          tone: KasyToastTone.destructive,
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isUploading = false);
+      }
+    }
   }
 
-  void _showMockFilePicker() {
-    final List<Map<String, dynamic>> files = [
-      {'name': 'Contrato_de_Prestacao_de_Servicos.pdf', 'size': 2.4, 'pages': 6},
-      {'name': 'Manual_do_Usuario_Biblioteca_Digital.pdf', 'size': 5.1, 'pages': 14},
-      {'name': 'Relatorio_de_Metricas_Q2.pdf', 'size': 1.8, 'pages': 8},
-      {'name': 'Guia_Visual_Kasy_Design_System.pdf', 'size': 8.7, 'pages': 24},
-    ];
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: context.colors.surface,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(KasyRadius.lg),
-          ),
-          title: Text(
-            'Selecione um PDF para simular o upload',
-            style: context.kasyTextTheme.sectionTitle,
-          ),
-          content: SizedBox(
-            width: 400,
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: files.length,
-              separatorBuilder: (context, index) => const SizedBox(height: KasySpacing.sm),
-              itemBuilder: (context, index) {
-                final file = files[index];
-                final name = file['name']?.toString() ?? '';
-                final size = file['size'] as double;
-                final pages = file['pages'] as int;
-
-                return ListTile(
-                  leading: Icon(
-                    Icons.picture_as_pdf,
-                    color: context.colors.primary,
-                    size: 32,
-                  ),
-                  title: Text(
-                    name,
-                    style: context.kasyTextTheme.cardTitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    '$size MB • $pages ${t.library.pages.toLowerCase()}',
-                    style: context.kasyTextTheme.cardSubtitle,
-                  ),
-                  trailing: Icon(
-                    Icons.chevron_right,
-                    color: context.colors.muted,
-                  ),
-                  onTap: () {
-                    setState(() {
-                      _selectedFileName = name;
-                      _selectedFileSize = size;
-                      _selectedPageCount = pages;
-
-                      // Auto-fill some fields to help the user
-                      _titleController.text = _selectedFileName!
-                          .replaceAll('.pdf', '')
-                          .replaceAll('_', ' ');
-                      if (_authorController.text.isEmpty) {
-                        _authorController.text =
-                            ref.read(userStateNotifierProvider).user.isAdmin
-                                ? 'Admin / Dev'
-                                : 'Cliente';
-                      }
-                    });
-                    Navigator.of(context).pop();
-                  },
-                );
-              },
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(
-                t.library.cancel,
-                style: TextStyle(color: context.colors.muted),
-              ),
-            ),
-          ],
-        );
-      },
+  Future<void> _pickFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+      withData: false,
     );
+
+    if (result != null && result.files.single.path != null) {
+      final file = result.files.single;
+      setState(() {
+        _selectedFilePath = file.path;
+        _selectedFileName = file.name;
+        _selectedFileSize = (file.size / (1024 * 1024)); // MB
+
+        // Auto-fill some fields to help the user
+        _titleController.text = _selectedFileName!
+            .replaceAll('.pdf', '')
+            .replaceAll('_', ' ');
+        if (_authorController.text.isEmpty) {
+          _authorController.text =
+              ref.read(userStateNotifierProvider).user.isAdmin
+                  ? 'Admin / Dev'
+                  : 'Cliente';
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final categories = ref.watch(categoriesProvider);
+    final categories = ref.watch(categoriesProvider).valueOrNull ?? [];
     final userState = ref.watch(userStateNotifierProvider).user;
     final isAdmin = userState.isAdmin;
 
@@ -203,7 +166,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
           children: [
             // Upload Square
             GestureDetector(
-              onTap: _showMockFilePicker,
+              onTap: _pickFile,
               child: Container(
                 height: 140,
                 decoration: BoxDecoration(
@@ -274,7 +237,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
                                   ),
                                   const SizedBox(height: KasySpacing.xs),
                                   Text(
-                                    '$_selectedFileSize MB • $_selectedPageCount ${t.library.pages.toLowerCase()}',
+                                    '${_selectedFileSize?.toStringAsFixed(2)} MB',
                                     style: context.kasyTextTheme.cardSubtitle,
                                   ),
                                 ],
@@ -284,7 +247,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
                             KasyButton(
                               label: t.library.change_file,
                               variant: KasyButtonVariant.secondary,
-                              onPressed: _showMockFilePicker,
+                              onPressed: _pickFile,
                             ),
                           ],
                         ),
@@ -292,95 +255,6 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
               ),
             ),
             const SizedBox(height: KasySpacing.lg),
-
-            // PDF Page Preview
-            if (_selectedPageCount != null) ...[
-              Text(
-                '${t.library.pdf_preview} ($_selectedPageCount ${t.library.pages.toLowerCase()})',
-                style: context.kasyTextTheme.sectionTitle,
-              ),
-              const SizedBox(height: KasySpacing.sm),
-              SizedBox(
-                height: 110,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _selectedPageCount!,
-                  separatorBuilder: (context, index) => const SizedBox(width: KasySpacing.sm),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 80,
-                      decoration: BoxDecoration(
-                        color: context.colors.surface,
-                        borderRadius: BorderRadius.circular(KasyRadius.md),
-                        border: Border.all(
-                          color: context.colors.muted.withAlpha(60),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withAlpha(10),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(KasySpacing.xs),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: context.colors.surfaceSecondary,
-                                  borderRadius: BorderRadius.circular(KasyRadius.sm),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                    horizontal: 6.0,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 4,
-                                        width: 40,
-                                        color: context.colors.muted.withAlpha(80),
-                                      ),
-                                      const SizedBox(height: 3),
-                                      Container(
-                                        height: 4,
-                                        width: 50,
-                                        color: context.colors.muted.withAlpha(60),
-                                      ),
-                                      const SizedBox(height: 3),
-                                      Container(
-                                        height: 4,
-                                        width: 30,
-                                        color: context.colors.muted.withAlpha(60),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: KasySpacing.xs),
-                            Text(
-                              'Pág ${index + 1}',
-                              style: context.kasyTextTheme.labelSmall.copyWith(
-                                fontSize: 10,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: KasySpacing.lg),
-            ],
 
             KasyTextField(
               controller: _titleController,
@@ -446,6 +320,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
 
             KasyButton(
               label: t.library.save,
+              isLoading: _isUploading,
               onPressed: _savePdf,
             ),
             const SizedBox(height: KasySpacing.sm),

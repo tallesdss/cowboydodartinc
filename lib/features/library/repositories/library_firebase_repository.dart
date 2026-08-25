@@ -49,6 +49,23 @@ class LibraryFirebaseRepository {
     }).toList();
   }
 
+  Stream<List<LibraryCategory>> watchCategories() {
+    return _firestore.collection('categories').orderBy('criado_em').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        final rawDate = data['criado_em'];
+        return LibraryCategory(
+          id: doc.id,
+          name: data['nome'] as String? ?? '',
+          description: data['descricao'] as String? ?? '',
+          icon: data['icone'] as String? ?? '',
+          color: data['icone_cor'] as String? ?? '',
+          createdAt: rawDate is Timestamp ? rawDate.toDate() : DateTime.now(),
+        );
+      }).toList();
+    });
+  }
+
   Future<void> addCategory(LibraryCategory category) async {
     await _firestore.collection('categories').doc(category.id).set({
       'nome': category.name,
@@ -95,6 +112,29 @@ class LibraryFirebaseRepository {
         downloads: data['downloads'] as int? ?? 0,
       );
     }).toList();
+  }
+
+  Stream<List<PdfDocument>> watchPdfs() {
+    return _firestore.collection('pdfs').orderBy('criado_em', descending: true).snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        final rawDate = data['criado_em'];
+        return PdfDocument(
+          id: doc.id,
+          title: data['titulo'] as String? ?? '',
+          description: data['descricao'] as String? ?? '',
+          categoryIds: List<String>.from(data['categoryIds'] as Iterable? ?? []),
+          author: data['autor_nome'] as String? ?? 'Desconhecido',
+          fileUrl: data['arquivo_url'] as String? ?? '',
+          thumbnailUrl: data['thumbnail_url'] as String? ?? '',
+          tags: List<String>.from(data['tags'] as Iterable? ?? []),
+          createdAt: rawDate is Timestamp ? rawDate.toDate() : DateTime.now(),
+          createdBy: data['autor_id'] as String? ?? '',
+          views: data['views'] as int? ?? 0,
+          downloads: data['downloads'] as int? ?? 0,
+        );
+      }).toList();
+    });
   }
 
   Future<void> addPdf({
@@ -150,6 +190,26 @@ class LibraryFirebaseRepository {
     }).toList();
   }
 
+  Stream<List<LibraryComment>> watchComments(String pdfId) {
+    return _firestore.collection('comments')
+        .where('pdf_id', isEqualTo: pdfId)
+        .orderBy('criado_em', descending: true)
+        .snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        final rawDate = data['criado_em'];
+        return LibraryComment(
+          id: doc.id,
+          pdfId: data['pdf_id'] as String? ?? '',
+          userName: data['usuario_nome'] as String? ?? 'Anônimo',
+          text: data['texto'] as String? ?? '',
+          rating: data['nota'] as int? ?? 5,
+          createdAt: rawDate is Timestamp ? rawDate.toDate() : DateTime.now(),
+        );
+      }).toList();
+    });
+  }
+
   Future<void> addComment(LibraryComment comment) async {
     await _firestore.collection('comments').doc(comment.id).set({
       'pdf_id': comment.pdfId,
@@ -170,6 +230,14 @@ class LibraryFirebaseRepository {
         .where('usuario_id', isEqualTo: currentUserId)
         .get();
     return snapshot.docs.map((doc) => doc.data()['pdf_id'] as String).toList();
+  }
+
+  Stream<List<String>> watchFavorites() {
+    if (currentUserId.isEmpty) return Stream.value([]);
+    return _firestore.collection('bookmarks')
+        .where('usuario_id', isEqualTo: currentUserId)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()['pdf_id'] as String).toList());
   }
 
   Future<void> toggleFavorite(String pdfId) async {

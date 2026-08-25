@@ -46,7 +46,7 @@ class AdminCategoriesTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categories = ref.watch(categoriesProvider);
+    final categories = ref.watch(categoriesProvider).valueOrNull ?? [];
     final c = t.admin_console.categories;
 
     return SingleChildScrollView(

@@ -13,23 +13,8 @@ class Categories extends _$Categories {
   late final LibraryFirebaseRepository _repository;
 
   @override
-  List<LibraryCategory> build() {
-    _repository = ref.watch(libraryFirebaseRepositoryProvider);
-    _fetchCategories();
-    return [];
-  }
-
-  Future<void> _fetchCategories() async {
-    try {
-      final list = await _repository.getCategories();
-      state = list;
-    } catch (_) {
-      state = [];
-    }
-  }
-
-  Future<void> refresh() async {
-    await _fetchCategories();
+  Stream<List<LibraryCategory>> build() {
+    return ref.watch(libraryFirebaseRepositoryProvider).watchCategories();
   }
 
   Future<void> addCategory({
@@ -46,18 +31,15 @@ class Categories extends _$Categories {
       color: color,
       createdAt: DateTime.now(),
     );
-    await _repository.addCategory(category);
-    await refresh();
+    await ref.read(libraryFirebaseRepositoryProvider).addCategory(category);
   }
 
   Future<void> updateCategory(LibraryCategory category) async {
-    await _repository.updateCategory(category);
-    await refresh();
+    await ref.read(libraryFirebaseRepositoryProvider).updateCategory(category);
   }
 
   Future<void> deleteCategory(String id) async {
-    await _repository.deleteCategory(id);
-    await refresh();
+    await ref.read(libraryFirebaseRepositoryProvider).deleteCategory(id);
   }
 }
 
@@ -69,23 +51,8 @@ class Pdfs extends _$Pdfs {
   late final LibraryFirebaseRepository _repository;
 
   @override
-  List<PdfDocument> build() {
-    _repository = ref.watch(libraryFirebaseRepositoryProvider);
-    _fetchPdfs();
-    return [];
-  }
-
-  Future<void> _fetchPdfs() async {
-    try {
-      final list = await _repository.getPdfs();
-      state = list;
-    } catch (_) {
-      state = [];
-    }
-  }
-
-  Future<void> refresh() async {
-    await _fetchPdfs();
+  Stream<List<PdfDocument>> build() {
+    return ref.watch(libraryFirebaseRepositoryProvider).watchPdfs();
   }
 
   Future<void> addPdf({
@@ -98,7 +65,7 @@ class Pdfs extends _$Pdfs {
     required List<String> tags,
     required String createdBy,
   }) async {
-    await _repository.addPdf(
+    await ref.read(libraryFirebaseRepositoryProvider).addPdf(
       title: title,
       description: description,
       categoryIds: categoryIds,
@@ -108,12 +75,10 @@ class Pdfs extends _$Pdfs {
       tags: tags,
       createdBy: createdBy,
     );
-    await refresh();
   }
 
   Future<void> deletePdf(String id) async {
-    await _repository.deletePdf(id);
-    await refresh();
+    await ref.read(libraryFirebaseRepositoryProvider).deletePdf(id);
   }
 }
 
@@ -125,23 +90,8 @@ class Comments extends _$Comments {
   late final LibraryFirebaseRepository _repository;
 
   @override
-  List<LibraryComment> build(String pdfId) {
-    _repository = ref.watch(libraryFirebaseRepositoryProvider);
-    _fetchComments();
-    return [];
-  }
-
-  Future<void> _fetchComments() async {
-    try {
-      final list = await _repository.getComments(pdfId);
-      state = list;
-    } catch (_) {
-      state = [];
-    }
-  }
-
-  Future<void> refresh() async {
-    await _fetchComments();
+  Stream<List<LibraryComment>> build(String pdfId) {
+    return ref.watch(libraryFirebaseRepositoryProvider).watchComments(pdfId);
   }
 
   Future<void> addComment({
@@ -157,8 +107,7 @@ class Comments extends _$Comments {
       rating: rating,
       createdAt: DateTime.now(),
     );
-    await _repository.addComment(comment);
-    await refresh();
+    await ref.read(libraryFirebaseRepositoryProvider).addComment(comment);
   }
 }
 
@@ -170,28 +119,12 @@ class Favorites extends _$Favorites {
   late final LibraryFirebaseRepository _repository;
 
   @override
-  List<String> build() {
-    _repository = ref.watch(libraryFirebaseRepositoryProvider);
-    _fetchFavorites();
-    return [];
-  }
-
-  Future<void> _fetchFavorites() async {
-    try {
-      final list = await _repository.getFavorites();
-      state = list;
-    } catch (_) {
-      state = [];
-    }
-  }
-
-  Future<void> refresh() async {
-    await _fetchFavorites();
+  Stream<List<String>> build() {
+    return ref.watch(libraryFirebaseRepositoryProvider).watchFavorites();
   }
 
   Future<void> toggleFavorite(String pdfId) async {
-    await _repository.toggleFavorite(pdfId);
-    await refresh();
+    await ref.read(libraryFirebaseRepositoryProvider).toggleFavorite(pdfId);
   }
 }
 

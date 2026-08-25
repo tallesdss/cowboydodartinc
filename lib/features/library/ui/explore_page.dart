@@ -70,9 +70,9 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     final userId = ref.watch(userStateNotifierProvider).user.idOrNull;
-    final pdfs = ref.watch(pdfsProvider);
-    final favorites = ref.watch(favoritesProvider);
-    final categories = ref.watch(categoriesProvider);
+    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
+    final favorites = ref.watch(favoritesProvider).valueOrNull ?? [];
+    final categories = ref.watch(categoriesProvider).valueOrNull ?? [];
 
     // Other users: any PDF where createdBy != userId
     final otherUsersPdfs = pdfs.where((pdf) {
