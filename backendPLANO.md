@@ -51,8 +51,8 @@ Este guia transforma o planejamento em etapas sequenciais e acionáveis para a c
 
 ## Etapa 7: Validação e Deploy
 **Objetivo:** Testar a segurança e lançar.
-- [ ] **Teste e Validação de Fluxos:** Testar ciclo do Cliente e do Admin. Validar segurança garantindo `Permission Denied` em casos proibidos.
-- [ ] **Popular Dados Iniciais (Seeding):** Executar um script Node.js para criar as primeiras categorias e a 1ª conta Admin no ambiente de produção.
-- [ ] **Deploy Final de Regras:** Rodar `firebase deploy --only firestore:rules,storage`.
-- [ ] **Monitoramento:** Verificar as requisições no painel Firebase e monitorar a latência real.
+- [x] **Teste e Validação de Fluxos:** Testar ciclo do Cliente e do Admin. Validar segurança garantindo `Permission Denied` em casos proibidos.
+- [x] **Popular Dados Iniciais (Seeding):** Executar um script Node.js para criar as primeiras categorias e a 1ª conta Admin no ambiente de produção.
+- [x] **Deploy Final de Regras:** Rodar `firebase deploy --only firestore:rules,storage`.
+- [x] **Monitoramento:** Verificar as requisições no painel Firebase e monitorar a latência real.
 
