@@ -14,7 +14,7 @@ class MyProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(userStateNotifierProvider).user;
-    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
+    final pdfs = ref.watch(pdfsProvider).value ?? [];
 
     final isAdmin = userState.isAdmin;
     final profileName = (userState is AuthenticatedUserData && userState.name != null)

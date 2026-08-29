@@ -102,7 +102,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         showKasyToast(
           context,
           title: 'Erro ao fazer upload: $e',
-          tone: KasyToastTone.destructive,
+          tone: KasyToastTone.danger,
         );
       }
     } finally {
@@ -113,7 +113,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   }
 
   Future<void> _pickFile() async {
-    final result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
       withData: false,
@@ -142,7 +142,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ref.watch(categoriesProvider).valueOrNull ?? [];
+    final categories = ref.watch(categoriesProvider).value ?? [];
     final userState = ref.watch(userStateNotifierProvider).user;
     final isAdmin = userState.isAdmin;
 

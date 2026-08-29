@@ -118,7 +118,7 @@ class _PdfReaderPageState extends ConsumerState<PdfReaderPage> {
 
   @override
   Widget build(BuildContext context) {
-    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
+    final pdfs = ref.watch(pdfsProvider).value ?? [];
     final PdfDocument? pdf = pdfs.cast<PdfDocument?>().firstWhere((p) => p?.id == widget.pdfId, orElse: () => null);
 
     if (pdf == null) {

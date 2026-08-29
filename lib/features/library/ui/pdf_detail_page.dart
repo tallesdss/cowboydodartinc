@@ -50,9 +50,9 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
-    final favorites = ref.watch(favoritesProvider).valueOrNull ?? [];
-    final comments = ref.watch(commentsProvider(widget.pdfId)).valueOrNull ?? [];
+    final pdfs = ref.watch(pdfsProvider).value ?? [];
+    final favorites = ref.watch(favoritesProvider).value ?? [];
+    final comments = ref.watch(commentsProvider(widget.pdfId)).value ?? [];
 
     final PdfDocument? pdf = pdfs.cast<PdfDocument?>().firstWhere((p) => p?.id == widget.pdfId, orElse: () => null);
 

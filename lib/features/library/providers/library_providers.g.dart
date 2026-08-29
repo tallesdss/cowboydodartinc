@@ -13,7 +13,7 @@ part of 'library_providers.dart';
 final categoriesProvider = CategoriesProvider._();
 
 final class CategoriesProvider
-    extends $NotifierProvider<Categories, List<LibraryCategory>> {
+    extends $StreamNotifierProvider<Categories, List<LibraryCategory>> {
   CategoriesProvider._()
     : super(
         from: null,
@@ -31,29 +31,26 @@ final class CategoriesProvider
   @$internal
   @override
   Categories create() => Categories();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<LibraryCategory> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<LibraryCategory>>(value),
-    );
-  }
 }
 
-String _$categoriesHash() => r'd9637fef02fbe730ea8f7a0f229a1fdd5bc69972';
+String _$categoriesHash() => r'21bc95d3ef322ad780daf52296b0d24096c1bff6';
 
-abstract class _$Categories extends $Notifier<List<LibraryCategory>> {
-  List<LibraryCategory> build();
+abstract class _$Categories extends $StreamNotifier<List<LibraryCategory>> {
+  Stream<List<LibraryCategory>> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<List<LibraryCategory>, List<LibraryCategory>>;
+    final ref =
+        this.ref
+            as $Ref<AsyncValue<List<LibraryCategory>>, List<LibraryCategory>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<List<LibraryCategory>, List<LibraryCategory>>,
-              List<LibraryCategory>,
+              AnyNotifier<
+                AsyncValue<List<LibraryCategory>>,
+                List<LibraryCategory>
+              >,
+              AsyncValue<List<LibraryCategory>>,
               Object?,
               Object?
             >;
@@ -64,7 +61,8 @@ abstract class _$Categories extends $Notifier<List<LibraryCategory>> {
 @ProviderFor(Pdfs)
 final pdfsProvider = PdfsProvider._();
 
-final class PdfsProvider extends $NotifierProvider<Pdfs, List<PdfDocument>> {
+final class PdfsProvider
+    extends $StreamNotifierProvider<Pdfs, List<PdfDocument>> {
   PdfsProvider._()
     : super(
         from: null,
@@ -82,29 +80,22 @@ final class PdfsProvider extends $NotifierProvider<Pdfs, List<PdfDocument>> {
   @$internal
   @override
   Pdfs create() => Pdfs();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<PdfDocument> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<PdfDocument>>(value),
-    );
-  }
 }
 
-String _$pdfsHash() => r'2c7410d3f04a018be2a61927801c445c205f0593';
+String _$pdfsHash() => r'c9b1e380fea27fd8f3751168176e7a4eea0889be';
 
-abstract class _$Pdfs extends $Notifier<List<PdfDocument>> {
-  List<PdfDocument> build();
+abstract class _$Pdfs extends $StreamNotifier<List<PdfDocument>> {
+  Stream<List<PdfDocument>> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<List<PdfDocument>, List<PdfDocument>>;
+    final ref =
+        this.ref as $Ref<AsyncValue<List<PdfDocument>>, List<PdfDocument>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<List<PdfDocument>, List<PdfDocument>>,
-              List<PdfDocument>,
+              AnyNotifier<AsyncValue<List<PdfDocument>>, List<PdfDocument>>,
+              AsyncValue<List<PdfDocument>>,
               Object?,
               Object?
             >;
@@ -116,7 +107,7 @@ abstract class _$Pdfs extends $Notifier<List<PdfDocument>> {
 final commentsProvider = CommentsFamily._();
 
 final class CommentsProvider
-    extends $NotifierProvider<Comments, List<LibraryComment>> {
+    extends $StreamNotifierProvider<Comments, List<LibraryComment>> {
   CommentsProvider._({
     required CommentsFamily super.from,
     required String super.argument,
@@ -142,14 +133,6 @@ final class CommentsProvider
   @override
   Comments create() => Comments();
 
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<LibraryComment> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<LibraryComment>>(value),
-    );
-  }
-
   @override
   bool operator ==(Object other) {
     return other is CommentsProvider && other.argument == argument;
@@ -161,15 +144,15 @@ final class CommentsProvider
   }
 }
 
-String _$commentsHash() => r'279907d952f1f955718415792ca1d7999e475ac7';
+String _$commentsHash() => r'3d0136849454d1992a6abc40c3fe92943eacfcef';
 
 final class CommentsFamily extends $Family
     with
         $ClassFamilyOverride<
           Comments,
+          AsyncValue<List<LibraryComment>>,
           List<LibraryComment>,
-          List<LibraryComment>,
-          List<LibraryComment>,
+          Stream<List<LibraryComment>>,
           String
         > {
   CommentsFamily._()
@@ -188,20 +171,25 @@ final class CommentsFamily extends $Family
   String toString() => r'commentsProvider';
 }
 
-abstract class _$Comments extends $Notifier<List<LibraryComment>> {
+abstract class _$Comments extends $StreamNotifier<List<LibraryComment>> {
   late final _$args = ref.$arg as String;
   String get pdfId => _$args;
 
-  List<LibraryComment> build(String pdfId);
+  Stream<List<LibraryComment>> build(String pdfId);
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<List<LibraryComment>, List<LibraryComment>>;
+    final ref =
+        this.ref
+            as $Ref<AsyncValue<List<LibraryComment>>, List<LibraryComment>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<List<LibraryComment>, List<LibraryComment>>,
-              List<LibraryComment>,
+              AnyNotifier<
+                AsyncValue<List<LibraryComment>>,
+                List<LibraryComment>
+              >,
+              AsyncValue<List<LibraryComment>>,
               Object?,
               Object?
             >;
@@ -213,7 +201,7 @@ abstract class _$Comments extends $Notifier<List<LibraryComment>> {
 final favoritesProvider = FavoritesProvider._();
 
 final class FavoritesProvider
-    extends $NotifierProvider<Favorites, List<String>> {
+    extends $StreamNotifierProvider<Favorites, List<String>> {
   FavoritesProvider._()
     : super(
         from: null,
@@ -231,29 +219,21 @@ final class FavoritesProvider
   @$internal
   @override
   Favorites create() => Favorites();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<String> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<String>>(value),
-    );
-  }
 }
 
-String _$favoritesHash() => r'661986b6b82fc284c14d9a53fab6df84c8e02e28';
+String _$favoritesHash() => r'2fedb5e10c45343db8b33808dc977046e5b249c7';
 
-abstract class _$Favorites extends $Notifier<List<String>> {
-  List<String> build();
+abstract class _$Favorites extends $StreamNotifier<List<String>> {
+  Stream<List<String>> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<List<String>, List<String>>;
+    final ref = this.ref as $Ref<AsyncValue<List<String>>, List<String>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<List<String>, List<String>>,
-              List<String>,
+              AnyNotifier<AsyncValue<List<String>>, List<String>>,
+              AsyncValue<List<String>>,
               Object?,
               Object?
             >;

@@ -11,8 +11,8 @@ class HomeFeed extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
-    final favorites = ref.watch(favoritesProvider).valueOrNull ?? [];
+    final pdfs = ref.watch(pdfsProvider).value ?? [];
+    final favorites = ref.watch(favoritesProvider).value ?? [];
 
     // Filter PDFs sent by clients
     final clientPdfs = pdfs.where((pdf) => pdf.createdBy == 'cliente').toList();

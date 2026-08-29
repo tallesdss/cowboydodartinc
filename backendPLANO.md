@@ -56,3 +56,7 @@ Este guia transforma o planejamento em etapas sequenciais e acionáveis para a c
 - [x] **Deploy Final de Regras:** Rodar `firebase deploy --only firestore:rules,storage`.
 - [x] **Monitoramento:** Verificar as requisições no painel Firebase e monitorar a latência real.
 
+## Alterações de Documentação (MCP Backend Refactor)
+- [x] Atualizado `AGENTS.md` para remover as regras de "exclusivamente frontend com dados mockados" e refletir que o projeto agora é full-stack utilizando backend integrado via MCP.
+- [x] Atualizado `estrutura(ROADMAP).md` removendo todas as menções ao uso de LocalStorage e dados mockados, ajustando os requisitos técnicos para focar em Supabase/Firebase via MCP.
+

@@ -73,7 +73,7 @@ final class GlobalSearchResultsProvider
 }
 
 String _$globalSearchResultsHash() =>
-    r'08bdd58662c3af021041bc4ad243cc3e5577e65a';
+    r'0c12aebc2cd0235b724b61d78b82d68cf6bdb6ba';
 
 final class GlobalSearchResultsFamily extends $Family
     with $FunctionalFamilyOverride<GlobalSearchResults, String> {

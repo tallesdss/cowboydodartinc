@@ -46,7 +46,7 @@ Sistema web para gerenciamento de uma biblioteca digital de PDFs, organizados po
 ## 3. Navegação e Fluxo
 
 ### 3.1 Login
-- Tela de login (mockada, sem validação real de senha/token)
+- Tela de login usando backend Supabase/Firebase via MCP
 - Após autenticar, navega para a **Home autenticada**
 
 ### 3.2 Seletor de Perfil (troca simples)
@@ -66,15 +66,15 @@ Sistema web para gerenciamento de uma biblioteca digital de PDFs, organizados po
 ## 4. Módulos e Funcionalidades Detalhadas
 
 ### 4.1 Funcionalidades Existentes (Fase 1)
-- [x] Cadastro de categorias — via dados mockados (nome, descrição, ícone/cor opcional)
-- [x] Listagem de PDFs mockados vinculados a uma ou mais categorias
-- [x] Metadados do PDF (mock): título, descrição, autor, data de publicação, tags, thumbnail (capa)
+- [x] Cadastro de categorias — conectado ao backend via MCP
+- [x] Listagem de PDFs vinculados a uma ou mais categorias
+- [x] Metadados do PDF integrados: título, descrição, autor, data de publicação, tags, thumbnail (capa)
 - [x] Listagem de PDFs por categoria
-- [x] Busca por nome/tag/categoria (filtro no front-end sobre os dados mockados)
+- [x] Busca por nome/tag/categoria (filtro com suporte do backend)
 - [x] Botão de marcação (favoritar/salvar PDF) — usuário marca PDFs de interesse para acesso rápido depois
 - [x] Funções de biblioteca online: leitura/visualização do PDF direto no navegador (sem precisar baixar), navegação por páginas, zoom
-- [x] Download do PDF (arquivo mockado local ou link fixo)
-- [x] Simulação de tela de upload (Admin/Desenvolvedor) — sem persistência real, apenas adiciona ao mock em memória/LocalStorage
+- [x] Download do PDF
+- [x] Tela de upload integrada ao backend via MCP (Admin/Desenvolvedor e Cliente)
 - [x] Comentários e avaliações (nota/estrelas) por PDF — todos os perfis podem comentar/avaliar
 
 ### 4.2 Recursos Faltantes para Upgrade (Fase 2)
@@ -84,7 +84,7 @@ Sistema web para gerenciamento de uma biblioteca digital de PDFs, organizados po
 - Os PDFs enviados por um cliente ficam associados ao seu nome de usuário como autor/criador.
 
 #### B. Navegação de Perfis ("Explorar Criadores")
-- Tela que lista todos os usuários/criadores cadastrados no mock.
+- Tela que lista todos os usuários/criadores cadastrados no backend.
 - Permite clicar em qualquer usuário para acessar seu perfil público e ver todos os PDFs enviados por ele.
 
 #### C. Tela de Perfil Público / Detalhe do Uploader
@@ -148,16 +148,16 @@ Usuario
 
 ## 5. Requisitos Técnicos
 
-**Escopo:** projeto 100% front-end, sem back-end/API real. Todos os dados (categorias, PDFs, usuários) serão **mockados** (hardcoded ou via arquivos JSON locais/mock service).
+**Escopo:** projeto full-stack, com backend real integrado via MCP. Todos os dados (categorias, PDFs, usuários) serão persistidos no backend.
 
 | Item | Decisão |
 |---|---|
 | Front-end | **Flutter Web** |
-| Back-end | Não haverá — dados 100% mockup |
-| Banco de dados | Não haverá — mock local (ex: JSON estático, array em memória, LocalStorage) |
-| Armazenamento de arquivos (PDFs) | PDFs de exemplo hospedados localmente no projeto ou via URLs públicas fixas |
-| Autenticação | Simulada (mock de login, sem validação real de senha/token) |
-| Persistência de dados | Sim — dados mockados persistem entre reloads via **LocalStorage** (em Flutter Web, via pacote `shared_preferences` ou `localstorage`/`hive` com adaptador web) |
+| Back-end | Integrado via MCP (Supabase/Firebase) |
+| Banco de dados | Real (Postgres via Supabase ou Firestore via Firebase) |
+| Armazenamento de arquivos (PDFs) | Storage do provedor de backend |
+| Autenticação | Real via backend |
+| Persistência de dados | Sim — dados reais persistidos no banco de dados do backend |
 
 ---
 
@@ -165,7 +165,7 @@ Usuario
 
 **Fase 1 (Concluída):**
 - [x] Biblioteca de PDFs com categorias básicas
-- [x] Login mockado + Home autenticada
+- [x] Login conectado ao backend + Home autenticada
 - [x] Menu lateral dinâmico por perfil (Admin vs Cliente)
 - [x] Seletor de troca de perfil rápido
 - [x] Comentários/avaliações iniciais em PDFs
@@ -179,7 +179,7 @@ Usuario
 - [x] **Perfis públicos de usuários**: Página do uploader visitado mostrando estatísticas (PDFs enviados, curtidas/avaliações) e a grade de PDFs publicados por ele.
 - [x] **Exploração avançada por temas**: Refinar a aba "Explorar" com filtros visuais por temas (categorias) e tags de interesse.
 - [x] **Meu Perfil**: Implementar a aba "Meu Perfil" do usuário logado atual, com listagem exclusiva de seus PDFs enviados e estatísticas.
-- [x] **Persistência estendida**: Garantir persistência completa em LocalStorage (com dados mockados) para novos uploads, comentários e favoritos.
+- [x] **Persistência estendida**: Garantir persistência completa no backend para novos uploads, comentários e favoritos.
 
 **Fase 3 (Faltante - Aperfeiçoamentos e Área Admin):**
 - [x] **Painel de Dashboard (Admin)**: Tela de estatísticas gerais (total de PDFs, acessos, downloads e ranking de uploaders).

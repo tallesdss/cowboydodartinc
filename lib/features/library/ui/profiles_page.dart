@@ -11,7 +11,7 @@ class ProfilesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
+    final pdfs = ref.watch(pdfsProvider).value ?? [];
 
     // Extract unique authors (uploaders)
     final uniqueAuthors = pdfs.map((pdf) => pdf.author).toSet().toList();

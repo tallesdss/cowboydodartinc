@@ -77,9 +77,9 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ref.watch(categoriesProvider).valueOrNull ?? [];
-    final pdfs = ref.watch(pdfsProvider).valueOrNull ?? [];
-    final favorites = ref.watch(favoritesProvider).valueOrNull ?? [];
+    final categories = ref.watch(categoriesProvider).value ?? [];
+    final pdfs = ref.watch(pdfsProvider).value ?? [];
+    final favorites = ref.watch(favoritesProvider).value ?? [];
 
     final isAdmin = ref.watch(userStateNotifierProvider).user.isAdmin;
 
