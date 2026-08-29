@@ -2,7 +2,7 @@
 $__dart_deferred_initializers__.current=function(a,b,c,$){var B,C,A={
 cC0(d,e,f){var w,v,u=null,t=new B.qX(C.Gb,x.c),s=new B.qX(C.kL,x.c)
 s=new A.aAK(t,s)
-s.a08(d,u,e,u)
+s.a09(d,u,e,u)
 w=s.a
 v=t.r
 v.toString
@@ -935,7 +935,7 @@ break B}return w},
 d81(d){return new A.ce2(d)},
 aAK:function aAK(d,e){var _=this
 _.p3=d
-_.cq=_.af=_.cN=_.c8=_.b6=_.cb=_.dl=_.cG=_.cH=_.bH=_.ba=_.ah=_.a_=_.ae=_.ao=_.a7=_.a0=_.bg=_.y2=_.y1=_.xr=_.x2=_.x1=_.ry=_.rx=_.RG=_.R8=_.p4=$
+_.cq=_.af=_.cO=_.c8=_.b6=_.cb=_.dl=_.cG=_.cH=_.bH=_.ba=_.ah=_.a_=_.ae=_.ao=_.a7=_.a0=_.bg=_.y2=_.y1=_.xr=_.x2=_.x1=_.ry=_.rx=_.RG=_.R8=_.p4=$
 _.a=e
 _.p2=_.p1=_.ok=_.k4=_.k3=_.k2=_.k1=_.id=_.go=_.fy=_.dy=_.db=_.cy=_.cx=_.CW=_.ch=_.ay=_.as=_.Q=_.z=_.y=_.x=_.w=_.f=_.e=_.d=_.c=_.b=$},
 c6R:function c6R(){},
@@ -1090,8 +1090,8 @@ B=c[0]
 C=c[2]
 A=a.updateHolder(c[3],A)
 A.aAK.prototype={
-h(d,e){var w=this.p3.GG(e)
-return w==null?this.a.GG(e):w},
+h(d,e){var w=this.p3.GI(e)
+return w==null?this.a.GI(e):w},
 gim(){var w=this.p4
 return w===$?this.p4=this:w},
 gjx(){var w=this,v=w.R8
@@ -1130,11 +1130,11 @@ gCs(){var w=this,v=w.y2
 if(v===$){w.gim()
 w.y2!==$&&B.aD()
 v=w.y2=new A.c8n()}return v},
-gafP(){var w=this,v=w.bg
+gafO(){var w=this,v=w.bg
 if(v===$){w.gim()
 w.bg!==$&&B.aD()
 v=w.bg=new A.c8l()}return v},
-gXN(){var w=this,v=w.a0
+gXO(){var w=this,v=w.a0
 if(v===$){w.gim()
 w.a0!==$&&B.aD()
 v=w.a0=new A.c87()}return v},
@@ -1142,7 +1142,7 @@ gyd(d){var w=this,v=w.a7
 if(v===$){w.gim()
 w.a7!==$&&B.aD()
 v=w.a7=new A.c7i()}return v},
-gMi(){var w=this,v=w.ao
+gMk(){var w=this,v=w.ao
 if(v===$){w.gim()
 w.ao!==$&&B.aD()
 v=w.ao=new A.c85()}return v},
@@ -1150,7 +1150,7 @@ gwb(){var w=this,v=w.ae
 if(v===$){w.gim()
 w.ae!==$&&B.aD()
 v=w.ae=new A.c8j()}return v},
-ga93(){var w=this,v=w.a_
+ga94(){var w=this,v=w.a_
 if(v===$){w.gim()
 w.a_!==$&&B.aD()
 v=w.a_=new A.c6T()}return v},
@@ -1166,15 +1166,15 @@ glI(){var w=this,v=w.bH
 if(v===$){w.gim()
 w.bH!==$&&B.aD()
 v=w.bH=new A.c7S()}return v},
-gFZ(){var w=this,v=w.cH
+gG0(){var w=this,v=w.cH
 if(v===$){w.gim()
 w.cH!==$&&B.aD()
 v=w.cH=new A.c83()}return v},
-gad6(){var w=this,v=w.cG
+gad7(){var w=this,v=w.cG
 if(v===$){w.gim()
 w.cG!==$&&B.aD()
 v=w.cG=new A.c7Q()}return v},
-ga7_(){var w=this,v=w.b6
+ga70(){var w=this,v=w.b6
 if(v===$){w.gim()
 w.b6!==$&&B.aD()
 v=w.b6=new A.c6P()}return v},
@@ -1182,29 +1182,29 @@ gq_(){var w=this,v=w.c8
 if(v===$){w.gim()
 w.c8!==$&&B.aD()
 v=w.c8=new A.c7c()}return v},
-gj3(){var w=this,v=w.cN
+gj3(){var w=this,v=w.cO
 if(v===$){w.gim()
-w.cN!==$&&B.aD()
-v=w.cN=new A.c7e()}return v},
-gcY(){var w=this,v=w.af
+w.cO!==$&&B.aD()
+v=w.cO=new A.c7e()}return v},
+gd0(){var w=this,v=w.af
 if(v===$){w.gim()
 w.af!==$&&B.aD()
 v=w.af=new A.c7g()}return v},
-gob(d){var w=this,v=w.cq
+goc(d){var w=this,v=w.cq
 if(v===$){w.gim()
 w.cq!==$&&B.aD()
 v=w.cq=new A.c89()}return v},
 gyM(){return this.p3}}
 A.c6R.prototype={
 gkH(d){return"Cerrar"},
-gK2(){return"Copiado"},
+gK4(){return"Copiado"},
 gnc(){return"Guardado"},
 ghk(d){return"Error"},
-gLJ(){return"Solo en la app nativa"}}
+gLL(){return"Solo en la app nativa"}}
 A.c6r.prototype={
 gu7(){var w=this.z
 return w===$?this.z=new A.c6D():w},
-ga6y(){return"Volver a la app"},
+ga6z(){return"Volver a la app"},
 gvV(){var w=this.Q
 return w===$?this.Q=new A.c6u():w},
 gk8(){var w=this.as
@@ -1213,19 +1213,19 @@ gnY(){var w=this.at
 return w===$?this.at=new A.c6z():w},
 gjR(){var w=this.ax
 return w===$?this.ax=new A.c6p():w},
-gNi(){var w=this.ay
+gNj(){var w=this.ay
 return w===$?this.ay=new A.c6s():w},
 grg(){var w=this.ch
 return w===$?this.ch=new A.c6w():w},
 gz8(){var w=this.CW
 return w===$?this.CW=new A.c6B():w},
-gG5(){return y.ba}}
+gG7(){return y.ba}}
 A.c78.prototype={
-gUD(){var w=this.w
+gUE(){var w=this.w
 return w===$?this.w=new A.c79():w},
 gvi(){var w=this.x
 return w===$?this.x=new A.c76():w},
-gEn(){var w=this.y
+gEo(){var w=this.y
 return w===$?this.y=new A.c74():w}}
 A.c6H.prototype={
 ghd(){var w=this.f
@@ -1235,37 +1235,37 @@ return w===$?this.r=new A.c6N():w},
 gu0(){var w=this.w
 return w===$?this.w=new A.c6J():w}}
 A.c7W.prototype={
-ga9N(){return"Mes"},
-gUo(){return"De por vida"},
-gXJ(){return"Restaurar"},
+ga9O(){return"Mes"},
+gUp(){return"De por vida"},
+gXK(){return"Restaurar"},
 gadC(){return"Vista previa"},
 gadB(){return y.go},
-gUp(){return"Anual"},
-gUq(){return"Mensual"},
-gUr(){return"Semanal"},
-gX1(){return"/semana"},
-gWZ(){return"/mes"},
-gX0(){return"/3 meses"},
-gX_(){return"/6 meses"},
-gX2(){return"/a\xf1o"},
-gWY(){return""},
-gaeQ(){return"T\xe9rminos"},
+gUq(){return"Anual"},
+gUr(){return"Mensual"},
+gUs(){return"Semanal"},
+gX2(){return"/semana"},
+gX_(){return"/mes"},
+gX1(){return"/3 meses"},
+gX0(){return"/6 meses"},
+gX3(){return"/a\xf1o"},
+gWZ(){return""},
+gaeP(){return"T\xe9rminos"},
 gBW(){return"Privacidad"},
-gaeR(){return"T\xe9rminos de uso"},
+gaeQ(){return"T\xe9rminos de uso"},
 gadG(){return"Pol\xedtica de privacidad"},
-gaaa(){return"Error al cargar las ofertas"},
-gacA(){return y.l},
-gacz(){return y.gF},
-gXK(){return"Suscripci\xf3n restaurada"},
-gaeA(){return"Gracias por tu confianza"},
+gaab(){return"Error al cargar las ofertas"},
+gacB(){return y.l},
+gacA(){return y.gF},
+gXL(){return"Suscripci\xf3n restaurada"},
+gaez(){return"Gracias por tu confianza"},
 gadK(){return"Suscripci\xf3n realizada con \xe9xito"},
 gadJ(){return"Gracias por tu confianza"},
 gfX(){return"Error"},
 glv(){return"Ocurri\xf3 un error. Int\xe9ntalo de nuevo"},
-gage(){return"Pago no confirmado"},
-gagd(){return y.dF},
-gaey(){return"No se encontr\xf3 ninguna suscripci\xf3n"},
-gaex(){return y.dK},
+gagd(){return"Pago no confirmado"},
+gagc(){return y.dF},
+gaex(){return"No se encontr\xf3 ninguna suscripci\xf3n"},
+gaew(){return y.dK},
 gzf(){var w=this.w
 return w===$?this.w=new A.c7Y():w},
 gth(){var w=this.x
@@ -1275,19 +1275,19 @@ return w===$?this.y=new A.c8_():w},
 gyE(){var w=this.z
 return w===$?this.z=new A.c81():w}}
 A.c6n.prototype={
-gac8(){return"Suscripci\xf3n en otra plataforma"},
-gac7(){return y.Y},
-ga7q(){return"Cerrar"},
-ga6F(){return"Facturaci\xf3n"},
+gac9(){return"Suscripci\xf3n en otra plataforma"},
+gac8(){return y.Y},
+ga7r(){return"Cerrar"},
+ga6G(){return"Facturaci\xf3n"},
 gadp(){return"Plan de cuenta"},
-gWP(){return"Premium"},
-gac6(){return"Administrar suscripci\xf3n"},
-gaez(){return"Restaurar compras"},
-aes(d){return"Renueva el "+d},
-aag(d){return"Expira el "+d},
-gafr(){return"Evaluaci\xf3n gratuita"},
-aft(d){return"Evaluaci\xf3n gratuita hasta el "+d},
-a7A(d,e){return e+" a partir del "+d}}
+gWQ(){return"Premium"},
+gac7(){return"Administrar suscripci\xf3n"},
+gaey(){return"Restaurar compras"},
+aer(d){return"Renueva el "+d},
+aah(d){return"Expira el "+d},
+gafq(){return"Evaluaci\xf3n gratuita"},
+afs(d){return"Evaluaci\xf3n gratuita hasta el "+d},
+a7B(d,e){return e+" a partir del "+d}}
 A.c7s.prototype={
 gkK(){var w=this.Q
 return w===$?this.Q=new A.c7t():w},
@@ -1295,314 +1295,313 @@ gkL(){var w=this.as
 return w===$?this.as=new A.c7v():w},
 gkM(){var w=this.at
 return w===$?this.at=new A.c7x():w},
-gW4(){var w,v=this.ax
+gW5(){var w,v=this.ax
 if(v===$){w=this.z
 v=this.ax=new A.c7J(w,w)}return v},
-ga6b(){var w=this.ay
+ga6c(){var w=this.ay
 return w===$?this.ay=new A.c7m():w},
-gYE(){var w=this.ch
+gYF(){var w=this.ch
 return w===$?this.ch=new A.c7z():w},
 gmk(){var w,v=this.CW
 if(v===$){w=this.z
 v=this.CW=new A.c7L(w,w)}return v},
-gSJ(){var w,v=this.cx
+gSK(){var w,v=this.cx
 if(v===$){w=this.z
 v=this.cx=new A.c7q(w,w)}return v},
-gFv(){var w,v=this.cy
+gFw(){var w,v=this.cy
 if(v===$){w=this.z
 v=this.cy=new A.c7B(w,w)}return v}}
 A.c6Z.prototype={
 gal(d){return"Ideas"},
-gacC(){return"Sin ideas a\xfan"},
-gacD(){return y.D},
-gYC(){var w=this.f
+gacD(){return"Sin ideas a\xfan"},
+gacE(){return y.D},
+gYD(){var w=this.f
 return w===$?this.f=new A.c72():w},
-gYB(){var w=this.r
+gYC(){var w=this.r
 return w===$?this.r=new A.c70():w},
 gta(){var w,v=this.w
 if(v===$){w=this.e
 v=this.w=new A.c6V(w,w)}return v}}
 A.c8n.prototype={
 gal(d){return"\xbfQu\xe9 hay de nuevo?"},
-gFa(){var w=y.I
+gFb(){var w=y.I
 return B.a([w,w,w],x.h)},
 gqR(){return"Entendido"}}
 A.c8l.prototype={
 gal(d){return"Actualizaci\xf3n disponible"},
 gcp(d){return y.dB},
-gafQ(){return"Actualizar ahora"},
-gVN(){return"Ahora no"}}
+gafP(){return"Actualizar ahora"},
+gVO(){return"Ahora no"}}
 A.c87.prototype={
-gadY(){return"\xbfTe gusta la app?"},
-gadV(){return"Tu respuesta nos ayuda a mejorar."},
-gadX(){return"S\xed, me gusta"},
-gadW(){return"Podr\xeda mejorar"},
+gadX(){return"\xbfTe gusta la app?"},
+gadU(){return"Tu respuesta nos ayuda a mejorar."},
+gadW(){return"S\xed, me gusta"},
+gadV(){return"Podr\xeda mejorar"},
 gal(d){return"\xa1Qu\xe9 bueno que te guste!"},
 gcp(d){return y.aK},
-gae4(){return"Escribir una rese\xf1a"}}
+gae3(){return"Escribir una rese\xf1a"}}
 A.c7i.prototype={
 gkn(){return"Inicio"},
 gzv(){return"Ayuda"},
 gmk(){return"Notificaciones"},
 gds(){return"Config."},
 gBI(){return"Salir"},
-ga_c(){return"Saltar al contenido"}}
+ga_d(){return"Saltar al contenido"}}
 A.c85.prototype={
 gal(d){return"Recordatorios"},
-gafl(){return"Activar recordatorio"},
-gafw(){return"Repetir"},
-ga92(){return"Cada d\xeda"},
-gagf(){return"Cada semana"},
-ga_h(){return"Una vez"},
-gaf_(){return"Hora"},
-ga95(){return"D\xeda de la semana"},
-ga94(){return"Fecha"},
-gZj(){return"Seleccionar fecha"},
+gafk(){return"Activar recordatorio"},
+gafv(){return"Repetir"},
+ga93(){return"Cada d\xeda"},
+gage(){return"Cada semana"},
+ga_i(){return"Una vez"},
+gaeZ(){return"Hora"},
+ga96(){return"D\xeda de la semana"},
+ga95(){return"Fecha"},
+gZk(){return"Seleccionar fecha"},
 gnK(d){return y.dl},
-a_B(d){return"Todos los d\xedas a las "+d},
-a_D(d,e){return"Cada "+d+" a las "+e},
-a_C(d,e){return"El "+d+" a las "+e}}
+a_C(d){return"Todos los d\xedas a las "+d},
+a_E(d,e){return"Cada "+d+" a las "+e},
+a_D(d,e){return"El "+d+" a las "+e}}
 A.c8j.prototype={
 gal(d){return"Selecciona la hora"},
 gadm(d){return"Selecciona una hora"},
-gSB(){return"AM"},
-gWS(){return"PM"}}
+gSC(){return"AM"},
+gWT(){return"PM"}}
 A.c6T.prototype={
 gal(d){return"Recordatorio"},
-gJU(d){return"Es hora de beber un vaso de agua."}}
+gJW(d){return"Es hora de beber un vaso de agua."}}
 A.c8h.prototype={
 gal(d){return"Configuraci\xf3n"},
-ga6x(){var w=this.f
+ga6y(){var w=this.f
 return w===$?this.f=new A.c8d():w},
-gLs(){return"Idiomas"},
-gaeW(){return"Tema"},
-gaeV(){return"Sistema"},
-gaeU(){return"Claro"},
-gaeT(){return"Oscuro"},
-gabf(){return"Ocultar barras al desplazar"},
-gNp(){return"PREFERENCIAS"},
-gZg(){return"SEGURIDAD"},
-gNq(){return"AYUDA"},
-ga77(){return"Bloqueo de la app"},
-ga74(){return y.C},
-ga75(){return y.aa},
-ga76(){return y.cs},
-ga70(){return y.h1},
-ga71(){return y.d5},
-ga73(){return y.a0},
-ga72(){return y.fc},
-ga6K(){return"\xbfDesactivar bloqueo?"},
-ga6J(){return y.cg},
-ga6I(){return"Desactivar"},
-ga6H(){return"Cancelar"},
-ga6P(){return y.m},
-ga6Q(){return y.j},
-ga6R(){return y.K},
-ga6L(){return y.U},
-ga6M(){return y.k},
-ga6O(){return y.v},
-ga6N(){return y.g},
-ga6W(){return"Desbloquea con Face ID o Touch ID"},
-ga6X(){return"Desbloquea con Face ID"},
-ga6Y(){return"Desbloquea con Touch ID"},
-ga6S(){return"Confirma tu identidad"},
-ga6T(){return"Desbloquea con reconocimiento facial"},
-ga6V(){return"Desbloquea con huella digital"},
-ga6U(){return"Desbloquea con huella o rostro"},
-ga7c(){return y.c},
-ga7d(){return y.b},
-ga7e(){return y.S},
-ga78(){return y.d},
-ga79(){return y.i},
-ga7b(){return y.n},
-ga7a(){return y.E},
-ga6Z(){return"El bloqueo de la app no se activ\xf3."},
-gaak(){return"Enviar comentarios"},
+gLu(){return"Idiomas"},
+gaeV(){return"Tema"},
+gaeU(){return"Sistema"},
+gaeT(){return"Claro"},
+gaeS(){return"Oscuro"},
+gabg(){return"Ocultar barras al desplazar"},
+gNq(){return"PREFERENCIAS"},
+gZh(){return"SEGURIDAD"},
+gNr(){return"AYUDA"},
+ga78(){return"Bloqueo de la app"},
+ga75(){return y.C},
+ga76(){return y.aa},
+ga77(){return y.cs},
+ga71(){return y.h1},
+ga72(){return y.d5},
+ga74(){return y.a0},
+ga73(){return y.fc},
+ga6L(){return"\xbfDesactivar bloqueo?"},
+ga6K(){return y.cg},
+ga6J(){return"Desactivar"},
+ga6I(){return"Cancelar"},
+ga6Q(){return y.m},
+ga6R(){return y.j},
+ga6S(){return y.K},
+ga6M(){return y.U},
+ga6N(){return y.k},
+ga6P(){return y.v},
+ga6O(){return y.g},
+ga6X(){return"Desbloquea con Face ID o Touch ID"},
+ga6Y(){return"Desbloquea con Face ID"},
+ga6Z(){return"Desbloquea con Touch ID"},
+ga6T(){return"Confirma tu identidad"},
+ga6U(){return"Desbloquea con reconocimiento facial"},
+ga6W(){return"Desbloquea con huella digital"},
+ga6V(){return"Desbloquea con huella o rostro"},
+ga7d(){return y.c},
+ga7e(){return y.b},
+ga7f(){return y.S},
+ga79(){return y.d},
+ga7a(){return y.i},
+ga7c(){return y.n},
+ga7b(){return y.E},
+ga7_(){return"El bloqueo de la app no se activ\xf3."},
+gaal(){return"Enviar comentarios"},
 gcU(){return"Premium"},
-ga6E(){return"Facturaci\xf3n"},
+ga6F(){return"Facturaci\xf3n"},
 gBW(){return"Pol\xedtica de privacidad"},
 gzv(){return"Centro de ayuda"},
-ga9x(d){return"S\xed, salir"},
-ga9A(){return"\xbfSalir de tu cuenta?"},
-ga9z(){return"\xbfSeguro que quieres salir?"},
-ga9y(){return"Cancelar"},
+ga9y(d){return"S\xed, salir"},
+ga9B(){return"\xbfSalir de tu cuenta?"},
+ga9A(){return"\xbfSeguro que quieres salir?"},
+ga9z(){return"Cancelar"},
 gBI(){return"Cerrar sesi\xf3n"},
-gFz(){return"Mi cuenta"},
-gaek(d){return"Registrarse"},
-gFA(){return"Nombre"},
+gFA(){return"Mi cuenta"},
+gaej(d){return"Registrarse"},
+gFB(){return"Nombre"},
 gpO(){return"Editar"},
 gnE(){return"Correo electr\xf3nico"},
-ga89(){return"Conectado con"},
+ga8a(){return"Conectado con"},
 gadH(){return"Correo y contrase\xf1a"},
 gadI(){return"Tel\xe9fono"},
-gKd(){return"Crear contrase\xf1a"},
-ga8U(){return y.B},
-ga8S(){return"Nueva contrase\xf1a"},
-ga8Q(){return"Confirmar contrase\xf1a"},
-ga8V(){return"Contrase\xf1a creada"},
-ga8R(){return y.V},
-ga8W(){return y.aF},
-ga8T(){return"Las contrase\xf1as no coinciden"},
-abS(d){return"Vincular "+d},
-abU(d){return d+" vinculado"},
-gabT(){return y.J},
-gUs(){return"Tu nombre"},
-gKH(){return"Guardar"},
-gKG(){return"Cancelar"},
-gEb(){return"Bio"},
-gSX(){return"Escribe algo sobre ti..."},
-ga9Q(){return"Editar perfil"},
-ga9P(){return"Guardar"},
-gUu(){return"Perfil actualizado"},
-gUt(){return y.L},
-gaem(){return"Recordatorios"},
-gKn(){var w=this.r
+gKf(){return"Crear contrase\xf1a"},
+ga8V(){return y.B},
+ga8T(){return"Nueva contrase\xf1a"},
+ga8R(){return"Confirmar contrase\xf1a"},
+ga8W(){return"Contrase\xf1a creada"},
+ga8S(){return y.V},
+ga8X(){return y.aF},
+ga8U(){return"Las contrase\xf1as no coinciden"},
+abT(d){return"Vincular "+d},
+abV(d){return d+" vinculado"},
+gabU(){return y.J},
+gUt(){return"Tu nombre"},
+gKJ(){return"Guardar"},
+gKI(){return"Cancelar"},
+gEc(){return"Bio"},
+gSY(){return"Escribe algo sobre ti..."},
+ga9R(){return"Editar perfil"},
+ga9Q(){return"Guardar"},
+gUv(){return"Perfil actualizado"},
+gUu(){return y.L},
+gael(){return"Recordatorios"},
+gKp(){var w=this.r
 return w===$?this.r=new A.c8f():w},
 gtb(){var w=this.w
 return w===$?this.w=new A.c8b():w}}
 A.c7k.prototype={
 gal(d){return"Notificaciones"},
-ga9Y(){return"No tienes notificaciones"},
-gaa8(){return"Error al obtener notificaciones"},
-gacc(){return"Marcar le\xeddas"},
-gZh(){return"Ver todas"}}
+ga9Z(){return"No tienes notificaciones"},
+gaa9(){return"Error al obtener notificaciones"},
+gacd(){return"Marcar le\xeddas"},
+gZi(){return"Ver todas"}}
 A.c7S.prototype={
-gaf6(){return"Autenticaci\xf3n por Tel\xe9fono"},
-ga_z(){return"Ingresa tu n\xfamero de tel\xe9fono"},
-ga9k(){return y.ci},
+gaf5(){return"Autenticaci\xf3n por Tel\xe9fono"},
+ga_A(){return"Ingresa tu n\xfamero de tel\xe9fono"},
+ga9l(){return y.ci},
 gadk(){return"N\xfamero de tel\xe9fono"},
 gadj(){return"+34 600 123 456"},
-gaa6(){return"Por favor, ingresa un n\xfamero de tel\xe9fono"},
-gaa9(){return"Por favor, ingresa un n\xfamero v\xe1lido"},
-ga8i(){return"Continuar"},
-gafc(){return"Verificar C\xf3digo"},
-gafX(){return"C\xf3digo de Verificaci\xf3n"},
-a7P(d){return y.y+d},
-ga_9(){return"Listo"},
-ga_8(){return y.gv},
-gafY(){return"Verificar C\xf3digo"},
-gaeu(){return"Reenviar C\xf3digo"},
-gaa3(){return"Por favor, ingresa los 6 d\xedgitos"}}
+gaa7(){return"Por favor, ingresa un n\xfamero de tel\xe9fono"},
+gaaa(){return"Por favor, ingresa un n\xfamero v\xe1lido"},
+ga8j(){return"Continuar"},
+gafb(){return"Verificar C\xf3digo"},
+gafW(){return"C\xf3digo de Verificaci\xf3n"},
+a7Q(d){return y.y+d},
+ga_a(){return"Listo"},
+ga_9(){return y.gv},
+gafX(){return"Verificar C\xf3digo"},
+gaet(){return"Reenviar C\xf3digo"},
+gaa4(){return"Por favor, ingresa los 6 d\xedgitos"}}
 A.c83.prototype={
 gal(d){return"Email enviado"},
 gcp(d){return y.w},
-ga6z(){return"Volver a Iniciar Sesi\xf3n"},
-gacE(){return y.f1}}
+ga6A(){return"Volver a Iniciar Sesi\xf3n"},
+gacF(){return y.f1}}
 A.c7Q.prototype={
 gal(d){return"404 - P\xe1gina no encontrada"}}
 A.c6P.prototype={
-gaf7(){return"\xbfActivar Face ID en el bloqueo?"},
-gaf9(){return"\xbfActivar Touch ID en el bloqueo?"},
-gaf8(){return"\xbfActivar Face ID/Touch ID en el bloqueo?"},
-gaf0(){return y.eu},
-gaf2(){return"\xbfActivar bloqueo con huella digital?"},
-gaf3(){return"\xbfProteger la app con tu tel\xe9fono?"},
-gacn(){return y.t},
-gacp(){return y.z},
-gaco(){return y.H},
-gacj(){return y.s},
-gacl(){return y.W},
-gaf1(){return"\xbfActivar bloqueo con huella o rostro?"},
-gack(){return y.e3},
-gacm(){return y.fN},
+gaf6(){return"\xbfActivar Face ID en el bloqueo?"},
+gaf8(){return"\xbfActivar Touch ID en el bloqueo?"},
+gaf7(){return"\xbfActivar Face ID/Touch ID en el bloqueo?"},
+gaf_(){return y.eu},
+gaf1(){return"\xbfActivar bloqueo con huella digital?"},
+gaf2(){return"\xbfProteger la app con tu tel\xe9fono?"},
+gaco(){return y.t},
+gacq(){return y.z},
+gacp(){return y.H},
+gack(){return y.s},
+gacm(){return y.W},
+gaf0(){return"\xbfActivar bloqueo con huella o rostro?"},
+gacl(){return y.e3},
+gacn(){return y.fN},
 gvS(){return"Ahora no"},
 gvp(d){return"Activar"}}
 A.c7c.prototype={
-gZ0(){return"Buenos d\xedas"},
-gYZ(){return"Buenas tardes"},
-gZ_(){return"Buenas noches"},
-afd(d){return"\xa1Hola, "+d+"!"},
-gaf4(){return"\xa1Hola!"},
-gafb(){return"Te esperamos de vuelta"},
+gZ1(){return"Buenos d\xedas"},
+gZ_(){return"Buenas tardes"},
+gZ0(){return"Buenas noches"},
+afc(d){return"\xa1Hola, "+d+"!"},
+gaf3(){return"\xa1Hola!"},
+gafa(){return"Te esperamos de vuelta"},
 gado(){return"Plan gratuito"},
 gadr(){return"PRO"},
-gadZ(){return y.h4},
-gae_(){return"Steve Jobs"}}
+gadY(){return y.h4},
+gadZ(){return"Steve Jobs"}}
 A.c7e.prototype={
 gal(d){return"Tareas"},
-gUx(){return"Sin tareas en esta columna"},
+gUy(){return"Sin tareas en esta columna"},
 gfX(){return"Error al cargar"},
-ga66(){return"A\xf1adir otra lista"},
-ga67(){return"A\xf1adir lista"},
-gabV(){return"Escribe el nombre de la lista..."},
-ga68(){return"A\xf1adir tarea"},
-ga69(){return y.q},
-gKF(){return"Editar columna"},
-ga9R(){return"Actualiza los detalles de esta tarea."},
+ga67(){return"A\xf1adir otra lista"},
+ga68(){return"A\xf1adir lista"},
+gabW(){return"Escribe el nombre de la lista..."},
+ga69(){return"A\xf1adir tarea"},
+ga6a(){return y.q},
+gKH(){return"Editar columna"},
+ga9S(){return"Actualiza los detalles de esta tarea."},
 gfu(d){return"Cancelar"},
 gl4(d){return"Guardar"},
-gEF(){return"Eliminar columna"},
+gEG(){return"Eliminar columna"},
 gB2(){return"Editar tarea"},
-gEG(){return"Eliminar tarea"},
-ga7W(){return"Nombre de columna"},
-ga7X(){return"Ej: En progreso, Hecho"},
-gaeM(){return"T\xedtulo de tarea"},
-gaeN(){return"Ej: Implementar login"},
-gaeO(){return"Ingresa un t\xedtulo para la tarea."},
-ga7Y(){return"Ingresa un nombre para la columna."},
-gaeL(){return"Descripci\xf3n"},
-gXQ(){return"Detalles sobre la tarea"},
-ga8J(d){return"Crear"},
-ga7U(){return"Columna creada"},
-ga7Z(){return"Columna actualizada"},
-ga7V(){return"Columna eliminada"},
-gaeJ(){return"Tarea creada"},
-gaeP(){return"Tarea actualizada"},
-gaeK(){return"Tarea eliminada"},
-gFS(){return"Prioridad"},
+gEH(){return"Eliminar tarea"},
+ga7X(){return"Nombre de columna"},
+ga7Y(){return"Ej: En progreso, Hecho"},
+gaeL(){return"T\xedtulo de tarea"},
+gaeM(){return"Ej: Implementar login"},
+gaeN(){return"Ingresa un t\xedtulo para la tarea."},
+ga7Z(){return"Ingresa un nombre para la columna."},
+gaeK(){return"Descripci\xf3n"},
+gXR(){return"Detalles sobre la tarea"},
+ga8K(d){return"Crear"},
+ga7V(){return"Columna creada"},
+ga8_(){return"Columna actualizada"},
+ga7W(){return"Columna eliminada"},
+gaeI(){return"Tarea creada"},
+gaeO(){return"Tarea actualizada"},
+gaeJ(){return"Tarea eliminada"},
+gFT(){return"Prioridad"},
 gadF(){return"Ninguna"},
-gX4(){return"Baja"},
-gX5(){return"Media"},
-gX3(){return"Alta"},
-gX6(){return"Urgente"},
-ga9d(){return y.Q},
-ga9g(){return"Esta tarea se eliminara permanentemente."},
-a8X(d){return"Creado el "+d}}
+gX5(){return"Baja"},
+gX6(){return"Media"},
+gX4(){return"Alta"},
+gX7(){return"Urgente"},
+ga9e(){return y.Q},
+ga9h(){return"Esta tarea se eliminara permanentemente."},
+a8Y(d){return"Creado el "+d}}
 A.c7g.prototype={
 gal(d){return"Biblioteca"},
-gac5(){return"Administrar Categor\xedas"},
+gac6(){return"Administrar Categor\xedas"},
 gl4(d){return"Guardar"},
 gfu(d){return"Cancelar"},
 gBT(){return"PDFs"},
-gaai(){return"Favoritos"},
-goc(){return"Buscar por t\xedtulo, autor o etiqueta..."},
-gSy(){return"Registrar PDF"},
-ga9f(){return"Eliminar PDF"},
+gaaj(){return"Favoritos"},
+god(){return"Buscar por t\xedtulo, autor o etiqueta..."},
+gSz(){return"Registrar PDF"},
+ga9g(){return"Eliminar PDF"},
 gadf(){return"T\xedtulo"},
-gadb(){return"Descripci\xf3n"},
-gada(){return"Autor"},
-gade(){return"URL de la miniatura (portada)"},
-gadc(){return"Etiquetas (separadas por comas)"},
-gLM(){return"Ning\xfan PDF encontrado"},
-ga8_(){return"Comentarios"},
-gagq(){return"Escribir un comentario..."},
-ga_v(){return"Enviar Comentario"},
-gae5(){return"Calificaci\xf3n"},
-ga9F(d){return"Descargar"},
-gae6(d){return"Leer"},
-ga6a(){return"Admin / Dev"},
-ga7J(d){return"Cliente"},
-gaea(){return"Lector Simulado"},
+gadc(){return"Descripci\xf3n"},
+gadb(){return"Autor"},
+gade(){return"Etiquetas (separadas por comas)"},
+gLO(){return"Ning\xfan PDF encontrado"},
+ga80(){return"Comentarios"},
+gagp(){return"Escribir un comentario..."},
+ga_w(){return"Enviar Comentario"},
+gae4(){return"Calificaci\xf3n"},
+ga9G(d){return"Descargar"},
+gae5(d){return"Leer"},
+ga6b(){return"Admin / Dev"},
+ga7K(d){return"Cliente"},
+gae9(){return"Lector Simulado"},
 gadA(){return"Anterior"},
-gacw(){return"Siguiente"},
-gagr(){return"Acercar"},
-gags(){return"Alejar"},
-ad5(d,e){return"P\xe1gina "+d+" de "+e},
-gacy(){return y.A},
-gW6(){return"Mis PDFs"},
-gGV(){return"Enviar PDF"},
-gafT(){return"Haz clic para subir tu PDF"},
-gafS(){return"Formato soportado: PDF (M\xe1x. 10MB)"},
-ga7z(){return"Cambiar Archivo"},
-gUC(){return"Explorar"},
-gacB(){return y.bE},
-gYt(){return"Enviado por"},
-gMa(){return"Perfil P\xfablico"},
-gafZ(){return y.dQ}}
+gacx(){return"Siguiente"},
+gagq(){return"Acercar"},
+gagr(){return"Alejar"},
+ad6(d,e){return"P\xe1gina "+d+" de "+e},
+gacz(){return y.A},
+gW7(){return"Mis PDFs"},
+gGX(){return"Enviar PDF"},
+gafS(){return"Haz clic para subir tu PDF"},
+gafR(){return"Formato soportado: PDF (M\xe1x. 10MB)"},
+ga7A(){return"Cambiar Archivo"},
+gUD(){return"Explorar"},
+gacC(){return y.bE},
+gYu(){return"Enviado por"},
+gMc(){return"Perfil P\xfablico"},
+gafY(){return y.dQ}}
 A.c89.prototype={
 gal(d){return"B\xfasqueda Global"},
 gnK(d){return"Buscar autores, temas y PDFs..."},
-ga6w(){return"Autores"},
+ga6x(){return"Autores"},
 gjR(){return"Temas"},
 gBT(){return"PDFs"},
 gmU(d){return y.cz}}
@@ -1611,66 +1610,66 @@ gvV(){return"Resumen"},
 gk8(){return"Usuarios"},
 gnY(){return"Solicitudes"},
 gjR(){return"Categor\xedas"},
-gY0(){return"Herramientas"},
+gY1(){return"Herramientas"},
 gAO(){return"Depuraci\xf3n"}}
 A.c6u.prototype={
-gD2(){return"Resumen"},
-ga6B(){return"Backend"},
+gD3(){return"Resumen"},
+ga6C(){return"Backend"},
 gAa(){return"Cuenta"},
-gZ1(){return"Invitado"},
-gafV(){return"ID de usuario"},
+gZ2(){return"Invitado"},
+gafU(){return"ID de usuario"},
 gdS(){return"Versi\xf3n"},
-gZU(){return"Sesi\xf3n actual"},
-gafW(){return y.R}}
+gZV(){return"Sesi\xf3n actual"},
+gafV(){return y.R}}
 A.c6F.prototype={
 gal(d){return"Usuarios"},
-goc(){return"Buscar por nombre o correo"},
-ga7T(){return"Usuario"},
-ga7S(){return"Estado"},
-ga7R(){return"Rol"},
-gTf(){return"Acciones"},
-ga7Q(){return"Registro"},
-gO6(){return"Activo"},
-gO8(){return"Inactivo"},
-gO7(){return"Bloqueado"},
-gXO(){return"Admin"},
-gXP(){return"Usuario"},
-gSe(){return"Hacer Administrador"},
-gSf(){return"Quitar Admin"},
-gSd(){return"Bloquear Acceso"},
-gSg(){return"Desbloquear"},
+god(){return"Buscar por nombre o correo"},
+ga7U(){return"Usuario"},
+ga7T(){return"Estado"},
+ga7S(){return"Rol"},
+gTg(){return"Acciones"},
+ga7R(){return"Registro"},
+gO7(){return"Activo"},
+gO9(){return"Inactivo"},
+gO8(){return"Bloqueado"},
+gXP(){return"Admin"},
+gXQ(){return"Usuario"},
+gSf(){return"Hacer Administrador"},
+gSg(){return"Quitar Admin"},
+gSe(){return"Bloquear Acceso"},
+gSh(){return"Desbloquear"},
 gmU(d){return"No se encontraron usuarios"},
 gB3(){return y.P},
 ghk(d){return y.c0},
 gadz(){return"Anterior"},
 gmj(d){return"Siguiente"},
-gJJ(){return"An\xf3nimo"},
-gaaD(){return"Todos los usuarios"},
-gaaE(){return"Suscriptores"},
-aeB(d,e,f,g){return"Mostrando "+e+" a "+f+" de "+g},
-gZe(){return y.M},
-ga9U(){return"Ning\xfan usuario coincide con la b\xfasqueda"},
-ga9V(){return"Prueba con otro nombre o correo."},
-ga9W(){return"No se encontraron suscriptores"},
-ga9X(){return y.cU},
-gaej(d){return"Actualizar"},
-gaeC(){return"Reintentar"}}
+gJL(){return"An\xf3nimo"},
+gaaE(){return"Todos los usuarios"},
+gaaF(){return"Suscriptores"},
+aeA(d,e,f,g){return"Mostrando "+e+" a "+f+" de "+g},
+gZf(){return y.M},
+ga9V(){return"Ning\xfan usuario coincide con la b\xfasqueda"},
+ga9W(){return"Prueba con otro nombre o correo."},
+ga9X(){return"No se encontraron suscriptores"},
+ga9Y(){return y.cU},
+gaei(d){return"Actualizar"},
+gaeB(){return"Reintentar"}}
 A.c6z.prototype={
 gal(d){return"Solicitudes de funci\xf3n"},
 ghe(){return y.bx},
 gmU(d){return"A\xfan no hay solicitudes"},
 gB3(){return y.h},
-gMG(d){return"Visible"},
-gL9(d){return"Oculto"},
+gMH(d){return"Visible"},
+gLb(d){return"Oculto"},
 gpO(){return"Editar"},
 ghk(d){return"No se pudieron cargar las solicitudes"},
 gnc(){return"Solicitud actualizada"},
-gUv(){return"Editar solicitud"},
-gaaC(){return"T\xedtulo"},
-gaaB(){return"Descripci\xf3n"},
-gabI(){return"Ingl\xe9s"},
-gabK(){return"Portugu\xe9s"},
-gabJ(){return"Espa\xf1ol"},
+gUw(){return"Editar solicitud"},
+gaaD(){return"T\xedtulo"},
+gaaC(){return"Descripci\xf3n"},
+gabJ(){return"Ingl\xe9s"},
+gabL(){return"Portugu\xe9s"},
+gabK(){return"Espa\xf1ol"},
 gl4(d){return"Guardar"}}
 A.c6p.prototype={
 gal(d){return"Categor\xedas"},
@@ -1678,73 +1677,73 @@ ghe(){return y.e},
 giX(d){return"Nueva Categor\xeda"},
 gpO(){return"Editar"},
 gqr(d){return"Eliminar"},
-ga9e(){return y.fo},
+ga9f(){return y.fo},
 gl4(d){return"Guardar"},
 gfu(d){return"Cancelar"},
 gaJ(d){return"Nombre"},
 gcp(d){return"Descripci\xf3n"},
-gabj(d){return"Icono"},
+gabk(d){return"Icono"},
 geI(d){return"Color"},
 gmU(d){return"No hay categor\xedas."},
-gOc(){return"\xa1Categor\xeda guardada con \xe9xito!"},
-ga_A(){return"\xa1Categor\xeda eliminada!"},
-gaa7(){return y.co},
+gOd(){return"\xa1Categor\xeda guardada con \xe9xito!"},
+ga_B(){return"\xa1Categor\xeda eliminada!"},
+gaa8(){return y.co},
 B(d,e){return this.giX(this).$1(e)}}
 A.c6s.prototype={
-ga97(){return"Acciones de debug"},
-gabk(){return"Identidad"},
-gacF(){return"Prueba de notificaci\xf3n"}}
+ga98(){return"Acciones de debug"},
+gabl(){return"Identidad"},
+gacG(){return"Prueba de notificaci\xf3n"}}
 A.c6w.prototype={
 ghe(){return y.N},
-ga8E(){return"Copiar c\xf3digo"},
-ga7O(){return"C\xf3digo copiado al portapapeles"},
-ga_f(){return"Solo"},
-ga_e(){return y.eP},
-ga81(){return"Compare"},
-ga80(){return y.h9},
-gafs(){return"Trial"},
-gafq(){return y.gq},
-gafA(){return"Unlock"},
-gafz(){return y.fP}}
+ga8F(){return"Copiar c\xf3digo"},
+ga7P(){return"C\xf3digo copiado al portapapeles"},
+ga_g(){return"Solo"},
+ga_f(){return y.eP},
+ga82(){return"Compare"},
+ga81(){return y.h9},
+gafr(){return"Trial"},
+gafp(){return y.gq},
+gafz(){return"Unlock"},
+gafy(){return y.fP}}
 A.c6B.prototype={
 gal(d){return"Admin"},
-gT5(d){return y.bD}}
+gT6(d){return y.bD}}
 A.c79.prototype={
-gacG(){return"Probar notificaci\xf3n"},
+gacH(){return"Probar notificaci\xf3n"},
 gus(){return"Enviar notificaci\xf3n push"}}
 A.c76.prototype={
-ga7h(){return"kasy"},
-gTi(){return"Componentes"},
-goc(){return"Buscar componentes"},
-gZf(){return"Ning\xfan componente encontrado"},
-gabm(){return"En producci\xf3n"},
-gacu(){return"Revisar"}}
+ga7i(){return"kasy"},
+gTj(){return"Componentes"},
+god(){return"Buscar componentes"},
+gZg(){return"Ning\xfan componente encontrado"},
+gabn(){return"En producci\xf3n"},
+gacv(){return"Revisar"}}
 A.c74.prototype={
-gFB(){return"Componentes"}}
+gFC(){return"Componentes"}}
 A.c6L.prototype={
 gal(d){return"Bienvenido de nuevo"},
 ghe(){return y.fm},
-gUw(){return"bruce@wayne.com"},
+gUx(){return"bruce@wayne.com"},
 gnE(){return"Correo electr\xf3nico"},
-gWE(){return"Contrase\xf1a"},
 gWF(){return"Contrase\xf1a"},
-gaaJ(){return"Olvid\xe9 contrase\xf1a"},
+gWG(){return"Contrase\xf1a"},
+gaaK(){return"Olvid\xe9 contrase\xf1a"},
 gqz(d){return"Continuar con correo"},
-gacx(){return"\xbfNo tienes una cuenta?"},
-ga_a(){return"Reg\xedstrate"},
-gad2(){return"o"},
-gNh(){return"Gmail"},
+gacy(){return"\xbfNo tienes una cuenta?"},
+ga_b(){return"Reg\xedstrate"},
+gad3(){return"o"},
+gNi(){return"Gmail"},
 gfX(){return"Error"},
 glv(){return y.O},
-gKL(){return"Correo electr\xf3nico inv\xe1lido"},
-gWG(){return"Debes ingresar una contrase\xf1a"},
-gWH(){return y.cO},
-a_d(d){return"No se pudo iniciar sesi\xf3n con "+d}}
+gKN(){return"Correo electr\xf3nico inv\xe1lido"},
+gWH(){return"Debes ingresar una contrase\xf1a"},
+gWI(){return y.cO},
+a_e(d){return"No se pudo iniciar sesi\xf3n con "+d}}
 A.c6N.prototype={
 gal(d){return"Reg\xedstrate ahora"},
 ghe(){return"Crea tu cuenta para empezar"},
 gqz(d){return"Crear mi cuenta"},
-gaba(){return"\xbfYa tienes una cuenta?"},
+gabb(){return"\xbfYa tienes una cuenta?"},
 gzb(){return"Iniciar sesi\xf3n"},
 gfX(){return"Error"},
 glv(){return"Este correo ya existe o es inv\xe1lido"}}
@@ -1753,7 +1752,7 @@ gal(d){return"Recuperar contrase\xf1a"},
 ghe(){return y.cu},
 gnE(){return"Correo electr\xf3nico"},
 gqz(d){return"Recuperar contrase\xf1a"},
-gael(){return"\xbfRecordaste tu contrase\xf1a?"},
+gaek(){return"\xbfRecordaste tu contrase\xf1a?"},
 gzb(){return"Iniciar sesi\xf3n"},
 gfX(){return"Error"},
 glv(){return"Ingresa un correo electr\xf3nico v\xe1lido"}}
@@ -1765,49 +1764,49 @@ gkK(){return"Sin anuncios"},
 gkL(){return"Modo sin conexi\xf3n"},
 gkM(){return"Saltos ilimitados"},
 gpQ(){return"Audio en alta calidad"},
-gOa(d){return"Suscribirse ahora"}}
+gOb(d){return"Suscribirse ahora"}}
 A.c7U.prototype={
-gabc(){return y.F},
-SQ(d){return"Ahorra "+d+"%"},
-gSR(){return"Facturaci\xf3n mensual"},
-gWR(){return"3 meses"},
-gWQ(){return"6 meses"}}
+gabd(){return y.F},
+SR(d){return"Ahorra "+d+"%"},
+gSS(){return"Facturaci\xf3n mensual"},
+gWS(){return"3 meses"},
+gWR(){return"6 meses"}}
 A.c8_.prototype={
-gXU(){return"KASY "},
-gXT(){return"PRO"},
+gXV(){return"KASY "},
+gXU(){return"PRO"},
 ghe(){return"Acceso a todas las funciones"},
-gO5(){return"\xdanete a miles de usuarios de Kasy"},
+gO6(){return"\xdanete a miles de usuarios de Kasy"},
 gkK(){return"Funciones premium ilimitadas"},
 gkL(){return"Exportaci\xf3n de alta calidad"},
 gkM(){return"Sin anuncios ni marca de agua"},
 gpQ(){return"Sincroniza en todos tus dispositivos"},
-gY9(){return"Prueba gratis activada"},
-gY8(){return"Activar prueba gratis"},
-gTP(){return"Iniciar prueba gratis"},
-gTO(){return"Suscribirse ahora"},
-SV(d,e){return""+d+" d\xedas gratis, luego "+e+"/a\xf1o"},
-SS(d){return d+"/a\xf1o"}}
+gYa(){return"Prueba gratis activada"},
+gY9(){return"Activar prueba gratis"},
+gTQ(){return"Iniciar prueba gratis"},
+gTP(){return"Suscribirse ahora"},
+SW(d,e){return""+d+" d\xedas gratis, luego "+e+"/a\xf1o"},
+ST(d){return d+"/a\xf1o"}}
 A.c81.prototype={
 gxW(){return"DESBLOQUEA TODO"},
 gxX(){return"CON POCOS TOQUES"},
-gabd(){return"Desbloquea todo en instantes"},
+gabe(){return"Desbloquea todo en instantes"},
 gkK(){return"Crea m\xe1s contenido"},
 gkL(){return"Resultados m\xe1s r\xe1pidos"},
 gkM(){return"Menos tiempo de espera"},
 gpQ(){return"Sync en la nube"},
-gaaj(){return"Soporte prioritario"},
-ga8Z(){return"Desbloquear ahora"},
-ga9_(){return"Desbloquear"},
-gST(){return y.eT},
-gSU(){return y.f3},
+gaak(){return"Soporte prioritario"},
+ga9_(){return"Desbloquear ahora"},
+ga90(){return"Desbloquear"},
+gSU(){return y.eT},
+gSV(){return y.f3},
 adn(d){return"Solo "+d+" / a\xf1o"},
 adq(d){return d+" / mes"}}
 A.c7t.prototype={
 gal(d){return"Monetiza desde el d\xeda uno"},
 gcp(d){return y.c9},
 gkg(d){return"Continuar"},
-ga_b(d){return"Omitir"},
-gac2(){return"\xbfYa tienes cuenta? Iniciar sesi\xf3n"}}
+ga_c(d){return"Omitir"},
+gac3(){return"\xbfYa tienes cuenta? Iniciar sesi\xf3n"}}
 A.c7v.prototype={
 gal(d){return"Inicio de sesi\xf3n, ya resuelto"},
 gcp(d){return y.o},
@@ -1818,9 +1817,9 @@ gal(d){return"Tu asistente de IA integrado"},
 gcp(d){return y.dn},
 gkg(d){return"Continuar"}}
 A.c7J.prototype={
-ga9O(){var w=this.x
+ga9P(){var w=this.x
 return w===$?this.x=new A.c7H():w},
-ga6c(){var w=this.Q
+ga6d(){var w=this.Q
 return w===$?this.Q=new A.c7F():w}}
 A.c7m.prototype={
 gal(d){return"\xbfCu\xe1ntos a\xf1os tienes?"},
@@ -1839,20 +1838,20 @@ gal(d){return"No te pierdas nada"},
 gcp(d){return y.eq},
 gqR(){return"Activar notificaciones"},
 gzd(){return"Ahora no"},
-gafk(){var w=this.d
+gafj(){var w=this.d
 return w===$?this.d=new A.c7N():w}}
 A.c7q.prototype={
 gal(d){return"Experiencia personalizada"},
 gcp(d){return y.a},
 gqR(){return"Continuar"},
 gzd(){return"Ahora no"},
-ga7w(){var w=this.d
+ga7x(){var w=this.d
 return w===$?this.d=new A.c7o():w}}
 A.c7B.prototype={
-gagg(){return"Cuenta creada."},
-gagi(){return"Cuenta creada. Bienvenido!"},
-gagh(){return"Cuenta creada. Bienvenida!"},
-gHh(){var w=this.d
+gagf(){return"Cuenta creada."},
+gagh(){return"Cuenta creada. Bienvenido!"},
+gagg(){return"Cuenta creada. Bienvenida!"},
+gHj(){var w=this.d
 return w===$?this.d=new A.c7D():w}}
 A.c72.prototype={
 gal(d){return"Voto registrado"},
@@ -1861,104 +1860,104 @@ A.c70.prototype={
 gal(d){return"Ya votado"},
 gcp(d){return"Ya votaste por esta idea"}}
 A.c6V.prototype={
-ga7B(){return"Agregar"},
+ga7C(){return"Agregar"},
 gal(d){return"Enviar una idea"},
 gcp(d){return"Cu\xe9ntanos qu\xe9 te gustar\xeda ver en la app."},
-gZ5(){return"Enviar"},
+gZ6(){return"Enviar"},
 gfu(d){return"Cancelar"},
-gafa(){return"T\xedtulo"},
-gaf5(){return"Un t\xedtulo corto y descriptivo"},
-ga9l(){return"Descripci\xf3n"},
-ga9j(){return y._},
+gaf9(){return"T\xedtulo"},
+gaf4(){return"Un t\xedtulo corto y descriptivo"},
+ga9m(){return"Descripci\xf3n"},
+ga9k(){return y._},
 gfX(){return"Error"},
-gUA(){return y.fu},
-gaab(){return"Algo sali\xf3 mal. Int\xe9ntalo de nuevo."},
-gUB(){return y.T},
-gXY(){var w=this.d
+gUB(){return y.fu},
+gaac(){return"Algo sali\xf3 mal. Int\xe9ntalo de nuevo."},
+gUC(){return y.T},
+gXZ(){var w=this.d
 return w===$?this.d=new A.c6X():w}}
 A.c8d.prototype={
 gal(d){return"Foto de perfil"},
-gaeI(){return"Tomar foto"},
-ga7C(){return"Biblioteca de fotos"},
-gaeq(){return"Eliminar foto"}}
+gaeH(){return"Tomar foto"},
+ga7D(){return"Biblioteca de fotos"},
+gaep(){return"Eliminar foto"}}
 A.c8f.prototype={
-gJX(d){return"Quiero eliminar mi cuenta"},
+gJZ(d){return"Quiero eliminar mi cuenta"},
 gal(d){return"\xbfQuieres eliminar tu cuenta?"},
-ga8f(d){return y.p},
-ga8g(){return y.u},
+ga8g(d){return y.p},
+ga8h(){return y.u},
 gfu(d){return"Cancelar"},
-ga88(d){return"S\xed, eliminar"},
+ga89(d){return"S\xed, eliminar"},
 ghk(d){return y.x}}
 A.c8b.prototype={
 gCs(){return"Previsualizar novedades"},
 gadD(){return"Previsualizar actualizaci\xf3n disponible"},
 grg(){return"Paywalls"},
-gaeS(){return"Probar onboarding"},
-ga8G(){return"Copiar ID de usuario"},
-gYv(){return"ID de usuario copiado al portapapeles"},
-ga8F(){return"Copiar FCM Token"},
-ga6r(){return"Pedir permiso de notificaci\xf3n"},
-gLI(){return y.X},
-ga6s(){return"Pedir evaluaci\xf3n"},
+gaeR(){return"Probar onboarding"},
+ga8H(){return"Copiar ID de usuario"},
+gYw(){return"ID de usuario copiado al portapapeles"},
+ga8G(){return"Copiar FCM Token"},
+ga6s(){return"Pedir permiso de notificaci\xf3n"},
+gLK(){return y.X},
+ga6t(){return"Pedir evaluaci\xf3n"},
 gus(){return"Enviar notificaci\xf3n"},
-gZu(){return"Agregar e-mail"},
-gZS(){return"T\xedtulo"},
-gZR(){return"Ej: Nueva actualizaci\xf3n disponible"},
-gZt(){return"Mensaje"},
-gZs(){return y.G},
-gZx(){return"URL de imagen (opcional)"},
-gZw(){return"https://..."},
-gZv(){return"Correos destinatarios"},
-gZQ(){return"\xa1Notificaci\xf3n enviada!"},
-ZT(d){return"Usuario no encontrado: "+d},
-gZP(){return"Enviar"},
-gZD(){return"El t\xedtulo y el mensaje son obligatorios"},
-gZy(){return"Agrega al menos un correo"},
-gZH(){return"P\xe1gina al abrir"},
-gZE(){return y.aZ},
-gZI(){return"Notificaciones"},
-gZG(){return"Inicio"},
-gZL(){return"Configuraci\xf3n"},
-gZJ(){return"Premium"},
-gZK(){return"Recordatorios"},
-gZF(){return"Comentarios"},
-gZA(){return"Vista previa"},
-gZB(){return"ahora"},
-gZC(){return"T\xedtulo de la notificaci\xf3n"},
-gZz(){return"El cuerpo del mensaje aparece aqu\xed"},
-gZO(){return"Destinatarios"},
-gZN(){return"Contenido"},
-gZM(){return"Avanzado"},
-gZp(){return"Todos"},
-gZr(){return"Espec\xedficos"},
-gZq(){return y.gk}}
+gZv(){return"Agregar e-mail"},
+gZT(){return"T\xedtulo"},
+gZS(){return"Ej: Nueva actualizaci\xf3n disponible"},
+gZu(){return"Mensaje"},
+gZt(){return y.G},
+gZy(){return"URL de imagen (opcional)"},
+gZx(){return"https://..."},
+gZw(){return"Correos destinatarios"},
+gZR(){return"\xa1Notificaci\xf3n enviada!"},
+ZU(d){return"Usuario no encontrado: "+d},
+gZQ(){return"Enviar"},
+gZE(){return"El t\xedtulo y el mensaje son obligatorios"},
+gZz(){return"Agrega al menos un correo"},
+gZI(){return"P\xe1gina al abrir"},
+gZF(){return y.aZ},
+gZJ(){return"Notificaciones"},
+gZH(){return"Inicio"},
+gZM(){return"Configuraci\xf3n"},
+gZK(){return"Premium"},
+gZL(){return"Recordatorios"},
+gZG(){return"Comentarios"},
+gZB(){return"Vista previa"},
+gZC(){return"ahora"},
+gZD(){return"T\xedtulo de la notificaci\xf3n"},
+gZA(){return"El cuerpo del mensaje aparece aqu\xed"},
+gZP(){return"Destinatarios"},
+gZO(){return"Contenido"},
+gZN(){return"Avanzado"},
+gZq(){return"Todos"},
+gZs(){return"Espec\xedficos"},
+gZr(){return y.gk}}
 A.c7H.prototype={
-gacJ(){return"Nuevo suscriptor Pro"},
-gacH(){return"Plan anual \xb7 +$49.90"},
-gacI(){return"1:40 PM"},
-gFT(){return"Procesando pago\u2026"},
-ga_F(){return"Ganancias"},
-ga_E(){return y.gW}}
+gacK(){return"Nuevo suscriptor Pro"},
+gacI(){return"Plan anual \xb7 +$49.90"},
+gacJ(){return"1:40 PM"},
+gFU(){return"Procesando pago\u2026"},
+ga_G(){return"Ganancias"},
+ga_F(){return y.gW}}
 A.c7F.prototype={
-gafx(){return"\xbfQu\xe9 puedes hacer?"},
-ga5U(){return y.f},
-gafy(){return"Resume mis notas"},
-ga5V(){return y.e0}}
+gafw(){return"\xbfQu\xe9 puedes hacer?"},
+ga5V(){return y.f},
+gafx(){return"Resume mis notas"},
+ga5W(){return y.e0}}
 A.c7N.prototype={
 gadN(){return"Kasy"},
 gadP(){return"Tu resumen semanal est\xe1 listo"},
 gadO(){return"Toca para abrir."},
 gadQ(){return"ahora"},
-ga_x(){return"Nuevo suscriptor Pro"},
-ga_w(){return"Plan anual \xb7 +$49,90"},
-ga_t(){return"\xa1Racha de 7 d\xedas!"},
-ga_s(){return"Volviste a cumplir tu meta diaria."}}
+ga_y(){return"Nuevo suscriptor Pro"},
+ga_x(){return"Plan anual \xb7 +$49,90"},
+ga_u(){return"\xa1Racha de 7 d\xedas!"},
+ga_t(){return"Volviste a cumplir tu meta diaria."}}
 A.c7o.prototype={
-gaeH(d){return"Privacidad"}}
+gaeG(d){return"Privacidad"}}
 A.c7D.prototype={
 gAa(){return"Creando tu cuenta"},
 gadv(){return"Guardando tus preferencias"},
-gaeb(d){return"Personalizando tu experiencia"}}
+gaea(d){return"Personalizando tu experiencia"}}
 A.c6X.prototype={
 gal(d){return"Idea enviada"},
 gcp(d){return y.r}}
@@ -2173,73 +2172,73 @@ $D(){return{page:C.D,total:C.D}},
 $S:108};(function inheritance(){var w=a.mixin,v=a.inherit,u=a.inheritMany
 v(A.aTE,B.jL)
 v(A.aAK,A.aTE)
-v(A.c6R,B.a5L)
-v(A.c6r,B.a5y)
-v(A.c78,B.a5U)
-v(A.c6H,B.a5G)
-v(A.c7W,B.a6i)
-v(A.c6n,B.a5w)
-v(A.c7s,B.a63)
-v(A.c6Z,B.a5P)
-v(A.c8n,B.a6w)
-v(A.c8l,B.a6v)
-v(A.c87,B.a6o)
-v(A.c7i,B.a5Z)
-v(A.c85,B.a6n)
-v(A.c8j,B.a6u)
-v(A.c6T,B.a5M)
-v(A.c8h,B.a6t)
-v(A.c7k,B.a6_)
-v(A.c7S,B.a6g)
-v(A.c83,B.a6m)
-v(A.c7Q,B.a6f)
-v(A.c6P,B.a5K)
-v(A.c7c,B.a5W)
-v(A.c7e,B.a5X)
-v(A.c7g,B.a5Y)
-v(A.c89,B.a6p)
-v(A.c6D,B.a5E)
-v(A.c6u,B.a5A)
-v(A.c6F,B.a5F)
-v(A.c6z,B.a5C)
-v(A.c6p,B.a5x)
-v(A.c6s,B.a5z)
-v(A.c6w,B.a5B)
-v(A.c6B,B.a5D)
-v(A.c79,B.a5V)
-v(A.c76,B.a5T)
-v(A.c74,B.a5S)
-v(A.c6L,B.a5I)
-v(A.c6N,B.a5J)
-v(A.c6J,B.a5H)
-v(A.c7Y,B.a6j)
-v(A.c7U,B.a6h)
-v(A.c8_,B.a6k)
-v(A.c81,B.a6l)
-v(A.c7t,B.a64)
-v(A.c7v,B.a65)
-v(A.c7x,B.a66)
-v(A.c7J,B.a6c)
-v(A.c7m,B.a60)
-v(A.c7z,B.a67)
-v(A.c7L,B.a6d)
-v(A.c7q,B.a62)
-v(A.c7B,B.a68)
-v(A.c72,B.a5R)
-v(A.c70,B.a5Q)
-v(A.c6V,B.a5N)
-v(A.c8d,B.a6r)
-v(A.c8f,B.a6s)
-v(A.c8b,B.a6q)
-v(A.c7H,B.a6b)
-v(A.c7F,B.a6a)
-v(A.c7N,B.a6e)
-v(A.c7o,B.a61)
-v(A.c7D,B.a69)
-v(A.c6X,B.a5O)
+v(A.c6R,B.a5K)
+v(A.c6r,B.a5x)
+v(A.c78,B.a5T)
+v(A.c6H,B.a5F)
+v(A.c7W,B.a6h)
+v(A.c6n,B.a5v)
+v(A.c7s,B.a62)
+v(A.c6Z,B.a5O)
+v(A.c8n,B.a6v)
+v(A.c8l,B.a6u)
+v(A.c87,B.a6n)
+v(A.c7i,B.a5Y)
+v(A.c85,B.a6m)
+v(A.c8j,B.a6t)
+v(A.c6T,B.a5L)
+v(A.c8h,B.a6s)
+v(A.c7k,B.a5Z)
+v(A.c7S,B.a6f)
+v(A.c83,B.a6l)
+v(A.c7Q,B.a6e)
+v(A.c6P,B.a5J)
+v(A.c7c,B.a5V)
+v(A.c7e,B.a5W)
+v(A.c7g,B.a5X)
+v(A.c89,B.a6o)
+v(A.c6D,B.a5D)
+v(A.c6u,B.a5z)
+v(A.c6F,B.a5E)
+v(A.c6z,B.a5B)
+v(A.c6p,B.a5w)
+v(A.c6s,B.a5y)
+v(A.c6w,B.a5A)
+v(A.c6B,B.a5C)
+v(A.c79,B.a5U)
+v(A.c76,B.a5S)
+v(A.c74,B.a5R)
+v(A.c6L,B.a5H)
+v(A.c6N,B.a5I)
+v(A.c6J,B.a5G)
+v(A.c7Y,B.a6i)
+v(A.c7U,B.a6g)
+v(A.c8_,B.a6j)
+v(A.c81,B.a6k)
+v(A.c7t,B.a63)
+v(A.c7v,B.a64)
+v(A.c7x,B.a65)
+v(A.c7J,B.a6b)
+v(A.c7m,B.a6_)
+v(A.c7z,B.a66)
+v(A.c7L,B.a6c)
+v(A.c7q,B.a61)
+v(A.c7B,B.a67)
+v(A.c72,B.a5Q)
+v(A.c70,B.a5P)
+v(A.c6V,B.a5M)
+v(A.c8d,B.a6q)
+v(A.c8f,B.a6r)
+v(A.c8b,B.a6p)
+v(A.c7H,B.a6a)
+v(A.c7F,B.a69)
+v(A.c7N,B.a6d)
+v(A.c7o,B.a60)
+v(A.c7D,B.a68)
+v(A.c6X,B.a5N)
 u(B.uy,[A.ce2,A.cdn,A.cdo,A.cdp,A.cdq,A.cdr,A.cds,A.cdt,A.cdv,A.cdw,A.cdx,A.cdy,A.cdz,A.cdA,A.cdB,A.cdC,A.cdD,A.cdE,A.cdG,A.cdH,A.cdI,A.cdJ,A.cdK,A.cdL,A.cdM,A.cdN,A.cdO,A.cdP,A.cdR,A.cdS,A.cdT,A.cdU,A.cdV,A.cdW,A.cdX])
 w(A.aTE,B.nH)})()
 B.cqw(b.typeUniverse,JSON.parse('{"aAK":{"jL":[],"nH":["j9","jL"]}}'))
 var y={I:"- Lorem ipsum dolor sit amet, consectetur adipiscing elit.",R:"Abre la pesta\xf1a Usuarios para gestionar todas las cuentas.",b:"Activa Face ID o un c\xf3digo del dispositivo en Ajustes.",c:"Activa Face ID, Touch ID o c\xf3digo en Ajustes.",S:"Activa Touch ID o un c\xf3digo del dispositivo en Ajustes.",d:"Activa desbloqueo biom\xe9trico o bloqueo de pantalla en Ajustes.",e:"Administre las categor\xedas oficiales de la biblioteca. Los PDF vinculados a una categor\xeda eliminada no se borrar\xe1n.",p:"Advertencia: esta acci\xf3n es permanente y no se puede deshacer.",u:"Advertencia: esta acci\xf3n es permanente. Perder\xe1s tu suscripci\xf3n activa, y crear una cuenta nueva m\xe1s tarde (incluso con el mismo correo) no la recuperar\xe1.",H:"Al abrir confirmar\xe1s con Face ID o Touch ID\u2014sigues con sesi\xf3n iniciada.",t:"Al abrir confirmar\xe1s con Face ID\u2014sigues con sesi\xf3n iniciada.",z:"Al abrir confirmar\xe1s con Touch ID\u2014sigues con sesi\xf3n iniciada.",W:"Al abrir verificar\xe1s con huella digital\u2014sigues con sesi\xf3n iniciada.",s:"Al abrir verificar\xe1s con reconocimiento facial\u2014sigues con sesi\xf3n iniciada.",x:"Algo sali\xf3 mal. Por favor, int\xe9ntalo de nuevo.",E:"A\xf1ade huella o reconocimiento facial en Ajustes.",A:"A\xfan no hay comentarios. \xa1S\xe9 el primero en comentar!",F:"Compara Gratis y Premium y elige la facturaci\xf3n mensual o anual que mejor te encaje.",n:"Configura huella digital o bloqueo de pantalla en ajustes.",i:"Configura reconocimiento facial o bloqueo de pantalla en ajustes.",m:"Confirma con Face ID o Touch ID para activar el bloqueo",j:"Confirma con Face ID para activar el bloqueo",K:"Confirma con Touch ID para activar el bloqueo",v:"Confirma con huella digital para activar el bloqueo",g:"Confirma con huella o rostro para activar el bloqueo",k:"Confirma con reconocimiento facial para activar el bloqueo",U:"Confirma en el tel\xe9fono para activar el bloqueo",O:"Correo, contrase\xf1a incorrectos o este correo no est\xe1 registrado",o:"Correo, login social y recuperaci\xf3n de contrase\xf1a. Seguro y listo para publicar.",P:"Cuando alguien cree una cuenta, aparecer\xe1 aqu\xed.",h:"Cuando un usuario env\xede una idea, aparecer\xe1 aqu\xed.",q:"Define el titulo y, si quieres, una descripcion y la prioridad.",B:"Define una contrase\xf1a para tambi\xe9n iniciar sesi\xf3n con correo y contrase\xf1a, adem\xe1s del inicio de sesi\xf3n social.",_:"Describe el recurso o la mejora en detalle...",T:"Descripci\xf3n muy corta. Agrega m\xe1s detalles",X:"Disponible solo en la app nativa (iOS / Android)",a:"El permiso ayuda a ajustar comunicaciones a tu perfil. No muestra anuncios dentro de la app.",fu:"El t\xedtulo y la descripci\xf3n son obligatorios",Z:"Elige lo que mejor te represente. Puedes omitir si prefieres.",f:"Escribo, resumo y respondo cualquier cosa en segundos.",go:"Esta es una vista previa de administrador. Las acciones de compra est\xe1n desactivadas.",Y:"Esta suscripci\xf3n se realiz\xf3 en otra plataforma y no se puede gestionar ni cancelar aqu\xed. Inicia sesi\xf3n en tu cuenta en la plataforma donde la compraste.",cn:"Esto nos ayuda a personalizar tu experiencia.",aa:"Exige Face ID al abrir con sesi\xf3n iniciada.",cs:"Exige Touch ID al abrir con sesi\xf3n iniciada.",d5:"Exige desbloqueo facial al abrir con sesi\xf3n iniciada.",a0:"Exige huella digital al abrir con sesi\xf3n iniciada.",fc:"Exige huella digital o desbloqueo facial al abrir con sesi\xf3n iniciada.",gW:"Ganaste $312.40 esta semana de 14 nuevas suscripciones.",gv:"Has iniciado sesi\xf3n con tu n\xfamero de tel\xe9fono",G:"Hasta 3 l\xedneas en la lista de la app (m\xe1x. 140 caracteres)",dB:"Hay una versi\xf3n m\xe1s nueva de la app. Actualiza para tener las \xfaltimas mejoras y correcciones.",y:"Hemos enviado un c\xf3digo de verificaci\xf3n a ",fm:"Inicia sesi\xf3n para continuar tu experiencia",gF:"Int\xe9ntalo de nuevo en unos instantes. Si sigue ocurriendo, es posible que los productos de la tienda a\xfan est\xe9n terminando la configuraci\xf3n.",M:"La b\xfasqueda escane\xf3 un conjunto limitado. Pueden faltar coincidencias.",aF:"La contrase\xf1a debe tener al menos 6 caracteres",gk:"La notificaci\xf3n se enviar\xe1 a todos los usuarios suscritos.",r:"La revisaremos y te daremos una respuesta",l:"Las opciones de suscripci\xf3n a\xfan no est\xe1n disponibles",e0:"Listo. Aqu\xed tienes los 3 puntos clave de hoy.",h9:"Mensual vs anual lado a lado, con tabla free vs premium.",ba:"Necesitas ser admin para ver esto. Define role: admin en el registro de tu usuario en el backend. La app no puede cambiar este campo; la validaci\xf3n est\xe1 en el servidor.",bE:"Ning\xfan PDF p\xfablico enviado por otros usuarios a\xfan.",dK:"No encontramos una suscripci\xf3n activa para restaurar.",dF:"No recibimos confirmaci\xf3n del pago. Si ya pagaste, toca Restaurar.",cz:'No se encontraron resultados para "{query}".',c0:"No se pudieron cargar los usuarios. Aseg\xfarate de ser admin.",L:"No se pudo actualizar tu perfil. Int\xe9ntalo de nuevo.",V:"No se pudo crear la contrase\xf1a. Int\xe9ntalo de nuevo.",J:"No se pudo vincular la cuenta. Int\xe9ntalo de nuevo.",f1:"Nota: Si no recibes un email, por favor revisa tu carpeta de spam",aZ:"Pantalla que se abre cuando el usuario toca la notificaci\xf3n.",fP:"Paywall de conversi\xf3n para onboarding o bloqueo fuerte.",c9:"Paywalls, suscripciones y prueba gratis listos para producci\xf3n. Sin crear backend de cobros.",h1:"Pediremos una verificaci\xf3n r\xe1pida en el tel\xe9fono cuando abras con sesi\xf3n iniciada.",C:"Pide Face ID o Touch ID al abrir con la sesi\xf3n iniciada.",co:"Por favor, complete todos los campos requeridos.",e3:"Puedes usar cualquiera de los dos\u2014sigues dentro.",cU:"Quien tenga el plan premium aparece en este filtro.",dl:"Recibe un recordatorio para volver a la app",f3:"Renueva hasta cancelar. Gestiona en configuraci\xf3n.",eT:"Renueva hasta cancelar. Gestiona en la tienda.",Q:"Se eliminaran permanentemente todas las tarjetas de esta columna.",cg:"Sin bloqueo, quien tenga el tel\xe9fono desbloqueado puede usar la app hasta que cierres sesi\xf3n.",bx:"Solicitudes y sugerencias enviadas por tus usuarios. M\xe1rcalas como visibles para mostrarlas en la app, u oc\xfaltalas si no corresponden.",eq:"Solo te escribiremos cuando de verdad importe. Nada de spam.",D:"S\xe9 el primero en sugerir una funci\xf3n o mejora.",ci:"Te enviaremos un c\xf3digo de verificaci\xf3n para confirmar tu identidad",cu:"Te enviaremos un enlace para restablecerla",w:"Te hemos enviado un email con un enlace para restablecer tu contrase\xf1a",N:"Toca un paywall para previsualizarlo. Copia su c\xf3digo para decirle al asistente cu\xe1l usar.",gq:"Toggle de prueba gratis, normalmente en el anual. Mensual cobra al instante.",cO:"Tu contrase\xf1a debe tener al menos 5 caracteres",h4:"Tu tiempo es limitado.\nNo vivas la vida de otra persona.\nTen el coraje de seguir tu intuici\xf3n.\nTodo lo dem\xe1s es secundario.",dn:"Un asistente conversacional listo para usar, ya integrado.",eP:"Un solo plan con beneficios y un CTA. Ideal para apps de un tier.",fN:"Una confirmaci\xf3n r\xe1pida al abrir\u2014sigues con la sesi\xf3n.",aK:"Una rese\xf1a en la tienda marca la diferencia. Toma unos segundos y nos ayuda mucho a crecer.",dQ:"Ver todos los PDFs subidos por este usuario",bD:"Visible solo para administradores y en modo de desarrollo.",eu:"\xbfActivar bloqueo con reconocimiento facial?",fo:"\xbfEst\xe1 seguro de que desea eliminar esta categor\xeda?"}
 var x={h:B.a_("I<k>"),g:B.a_("k"),c:B.a_("qX<j9,jL>")}};
-(a=>{a["cqpaxHnsOmftzS8z2GxjP5Ub2PI="]=a.current})($__dart_deferred_initializers__);
+(a=>{a["TPk+IbiCbt+yPqf2oLbhGRUj5qA="]=a.current})($__dart_deferred_initializers__);
