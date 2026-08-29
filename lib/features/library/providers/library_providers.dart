@@ -44,6 +44,31 @@ class Categories extends _$Categories {
 }
 
 // ----------------------------------------------------
+// AUTHORS PROVIDER
+// ----------------------------------------------------
+@riverpod
+class Authors extends _$Authors {
+  @override
+  Future<List<LibraryAuthor>> build() async {
+    return ref.watch(libraryFirebaseRepositoryProvider).getAuthors();
+  }
+
+  Future<void> addAuthor({
+    required String name,
+    required String bio,
+    required String createdBy,
+  }) async {
+    await ref.read(libraryFirebaseRepositoryProvider).addAuthor(
+          name: name,
+          bio: bio,
+          createdBy: createdBy,
+        );
+    // Refresh the list after adding
+    ref.invalidateSelf();
+  }
+}
+
+// ----------------------------------------------------
 // PDFS PROVIDER
 // ----------------------------------------------------
 @riverpod
@@ -60,6 +85,7 @@ class Pdfs extends _$Pdfs {
     required String description,
     required List<String> categoryIds,
     required String author,
+    String? authorId,
     required String fileUrl,
     required String thumbnailUrl,
     required List<String> tags,
@@ -70,6 +96,7 @@ class Pdfs extends _$Pdfs {
       description: description,
       categoryIds: categoryIds,
       author: author,
+      authorId: authorId,
       fileUrl: fileUrl,
       thumbnailUrl: thumbnailUrl,
       tags: tags,

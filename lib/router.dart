@@ -20,7 +20,9 @@ import 'package:cowboydodartinc/features/home/home_components_page.dart';
 import 'package:cowboydodartinc/features/home/home_components_preview_page.dart';
 import 'package:cowboydodartinc/features/home/home_components_preview_registry.dart';
 import 'package:cowboydodartinc/features/library/ui/admin/manage_pdfs_page.dart';
+import 'package:cowboydodartinc/features/library/ui/author_profile_page.dart';
 import 'package:cowboydodartinc/features/library/ui/global_search_page.dart';
+import 'package:cowboydodartinc/features/library/ui/my_profile_page.dart';
 import 'package:cowboydodartinc/features/library/ui/pdf_detail_page.dart';
 import 'package:cowboydodartinc/features/library/ui/pdf_reader_page.dart';
 import 'package:cowboydodartinc/features/library/ui/uploader_profile_page.dart';
@@ -421,6 +423,14 @@ GoRouter generateRouter({
         pageBuilder: (context, state) => kasyTransitionPage(
           key: state.pageKey,
           child: PdfReaderPage(pdfId: state.pathParameters['id'] ?? ''),
+        ),
+      ),
+      GoRoute(
+        name: 'author_profile',
+        path: '/library/author/:id',
+        pageBuilder: (context, state) => kasyTransitionPage(
+          key: state.pageKey,
+          child: AuthorProfilePage(authorId: state.pathParameters['id'] ?? ''),
         ),
       ),
       GoRoute(

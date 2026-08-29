@@ -19,6 +19,7 @@ class ExplorePage extends ConsumerStatefulWidget {
 class _ExplorePageState extends ConsumerState<ExplorePage> {
   String _searchQuery = '';
   String _selectedCategoryId = 'all';
+  String _selectedAuthorId = 'all';
   bool _isLoading = true;
   Timer? _debounceTimer;
 
@@ -67,12 +68,21 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
     _simulateLoading(500);
   }
 
+  void _selectAuthor(String authorId) {
+    if (_selectedAuthorId == authorId) return;
+    setState(() {
+      _selectedAuthorId = authorId;
+    });
+    _simulateLoading(500);
+  }
+
   @override
   Widget build(BuildContext context) {
     final userId = ref.watch(userStateNotifierProvider).user.idOrNull;
     final pdfs = ref.watch(pdfsProvider).value ?? [];
     final favorites = ref.watch(favoritesProvider).value ?? [];
     final categories = ref.watch(categoriesProvider).value ?? [];
+    final authors = ref.watch(authorsProvider).value ?? [];
 
     // Other users: any PDF where createdBy != userId
     final otherUsersPdfs = pdfs.where((pdf) {
@@ -81,7 +91,8 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
           pdf.author.toLowerCase().contains(_searchQuery.toLowerCase()) ||
           pdf.tags.any((t) => t.toLowerCase().contains(_searchQuery.toLowerCase()));
       final matchesCategory = _selectedCategoryId == 'all' || pdf.categoryIds.contains(_selectedCategoryId);
-      return isFromOther && matchesSearch && matchesCategory;
+      final matchesAuthor = _selectedAuthorId == 'all' || pdf.authorId == _selectedAuthorId;
+      return isFromOther && matchesSearch && matchesCategory && matchesAuthor;
     }).toList();
 
     return KasyScreen(
@@ -130,6 +141,38 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
                           label: cat.name,
                           selected: _selectedCategoryId == cat.id,
                           onTap: () => _selectCategory(cat.id),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ),
+              const SizedBox(height: KasySpacing.lg),
+
+              // Authors horizontal list
+              Text(
+                'Autores',
+                style: context.kasyTextTheme.sectionTitle,
+              ),
+              const SizedBox(height: KasySpacing.sm),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    KasySelectableChip(
+                      key: const ValueKey('author-explore-all'),
+                      label: 'Todos os Autores',
+                      selected: _selectedAuthorId == 'all',
+                      onTap: () => _selectAuthor('all'),
+                    ),
+                    ...authors.map((a) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: KasySpacing.sm),
+                        child: KasySelectableChip(
+                          key: ValueKey('author-explore-${a.id}'),
+                          label: a.name,
+                          selected: _selectedAuthorId == a.id,
+                          onTap: () => _selectAuthor(a.id),
                         ),
                       );
                     }),
@@ -228,13 +271,17 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
                                   style: context.kasyTextTheme.cardTitle,
                                 ),
                                 const SizedBox(height: KasySpacing.xs),
-                                // Clickable Uploader/Author Name
+                                // Clickable Author Name
                                 GestureDetector(
-                                  onTap: () => context.push('/library/uploader/${Uri.encodeComponent(pdf.author)}'),
+                                  onTap: () {
+                                    if (pdf.authorId != null) {
+                                      context.push('/library/author/${pdf.authorId}');
+                                    }
+                                  },
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     child: Text(
-                                      '${t.library.uploaded_by}: ${pdf.author}',
+                                      'Autor: ${pdf.author}',
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: context.kasyTextTheme.cardSubtitle.copyWith(

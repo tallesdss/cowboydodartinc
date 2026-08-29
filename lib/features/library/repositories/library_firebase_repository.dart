@@ -92,6 +92,38 @@ class LibraryFirebaseRepository {
   }
 
   // ----------------------------------------------------
+  // AUTHORS
+  // ----------------------------------------------------
+  Future<List<LibraryAuthor>> getAuthors() async {
+    final snapshot = await _firestore
+        .collection('autores')
+        .orderBy('name', descending: false)
+        .get();
+    
+    return snapshot.docs.map((doc) {
+      final data = doc.data();
+      data['id'] = doc.id;
+      if (data['createdAt'] is Timestamp) {
+        data['createdAt'] = (data['createdAt'] as Timestamp).toDate().toIso8601String();
+      }
+      return LibraryAuthor.fromMap(data);
+    }).toList();
+  }
+
+  Future<void> addAuthor({
+    required String name,
+    required String bio,
+    required String createdBy,
+  }) async {
+    await _firestore.collection('autores').add({
+      'name': name,
+      'bio': bio,
+      'createdBy': createdBy,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  // ----------------------------------------------------
   // PDFS
   // ----------------------------------------------------
   Future<List<PdfDocument>> getPdfs() async {
@@ -105,6 +137,7 @@ class LibraryFirebaseRepository {
         description: data['descricao'] as String? ?? '',
         categoryIds: List<String>.from(data['categoryIds'] as Iterable? ?? []),
         author: data['autor_nome'] as String? ?? 'Desconhecido',
+        authorId: data['escritor_id'] as String?,
         fileUrl: data['arquivo_url'] as String? ?? '',
         thumbnailUrl: data['thumbnail_url'] as String? ?? '',
         tags: List<String>.from(data['tags'] as Iterable? ?? []),
@@ -127,6 +160,7 @@ class LibraryFirebaseRepository {
           description: data['descricao'] as String? ?? '',
           categoryIds: List<String>.from(data['categoryIds'] as Iterable? ?? []),
           author: data['autor_nome'] as String? ?? 'Desconhecido',
+          authorId: data['escritor_id'] as String?,
           fileUrl: data['arquivo_url'] as String? ?? '',
           thumbnailUrl: data['thumbnail_url'] as String? ?? '',
           tags: List<String>.from(data['tags'] as Iterable? ?? []),
@@ -144,6 +178,7 @@ class LibraryFirebaseRepository {
     required String description,
     required List<String> categoryIds,
     required String author,
+    String? authorId,
     required String fileUrl,
     required String thumbnailUrl,
     required List<String> tags,
@@ -154,6 +189,7 @@ class LibraryFirebaseRepository {
       'descricao': description,
       'categoryIds': categoryIds,
       'autor_nome': author,
+      if (authorId != null) 'escritor_id': authorId,
       'arquivo_url': fileUrl,
       'thumbnail_url': thumbnailUrl,
       'tags': tags,

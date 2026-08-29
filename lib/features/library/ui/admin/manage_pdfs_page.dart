@@ -5,6 +5,7 @@ import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
 import 'package:cowboydodartinc/features/library/repositories/library_firebase_repository.dart';
+import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -23,10 +24,10 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
-  final _authorController = TextEditingController();
   final _tagsController = TextEditingController();
 
   final List<String> _selectedCategoryIds = [];
+  LibraryAuthor? _selectedAuthor;
 
   // Real Upload Fields
   String? _selectedFilePath;
@@ -40,7 +41,6 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   void dispose() {
     _titleController.dispose();
     _descController.dispose();
-    _authorController.dispose();
     _tagsController.dispose();
     super.dispose();
   }
@@ -50,6 +50,14 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
       showKasyToast(
         context,
         title: 'Faça upload de um arquivo PDF primeiro!',
+        tone: KasyToastTone.warning,
+      );
+      return;
+    }
+    if (_selectedAuthor == null) {
+      showKasyToast(
+        context,
+        title: 'Selecione ou crie um autor!',
         tone: KasyToastTone.warning,
       );
       return;
@@ -86,7 +94,8 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         title: _titleController.text,
         description: _descController.text,
         categoryIds: _selectedCategoryIds,
-        author: _authorController.text,
+        author: _selectedAuthor!.name,
+        authorId: _selectedAuthor!.id,
         fileUrl: downloadUrl,
         thumbnailUrl: '',
         tags: tags,
@@ -135,26 +144,93 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         _titleController.text = _selectedFileName!
             .replaceAll('.pdf', '')
             .replaceAll('_', ' ');
-        if (_authorController.text.isEmpty) {
-          _authorController.text =
-              ref.read(userStateNotifierProvider).user.isAdmin
-                  ? 'Admin / Dev'
-                  : 'Cliente';
-        }
       });
     }
   }
 
+  Future<void> _showCreateAuthorModal() async {
+    final nameController = TextEditingController();
+    final bioController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+    bool isSaving = false;
+
+    await showKasyDialog(
+      context: context,
+      builder: (dialogCtx) => KasyDialog(
+        title: 'Novo Autor',
+        body: StatefulBuilder(
+          builder: (context, setModalState) {
+          return Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                KasyTextField(
+                  controller: nameController,
+                  label: 'Nome do Autor',
+                  validator: (val) => val == null || val.isEmpty ? 'Obrigatório' : null,
+                ),
+                const SizedBox(height: KasySpacing.md),
+                KasyTextField(
+                  controller: bioController,
+                  label: 'Biografia (Opcional)',
+                  maxLines: 3,
+                ),
+                const SizedBox(height: KasySpacing.lg),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    KasyButton(
+                      label: t.library.cancel,
+                      variant: KasyButtonVariant.ghost,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    const SizedBox(width: KasySpacing.md),
+                    KasyButton(
+                      label: t.library.save,
+                      isLoading: isSaving,
+                      onPressed: () async {
+                        if (!formKey.currentState!.validate()) return;
+                        setModalState(() => isSaving = true);
+                        try {
+                          final userId = ref.read(userStateNotifierProvider).user.idOrNull ?? 'unknown';
+                          await ref.read(authorsProvider.notifier).addAuthor(
+                            name: nameController.text,
+                            bio: bioController.text,
+                            createdBy: userId,
+                          );
+                          if (context.mounted) {
+                            Navigator.of(context).pop(nameController.text);
+                          }
+                        } catch (e) {
+                          if (context.mounted) {
+                            showKasyToast(context, title: 'Erro ao salvar autor', tone: KasyToastTone.danger);
+                          }
+                        } finally {
+                          if (context.mounted) {
+                            setModalState(() => isSaving = false);
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    ),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     final categories = ref.watch(categoriesProvider).value ?? [];
+    final authorsAsync = ref.watch(authorsProvider);
     final userState = ref.watch(userStateNotifierProvider).user;
     final isAdmin = userState.isAdmin;
-
-    // Auto-fill author if empty
-    if (_authorController.text.isEmpty) {
-      _authorController.text = isAdmin ? 'Admin / Dev' : 'Cliente';
-    }
 
     return KasyScreen(
       appBar: PreferredSize(
@@ -274,11 +350,51 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
               validator: (val) => val == null || val.isEmpty ? 'Campo obrigatório' : null,
             ),
             const SizedBox(height: KasySpacing.md),
-            KasyTextField(
-              controller: _authorController,
-              label: t.library.pdf_author,
-              validator: (val) => val == null || val.isEmpty ? 'Campo obrigatório' : null,
+            
+            // Author Selection
+            Text(
+              'Autor',
+              style: context.kasyTextTheme.labelLarge,
             ),
+            const SizedBox(height: KasySpacing.xs),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: authorsAsync.when(
+                    data: (authors) {
+                      return DropdownButtonFormField<LibraryAuthor>(
+                        value: _selectedAuthor,
+                        isExpanded: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(KasyRadius.md)),
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: KasySpacing.md),
+                        ),
+                        hint: const Text('Selecione um autor'),
+                        items: authors.map((a) {
+                          return DropdownMenuItem(
+                            value: a,
+                            child: Text(a.name),
+                          );
+                        }).toList(),
+                        onChanged: (val) => setState(() => _selectedAuthor = val),
+                      );
+                    },
+                    loading: () => const Center(child: CircularProgressIndicator()),
+                    error: (e, st) => Text('Erro: $e'),
+                  ),
+                ),
+                const SizedBox(width: KasySpacing.sm),
+                KasyButton(
+                  label: '+ Novo Autor',
+                  onPressed: _showCreateAuthorModal,
+                  variant: KasyButtonVariant.secondary,
+                ),
+              ],
+            ),
+            
             const SizedBox(height: KasySpacing.md),
             KasyTextField(
               controller: _tagsController,

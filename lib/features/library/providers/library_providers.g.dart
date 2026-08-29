@@ -58,6 +58,51 @@ abstract class _$Categories extends $StreamNotifier<List<LibraryCategory>> {
   }
 }
 
+@ProviderFor(Authors)
+final authorsProvider = AuthorsProvider._();
+
+final class AuthorsProvider
+    extends $AsyncNotifierProvider<Authors, List<LibraryAuthor>> {
+  AuthorsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authorsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authorsHash();
+
+  @$internal
+  @override
+  Authors create() => Authors();
+}
+
+String _$authorsHash() => r'72e02309005a51167d739f28db79d8f8fd0b18b1';
+
+abstract class _$Authors extends $AsyncNotifier<List<LibraryAuthor>> {
+  FutureOr<List<LibraryAuthor>> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref =
+        this.ref as $Ref<AsyncValue<List<LibraryAuthor>>, List<LibraryAuthor>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<LibraryAuthor>>, List<LibraryAuthor>>,
+              AsyncValue<List<LibraryAuthor>>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(Pdfs)
 final pdfsProvider = PdfsProvider._();
 
@@ -82,7 +127,7 @@ final class PdfsProvider
   Pdfs create() => Pdfs();
 }
 
-String _$pdfsHash() => r'c9b1e380fea27fd8f3751168176e7a4eea0889be';
+String _$pdfsHash() => r'd5dc7138349ae334aa990e9b2cb5ef38d3bcef7c';
 
 abstract class _$Pdfs extends $StreamNotifier<List<PdfDocument>> {
   Stream<List<PdfDocument>> build();

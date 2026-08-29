@@ -60,12 +60,66 @@ class LibraryCategory {
 }
 
 @immutable
+class LibraryAuthor {
+  final String id;
+  final String name;
+  final String bio;
+  final DateTime createdAt;
+  final String createdBy;
+
+  const LibraryAuthor({
+    required this.id,
+    required this.name,
+    required this.bio,
+    required this.createdAt,
+    required this.createdBy,
+  });
+
+  LibraryAuthor copyWith({
+    String? id,
+    String? name,
+    String? bio,
+    DateTime? createdAt,
+    String? createdBy,
+  }) {
+    return LibraryAuthor(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      bio: bio ?? this.bio,
+      createdAt: createdAt ?? this.createdAt,
+      createdBy: createdBy ?? this.createdBy,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'bio': bio,
+      'createdAt': createdAt.toIso8601String(),
+      'createdBy': createdBy,
+    };
+  }
+
+  factory LibraryAuthor.fromMap(Map<String, dynamic> map) {
+    return LibraryAuthor(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      bio: map['bio'] as String? ?? '',
+      createdAt: DateTime.parse(map['createdAt'] as String),
+      createdBy: map['createdBy'] as String? ?? '',
+    );
+  }
+}
+
+@immutable
 class PdfDocument {
   final String id;
   final String title;
   final String description;
   final List<String> categoryIds;
   final String author;
+  final String? authorId;
   final String fileUrl;
   final String thumbnailUrl;
   final List<String> tags;
@@ -80,6 +134,7 @@ class PdfDocument {
     required this.description,
     required this.categoryIds,
     required this.author,
+    this.authorId,
     required this.fileUrl,
     required this.thumbnailUrl,
     required this.tags,
@@ -95,6 +150,7 @@ class PdfDocument {
     String? description,
     List<String>? categoryIds,
     String? author,
+    String? authorId,
     String? fileUrl,
     String? thumbnailUrl,
     List<String>? tags,
@@ -109,6 +165,7 @@ class PdfDocument {
       description: description ?? this.description,
       categoryIds: categoryIds ?? this.categoryIds,
       author: author ?? this.author,
+      authorId: authorId ?? this.authorId,
       fileUrl: fileUrl ?? this.fileUrl,
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
       tags: tags ?? this.tags,
@@ -126,6 +183,7 @@ class PdfDocument {
       'description': description,
       'categoryIds': categoryIds,
       'author': author,
+      if (authorId != null) 'authorId': authorId,
       'fileUrl': fileUrl,
       'thumbnailUrl': thumbnailUrl,
       'tags': tags,
@@ -143,6 +201,7 @@ class PdfDocument {
       description: map['description'] as String,
       categoryIds: List<String>.from(map['categoryIds'] as List),
       author: map['author'] as String,
+      authorId: map['authorId'] as String?,
       fileUrl: map['fileUrl'] as String,
       thumbnailUrl: map['thumbnailUrl'] as String,
       tags: List<String>.from(map['tags'] as List),
