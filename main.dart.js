@@ -99615,7 +99615,7 @@ r.x.sdR(0,A.cm(q,"_"," "))},
 $S:0}
 A.bUy.prototype={
 $1(a){var s=this,r=null
-return A.lE(r,B.L,new A.Da(new A.bUx(s.a,s.b,s.c,s.d,s.e),r),!1,B.dt,r,r,r,r,B.f_,r,r,r,r,!0,"Novo Autor",!1)},
+return A.lE(r,B.L,new A.Da(new A.bUx(s.a,s.b,s.c,s.d,s.e),r),!1,B.dt,r,r,r,B.aw,B.f_,r,r,r,r,!0,"Novo Autor",!1)},
 $S:81}
 A.bUx.prototype={
 $2(a,b){var s=this,r=null,q=s.c,p=s.d,o=A.dy(!1,r,B.ay,p,!0,!0,r,!0,r,!1,r,r,!1,r,r,"Nome do Autor",r,r,1,r,r,r,r,r,r,!1,r,!1,r,r,B.ac,r,new A.bUu(),B.Z),n=s.e,m=A.dy(!1,r,B.ay,n,!0,!0,r,!0,r,!1,r,r,!1,r,r,"Biografia (Opcional)",r,r,3,r,r,r,r,r,r,!1,r,!1,r,r,B.ac,r,r,B.Z),l=$.aQ(),k=t.T,j=t.n,i=A.ae(l,k,j).gd1()
