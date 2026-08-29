@@ -84,7 +84,7 @@ service cloud.firestore {
     }
     match /pdfs/{pdfId} {
       allow read: if request.auth.uid != null;
-      allow create: if request.auth.uid != null && request.resource.data.autor_id == request.auth.uid;
+      allow create: if isAdmin() || (request.auth.uid != null && request.resource.data.autor_id == request.auth.uid);
       allow update, delete: if isAdmin() || (request.auth.uid != null && resource.data.autor_id == request.auth.uid);
     }
     match /comments/{commentId} {

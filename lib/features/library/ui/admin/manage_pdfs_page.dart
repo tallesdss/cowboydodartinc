@@ -158,6 +158,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
       context: context,
       builder: (dialogCtx) => KasyDialog(
         title: 'Novo Autor',
+        footer: const SizedBox.shrink(),
         body: StatefulBuilder(
           builder: (context, setModalState) {
           return Form(
