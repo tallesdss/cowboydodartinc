@@ -364,9 +364,10 @@ class _AvatarContent extends StatelessWidget {
 
     final path = avatarPath;
     if (path != null && path.isNotEmpty) {
+      final bustedUrl = cacheBustedAvatarUrl(path, DateTime.now().millisecondsSinceEpoch);
       return KasyAvatar(
         diameter: diameter,
-        image: NetworkImage(path),
+        image: NetworkImage(bustedUrl),
         fallbackSurface: KasyAvatarFallbackSurface.soft,
         tone: KasyAvatarTone.neutral,
       );

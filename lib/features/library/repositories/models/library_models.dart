@@ -217,6 +217,7 @@ class PdfDocument {
 class LibraryComment {
   final String id;
   final String pdfId;
+  final String userId;
   final String userName;
   final String text;
   final int rating; // 1 to 5 stars
@@ -225,6 +226,7 @@ class LibraryComment {
   const LibraryComment({
     required this.id,
     required this.pdfId,
+    required this.userId,
     required this.userName,
     required this.text,
     required this.rating,
@@ -234,6 +236,7 @@ class LibraryComment {
   LibraryComment copyWith({
     String? id,
     String? pdfId,
+    String? userId,
     String? userName,
     String? text,
     int? rating,
@@ -242,6 +245,7 @@ class LibraryComment {
     return LibraryComment(
       id: id ?? this.id,
       pdfId: pdfId ?? this.pdfId,
+      userId: userId ?? this.userId,
       userName: userName ?? this.userName,
       text: text ?? this.text,
       rating: rating ?? this.rating,
@@ -253,6 +257,7 @@ class LibraryComment {
     return {
       'id': id,
       'pdfId': pdfId,
+      'userId': userId,
       'userName': userName,
       'text': text,
       'rating': rating,
@@ -264,6 +269,7 @@ class LibraryComment {
     return LibraryComment(
       id: map['id'] as String,
       pdfId: map['pdfId'] as String,
+      userId: map['userId'] as String? ?? '',
       userName: map['userName'] as String,
       text: map['text'] as String,
       rating: map['rating'] as int,

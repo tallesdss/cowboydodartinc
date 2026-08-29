@@ -31,7 +31,9 @@ class UserApi {
       if (!doc.exists) {
         return null;
       }
-      return UserEntity.fromJson(doc.data()!);
+      final data = doc.data()!;
+      data['id'] = doc.id;
+      return UserEntity.fromJson(data);
     } catch (e, stacktrace) {
       Logger().e('Error fetching user $id: $e', stackTrace: stacktrace);
       return null;
@@ -103,7 +105,7 @@ class UserApi {
   ) async* {
     final task = _storageApi.uploadData(
       data,
-      'users/$userId/avatar',
+      'avatars/$userId',
       'thumb.jpg',
       mimeType: 'image/jpg',
     );
@@ -119,7 +121,7 @@ class UserApi {
   }
 
   Future<void> deleteAvatar(String userId) async {
-    await _storageApi.deleteFile('users/$userId/avatar/thumb.jpg');
+    await _storageApi.deleteFile('avatars/$userId/thumb.jpg');
     await _firestore
         .collection('users')
         .doc(userId)

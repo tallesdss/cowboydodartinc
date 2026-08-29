@@ -49,7 +49,8 @@ class KasyUserAvatar extends ConsumerWidget {
       _ => null,
     };
     if (avatarPath != null && avatarPath.isNotEmpty) {
-      return _avatar(NetworkImage(avatarPath));
+      final bustedUrl = cacheBustedAvatarUrl(avatarPath, user.lastUpdateDate?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch);
+      return _avatar(NetworkImage(bustedUrl));
     }
 
     final String? userId = user.idOrNull;

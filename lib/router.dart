@@ -393,10 +393,10 @@ GoRouter generateRouter({
       ),
       GoRoute(
         name: 'uploader_profile',
-        path: '/library/uploader/:name',
+        path: '/library/uploader/:id',
         pageBuilder: (context, state) => kasyTransitionPage(
           key: state.pageKey,
-          child: UploaderProfilePage(uploaderName: state.pathParameters['name'] ?? ''),
+          child: UploaderProfilePage(uploaderId: state.pathParameters['id'] ?? ''),
         ),
       ),
       GoRoute(

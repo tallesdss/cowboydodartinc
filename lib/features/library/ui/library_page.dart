@@ -202,17 +202,10 @@ class _LibraryPageState extends ConsumerState<LibraryPage> {
                           icon: Icons.add,
                           onPressed: () => context.push('/library/admin/cadastrar-pdf'),
                         ),
-                      ),
-                      const SizedBox(width: KasySpacing.md),
-                      Expanded(
-                        child: KasyButton(
-                          label: t.library.manage_categories,
-                          icon: Icons.category,
-                          variant: KasyButtonVariant.secondary,
-                          onPressed: () => context.push('/library/admin/categorias'),
-                        ),
-                      ),
-                    ],
+                  KasyButton(
+                    label: t.library.add_pdf,
+                    icon: Icons.add,
+                    onPressed: () => context.push('/library/admin/cadastrar-pdf'),
                   ),
                   const SizedBox(height: KasySpacing.lg),
                 ] else ...[

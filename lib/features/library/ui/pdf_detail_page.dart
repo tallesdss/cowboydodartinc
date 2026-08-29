@@ -6,6 +6,9 @@ import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
+import 'package:cowboydodartinc/core/data/models/user.dart';
 
 class PdfDetailPage extends ConsumerStatefulWidget {
   final String pdfId;
@@ -26,26 +29,45 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
     super.dispose();
   }
 
-  void _submitComment() {
+  Future<void> _submitComment() async {
     final text = _commentController.text.trim();
     if (text.isEmpty) return;
 
-    ref.read(commentsProvider(widget.pdfId).notifier).addComment(
-      userName: 'Usuário Logado', // simulated logged-in user name
-      text: text,
-      rating: _userRating,
-    );
+    final userState = ref.read(userStateNotifierProvider).user;
+    final userId = userState.idOrNull ?? 'unknown';
+    final userName = (userState is AuthenticatedUserData && userState.name != null) 
+        ? userState.name! 
+        : 'Usuário Logado';
 
-    _commentController.clear();
-    setState(() {
-      _userRating = 5;
-    });
+    try {
+      await ref.read(commentsProvider(widget.pdfId).notifier).addComment(
+        userId: userId,
+        userName: userName,
+        text: text,
+        rating: _userRating,
+      );
 
-    showKasyToast(
-      context,
-      title: 'Comentário enviado!',
-      tone: KasyToastTone.success,
-    );
+      _commentController.clear();
+      setState(() {
+        _userRating = 5;
+      });
+
+      if (mounted) {
+        showKasyToast(
+          context,
+          title: 'Comentário enviado!',
+          tone: KasyToastTone.success,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        showKasyToast(
+          context,
+          title: 'Erro ao enviar comentário: $e',
+          tone: KasyToastTone.danger,
+        );
+      }
+    }
   }
 
   @override
@@ -121,12 +143,34 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: () => context.push('/library/uploader/${Uri.encodeComponent(pdf.author)}'),
+                      onTap: () {
+                        if (pdf.authorId != null) {
+                          context.push('/library/author/${pdf.authorId}');
+                        }
+                      },
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: Text(
-                          '${t.library.uploaded_by}: ${pdf.author}',
+                          'Autor: ${pdf.author}',
                           style: context.kasyTextTheme.listRowValue.copyWith(
+                            color: context.colors.primary,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: KasySpacing.xs),
+                    GestureDetector(
+                      onTap: () {
+                        if (pdf.createdBy.isNotEmpty) {
+                          context.push('/library/uploader/${pdf.createdBy}');
+                        }
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Text(
+                          'Enviado por: Usuário Cadastrador',
+                          style: context.kasyTextTheme.caption.copyWith(
                             color: context.colors.primary,
                             decoration: TextDecoration.underline,
                           ),
@@ -175,7 +219,12 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                 child: KasyButton(
                   label: t.library.read,
                   icon: Icons.chrome_reader_mode,
-                  onPressed: () => context.push('/library/pdf/${pdf.id}/read'),
+                  onPressed: () async {
+                    final uri = Uri.parse(pdf.fileUrl);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
                 ),
               ),
               const SizedBox(width: KasySpacing.md),
@@ -184,12 +233,11 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                   label: t.library.download,
                   icon: Icons.download,
                   variant: KasyButtonVariant.secondary,
-                  onPressed: () {
-                    showKasyToast(
-                      context,
-                      title: 'Download iniciado (simulado)',
-                      tone: KasyToastTone.success,
-                    );
+                  onPressed: () async {
+                    final uri = Uri.parse(pdf.fileUrl);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
                   },
                 ),
               ),

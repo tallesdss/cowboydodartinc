@@ -220,8 +220,9 @@ class LibraryFirebaseRepository {
       return LibraryComment(
         id: doc.id,
         pdfId: data['pdf_id'] as String? ?? '',
+        userId: data['usuario_id'] as String? ?? '',
         userName: data['usuario_nome'] as String? ?? 'Anônimo',
-        text: data['texto'] as String? ?? '',
+        text: data['comentario'] as String? ?? '',
         rating: data['nota'] as int? ?? 5,
         createdAt: rawDate is Timestamp ? rawDate.toDate() : DateTime.now(),
       );
@@ -239,8 +240,9 @@ class LibraryFirebaseRepository {
         return LibraryComment(
           id: doc.id,
           pdfId: data['pdf_id'] as String? ?? '',
+          userId: data['usuario_id'] as String? ?? '',
           userName: data['usuario_nome'] as String? ?? 'Anônimo',
-          text: data['texto'] as String? ?? '',
+          text: data['comentario'] as String? ?? '',
           rating: data['nota'] as int? ?? 5,
           createdAt: rawDate is Timestamp ? rawDate.toDate() : DateTime.now(),
         );
@@ -251,10 +253,10 @@ class LibraryFirebaseRepository {
   Future<void> addComment(LibraryComment comment) async {
     await _firestore.collection('comments').doc(comment.id).set({
       'pdf_id': comment.pdfId,
-      'usuario_id': currentUserId,
+      'usuario_id': comment.userId,
       'usuario_nome': comment.userName,
-      'texto': comment.text,
-      'nota': comment.rating,
+      'comentario': comment.text,
+      'avaliacao': comment.rating,
       'criado_em': FieldValue.serverTimestamp(),
     });
   }

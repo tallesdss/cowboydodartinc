@@ -7,18 +7,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class UploaderProfilePage extends ConsumerWidget {
-  final String uploaderName;
+  final String uploaderId;
 
-  const UploaderProfilePage({super.key, required this.uploaderName});
+  const UploaderProfilePage({super.key, required this.uploaderId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pdfs = ref.watch(pdfsProvider).value ?? [];
     final favorites = ref.watch(favoritesProvider).value ?? [];
 
-    // Get all PDFs by this author
+    // Get all PDFs uploaded by this user
     final uploaderPdfs = pdfs.where((pdf) {
-      return pdf.author.trim().toLowerCase() == uploaderName.trim().toLowerCase();
+      return pdf.createdBy == uploaderId;
     }).toList();
 
     return KasyScreen(
@@ -41,7 +41,7 @@ class UploaderProfilePage extends ConsumerWidget {
                   radius: 32,
                   backgroundColor: context.colors.primary.withAlpha(20),
                   child: Text(
-                    uploaderName.isNotEmpty ? uploaderName[0].toUpperCase() : 'U',
+                    'U',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class UploaderProfilePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        uploaderName,
+                        'Usuário Cadastrador',
                         style: context.kasyTextTheme.pageTitle.copyWith(
                           fontSize: 20,
                         ),

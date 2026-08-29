@@ -122,6 +122,7 @@ class Comments extends _$Comments {
   }
 
   Future<void> addComment({
+    required String userId,
     required String userName,
     required String text,
     required int rating,
@@ -129,6 +130,7 @@ class Comments extends _$Comments {
     final comment = LibraryComment(
       id: 'comm_${DateTime.now().millisecondsSinceEpoch}',
       pdfId: pdfId,
+      userId: userId,
       userName: userName,
       text: text,
       rating: rating,
