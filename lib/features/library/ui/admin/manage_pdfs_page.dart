@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cowboydodartinc/components/components.dart';
 import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
@@ -5,6 +7,7 @@ import 'package:cowboydodartinc/features/library/providers/library_providers.dar
 import 'package:cowboydodartinc/features/library/repositories/library_firebase_repository.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -27,6 +30,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
 
   // Real Upload Fields
   String? _selectedFilePath;
+  Uint8List? _selectedFileBytes;
   String? _selectedFileName;
   double? _selectedFileSize;
   
@@ -42,7 +46,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   }
 
   Future<void> _savePdf() async {
-    if (_selectedFilePath == null) {
+    if (_selectedFilePath == null && _selectedFileBytes == null) {
       showKasyToast(
         context,
         title: 'Faça upload de um arquivo PDF primeiro!',
@@ -66,7 +70,11 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
       final userId = ref.read(userStateNotifierProvider).user.idOrNull ?? 'unknown';
       final repo = ref.read(libraryFirebaseRepositoryProvider);
       
-      final downloadUrl = await repo.uploadPdfFile(_selectedFilePath!, _selectedFileName!);
+      final downloadUrl = await repo.uploadPdfFile(
+        fileName: _selectedFileName!,
+        filePath: _selectedFilePath,
+        fileBytes: _selectedFileBytes,
+      );
 
       final tags = _tagsController.text
           .split(',')
@@ -112,13 +120,14 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
     final result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
-      withData: false,
+      withData: kIsWeb,
     );
 
-    if (result != null && result.files.single.path != null) {
+    if (result != null && (result.files.single.path != null || result.files.single.bytes != null)) {
       final file = result.files.single;
       setState(() {
         _selectedFilePath = file.path;
+        _selectedFileBytes = file.bytes;
         _selectedFileName = file.name;
         _selectedFileSize = (file.size / (1024 * 1024)); // MB
 

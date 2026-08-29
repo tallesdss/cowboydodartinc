@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cowboydodartinc/features/library/repositories/models/library_models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -265,10 +267,20 @@ class LibraryFirebaseRepository {
   // ----------------------------------------------------
   // FILE UPLOAD (Firebase Storage)
   // ----------------------------------------------------
-  Future<String> uploadPdfFile(String filePath, String fileName) async {
+  Future<String> uploadPdfFile({
+    required String fileName,
+    String? filePath,
+    Uint8List? fileBytes,
+  }) async {
     final ref = _storage.ref().child('pdfs/$currentUserId/$fileName');
-    final uploadTask = await ref.putFile(File(filePath));
-    return await uploadTask.ref.getDownloadURL();
+    if (fileBytes != null) {
+      final uploadTask = await ref.putData(fileBytes);
+      return await uploadTask.ref.getDownloadURL();
+    } else if (filePath != null) {
+      final uploadTask = await ref.putFile(File(filePath));
+      return await uploadTask.ref.getDownloadURL();
+    }
+    throw Exception('Nenhum arquivo ou byte fornecido para upload');
   }
 
   Future<String> uploadThumbnailFile(String filePath, String fileName) async {
