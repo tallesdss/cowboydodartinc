@@ -21,7 +21,6 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
   final _authorController = TextEditingController();
-  final _thumbController = TextEditingController();
   final _tagsController = TextEditingController();
 
   final List<String> _selectedCategoryIds = [];
@@ -38,7 +37,6 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
     _titleController.dispose();
     _descController.dispose();
     _authorController.dispose();
-    _thumbController.dispose();
     _tagsController.dispose();
     super.dispose();
   }
@@ -82,9 +80,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         categoryIds: _selectedCategoryIds,
         author: _authorController.text,
         fileUrl: downloadUrl,
-        thumbnailUrl: _thumbController.text.isNotEmpty
-            ? _thumbController.text
-            : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80',
+        thumbnailUrl: '',
         tags: tags,
         createdBy: userId,
       );
@@ -273,12 +269,6 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
               controller: _authorController,
               label: t.library.pdf_author,
               validator: (val) => val == null || val.isEmpty ? 'Campo obrigatório' : null,
-            ),
-            const SizedBox(height: KasySpacing.md),
-            KasyTextField(
-              controller: _thumbController,
-              label: t.library.pdf_thumb,
-              hint: 'URL da Capa (opcional)',
             ),
             const SizedBox(height: KasySpacing.md),
             KasyTextField(
