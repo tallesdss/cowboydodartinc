@@ -1,15 +1,15 @@
 ((a,b)=>{a[b]=a[b]||{}})(self,"$__dart_deferred_initializers__")
 $__dart_deferred_initializers__.current=function(a,b,c,$){var B,C,A={
-cDm(d,e,f){var w,v,u=null,t=new B.r2(C.Gi,x.c),s=new B.r2(C.kW,x.c)
-s=new A.aBb(t,s)
-s.a0l(d,u,e,u)
+cDr(d,e,f){var w,v,u=null,t=new B.r3(C.Gq,x.c),s=new B.r3(C.kV,x.c)
+s=new A.aBd(t,s)
+s.a0n(d,u,e,u)
 w=s.a
 v=t.r
 v.toString
 w.r=v
-t.r=A.d9n(s)
+t.r=A.d9t(s)
 return s},
-d9k(d4,d5){var w,v="Error",u="Usuarios",t="Categor\xedas",s="Solicitudes de funci\xf3n",r="Suscriptores",q="Gratis",p="Suscriptor",o="Acciones",n="Registro",m="Desbloquear",l="Anterior",k="Siguiente",j="Editar",i="T\xedtulo",h="Descripci\xf3n",g="Guardar",f="Cancelar",e="Vista previa",d="C\xf3digo copiado al portapapeles",a0="Asistente IA",a1="Componentes",a2="Correo electr\xf3nico",a3="Contrase\xf1a",a4="Crear mi cuenta",a5="Iniciar sesi\xf3n",a6="Recuperar contrase\xf1a",a7="Continuar",a8="Privacidad",a9="Pol\xedtica de privacidad",b0="Gracias por tu confianza",b1="Sin anuncios",b2="Suscribirse ahora",b3="Sync en la nube",b4="Soporte prioritario",b5="Iniciar prueba gratis",b6="Premium",b7="Restaurar compras",b8="Facturaci\xf3n",b9="Nuevo suscriptor Pro",c0="ahora",c1="Prefiero no decirlo",c2="Activar notificaciones",c3="Ahora no",c4=y.I,c5="Notificaciones",c6="Recordatorios",c7="Configuraci\xf3n",c8="S\xed, eliminar",c9="Panel de Home Widgets",d0="Demo de anuncios",d1="Comentarios",d2="Verificar C\xf3digo",d3="Enviado por"
+d9q(d4,d5){var w,v="Error",u="Usuarios",t="Categor\xedas",s="Solicitudes de funci\xf3n",r="Suscriptores",q="Gratis",p="Suscriptor",o="Acciones",n="Registro",m="Desbloquear",l="Anterior",k="Siguiente",j="Editar",i="T\xedtulo",h="Descripci\xf3n",g="Guardar",f="Cancelar",e="Vista previa",d="C\xf3digo copiado al portapapeles",a0="Asistente IA",a1="Componentes",a2="Correo electr\xf3nico",a3="Contrase\xf1a",a4="Crear mi cuenta",a5="Iniciar sesi\xf3n",a6="Recuperar contrase\xf1a",a7="Continuar",a8="Privacidad",a9="Pol\xedtica de privacidad",b0="Gracias por tu confianza",b1="Sin anuncios",b2="Suscribirse ahora",b3="Sync en la nube",b4="Soporte prioritario",b5="Iniciar prueba gratis",b6="Premium",b7="Restaurar compras",b8="Facturaci\xf3n",b9="Nuevo suscriptor Pro",c0="ahora",c1="Prefiero no decirlo",c2="Activar notificaciones",c3="Ahora no",c4=y.I,c5="Notificaciones",c6="Recordatorios",c7="Configuraci\xf3n",c8="S\xed, eliminar",c9="Panel de Home Widgets",d0="Demo de anuncios",d1="Comentarios",d2="Verificar C\xf3digo",d3="Enviado por"
 A:{w=a7
 if("common.close"===d5){w="Cerrar"
 break A}if("common.copied"===d5){w="Copiado"
@@ -38,13 +38,13 @@ break A}if("admin_console.overview.subscribers"===d5){w=r
 break A}if("admin_console.overview.new_7d"===d5){w="Nuevos (7 d\xedas)"
 break A}if("admin_console.overview.signups_title"===d5){w="Nuevos registros"
 break A}if("admin_console.overview.signups_subtitle"===d5){w="\xdaltimos 14 d\xedas"
-break A}if("admin_console.overview.signups_total"===d5){w=new A.ceF()
+break A}if("admin_console.overview.signups_total"===d5){w=new A.ceH()
 break A}if("admin_console.overview.signups_empty"===d5){w="Sin registros en este per\xedodo."
 break A}if("admin_console.overview.plan_split_title"===d5){w="Distribuci\xf3n de planes"
 break A}if("admin_console.overview.free"===d5){w=q
 break A}if("admin_console.overview.subscriber"===d5){w=p
-break A}if("admin_console.overview.conversion"===d5){w=new A.ceG()
-break A}if("admin_console.overview.loaded_note"===d5){w=new A.ceH()
+break A}if("admin_console.overview.conversion"===d5){w=new A.ceI()
+break A}if("admin_console.overview.loaded_note"===d5){w=new A.ceJ()
 break A}if("admin_console.overview.users_hint"===d5){w=y.R
 break A}if("admin_console.overview.debug_note"===d5){w="Consola de depuraci\xf3n \u2014 visible solo en builds de desarrollo."
 break A}if("admin_console.users.title"===d5){w=u
@@ -69,15 +69,15 @@ break A}if("admin_console.users.plan_free"===d5){w=q
 break A}if("admin_console.users.empty"===d5){w="No se encontraron usuarios"
 break A}if("admin_console.users.empty_hint"===d5){w=y.P
 break A}if("admin_console.users.error"===d5){w=y.c0
-break A}if("admin_console.users.page"===d5){w=new A.ceI()
+break A}if("admin_console.users.page"===d5){w=new A.ceK()
 break A}if("admin_console.users.prev"===d5){w=l
 break A}if("admin_console.users.next"===d5){w=k
 break A}if("admin_console.users.anonymous"===d5){w="An\xf3nimo"
 break A}if("admin_console.users.filter_all"===d5){w="Todos los usuarios"
 break A}if("admin_console.users.filter_subscribers"===d5){w=r
 break A}if("admin_console.users.loading"===d5){w="Cargando usuarios\u2026"
-break A}if("admin_console.users.results"===d5){w=new A.ceJ()
-break A}if("admin_console.users.truncated"===d5){w=new A.ceK()
+break A}if("admin_console.users.results"===d5){w=new A.ceL()
+break A}if("admin_console.users.truncated"===d5){w=new A.ceM()
 break A}if("admin_console.users.search_capped"===d5){w=y.M
 break A}if("admin_console.users.empty_search"===d5){w="Ning\xfan usuario coincide con la b\xfasqueda"
 break A}if("admin_console.users.empty_search_hint"===d5){w="Prueba con otro nombre o correo."
@@ -89,7 +89,7 @@ break A}if("admin_console.requests.title"===d5){w=s
 break A}if("admin_console.requests.subtitle"===d5){w=y.bx
 break A}if("admin_console.requests.empty"===d5){w="A\xfan no hay solicitudes"
 break A}if("admin_console.requests.empty_hint"===d5){w=y.h
-break A}if("admin_console.requests.votes"===d5){w=new A.ceL()
+break A}if("admin_console.requests.votes"===d5){w=new A.ceN()
 break A}if("admin_console.requests.visible"===d5){w="Visible"
 break A}if("admin_console.requests.hidden"===d5){w="Oculto"
 break A}if("admin_console.requests.edit"===d5){w=j
@@ -170,7 +170,7 @@ break A}if("home.dashboard.components_title"===d5){w=a1
 break A}if("home.dashboard.components_subtitle"===d5){w="Explora tokens de dise\xf1o y bloques de UI"
 break A}if("home.dashboard.features_title"===d5){w="Features"
 break A}if("home.dashboard.features_subtitle"===d5){w="IA, feedback, alertas y suscripci\xf3n"
-break A}if("home.dashboard.count_total"===d5){w=new A.ceN()
+break A}if("home.dashboard.count_total"===d5){w=new A.ceP()
 break A}if("home.dashboard.search_hint"===d5){w="Buscar componentes"
 break A}if("home.dashboard.search_empty"===d5){w="Ning\xfan componente encontrado"
 break A}if("home.dashboard.in_production"===d5){w="En producci\xf3n"
@@ -198,7 +198,7 @@ break A}if("auth.signin.error_text"===d5){w=y.O
 break A}if("auth.signin.email_invalid"===d5){w="Correo electr\xf3nico inv\xe1lido"
 break A}if("auth.signin.password_required"===d5){w="Debes ingresar una contrase\xf1a"
 break A}if("auth.signin.password_too_short"===d5){w=y.cO
-break A}if("auth.signin.social_error"===d5){w=new A.ceO()
+break A}if("auth.signin.social_error"===d5){w=new A.ceQ()
 break A}if("auth.signin.email_already_registered"===d5){w="Este correo ya tiene una cuenta con otro m\xe9todo de inicio de sesi\xf3n. Usa el m\xe9todo con el que te registraste."
 break A}if("auth.signup.title"===d5){w="Reg\xedstrate ahora"
 break A}if("auth.signup.subtitle"===d5){w="Crea tu cuenta para empezar"
@@ -238,8 +238,8 @@ break A}if("premium.coupon_title"===d5){w="\xbfTienes un cup\xf3n?"
 break A}if("premium.payment_cancel_reassurance"===d5){w="Cancelaci\xf3n f\xe1cil con 1 clic, siempre"
 break A}if("premium.payment_cancel_reassurance_free_trial"===d5){w="Sin pago ahora, cancela cuando quieras"
 break A}if("premium.payment_action"===d5){w="Iniciar prueba gratuita"
-break A}if("premium.payment_action_trial"===d5){w=new A.ceP()
-break A}if("premium.try_free_btn_action"===d5){w=new A.ceQ()
+break A}if("premium.payment_action_trial"===d5){w=new A.ceR()
+break A}if("premium.try_free_btn_action"===d5){w=new A.ceS()
 break A}if("premium.duration_recuring_label_annual"===d5){w="Anual"
 break A}if("premium.duration_recuring_label_monthly"===d5){w="Mensual"
 break A}if("premium.duration_recuring_label_weekly"===d5){w="Semanal"
@@ -288,10 +288,10 @@ break A}if("premium.comparePlan.feature_3_subtitle"===d5){w="Contin\xfaa donde l
 break A}if("premium.comparePlan.feature_4_title"===d5){w=b4
 break A}if("premium.comparePlan.feature_4_subtitle"===d5){w="Ayuda cuando la necesites"
 break A}if("premium.comparePlan.continue_cta"===d5)break A
-if("premium.comparePlan.best_offer_badge"===d5){w=new A.ceR()
-break A}if("premium.comparePlan.per_month_line"===d5){w=new A.ceS()
+if("premium.comparePlan.best_offer_badge"===d5){w=new A.ceT()
+break A}if("premium.comparePlan.per_month_line"===d5){w=new A.ceU()
 break A}if("premium.comparePlan.billed_monthly"===d5){w="Facturaci\xf3n mensual"
-break A}if("premium.comparePlan.billed_every"===d5){w=new A.ceT()
+break A}if("premium.comparePlan.billed_every"===d5){w=new A.ceV()
 break A}if("premium.comparePlan.flexible_plan"===d5){w="Facturaci\xf3n flexible"
 break A}if("premium.comparePlan.plan_three_month"===d5){w="3 meses"
 break A}if("premium.comparePlan.plan_six_month"===d5){w="6 meses"
@@ -310,8 +310,8 @@ break A}if("premium.trialPlan.trial_toggle_enabled"===d5){w="Prueba gratis activ
 break A}if("premium.trialPlan.trial_toggle_disabled"===d5){w="Activar prueba gratis"
 break A}if("premium.trialPlan.cta_trial"===d5){w=b5
 break A}if("premium.trialPlan.cta_no_trial"===d5){w=b2
-break A}if("premium.trialPlan.billing_trial"===d5){w=new A.ceU()
-break A}if("premium.trialPlan.billing_annual"===d5){w=new A.ceV()
+break A}if("premium.trialPlan.billing_trial"===d5){w=new A.ceW()
+break A}if("premium.trialPlan.billing_annual"===d5){w=new A.ceX()
 break A}if("premium.unlockPlan.headline_1"===d5){w="DESBLOQUEA TODO"
 break A}if("premium.unlockPlan.headline_2"===d5){w="CON POCOS TOQUES"
 break A}if("premium.unlockPlan.headline_desktop"===d5){w="Desbloquea todo en instantes"
@@ -324,8 +324,8 @@ break A}if("premium.unlockPlan.cta"===d5){w="Desbloquear ahora"
 break A}if("premium.unlockPlan.cta_desktop"===d5){w=m
 break A}if("premium.unlockPlan.billing_note"===d5){w=y.eT
 break A}if("premium.unlockPlan.billing_note_web"===d5){w=y.f3
-break A}if("premium.unlockPlan.plan_annual_price"===d5){w=new A.ceW()
-break A}if("premium.unlockPlan.plan_monthly_price"===d5){w=new A.ceY()
+break A}if("premium.unlockPlan.plan_annual_price"===d5){w=new A.ceY()
+break A}if("premium.unlockPlan.plan_monthly_price"===d5){w=new A.cf_()
 break A}if("premium.comparison.title"===d5){w="Comparaci\xf3n de planes Premium"
 break A}if("premium.comparison.features_label"===d5){w="Caracter\xedsticas"
 break A}if("premium.comparison.free_version"===d5){w=q
@@ -355,11 +355,11 @@ break A}if("activePremium.plan_label"===d5){w="Plan de cuenta"
 break A}if("activePremium.plan_fallback"===d5){w=b6
 break A}if("activePremium.manage_subscription"===d5){w="Administrar suscripci\xf3n"
 break A}if("activePremium.restore_purchases"===d5){w=b7
-break A}if("activePremium.renews_on"===d5){w=new A.ceZ()
-break A}if("activePremium.expires_on"===d5){w=new A.cf_()
+break A}if("activePremium.renews_on"===d5){w=new A.cf0()
+break A}if("activePremium.expires_on"===d5){w=new A.cf1()
 break A}if("activePremium.trial_label"===d5){w="Evaluaci\xf3n gratuita"
-break A}if("activePremium.trial_until"===d5){w=new A.cf0()
-break A}if("activePremium.charges_from"===d5){w=new A.cf1()
+break A}if("activePremium.trial_until"===d5){w=new A.cf2()
+break A}if("activePremium.charges_from"===d5){w=new A.cf3()
 break A}if("onboarding.feature_1.title"===d5){w="Monetiza desde el d\xeda uno"
 break A}if("onboarding.feature_1.description"===d5){w=y.c9
 break A}if("onboarding.feature_1.action"===d5)break A
@@ -511,9 +511,9 @@ break A}if("reminderPage.dayLabel"===d5){w="D\xeda de la semana"
 break A}if("reminderPage.dateLabel"===d5){w="Fecha"
 break A}if("reminderPage.selectDate"===d5){w="Seleccionar fecha"
 break A}if("reminderPage.hint"===d5){w=y.dl
-break A}if("reminderPage.summaryDaily"===d5){w=new A.cf2()
-break A}if("reminderPage.summaryWeekly"===d5){w=new A.cf3()
-break A}if("reminderPage.summaryDate"===d5){w=new A.cf4()
+break A}if("reminderPage.summaryDaily"===d5){w=new A.cf4()
+break A}if("reminderPage.summaryWeekly"===d5){w=new A.cf5()
+break A}if("reminderPage.summaryDate"===d5){w=new A.cf6()
 break A}if("time_picker.title"===d5){w="Selecciona la hora"
 break A}if("time_picker.placeholder"===d5){w="Selecciona una hora"
 break A}if("time_picker.hour"===d5){w="Hora"
@@ -603,8 +603,8 @@ break B}if("settings.create_password_success"===d5){w="Contrase\xf1a creada"
 break B}if("settings.create_password_error"===d5){w=y.V
 break B}if("settings.create_password_too_short"===d5){w=y.aF
 break B}if("settings.create_password_mismatch"===d5){w="Las contrase\xf1as no coinciden"
-break B}if("settings.link_social"===d5){w=new A.cf5()
-break B}if("settings.link_social_success"===d5){w=new A.cf6()
+break B}if("settings.link_social"===d5){w=new A.cf7()
+break B}if("settings.link_social_success"===d5){w=new A.cf8()
 break B}if("settings.link_social_error"===d5){w=y.J
 break B}if("settings.edit_name_title"===d5){w="Editar nombre"
 break B}if("settings.edit_name_hint"===d5){w="Tu nombre"
@@ -653,7 +653,7 @@ break B}if("settings.admin.ads_rewarded_title"===d5){w="Recompensado"
 break B}if("settings.admin.ads_rewarded_desc"===d5){w="El usuario mira para ganar una recompensa. Toca para mostrar."
 break B}if("settings.admin.ads_rewarded_interstitial_title"===d5){w="Recompensado intersticial"
 break B}if("settings.admin.ads_rewarded_interstitial_desc"===d5){w="Anuncio a pantalla completa que tambi\xe9n da recompensa. Toca para mostrar."
-break B}if("settings.admin.ads_reward_earned"===d5){w=new A.cf8()
+break B}if("settings.admin.ads_reward_earned"===d5){w=new A.cfa()
 break B}if("settings.admin.ads_load_failed"===d5){w="No se pudo cargar el anuncio (sin relleno). Int\xe9ntalo de nuevo en un momento."
 break B}if("settings.admin.ads_code_copied"===d5){w=d
 break B}if("settings.admin.ads_status_safe"===d5){w="Esta demo siempre muestra anuncios de prueba de Google, as\xed que es seguro tocar, incluso en producci\xf3n."
@@ -675,7 +675,7 @@ break B}if("settings.admin.send_push_image_label"===d5){w="URL de imagen (opcion
 break B}if("settings.admin.send_push_image_hint"===d5){w="https://..."
 break B}if("settings.admin.send_push_email_label"===d5){w="Correos destinatarios"
 break B}if("settings.admin.send_push_success"===d5){w="\xa1Notificaci\xf3n enviada!"
-break B}if("settings.admin.send_push_user_not_found"===d5){w=new A.cf9()
+break B}if("settings.admin.send_push_user_not_found"===d5){w=new A.cfb()
 break B}if("settings.admin.send_push_send_button"===d5){w="Enviar"
 break B}if("settings.admin.send_push_required"===d5){w="El t\xedtulo y el mensaje son obligatorios"
 break B}if("settings.admin.send_push_no_emails"===d5){w="Agrega al menos un correo"
@@ -752,7 +752,7 @@ break B}if("phone_auth.error_invalid"===d5){w="Por favor, ingresa un n\xfamero v
 break B}if("phone_auth.continue_btn"===d5){w=a7
 break B}if("phone_auth.title_verify"===d5){w=d2
 break B}if("phone_auth.verification_code"===d5){w="C\xf3digo de Verificaci\xf3n"
-break B}if("phone_auth.code_sent"===d5){w=new A.cfa()
+break B}if("phone_auth.code_sent"===d5){w=new A.cfc()
 break B}if("phone_auth.signin_success_title"===d5){w="Listo"
 break B}if("phone_auth.signin_success_text"===d5){w=y.gv
 break B}if("phone_auth.verify_code"===d5){w=d2
@@ -812,7 +812,7 @@ break B}if("biometric_prompt.enable"===d5){w="Activar"
 break B}if("home_widget.greeting_morning"===d5){w="Buenos d\xedas"
 break B}if("home_widget.greeting_afternoon"===d5){w="Buenas tardes"
 break B}if("home_widget.greeting_evening"===d5){w="Buenas noches"
-break B}if("home_widget.title_with_name"===d5){w=new A.cfb()
+break B}if("home_widget.title_with_name"===d5){w=new A.cfd()
 break B}if("home_widget.title_default"===d5){w="\xa1Hola!"
 break B}if("home_widget.title_logged_out"===d5){w="Te esperamos de vuelta"
 break B}if("home_widget.plan_free"===d5){w="Plan gratuito"
@@ -861,13 +861,13 @@ break B}if("kanban.priority_low"===d5){w="Baja"
 break B}if("kanban.priority_medium"===d5){w="Media"
 break B}if("kanban.priority_high"===d5){w="Alta"
 break B}if("kanban.priority_urgent"===d5){w="Urgente"
-break B}if("kanban.cards_count"===d5){w=new A.cfc()
+break B}if("kanban.cards_count"===d5){w=new A.cfe()
 break B}if("kanban.move_to"===d5){w="Mover a columna"
 break B}if("kanban.move_left"===d5){w="Mover a la izquierda"
 break B}if("kanban.move_right"===d5){w="Mover a la derecha"
 break B}if("kanban.delete_column_confirm"===d5){w=y.Q
 break B}if("kanban.delete_task_confirm"===d5){w="Esta tarea se eliminara permanentemente."
-break B}if("kanban.created_on"===d5){w=new A.cfd()
+break B}if("kanban.created_on"===d5){w=new A.cff()
 break B}if("library.title"===d5){w="Biblioteca"
 break B}if("library.categories"===d5){w=t
 break B}if("library.manage_categories"===d5){w="Administrar Categor\xedas"
@@ -907,7 +907,7 @@ break B}if("library.prev_page"===d5){w=l
 break B}if("library.next_page"===d5){w=k
 break B}if("library.zoom_in"===d5){w="Acercar"
 break B}if("library.zoom_out"===d5){w="Alejar"
-break B}if("library.page_info"===d5){w=new A.cfe()
+break B}if("library.page_info"===d5){w=new A.cfg()
 break B}if("library.no_comments"===d5){w=y.A
 break B}if("library.my_pdfs"===d5){w="Mis PDFs"
 break B}if("library.send_pdf"===d5){w="Enviar PDF"
@@ -932,134 +932,132 @@ break B}if("search.pdfs"===d5){w="PDFs"
 break B}if("search.empty"===d5){w=y.cz
 break B}w=null
 break B}return w},
-d9n(d){return new A.cfk(d)},
-aBb:function aBb(d,e){var _=this
+d9t(d){return new A.cfm(d)},
+aBd:function aBd(d,e){var _=this
 _.p3=d
 _.cs=_.ad=_.cQ=_.c9=_.b6=_.cc=_.dm=_.cH=_.cJ=_.bI=_.bb=_.aj=_.a_=_.af=_.ao=_.a7=_.a0=_.bh=_.y2=_.y1=_.xr=_.x2=_.x1=_.ry=_.rx=_.RG=_.R8=_.p4=$
 _.a=e
 _.p2=_.p1=_.ok=_.k4=_.k3=_.k2=_.k1=_.id=_.go=_.fy=_.dy=_.db=_.cy=_.cx=_.CW=_.ch=_.ay=_.as=_.Q=_.z=_.y=_.x=_.w=_.f=_.e=_.d=_.c=_.b=$},
-c88:function c88(){},
-c7J:function c7J(d,e){var _=this
+c8a:function c8a(){},
+c7L:function c7L(d,e){var _=this
 _.y=d
 _.CW=_.ch=_.ay=_.ax=_.at=_.as=_.Q=_.z=$
 _.a=e
 _.x=_.w=_.r=_.f=_.e=_.d=_.c=_.b=$},
-c8q:function c8q(d,e){var _=this
+c8s:function c8s(d,e){var _=this
 _.f=d
 _.y=_.x=_.w=$
 _.a=e
 _.e=_.d=_.c=$},
-c7Z:function c7Z(d,e){var _=this
+c80:function c80(d,e){var _=this
 _.e=d
 _.w=_.r=_.f=$
 _.a=e
 _.d=_.c=_.b=$},
-c9d:function c9d(d,e){var _=this
+c9f:function c9f(d,e){var _=this
 _.r=d
 _.Q=_.z=_.y=_.x=_.w=$
 _.a=e
 _.f=_.e=_.d=_.c=_.b=$},
-c7F:function c7F(){},
-c8K:function c8K(d,e){var _=this
+c7H:function c7H(){},
+c8M:function c8M(d,e){var _=this
 _.z=d
 _.cy=_.cx=_.CW=_.ch=_.ay=_.ax=_.at=_.as=_.Q=$
 _.a=e
 _.y=_.x=_.w=_.r=_.f=_.e=_.d=_.c=_.b=$},
-c8g:function c8g(d,e){var _=this
+c8i:function c8i(d,e){var _=this
 _.e=d
 _.w=_.r=_.f=$
 _.a=e
 _.d=_.c=_.b=$},
+c9H:function c9H(){},
 c9F:function c9F(){},
-c9D:function c9D(){},
+c9r:function c9r(){},
+c8C:function c8C(){},
 c9p:function c9p(){},
-c8A:function c8A(){},
-c9n:function c9n(){},
-c9B:function c9B(){},
-c8a:function c8a(){},
-c9z:function c9z(d,e){var _=this
+c9D:function c9D(){},
+c8c:function c8c(){},
+c9B:function c9B(d,e){var _=this
 _.e=d
 _.w=_.r=_.f=$
 _.a=e
 _.d=_.c=_.b=$},
-c8C:function c8C(){},
+c8E:function c8E(){},
+c9b:function c9b(){},
+c9n:function c9n(){},
 c99:function c99(){},
-c9l:function c9l(){},
-c97:function c97(){},
-c86:function c86(){},
-c8u:function c8u(){},
+c88:function c88(){},
 c8w:function c8w(){},
 c8y:function c8y(){},
-c9r:function c9r(){},
-c7V:function c7V(){},
-c7M:function c7M(){},
+c8A:function c8A(){},
+c9t:function c9t(){},
 c7X:function c7X(){},
-c7R:function c7R(){},
-c7H:function c7H(){},
-c7K:function c7K(){},
 c7O:function c7O(){},
+c7Z:function c7Z(){},
 c7T:function c7T(){},
-c8r:function c8r(){},
+c7J:function c7J(){},
+c7M:function c7M(){},
+c7Q:function c7Q(){},
+c7V:function c7V(){},
+c8t:function c8t(){},
+c8q:function c8q(){},
 c8o:function c8o(){},
-c8m:function c8m(){},
-c82:function c82(){},
 c84:function c84(){},
-c80:function c80(){},
-c9f:function c9f(){},
-c9b:function c9b(){},
+c86:function c86(){},
+c82:function c82(){},
 c9h:function c9h(){},
+c9d:function c9d(){},
 c9j:function c9j(){},
-c8L:function c8L(){},
+c9l:function c9l(){},
 c8N:function c8N(){},
 c8P:function c8P(){},
-c90:function c90(d,e){var _=this
+c8R:function c8R(){},
+c92:function c92(d,e){var _=this
 _.r=d
 _.Q=_.x=$
 _.a=e
 _.f=_.c=$},
-c8E:function c8E(){},
-c8R:function c8R(){},
-c92:function c92(d,e){var _=this
-_.c=d
-_.d=$
-_.a=e
-_.b=$},
-c8I:function c8I(d,e){var _=this
-_.c=d
-_.d=$
-_.a=e
-_.b=$},
-c8T:function c8T(d,e){var _=this
-_.c=d
-_.d=$
-_.a=e
-_.b=$},
-c8k:function c8k(){},
-c8i:function c8i(){},
-c8c:function c8c(d,e){var _=this
-_.c=d
-_.d=$
-_.a=e
-_.b=$},
-c9v:function c9v(){},
-c9x:function c9x(){},
-c9t:function c9t(){},
-c8Z:function c8Z(){},
-c8X:function c8X(){},
-c94:function c94(){},
 c8G:function c8G(){},
-c8V:function c8V(){},
-c8e:function c8e(){},
-cfk:function cfk(d){this.a=d},
-ceF:function ceF(){},
-ceG:function ceG(){},
+c8T:function c8T(){},
+c94:function c94(d,e){var _=this
+_.c=d
+_.d=$
+_.a=e
+_.b=$},
+c8K:function c8K(d,e){var _=this
+_.c=d
+_.d=$
+_.a=e
+_.b=$},
+c8V:function c8V(d,e){var _=this
+_.c=d
+_.d=$
+_.a=e
+_.b=$},
+c8m:function c8m(){},
+c8k:function c8k(){},
+c8e:function c8e(d,e){var _=this
+_.c=d
+_.d=$
+_.a=e
+_.b=$},
+c9x:function c9x(){},
+c9z:function c9z(){},
+c9v:function c9v(){},
+c90:function c90(){},
+c8Z:function c8Z(){},
+c96:function c96(){},
+c8I:function c8I(){},
+c8X:function c8X(){},
+c8g:function c8g(){},
+cfm:function cfm(d){this.a=d},
 ceH:function ceH(){},
 ceI:function ceI(){},
 ceJ:function ceJ(){},
 ceK:function ceK(){},
 ceL:function ceL(){},
+ceM:function ceM(){},
 ceN:function ceN(){},
-ceO:function ceO(){},
 ceP:function ceP(){},
 ceQ:function ceQ(){},
 ceR:function ceR(){},
@@ -1068,8 +1066,8 @@ ceT:function ceT(){},
 ceU:function ceU(){},
 ceV:function ceV(){},
 ceW:function ceW(){},
+ceX:function ceX(){},
 ceY:function ceY(){},
-ceZ:function ceZ(){},
 cf_:function cf_(){},
 cf0:function cf0(){},
 cf1:function cf1(){},
@@ -1078,261 +1076,263 @@ cf3:function cf3(){},
 cf4:function cf4(){},
 cf5:function cf5(){},
 cf6:function cf6(){},
+cf7:function cf7(){},
 cf8:function cf8(){},
-cf9:function cf9(){},
 cfa:function cfa(){},
 cfb:function cfb(){},
 cfc:function cfc(){},
 cfd:function cfd(){},
 cfe:function cfe(){},
-aUa:function aUa(){}}
+cff:function cff(){},
+cfg:function cfg(){},
+aUb:function aUb(){}}
 B=c[0]
 C=c[2]
 A=a.updateHolder(c[3],A)
-A.aBb.prototype={
+A.aBd.prototype={
 h(d,e){var w=this.p3.GQ(e)
 return w==null?this.a.GQ(e):w},
 giq(){var w=this.p4
 return w===$?this.p4=this:w},
-gjB(){var w=this,v=w.R8
+gjC(){var w=this,v=w.R8
 if(v===$){w.giq()
 w.R8!==$&&B.aD()
-v=w.R8=new A.c88()}return v},
+v=w.R8=new A.c8a()}return v},
 gdi(){var w,v=this,u=v.RG
 if(u===$){w=v.giq()
 v.RG!==$&&B.aD()
-u=v.RG=new A.c7J(w,w)}return u},
+u=v.RG=new A.c7L(w,w)}return u},
 gkr(){var w,v=this,u=v.rx
 if(u===$){w=v.giq()
 v.rx!==$&&B.aD()
-u=v.rx=new A.c8q(w,w)}return u},
-gdX(){var w,v=this,u=v.ry
+u=v.rx=new A.c8s(w,w)}return u},
+gdY(){var w,v=this,u=v.ry
 if(u===$){w=v.giq()
 v.ry!==$&&B.aD()
-u=v.ry=new A.c7Z(w,w)}return u},
+u=v.ry=new A.c80(w,w)}return u},
 gcV(){var w,v=this,u=v.x1
 if(u===$){w=v.giq()
 v.x1!==$&&B.aD()
-u=v.x1=new A.c9d(w,w)}return u},
+u=v.x1=new A.c9f(w,w)}return u},
 gAi(){var w=this,v=w.x2
 if(v===$){w.giq()
 w.x2!==$&&B.aD()
-v=w.x2=new A.c7F()}return v},
+v=w.x2=new A.c7H()}return v},
 glJ(){var w,v=this,u=v.xr
 if(u===$){w=v.giq()
 v.xr!==$&&B.aD()
-u=v.xr=new A.c8K(w,w)}return u},
+u=v.xr=new A.c8M(w,w)}return u},
 gvy(){var w,v=this,u=v.y1
 if(u===$){w=v.giq()
 v.y1!==$&&B.aD()
-u=v.y1=new A.c8g(w,w)}return u},
-gCB(){var w=this,v=w.y2
+u=v.y1=new A.c8i(w,w)}return u},
+gCA(){var w=this,v=w.y2
 if(v===$){w.giq()
 w.y2!==$&&B.aD()
-v=w.y2=new A.c9F()}return v},
+v=w.y2=new A.c9H()}return v},
 gafZ(){var w=this,v=w.bh
 if(v===$){w.giq()
 w.bh!==$&&B.aD()
-v=w.bh=new A.c9D()}return v},
-gY_(){var w=this,v=w.a0
+v=w.bh=new A.c9F()}return v},
+gY1(){var w=this,v=w.a0
 if(v===$){w.giq()
 w.a0!==$&&B.aD()
-v=w.a0=new A.c9p()}return v},
+v=w.a0=new A.c9r()}return v},
 gyl(d){var w=this,v=w.a7
 if(v===$){w.giq()
 w.a7!==$&&B.aD()
-v=w.a7=new A.c8A()}return v},
+v=w.a7=new A.c8C()}return v},
 gMp(){var w=this,v=w.ao
 if(v===$){w.giq()
 w.ao!==$&&B.aD()
-v=w.ao=new A.c9n()}return v},
+v=w.ao=new A.c9p()}return v},
 gwh(){var w=this,v=w.af
 if(v===$){w.giq()
 w.af!==$&&B.aD()
-v=w.af=new A.c9B()}return v},
-ga9g(){var w=this,v=w.a_
+v=w.af=new A.c9D()}return v},
+ga9h(){var w=this,v=w.a_
 if(v===$){w.giq()
 w.a_!==$&&B.aD()
-v=w.a_=new A.c8a()}return v},
+v=w.a_=new A.c8c()}return v},
 gdu(){var w,v=this,u=v.aj
 if(u===$){w=v.giq()
 v.aj!==$&&B.aD()
-u=v.aj=new A.c9z(w,w)}return u},
+u=v.aj=new A.c9B(w,w)}return u},
 gmo(){var w=this,v=w.bb
 if(v===$){w.giq()
 w.bb!==$&&B.aD()
-v=w.bb=new A.c8C()}return v},
+v=w.bb=new A.c8E()}return v},
 glL(){var w=this,v=w.bI
 if(v===$){w.giq()
 w.bI!==$&&B.aD()
-v=w.bI=new A.c99()}return v},
+v=w.bI=new A.c9b()}return v},
 gG8(){var w=this,v=w.cJ
 if(v===$){w.giq()
 w.cJ!==$&&B.aD()
-v=w.cJ=new A.c9l()}return v},
+v=w.cJ=new A.c9n()}return v},
 gadk(){var w=this,v=w.cH
 if(v===$){w.giq()
 w.cH!==$&&B.aD()
-v=w.cH=new A.c97()}return v},
-ga7c(){var w=this,v=w.b6
+v=w.cH=new A.c99()}return v},
+ga7e(){var w=this,v=w.b6
 if(v===$){w.giq()
 w.b6!==$&&B.aD()
-v=w.b6=new A.c86()}return v},
+v=w.b6=new A.c88()}return v},
 gq6(){var w=this,v=w.c9
 if(v===$){w.giq()
 w.c9!==$&&B.aD()
-v=w.c9=new A.c8u()}return v},
+v=w.c9=new A.c8w()}return v},
 gj7(){var w=this,v=w.cQ
 if(v===$){w.giq()
 w.cQ!==$&&B.aD()
-v=w.cQ=new A.c8w()}return v},
-gd1(){var w=this,v=w.ad
+v=w.cQ=new A.c8y()}return v},
+gdg(){var w=this,v=w.ad
 if(v===$){w.giq()
 w.ad!==$&&B.aD()
-v=w.ad=new A.c8y()}return v},
+v=w.ad=new A.c8A()}return v},
 gof(d){var w=this,v=w.cs
 if(v===$){w.giq()
 w.cs!==$&&B.aD()
-v=w.cs=new A.c9r()}return v},
+v=w.cs=new A.c9t()}return v},
 gyU(){return this.p3}}
-A.c88.prototype={
+A.c8a.prototype={
 gkM(d){return"Cerrar"},
 gK9(){return"Copiado"},
-gng(){return"Guardado"},
+gnh(){return"Guardado"},
 gho(d){return"Error"},
 gLQ(){return"Solo en la app nativa"}}
-A.c7J.prototype={
+A.c7L.prototype={
 gu9(){var w=this.z
-return w===$?this.z=new A.c7V():w},
-ga6L(){return"Volver a la app"},
+return w===$?this.z=new A.c7X():w},
+ga6N(){return"Volver a la app"},
 gw0(){var w=this.Q
-return w===$?this.Q=new A.c7M():w},
+return w===$?this.Q=new A.c7O():w},
 gkg(){var w=this.as
-return w===$?this.as=new A.c7X():w},
+return w===$?this.as=new A.c7Z():w},
 go1(){var w=this.at
-return w===$?this.at=new A.c7R():w},
+return w===$?this.at=new A.c7T():w},
 gjY(){var w=this.ax
-return w===$?this.ax=new A.c7H():w},
+return w===$?this.ax=new A.c7J():w},
 gNp(){var w=this.ay
-return w===$?this.ay=new A.c7K():w},
+return w===$?this.ay=new A.c7M():w},
 grk(){var w=this.ch
-return w===$?this.ch=new A.c7O():w},
+return w===$?this.ch=new A.c7Q():w},
 gze(){var w=this.CW
-return w===$?this.CW=new A.c7T():w},
+return w===$?this.CW=new A.c7V():w},
 gGf(){return y.ba}}
-A.c8q.prototype={
-gUR(){var w=this.w
-return w===$?this.w=new A.c8r():w},
+A.c8s.prototype={
+gUT(){var w=this.w
+return w===$?this.w=new A.c8t():w},
 gvm(){var w=this.x
-return w===$?this.x=new A.c8o():w},
-gEA(){var w=this.y
-return w===$?this.y=new A.c8m():w}}
-A.c7Z.prototype={
-ghh(){var w=this.f
-return w===$?this.f=new A.c82():w},
+return w===$?this.x=new A.c8q():w},
+gEz(){var w=this.y
+return w===$?this.y=new A.c8o():w}}
+A.c80.prototype={
+ghi(){var w=this.f
+return w===$?this.f=new A.c84():w},
 guz(){var w=this.r
-return w===$?this.r=new A.c84():w},
+return w===$?this.r=new A.c86():w},
 gu3(){var w=this.w
-return w===$?this.w=new A.c80():w}}
-A.c9d.prototype={
-gaa_(){return"Mes"},
-gUC(){return"De por vida"},
-gXW(){return"Restaurar"},
+return w===$?this.w=new A.c82():w}}
+A.c9f.prototype={
+gaa0(){return"Mes"},
+gUE(){return"De por vida"},
+gXY(){return"Restaurar"},
 gadN(){return"Vista previa"},
 gadM(){return y.go},
-gUD(){return"Anual"},
-gUE(){return"Mensual"},
-gUF(){return"Semanal"},
-gXe(){return"/semana"},
-gXb(){return"/mes"},
-gXd(){return"/3 meses"},
-gXc(){return"/6 meses"},
-gXf(){return"/a\xf1o"},
-gXa(){return""},
+gUF(){return"Anual"},
+gUG(){return"Mensual"},
+gUH(){return"Semanal"},
+gXg(){return"/semana"},
+gXd(){return"/mes"},
+gXf(){return"/3 meses"},
+gXe(){return"/6 meses"},
+gXh(){return"/a\xf1o"},
+gXc(){return""},
 gaf_(){return"T\xe9rminos"},
-gC3(){return"Privacidad"},
+gC2(){return"Privacidad"},
 gaf0(){return"T\xe9rminos de uso"},
 gadR(){return"Pol\xedtica de privacidad"},
-gaan(){return"Error al cargar las ofertas"},
+gaao(){return"Error al cargar las ofertas"},
 gacN(){return y.l},
 gacM(){return y.gF},
-gXX(){return"Suscripci\xf3n restaurada"},
+gXZ(){return"Suscripci\xf3n restaurada"},
 gaeK(){return"Gracias por tu confianza"},
 gadV(){return"Suscripci\xf3n realizada con \xe9xito"},
 gadU(){return"Gracias por tu confianza"},
-gfY(){return"Error"},
+gfZ(){return"Error"},
 glA(){return"Ocurri\xf3 un error. Int\xe9ntalo de nuevo"},
-gagp(){return"Pago no confirmado"},
-gago(){return y.dF},
+gago(){return"Pago no confirmado"},
+gagn(){return y.dF},
 gaeI(){return"No se encontr\xf3 ninguna suscripci\xf3n"},
 gaeH(){return y.dK},
 gzl(){var w=this.w
-return w===$?this.w=new A.c9f():w},
+return w===$?this.w=new A.c9h():w},
 gtm(){var w=this.x
-return w===$?this.x=new A.c9b():w},
+return w===$?this.x=new A.c9d():w},
 grD(){var w=this.y
-return w===$?this.y=new A.c9h():w},
+return w===$?this.y=new A.c9j():w},
 gyM(){var w=this.z
-return w===$?this.z=new A.c9j():w}}
-A.c7F.prototype={
+return w===$?this.z=new A.c9l():w}}
+A.c7H.prototype={
 gacl(){return"Suscripci\xf3n en otra plataforma"},
 gack(){return y.Y},
-ga7D(){return"Cerrar"},
-ga6S(){return"Facturaci\xf3n"},
+ga7F(){return"Cerrar"},
+ga6U(){return"Facturaci\xf3n"},
 gadA(){return"Plan de cuenta"},
-gX1(){return"Premium"},
+gX3(){return"Premium"},
 gacj(){return"Administrar suscripci\xf3n"},
 gaeJ(){return"Restaurar compras"},
 aeC(d){return"Renueva el "+d},
-aat(d){return"Expira el "+d},
+aau(d){return"Expira el "+d},
 gafB(){return"Evaluaci\xf3n gratuita"},
 afD(d){return"Evaluaci\xf3n gratuita hasta el "+d},
-a7N(d,e){return e+" a partir del "+d}}
-A.c8K.prototype={
+a7P(d,e){return e+" a partir del "+d}}
+A.c8M.prototype={
 gkP(){var w=this.Q
-return w===$?this.Q=new A.c8L():w},
+return w===$?this.Q=new A.c8N():w},
 gkQ(){var w=this.as
-return w===$?this.as=new A.c8N():w},
+return w===$?this.as=new A.c8P():w},
 gkR(){var w=this.at
-return w===$?this.at=new A.c8P():w},
-gWh(){var w,v=this.ax
+return w===$?this.at=new A.c8R():w},
+gWj(){var w,v=this.ax
 if(v===$){w=this.z
-v=this.ax=new A.c90(w,w)}return v},
-ga6n(){var w=this.ay
-return w===$?this.ay=new A.c8E():w},
-gYQ(){var w=this.ch
-return w===$?this.ch=new A.c8R():w},
+v=this.ax=new A.c92(w,w)}return v},
+ga6p(){var w=this.ay
+return w===$?this.ay=new A.c8G():w},
+gYS(){var w=this.ch
+return w===$?this.ch=new A.c8T():w},
 gmo(){var w,v=this.CW
 if(v===$){w=this.z
-v=this.CW=new A.c92(w,w)}return v},
-gSV(){var w,v=this.cx
+v=this.CW=new A.c94(w,w)}return v},
+gSW(){var w,v=this.cx
 if(v===$){w=this.z
-v=this.cx=new A.c8I(w,w)}return v},
+v=this.cx=new A.c8K(w,w)}return v},
 gFG(){var w,v=this.cy
 if(v===$){w=this.z
-v=this.cy=new A.c8T(w,w)}return v}}
-A.c8g.prototype={
+v=this.cy=new A.c8V(w,w)}return v}}
+A.c8i.prototype={
 gam(d){return"Ideas"},
 gacP(){return"Sin ideas a\xfan"},
 gacQ(){return y.D},
-gYO(){var w=this.f
-return w===$?this.f=new A.c8k():w},
-gYN(){var w=this.r
-return w===$?this.r=new A.c8i():w},
+gYQ(){var w=this.f
+return w===$?this.f=new A.c8m():w},
+gYP(){var w=this.r
+return w===$?this.r=new A.c8k():w},
 gte(){var w,v=this.w
 if(v===$){w=this.e
-v=this.w=new A.c8c(w,w)}return v}}
-A.c9F.prototype={
+v=this.w=new A.c8e(w,w)}return v}}
+A.c9H.prototype={
 gam(d){return"\xbfQu\xe9 hay de nuevo?"},
 gFm(){var w=y.I
 return B.a([w,w,w],x.h)},
 gqV(){return"Entendido"}}
-A.c9D.prototype={
+A.c9F.prototype={
 gam(d){return"Actualizaci\xf3n disponible"},
 gcr(d){return y.dB},
 gag_(){return"Actualizar ahora"},
-gW_(){return"Ahora no"}}
-A.c9p.prototype={
+gW1(){return"Ahora no"}}
+A.c9r.prototype={
 gae7(){return"\xbfTe gusta la app?"},
 gae4(){return"Tu respuesta nos ayuda a mejorar."},
 gae6(){return"S\xed, me gusta"},
@@ -1340,157 +1340,157 @@ gae5(){return"Podr\xeda mejorar"},
 gam(d){return"\xa1Qu\xe9 bueno que te guste!"},
 gcr(d){return y.aK},
 gaee(){return"Escribir una rese\xf1a"}}
-A.c8A.prototype={
+A.c8C.prototype={
 gkr(){return"Inicio"},
 gzB(){return"Ayuda"},
 gmo(){return"Notificaciones"},
 gdu(){return"Config."},
-gBP(){return"Salir"},
-ga_p(){return"Saltar al contenido"}}
-A.c9n.prototype={
+gBO(){return"Salir"},
+ga_r(){return"Saltar al contenido"}}
+A.c9p.prototype={
 gam(d){return"Recordatorios"},
 gafv(){return"Activar recordatorio"},
 gafG(){return"Repetir"},
-ga9f(){return"Cada d\xeda"},
-gagq(){return"Cada semana"},
-ga_u(){return"Una vez"},
+ga9g(){return"Cada d\xeda"},
+gagp(){return"Cada semana"},
+ga_w(){return"Una vez"},
 gaf9(){return"Hora"},
-ga9i(){return"D\xeda de la semana"},
-ga9h(){return"Fecha"},
-gZw(){return"Seleccionar fecha"},
-gnP(d){return y.dl},
-a_O(d){return"Todos los d\xedas a las "+d},
-a_Q(d,e){return"Cada "+d+" a las "+e},
-a_P(d,e){return"El "+d+" a las "+e}}
-A.c9B.prototype={
+ga9j(){return"D\xeda de la semana"},
+ga9i(){return"Fecha"},
+gZy(){return"Seleccionar fecha"},
+gnQ(d){return y.dl},
+a_Q(d){return"Todos los d\xedas a las "+d},
+a_S(d,e){return"Cada "+d+" a las "+e},
+a_R(d,e){return"El "+d+" a las "+e}}
+A.c9D.prototype={
 gam(d){return"Selecciona la hora"},
 gadx(d){return"Selecciona una hora"},
-gSN(){return"AM"},
-gX4(){return"PM"}}
-A.c8a.prototype={
+gSO(){return"AM"},
+gX6(){return"PM"}}
+A.c8c.prototype={
 gam(d){return"Recordatorio"},
 gK0(d){return"Es hora de beber un vaso de agua."}}
-A.c9z.prototype={
+A.c9B.prototype={
 gam(d){return"Configuraci\xf3n"},
-ga6K(){var w=this.f
-return w===$?this.f=new A.c9v():w},
+ga6M(){var w=this.f
+return w===$?this.f=new A.c9x():w},
 gLz(){return"Idiomas"},
 gaf5(){return"Tema"},
 gaf4(){return"Sistema"},
 gaf3(){return"Claro"},
 gaf2(){return"Oscuro"},
-gabs(){return"Ocultar barras al desplazar"},
+gabt(){return"Ocultar barras al desplazar"},
 gNw(){return"PREFERENCIAS"},
-gZt(){return"SEGURIDAD"},
+gZv(){return"SEGURIDAD"},
 gNx(){return"AYUDA"},
-ga7k(){return"Bloqueo de la app"},
-ga7h(){return y.C},
-ga7i(){return y.aa},
-ga7j(){return y.cs},
-ga7d(){return y.h1},
-ga7e(){return y.d5},
-ga7g(){return y.a0},
-ga7f(){return y.fc},
-ga6X(){return"\xbfDesactivar bloqueo?"},
-ga6W(){return y.cg},
-ga6V(){return"Desactivar"},
-ga6U(){return"Cancelar"},
-ga71(){return y.m},
-ga72(){return y.j},
-ga73(){return y.K},
-ga6Y(){return y.U},
-ga6Z(){return y.k},
-ga70(){return y.v},
-ga7_(){return y.g},
-ga78(){return"Desbloquea con Face ID o Touch ID"},
-ga79(){return"Desbloquea con Face ID"},
-ga7a(){return"Desbloquea con Touch ID"},
-ga74(){return"Confirma tu identidad"},
-ga75(){return"Desbloquea con reconocimiento facial"},
-ga77(){return"Desbloquea con huella digital"},
-ga76(){return"Desbloquea con huella o rostro"},
-ga7p(){return y.c},
-ga7q(){return y.b},
-ga7r(){return y.S},
-ga7l(){return y.d},
-ga7m(){return y.i},
-ga7o(){return y.n},
-ga7n(){return y.E},
-ga7b(){return"El bloqueo de la app no se activ\xf3."},
-gaax(){return"Enviar comentarios"},
+ga7m(){return"Bloqueo de la app"},
+ga7j(){return y.C},
+ga7k(){return y.aa},
+ga7l(){return y.cs},
+ga7f(){return y.h1},
+ga7g(){return y.d5},
+ga7i(){return y.a0},
+ga7h(){return y.fc},
+ga6Z(){return"\xbfDesactivar bloqueo?"},
+ga6Y(){return y.cg},
+ga6X(){return"Desactivar"},
+ga6W(){return"Cancelar"},
+ga73(){return y.m},
+ga74(){return y.j},
+ga75(){return y.K},
+ga7_(){return y.U},
+ga70(){return y.k},
+ga72(){return y.v},
+ga71(){return y.g},
+ga7a(){return"Desbloquea con Face ID o Touch ID"},
+ga7b(){return"Desbloquea con Face ID"},
+ga7c(){return"Desbloquea con Touch ID"},
+ga76(){return"Confirma tu identidad"},
+ga77(){return"Desbloquea con reconocimiento facial"},
+ga79(){return"Desbloquea con huella digital"},
+ga78(){return"Desbloquea con huella o rostro"},
+ga7r(){return y.c},
+ga7s(){return y.b},
+ga7t(){return y.S},
+ga7n(){return y.d},
+ga7o(){return y.i},
+ga7q(){return y.n},
+ga7p(){return y.E},
+ga7d(){return"El bloqueo de la app no se activ\xf3."},
+gaay(){return"Enviar comentarios"},
 gcV(){return"Premium"},
-ga6R(){return"Facturaci\xf3n"},
-gC3(){return"Pol\xedtica de privacidad"},
+ga6T(){return"Facturaci\xf3n"},
+gC2(){return"Pol\xedtica de privacidad"},
 gzB(){return"Centro de ayuda"},
-ga9K(d){return"S\xed, salir"},
-ga9N(){return"\xbfSalir de tu cuenta?"},
-ga9M(){return"\xbfSeguro que quieres salir?"},
-ga9L(){return"Cancelar"},
-gBP(){return"Cerrar sesi\xf3n"},
+ga9L(d){return"S\xed, salir"},
+ga9O(){return"\xbfSalir de tu cuenta?"},
+ga9N(){return"\xbfSeguro que quieres salir?"},
+ga9M(){return"Cancelar"},
+gBO(){return"Cerrar sesi\xf3n"},
 gFK(){return"Mi cuenta"},
 gaeu(d){return"Registrarse"},
 gFL(){return"Nombre"},
 gpW(){return"Editar"},
-gnI(){return"Correo electr\xf3nico"},
-ga8l(){return"Conectado con"},
+gnJ(){return"Correo electr\xf3nico"},
+ga8n(){return"Conectado con"},
 gadS(){return"Correo y contrase\xf1a"},
 gadT(){return"Tel\xe9fono"},
 gKj(){return"Crear contrase\xf1a"},
-ga96(){return y.B},
-ga94(){return"Nueva contrase\xf1a"},
-ga92(){return"Confirmar contrase\xf1a"},
-ga97(){return"Contrase\xf1a creada"},
-ga93(){return y.V},
-ga98(){return y.aF},
-ga95(){return"Las contrase\xf1as no coinciden"},
-ac4(d){return"Vincular "+d},
-ac6(d){return d+" vinculado"},
-gac5(){return y.J},
-gUG(){return"Tu nombre"},
+ga97(){return y.B},
+ga95(){return"Nueva contrase\xf1a"},
+ga93(){return"Confirmar contrase\xf1a"},
+ga98(){return"Contrase\xf1a creada"},
+ga94(){return y.V},
+ga99(){return y.aF},
+ga96(){return"Las contrase\xf1as no coinciden"},
+ac5(d){return"Vincular "+d},
+ac7(d){return d+" vinculado"},
+gac6(){return y.J},
+gUI(){return"Tu nombre"},
 gKN(){return"Guardar"},
 gKM(){return"Cancelar"},
-gEo(){return"Bio"},
-gT8(){return"Escribe algo sobre ti..."},
-gaa2(){return"Editar perfil"},
-gaa1(){return"Guardar"},
-gUI(){return"Perfil actualizado"},
-gUH(){return y.L},
+gEn(){return"Bio"},
+gT9(){return"Escribe algo sobre ti..."},
+gaa3(){return"Editar perfil"},
+gaa2(){return"Guardar"},
+gUK(){return"Perfil actualizado"},
+gUJ(){return y.L},
 gaew(){return"Recordatorios"},
 gKt(){var w=this.r
-return w===$?this.r=new A.c9x():w},
+return w===$?this.r=new A.c9z():w},
 gtf(){var w=this.w
-return w===$?this.w=new A.c9t():w}}
-A.c8C.prototype={
+return w===$?this.w=new A.c9v():w}}
+A.c8E.prototype={
 gam(d){return"Notificaciones"},
-gaaa(){return"No tienes notificaciones"},
-gaal(){return"Error al obtener notificaciones"},
+gaab(){return"No tienes notificaciones"},
+gaam(){return"Error al obtener notificaciones"},
 gacp(){return"Marcar le\xeddas"},
-gZu(){return"Ver todas"}}
-A.c99.prototype={
+gZw(){return"Ver todas"}}
+A.c9b.prototype={
 gafg(){return"Autenticaci\xf3n por Tel\xe9fono"},
-ga_M(){return"Ingresa tu n\xfamero de tel\xe9fono"},
-ga9x(){return y.ci},
+ga_O(){return"Ingresa tu n\xfamero de tel\xe9fono"},
+ga9y(){return y.ci},
 gadv(){return"N\xfamero de tel\xe9fono"},
 gadu(){return"+34 600 123 456"},
-gaaj(){return"Por favor, ingresa un n\xfamero de tel\xe9fono"},
-gaam(){return"Por favor, ingresa un n\xfamero v\xe1lido"},
-ga8u(){return"Continuar"},
+gaak(){return"Por favor, ingresa un n\xfamero de tel\xe9fono"},
+gaan(){return"Por favor, ingresa un n\xfamero v\xe1lido"},
+ga8w(){return"Continuar"},
 gafm(){return"Verificar C\xf3digo"},
-gag7(){return"C\xf3digo de Verificaci\xf3n"},
-a81(d){return y.y+d},
-ga_m(){return"Listo"},
-ga_l(){return y.gv},
-gag8(){return"Verificar C\xf3digo"},
+gag6(){return"C\xf3digo de Verificaci\xf3n"},
+a83(d){return y.y+d},
+ga_o(){return"Listo"},
+ga_n(){return y.gv},
+gag7(){return"Verificar C\xf3digo"},
 gaeE(){return"Reenviar C\xf3digo"},
-gaag(){return"Por favor, ingresa los 6 d\xedgitos"}}
-A.c9l.prototype={
+gaah(){return"Por favor, ingresa los 6 d\xedgitos"}}
+A.c9n.prototype={
 gam(d){return"Email enviado"},
 gcr(d){return y.w},
-ga6M(){return"Volver a Iniciar Sesi\xf3n"},
+ga6O(){return"Volver a Iniciar Sesi\xf3n"},
 gacR(){return y.f1}}
-A.c97.prototype={
+A.c99.prototype={
 gam(d){return"404 - P\xe1gina no encontrada"}}
-A.c86.prototype={
+A.c88.prototype={
 gafh(){return"\xbfActivar Face ID en el bloqueo?"},
 gafj(){return"\xbfActivar Touch ID en el bloqueo?"},
 gafi(){return"\xbfActivar Face ID/Touch ID en el bloqueo?"},
@@ -1507,10 +1507,10 @@ gacx(){return y.e3},
 gacz(){return y.fN},
 gvY(){return"Ahora no"},
 gvt(d){return"Activar"}}
-A.c8u.prototype={
-gZd(){return"Buenos d\xedas"},
-gZb(){return"Buenas tardes"},
-gZc(){return"Buenas noches"},
+A.c8w.prototype={
+gZf(){return"Buenos d\xedas"},
+gZd(){return"Buenas tardes"},
+gZe(){return"Buenas noches"},
 afn(d){return"\xa1Hola, "+d+"!"},
 gafe(){return"\xa1Hola!"},
 gafl(){return"Te esperamos de vuelta"},
@@ -1518,244 +1518,242 @@ gadz(){return"Plan gratuito"},
 gadC(){return"PRO"},
 gae8(){return y.h4},
 gae9(){return"Steve Jobs"}}
-A.c8w.prototype={
+A.c8y.prototype={
 gam(d){return"Tareas"},
-gUL(){return"Sin tareas en esta columna"},
-gfY(){return"Error al cargar"},
-ga6i(){return"A\xf1adir otra lista"},
-ga6j(){return"A\xf1adir lista"},
-gac7(){return"Escribe el nombre de la lista..."},
-ga6k(){return"A\xf1adir tarea"},
-ga6l(){return y.q},
+gUN(){return"Sin tareas en esta columna"},
+gfZ(){return"Error al cargar"},
+ga6k(){return"A\xf1adir otra lista"},
+ga6l(){return"A\xf1adir lista"},
+gac8(){return"Escribe el nombre de la lista..."},
+ga6m(){return"A\xf1adir tarea"},
+ga6n(){return y.q},
 gKL(){return"Editar columna"},
-gaa3(){return"Actualiza los detalles de esta tarea."},
-gfq(d){return"Cancelar"},
+gaa4(){return"Actualiza los detalles de esta tarea."},
+gfs(d){return"Cancelar"},
 gkB(d){return"Guardar"},
 gER(){return"Eliminar columna"},
-gB9(){return"Editar tarea"},
+gB8(){return"Editar tarea"},
 gES(){return"Eliminar tarea"},
-ga88(){return"Nombre de columna"},
-ga89(){return"Ej: En progreso, Hecho"},
+ga8a(){return"Nombre de columna"},
+ga8b(){return"Ej: En progreso, Hecho"},
 gaeW(){return"T\xedtulo de tarea"},
 gaeX(){return"Ej: Implementar login"},
 gaeY(){return"Ingresa un t\xedtulo para la tarea."},
-ga8a(){return"Ingresa un nombre para la columna."},
+ga8c(){return"Ingresa un nombre para la columna."},
 gaeV(){return"Descripci\xf3n"},
-gY2(){return"Detalles sobre la tarea"},
-ga8W(d){return"Crear"},
-ga86(){return"Columna creada"},
-ga8b(){return"Columna actualizada"},
-ga87(){return"Columna eliminada"},
+gY4(){return"Detalles sobre la tarea"},
+ga8X(d){return"Crear"},
+ga88(){return"Columna creada"},
+ga8d(){return"Columna actualizada"},
+ga89(){return"Columna eliminada"},
 gaeT(){return"Tarea creada"},
 gaeZ(){return"Tarea actualizada"},
 gaeU(){return"Tarea eliminada"},
 gG1(){return"Prioridad"},
 gadQ(){return"Ninguna"},
-gXh(){return"Baja"},
-gXi(){return"Media"},
-gXg(){return"Alta"},
-gXj(){return"Urgente"},
-ga9q(){return y.Q},
-ga9t(){return"Esta tarea se eliminara permanentemente."},
-a99(d){return"Creado el "+d}}
-A.c8y.prototype={
+gXj(){return"Baja"},
+gXk(){return"Media"},
+gXi(){return"Alta"},
+gXl(){return"Urgente"},
+ga9r(){return y.Q},
+ga9u(){return"Esta tarea se eliminara permanentemente."},
+a9a(d){return"Creado el "+d}}
+A.c8A.prototype={
 gam(d){return"Biblioteca"},
-gaci(){return"Administrar Categor\xedas"},
 gkB(d){return"Guardar"},
-gfq(d){return"Cancelar"},
-gC0(){return"PDFs"},
-gaav(){return"Favoritos"},
+gfs(d){return"Cancelar"},
+gC_(){return"PDFs"},
+gaaw(){return"Favoritos"},
 gog(){return"Buscar por t\xedtulo, autor o etiqueta..."},
-gSK(){return"Registrar PDF"},
-ga9s(){return"Eliminar PDF"},
+gSL(){return"Registrar PDF"},
+ga9t(){return"Eliminar PDF"},
 gadq(){return"T\xedtulo"},
 gado(){return"Descripci\xf3n"},
 gadp(){return"Etiquetas (separadas por comas)"},
 gLT(){return"Ning\xfan PDF encontrado"},
-ga8c(){return"Comentarios"},
-gagB(){return"Escribir un comentario..."},
-ga_I(){return"Enviar Comentario"},
+ga8e(){return"Comentarios"},
+gagA(){return"Escribir un comentario..."},
+ga_K(){return"Enviar Comentario"},
 gaef(){return"Calificaci\xf3n"},
-ga9S(d){return"Descargar"},
+ga9T(d){return"Descargar"},
 gaeg(d){return"Leer"},
-ga6m(){return"Admin / Dev"},
-ga7W(d){return"Cliente"},
+ga6o(){return"Admin / Dev"},
+ga7Y(d){return"Cliente"},
 gaek(){return"Lector Simulado"},
 gadL(){return"Anterior"},
 gacJ(){return"Siguiente"},
-gagC(){return"Acercar"},
-gagD(){return"Alejar"},
+gagB(){return"Acercar"},
+gagC(){return"Alejar"},
 adj(d,e){return"P\xe1gina "+d+" de "+e},
 gacL(){return y.A},
-gWj(){return"Mis PDFs"},
+gWl(){return"Mis PDFs"},
 gH4(){return"Enviar PDF"},
 gag2(){return"Haz clic para subir tu PDF"},
 gag1(){return"Formato soportado: PDF (M\xe1x. 10MB)"},
-ga7M(){return"Cambiar Archivo"},
-gUQ(){return"Explorar"},
+ga7O(){return"Cambiar Archivo"},
+gUS(){return"Explorar"},
 gacO(){return y.bE},
-gag3(){return"Enviado por"},
 gMh(){return"Perfil P\xfablico"},
-gag9(){return y.dQ}}
-A.c9r.prototype={
+gag8(){return y.dQ}}
+A.c9t.prototype={
 gam(d){return"B\xfasqueda Global"},
-gnP(d){return"Buscar autores, temas y PDFs..."},
-ga6J(){return"Autores"},
+gnQ(d){return"Buscar autores, temas y PDFs..."},
+ga6L(){return"Autores"},
 gjY(){return"Temas"},
-gC0(){return"PDFs"},
+gC_(){return"PDFs"},
 gmX(d){return y.cz}}
-A.c7V.prototype={
+A.c7X.prototype={
 gw0(){return"Resumen"},
 gkg(){return"Usuarios"},
 go1(){return"Solicitudes"},
 gjY(){return"Categor\xedas"},
-gYd(){return"Herramientas"},
-gAV(){return"Depuraci\xf3n"}}
-A.c7M.prototype={
-gDd(){return"Resumen"},
-ga6O(){return"Backend"},
+gYf(){return"Herramientas"},
+gAU(){return"Depuraci\xf3n"}}
+A.c7O.prototype={
+gDc(){return"Resumen"},
+ga6Q(){return"Backend"},
 gAh(){return"Cuenta"},
-gZe(){return"Invitado"},
-gag5(){return"ID de usuario"},
+gZg(){return"Invitado"},
+gag4(){return"ID de usuario"},
 gdL(){return"Versi\xf3n"},
-ga_6(){return"Sesi\xf3n actual"},
-gag6(){return y.R}}
-A.c7X.prototype={
+ga_8(){return"Sesi\xf3n actual"},
+gag5(){return y.R}}
+A.c7Z.prototype={
 gam(d){return"Usuarios"},
 gog(){return"Buscar por nombre o correo"},
-ga85(){return"Usuario"},
-ga84(){return"Estado"},
-ga83(){return"Rol"},
-gTr(){return"Acciones"},
-ga82(){return"Registro"},
+ga87(){return"Usuario"},
+ga86(){return"Estado"},
+ga85(){return"Rol"},
+gTs(){return"Acciones"},
+ga84(){return"Registro"},
 gOd(){return"Activo"},
 gOf(){return"Inactivo"},
 gOe(){return"Bloqueado"},
-gY0(){return"Admin"},
-gY1(){return"Usuario"},
-gSq(){return"Hacer Administrador"},
-gSr(){return"Quitar Admin"},
-gSp(){return"Bloquear Acceso"},
-gSs(){return"Desbloquear"},
+gY2(){return"Admin"},
+gY3(){return"Usuario"},
+gSr(){return"Hacer Administrador"},
+gSs(){return"Quitar Admin"},
+gSq(){return"Bloquear Acceso"},
+gSt(){return"Desbloquear"},
 gmX(d){return"No se encontraron usuarios"},
-gBa(){return y.P},
+gB9(){return y.P},
 gho(d){return y.c0},
 gadK(){return"Anterior"},
 gmn(d){return"Siguiente"},
 gJQ(){return"An\xf3nimo"},
-gaaQ(){return"Todos los usuarios"},
-gaaR(){return"Suscriptores"},
+gaaR(){return"Todos los usuarios"},
+gaaS(){return"Suscriptores"},
 aeL(d,e,f,g){return"Mostrando "+e+" a "+f+" de "+g},
-gZr(){return y.M},
-gaa6(){return"Ning\xfan usuario coincide con la b\xfasqueda"},
-gaa7(){return"Prueba con otro nombre o correo."},
-gaa8(){return"No se encontraron suscriptores"},
-gaa9(){return y.cU},
+gZt(){return y.M},
+gaa7(){return"Ning\xfan usuario coincide con la b\xfasqueda"},
+gaa8(){return"Prueba con otro nombre o correo."},
+gaa9(){return"No se encontraron suscriptores"},
+gaaa(){return y.cU},
 gaet(d){return"Actualizar"},
 gaeM(){return"Reintentar"}}
-A.c7R.prototype={
+A.c7T.prototype={
 gam(d){return"Solicitudes de funci\xf3n"},
-ghi(){return y.bx},
+ghj(){return y.bx},
 gmX(d){return"A\xfan no hay solicitudes"},
-gBa(){return y.h},
+gB9(){return y.h},
 gMM(d){return"Visible"},
 gLf(d){return"Oculto"},
 gpW(){return"Editar"},
 gho(d){return"No se pudieron cargar las solicitudes"},
-gng(){return"Solicitud actualizada"},
-gUJ(){return"Editar solicitud"},
-gaaP(){return"T\xedtulo"},
-gaaO(){return"Descripci\xf3n"},
-gabV(){return"Ingl\xe9s"},
-gabX(){return"Portugu\xe9s"},
-gabW(){return"Espa\xf1ol"},
+gnh(){return"Solicitud actualizada"},
+gUL(){return"Editar solicitud"},
+gaaQ(){return"T\xedtulo"},
+gaaP(){return"Descripci\xf3n"},
+gabW(){return"Ingl\xe9s"},
+gabY(){return"Portugu\xe9s"},
+gabX(){return"Espa\xf1ol"},
 gkB(d){return"Guardar"}}
-A.c7H.prototype={
+A.c7J.prototype={
 gam(d){return"Categor\xedas"},
-ghi(){return y.e},
+ghj(){return y.e},
 gj0(d){return"Nueva Categor\xeda"},
 gpW(){return"Editar"},
 gqv(d){return"Eliminar"},
-ga9r(){return y.fo},
+ga9s(){return y.fo},
 gkB(d){return"Guardar"},
-gfq(d){return"Cancelar"},
-gaI(d){return"Nombre"},
+gfs(d){return"Cancelar"},
+gaH(d){return"Nombre"},
 gcr(d){return"Descripci\xf3n"},
-gabw(d){return"Icono"},
-geK(d){return"Color"},
+gabx(d){return"Icono"},
+geL(d){return"Color"},
 gmX(d){return"No hay categor\xedas."},
 gOj(){return"\xa1Categor\xeda guardada con \xe9xito!"},
-ga_N(){return"\xa1Categor\xeda eliminada!"},
-gaak(){return y.co},
+ga_P(){return"\xa1Categor\xeda eliminada!"},
+gaal(){return y.co},
 B(d,e){return this.gj0(this).$1(e)}}
-A.c7K.prototype={
-ga9k(){return"Acciones de debug"},
-gabx(){return"Identidad"},
+A.c7M.prototype={
+ga9l(){return"Acciones de debug"},
+gaby(){return"Identidad"},
 gacS(){return"Prueba de notificaci\xf3n"}}
-A.c7O.prototype={
-ghi(){return y.N},
-ga8R(){return"Copiar c\xf3digo"},
-ga80(){return"C\xf3digo copiado al portapapeles"},
-ga_s(){return"Solo"},
-ga_r(){return y.eP},
-ga8e(){return"Compare"},
-ga8d(){return y.h9},
+A.c7Q.prototype={
+ghj(){return y.N},
+ga8S(){return"Copiar c\xf3digo"},
+ga82(){return"C\xf3digo copiado al portapapeles"},
+ga_u(){return"Solo"},
+ga_t(){return y.eP},
+ga8g(){return"Compare"},
+ga8f(){return y.h9},
 gafC(){return"Trial"},
 gafA(){return y.gq},
 gafK(){return"Unlock"},
 gafJ(){return y.fP}}
-A.c7T.prototype={
+A.c7V.prototype={
 gam(d){return"Admin"},
-gTh(d){return y.bD}}
-A.c8r.prototype={
+gTi(d){return y.bD}}
+A.c8t.prototype={
 gacT(){return"Probar notificaci\xf3n"},
 guu(){return"Enviar notificaci\xf3n push"}}
-A.c8o.prototype={
-ga7u(){return"kasy"},
-gTv(){return"Componentes"},
+A.c8q.prototype={
+ga7w(){return"kasy"},
+gTw(){return"Componentes"},
 gog(){return"Buscar componentes"},
-gZs(){return"Ning\xfan componente encontrado"},
-gabz(){return"En producci\xf3n"},
+gZu(){return"Ning\xfan componente encontrado"},
+gabA(){return"En producci\xf3n"},
 gacH(){return"Revisar"}}
-A.c8m.prototype={
+A.c8o.prototype={
 gFM(){return"Componentes"}}
-A.c82.prototype={
+A.c84.prototype={
 gam(d){return"Bienvenido de nuevo"},
-ghi(){return y.fm},
-gUK(){return"bruce@wayne.com"},
-gnI(){return"Correo electr\xf3nico"},
-gWR(){return"Contrase\xf1a"},
-gWS(){return"Contrase\xf1a"},
-gaaW(){return"Olvid\xe9 contrase\xf1a"},
+ghj(){return y.fm},
+gUM(){return"bruce@wayne.com"},
+gnJ(){return"Correo electr\xf3nico"},
+gWT(){return"Contrase\xf1a"},
+gWU(){return"Contrase\xf1a"},
+gaaX(){return"Olvid\xe9 contrase\xf1a"},
 gqD(d){return"Continuar con correo"},
 gacK(){return"\xbfNo tienes una cuenta?"},
-ga_n(){return"Reg\xedstrate"},
+ga_p(){return"Reg\xedstrate"},
 gadg(){return"o"},
 gNo(){return"Gmail"},
-gfY(){return"Error"},
+gfZ(){return"Error"},
 glA(){return y.O},
 gKR(){return"Correo electr\xf3nico inv\xe1lido"},
-gWT(){return"Debes ingresar una contrase\xf1a"},
-gWU(){return y.cO},
-a_q(d){return"No se pudo iniciar sesi\xf3n con "+d}}
-A.c84.prototype={
+gWV(){return"Debes ingresar una contrase\xf1a"},
+gWW(){return y.cO},
+a_s(d){return"No se pudo iniciar sesi\xf3n con "+d}}
+A.c86.prototype={
 gam(d){return"Reg\xedstrate ahora"},
-ghi(){return"Crea tu cuenta para empezar"},
+ghj(){return"Crea tu cuenta para empezar"},
 gqD(d){return"Crear mi cuenta"},
-gabn(){return"\xbfYa tienes una cuenta?"},
+gabo(){return"\xbfYa tienes una cuenta?"},
 gzh(){return"Iniciar sesi\xf3n"},
-gfY(){return"Error"},
+gfZ(){return"Error"},
 glA(){return"Este correo ya existe o es inv\xe1lido"}}
-A.c80.prototype={
+A.c82.prototype={
 gam(d){return"Recuperar contrase\xf1a"},
-ghi(){return y.cu},
-gnI(){return"Correo electr\xf3nico"},
+ghj(){return y.cu},
+gnJ(){return"Correo electr\xf3nico"},
 gqD(d){return"Recuperar contrase\xf1a"},
 gaev(){return"\xbfRecordaste tu contrase\xf1a?"},
 gzh(){return"Iniciar sesi\xf3n"},
-gfY(){return"Error"},
+gfZ(){return"Error"},
 glA(){return"Ingresa un correo electr\xf3nico v\xe1lido"}}
-A.c9f.prototype={
+A.c9h.prototype={
 gAy(d){return"Volver"},
 gy6(){return"Mejora para una"},
 gy7(){return"experiencia sin anuncios"},
@@ -1764,480 +1762,480 @@ gkQ(){return"Modo sin conexi\xf3n"},
 gkR(){return"Saltos ilimitados"},
 gpY(){return"Audio en alta calidad"},
 gOh(d){return"Suscribirse ahora"}}
-A.c9b.prototype={
-gabp(){return y.F},
-T1(d){return"Ahorra "+d+"%"},
-gT2(){return"Facturaci\xf3n mensual"},
-gX3(){return"3 meses"},
-gX2(){return"6 meses"}}
-A.c9h.prototype={
-gY6(){return"KASY "},
-gY5(){return"PRO"},
-ghi(){return"Acceso a todas las funciones"},
+A.c9d.prototype={
+gabq(){return y.F},
+T2(d){return"Ahorra "+d+"%"},
+gT3(){return"Facturaci\xf3n mensual"},
+gX5(){return"3 meses"},
+gX4(){return"6 meses"}}
+A.c9j.prototype={
+gY8(){return"KASY "},
+gY7(){return"PRO"},
+ghj(){return"Acceso a todas las funciones"},
 gOc(){return"\xdanete a miles de usuarios de Kasy"},
 gkP(){return"Funciones premium ilimitadas"},
 gkQ(){return"Exportaci\xf3n de alta calidad"},
 gkR(){return"Sin anuncios ni marca de agua"},
 gpY(){return"Sincroniza en todos tus dispositivos"},
-gYm(){return"Prueba gratis activada"},
-gYl(){return"Activar prueba gratis"},
-gU1(){return"Iniciar prueba gratis"},
-gU0(){return"Suscribirse ahora"},
-T6(d,e){return""+d+" d\xedas gratis, luego "+e+"/a\xf1o"},
-T3(d){return d+"/a\xf1o"}}
-A.c9j.prototype={
+gYo(){return"Prueba gratis activada"},
+gYn(){return"Activar prueba gratis"},
+gU3(){return"Iniciar prueba gratis"},
+gU2(){return"Suscribirse ahora"},
+T7(d,e){return""+d+" d\xedas gratis, luego "+e+"/a\xf1o"},
+T4(d){return d+"/a\xf1o"}}
+A.c9l.prototype={
 gy6(){return"DESBLOQUEA TODO"},
 gy7(){return"CON POCOS TOQUES"},
-gabq(){return"Desbloquea todo en instantes"},
+gabr(){return"Desbloquea todo en instantes"},
 gkP(){return"Crea m\xe1s contenido"},
 gkQ(){return"Resultados m\xe1s r\xe1pidos"},
 gkR(){return"Menos tiempo de espera"},
 gpY(){return"Sync en la nube"},
-gaaw(){return"Soporte prioritario"},
-ga9b(){return"Desbloquear ahora"},
-ga9c(){return"Desbloquear"},
-gT4(){return y.eT},
-gT5(){return y.f3},
+gaax(){return"Soporte prioritario"},
+ga9c(){return"Desbloquear ahora"},
+ga9d(){return"Desbloquear"},
+gT5(){return y.eT},
+gT6(){return y.f3},
 ady(d){return"Solo "+d+" / a\xf1o"},
 adB(d){return d+" / mes"}}
-A.c8L.prototype={
+A.c8N.prototype={
 gam(d){return"Monetiza desde el d\xeda uno"},
 gcr(d){return y.c9},
 gkn(d){return"Continuar"},
-ga_o(d){return"Omitir"},
-gacf(){return"\xbfYa tienes cuenta? Iniciar sesi\xf3n"}}
-A.c8N.prototype={
+ga_q(d){return"Omitir"},
+gacg(){return"\xbfYa tienes cuenta? Iniciar sesi\xf3n"}}
+A.c8P.prototype={
 gam(d){return"Inicio de sesi\xf3n, ya resuelto"},
 gcr(d){return y.o},
 gkn(d){return"Continuar"},
 gAy(d){return"Atr\xe1s"}}
-A.c8P.prototype={
+A.c8R.prototype={
 gam(d){return"Tu asistente de IA integrado"},
 gcr(d){return y.dn},
 gkn(d){return"Continuar"}}
-A.c90.prototype={
-gaa0(){var w=this.x
-return w===$?this.x=new A.c8Z():w},
-ga6o(){var w=this.Q
-return w===$?this.Q=new A.c8X():w}}
-A.c8E.prototype={
+A.c92.prototype={
+gaa1(){var w=this.x
+return w===$?this.x=new A.c90():w},
+ga6q(){var w=this.Q
+return w===$?this.Q=new A.c8Z():w}}
+A.c8G.prototype={
 gam(d){return"\xbfCu\xe1ntos a\xf1os tienes?"},
 gcr(d){return y.cn},
 gi1(d){var w=x.g
-return B.al(["age18_30","18 a 30","age31_40","31 a 40","age41_50","41 a 50","age51_60","M\xe1s de 50","none","Prefiero no decirlo"],w,w)},
+return B.ak(["age18_30","18 a 30","age31_40","31 a 40","age41_50","41 a 50","age51_60","M\xe1s de 50","none","Prefiero no decirlo"],w,w)},
 gkn(d){return"Continuar"}}
-A.c8R.prototype={
+A.c8T.prototype={
 gam(d){return"\xbfC\xf3mo te identificas?"},
 gcr(d){return y.Z},
 gi1(d){var w=x.g
-return B.al(["male","Masculino","female","Femenino","none","Prefiero no decirlo"],w,w)},
+return B.ak(["male","Masculino","female","Femenino","none","Prefiero no decirlo"],w,w)},
 gkn(d){return"Continuar"}}
-A.c92.prototype={
+A.c94.prototype={
 gam(d){return"No te pierdas nada"},
 gcr(d){return y.eq},
 gqV(){return"Activar notificaciones"},
 gzj(){return"Ahora no"},
 gafu(){var w=this.d
-return w===$?this.d=new A.c94():w}}
-A.c8I.prototype={
+return w===$?this.d=new A.c96():w}}
+A.c8K.prototype={
 gam(d){return"Experiencia personalizada"},
 gcr(d){return y.a},
 gqV(){return"Continuar"},
 gzj(){return"Ahora no"},
-ga7J(){var w=this.d
-return w===$?this.d=new A.c8G():w}}
-A.c8T.prototype={
-gagr(){return"Cuenta creada."},
-gagt(){return"Cuenta creada. Bienvenido!"},
-gags(){return"Cuenta creada. Bienvenida!"},
+ga7L(){var w=this.d
+return w===$?this.d=new A.c8I():w}}
+A.c8V.prototype={
+gagq(){return"Cuenta creada."},
+gags(){return"Cuenta creada. Bienvenido!"},
+gagr(){return"Cuenta creada. Bienvenida!"},
 gHq(){var w=this.d
-return w===$?this.d=new A.c8V():w}}
-A.c8k.prototype={
+return w===$?this.d=new A.c8X():w}}
+A.c8m.prototype={
 gam(d){return"Voto registrado"},
 gcr(d){return"Gracias por ayudarnos a priorizar"}}
-A.c8i.prototype={
+A.c8k.prototype={
 gam(d){return"Ya votado"},
 gcr(d){return"Ya votaste por esta idea"}}
-A.c8c.prototype={
-ga7O(){return"Agregar"},
+A.c8e.prototype={
+ga7Q(){return"Agregar"},
 gam(d){return"Enviar una idea"},
 gcr(d){return"Cu\xe9ntanos qu\xe9 te gustar\xeda ver en la app."},
-gZi(){return"Enviar"},
-gfq(d){return"Cancelar"},
+gZk(){return"Enviar"},
+gfs(d){return"Cancelar"},
 gafk(){return"T\xedtulo"},
 gaff(){return"Un t\xedtulo corto y descriptivo"},
-ga9y(){return"Descripci\xf3n"},
-ga9w(){return y._},
-gfY(){return"Error"},
-gUO(){return y.fu},
-gaao(){return"Algo sali\xf3 mal. Int\xe9ntalo de nuevo."},
-gUP(){return y.T},
-gYa(){var w=this.d
-return w===$?this.d=new A.c8e():w}}
-A.c9v.prototype={
+ga9z(){return"Descripci\xf3n"},
+ga9x(){return y._},
+gfZ(){return"Error"},
+gUQ(){return y.fu},
+gaap(){return"Algo sali\xf3 mal. Int\xe9ntalo de nuevo."},
+gUR(){return y.T},
+gYc(){var w=this.d
+return w===$?this.d=new A.c8g():w}}
+A.c9x.prototype={
 gam(d){return"Foto de perfil"},
 gaeS(){return"Tomar foto"},
-ga7P(){return"Biblioteca de fotos"},
+ga7R(){return"Biblioteca de fotos"},
 gaeA(){return"Eliminar foto"}}
-A.c9x.prototype={
+A.c9z.prototype={
 gK3(d){return"Quiero eliminar mi cuenta"},
 gam(d){return"\xbfQuieres eliminar tu cuenta?"},
-ga8r(d){return y.p},
-ga8s(){return y.u},
-gfq(d){return"Cancelar"},
-ga8k(d){return"S\xed, eliminar"},
+ga8t(d){return y.p},
+ga8u(){return y.u},
+gfs(d){return"Cancelar"},
+ga8m(d){return"S\xed, eliminar"},
 gho(d){return y.x}}
-A.c9t.prototype={
-gCB(){return"Previsualizar novedades"},
+A.c9v.prototype={
+gCA(){return"Previsualizar novedades"},
 gadO(){return"Previsualizar actualizaci\xf3n disponible"},
 grk(){return"Paywalls"},
 gaf1(){return"Probar onboarding"},
-ga8T(){return"Copiar ID de usuario"},
-gYH(){return"ID de usuario copiado al portapapeles"},
-ga8S(){return"Copiar FCM Token"},
-ga6E(){return"Pedir permiso de notificaci\xf3n"},
+ga8U(){return"Copiar ID de usuario"},
+gYJ(){return"ID de usuario copiado al portapapeles"},
+ga8T(){return"Copiar FCM Token"},
+ga6G(){return"Pedir permiso de notificaci\xf3n"},
 gLP(){return y.X},
-ga6F(){return"Pedir evaluaci\xf3n"},
+ga6H(){return"Pedir evaluaci\xf3n"},
 guu(){return"Enviar notificaci\xf3n"},
-gZH(){return"Agregar e-mail"},
-ga_4(){return"T\xedtulo"},
-ga_3(){return"Ej: Nueva actualizaci\xf3n disponible"},
-gZG(){return"Mensaje"},
-gZF(){return y.G},
-gZK(){return"URL de imagen (opcional)"},
-gZJ(){return"https://..."},
-gZI(){return"Correos destinatarios"},
-ga_2(){return"\xa1Notificaci\xf3n enviada!"},
-a_5(d){return"Usuario no encontrado: "+d},
-ga_1(){return"Enviar"},
-gZQ(){return"El t\xedtulo y el mensaje son obligatorios"},
-gZL(){return"Agrega al menos un correo"},
-gZU(){return"P\xe1gina al abrir"},
-gZR(){return y.aZ},
-gZV(){return"Notificaciones"},
-gZT(){return"Inicio"},
-gZY(){return"Configuraci\xf3n"},
-gZW(){return"Premium"},
-gZX(){return"Recordatorios"},
-gZS(){return"Comentarios"},
-gZN(){return"Vista previa"},
-gZO(){return"ahora"},
-gZP(){return"T\xedtulo de la notificaci\xf3n"},
-gZM(){return"El cuerpo del mensaje aparece aqu\xed"},
-ga_0(){return"Destinatarios"},
-ga__(){return"Contenido"},
-gZZ(){return"Avanzado"},
-gZC(){return"Todos"},
-gZE(){return"Espec\xedficos"},
-gZD(){return y.gk}}
-A.c8Z.prototype={
+gZJ(){return"Agregar e-mail"},
+ga_6(){return"T\xedtulo"},
+ga_5(){return"Ej: Nueva actualizaci\xf3n disponible"},
+gZI(){return"Mensaje"},
+gZH(){return y.G},
+gZM(){return"URL de imagen (opcional)"},
+gZL(){return"https://..."},
+gZK(){return"Correos destinatarios"},
+ga_4(){return"\xa1Notificaci\xf3n enviada!"},
+a_7(d){return"Usuario no encontrado: "+d},
+ga_3(){return"Enviar"},
+gZS(){return"El t\xedtulo y el mensaje son obligatorios"},
+gZN(){return"Agrega al menos un correo"},
+gZW(){return"P\xe1gina al abrir"},
+gZT(){return y.aZ},
+gZX(){return"Notificaciones"},
+gZV(){return"Inicio"},
+ga__(){return"Configuraci\xf3n"},
+gZY(){return"Premium"},
+gZZ(){return"Recordatorios"},
+gZU(){return"Comentarios"},
+gZP(){return"Vista previa"},
+gZQ(){return"ahora"},
+gZR(){return"T\xedtulo de la notificaci\xf3n"},
+gZO(){return"El cuerpo del mensaje aparece aqu\xed"},
+ga_2(){return"Destinatarios"},
+ga_1(){return"Contenido"},
+ga_0(){return"Avanzado"},
+gZE(){return"Todos"},
+gZG(){return"Espec\xedficos"},
+gZF(){return y.gk}}
+A.c90.prototype={
 gacW(){return"Nuevo suscriptor Pro"},
 gacU(){return"Plan anual \xb7 +$49.90"},
 gacV(){return"1:40 PM"},
 gG2(){return"Procesando pago\u2026"},
-ga_S(){return"Ganancias"},
-ga_R(){return y.gW}}
-A.c8X.prototype={
+ga_U(){return"Ganancias"},
+ga_T(){return y.gW}}
+A.c8Z.prototype={
 gafH(){return"\xbfQu\xe9 puedes hacer?"},
-ga65(){return y.f},
+ga67(){return y.f},
 gafI(){return"Resume mis notas"},
-ga66(){return y.e0}}
-A.c94.prototype={
+ga68(){return y.e0}}
+A.c96.prototype={
 gadY(){return"Kasy"},
 gae_(){return"Tu resumen semanal est\xe1 listo"},
 gadZ(){return"Toca para abrir."},
 gae0(){return"ahora"},
-ga_K(){return"Nuevo suscriptor Pro"},
-ga_J(){return"Plan anual \xb7 +$49,90"},
-ga_G(){return"\xa1Racha de 7 d\xedas!"},
-ga_F(){return"Volviste a cumplir tu meta diaria."}}
-A.c8G.prototype={
+ga_M(){return"Nuevo suscriptor Pro"},
+ga_L(){return"Plan anual \xb7 +$49,90"},
+ga_I(){return"\xa1Racha de 7 d\xedas!"},
+ga_H(){return"Volviste a cumplir tu meta diaria."}}
+A.c8I.prototype={
 gaeR(d){return"Privacidad"}}
-A.c8V.prototype={
+A.c8X.prototype={
 gAh(){return"Creando tu cuenta"},
 gadG(){return"Guardando tus preferencias"},
 gael(d){return"Personalizando tu experiencia"}}
-A.c8e.prototype={
+A.c8g.prototype={
 gam(d){return"Idea enviada"},
 gcr(d){return y.r}}
-A.aUa.prototype={}
+A.aUb.prototype={}
 var z=a.updateTypes([])
-A.cfk.prototype={
-$1(d){return A.d9k(this.a,d)},
+A.cfm.prototype={
+$1(d){return A.d9q(this.a,d)},
 $S:123}
-A.ceF.prototype={
+A.ceH.prototype={
 $1$count(d){return B.j(d)+" en 14 d\xedas"},
 $C:"$1$count",
 $R:0,
 $D(){return{count:C.E}},
 $S:34}
-A.ceG.prototype={
+A.ceI.prototype={
 $1$percent(d){return B.j(d)+" suscriben"},
 $C:"$1$percent",
 $R:0,
 $D(){return{percent:C.E}},
 $S:108}
-A.ceH.prototype={
+A.ceJ.prototype={
 $1$count(d){return"Seg\xfan los "+B.j(d)+" usuarios m\xe1s recientes."},
 $C:"$1$count",
 $R:0,
 $D(){return{count:C.E}},
 $S:34}
-A.ceI.prototype={
+A.ceK.prototype={
 $2$page$total(d,e){return"P\xe1gina "+B.j(d)+" de "+B.j(e)},
 $C:"$2$page$total",
 $R:0,
 $D(){return{page:C.E,total:C.E}},
 $S:109}
-A.ceJ.prototype={
+A.ceL.prototype={
 $3$from$to$total(d,e,f){return"Mostrando "+B.j(d)+" a "+B.j(e)+" de "+B.j(f)},
 $C:"$3$from$to$total",
 $R:0,
 $D(){return{from:C.E,to:C.E,total:C.E}},
-$S:263}
-A.ceK.prototype={
+$S:258}
+A.ceM.prototype={
 $1$count(d){return"Mostrando los "+B.j(d)+" m\xe1s recientes. La b\xfasqueda cubre solo los cargados."},
 $C:"$1$count",
 $R:0,
 $D(){return{count:C.E}},
 $S:34}
-A.ceL.prototype={
+A.ceN.prototype={
 $1$count(d){return B.j(d)+" votos"},
 $C:"$1$count",
 $R:0,
 $D(){return{count:C.E}},
 $S:34}
-A.ceN.prototype={
+A.ceP.prototype={
 $1$count(d){return B.j(d)+" en total"},
 $C:"$1$count",
 $R:0,
 $D(){return{count:C.E}},
 $S:34}
-A.ceO.prototype={
+A.ceQ.prototype={
 $1$provider(d){return"No se pudo iniciar sesi\xf3n con "+B.j(d)},
 $C:"$1$provider",
 $R:0,
 $D(){return{provider:C.E}},
 $S:78}
-A.ceP.prototype={
+A.ceR.prototype={
 $1$money(d){return"7 d\xedas gratis, luego "+B.j(d)},
 $C:"$1$money",
 $R:0,
 $D(){return{money:C.E}},
-$S:262}
-A.ceQ.prototype={
+$S:265}
+A.ceS.prototype={
 $1$days(d){return"Prueba gratis por "+B.j(d)+" d\xedas"},
 $C:"$1$days",
 $R:0,
 $D(){return{days:C.E}},
-$S:261}
-A.ceR.prototype={
+$S:237}
+A.ceT.prototype={
 $1$percent(d){return"Ahorra "+B.j(d)+"%"},
 $C:"$1$percent",
 $R:0,
 $D(){return{percent:C.E}},
 $S:108}
-A.ceS.prototype={
+A.ceU.prototype={
 $1$price(d){return B.j(d)+" facturado al a\xf1o"},
 $C:"$1$price",
 $R:0,
 $D(){return{price:C.E}},
 $S:57}
-A.ceT.prototype={
+A.ceV.prototype={
 $1$period(d){return"Facturaci\xf3n por "+B.j(d)},
 $C:"$1$period",
 $R:0,
 $D(){return{period:C.E}},
-$S:260}
-A.ceU.prototype={
+$S:222}
+A.ceW.prototype={
 $2$days$price(d,e){return B.j(d)+" d\xedas gratis, luego "+B.j(e)+"/a\xf1o"},
 $C:"$2$days$price",
 $R:0,
 $D(){return{days:C.E,price:C.E}},
-$S:259}
-A.ceV.prototype={
+$S:223}
+A.ceX.prototype={
 $1$price(d){return B.j(d)+"/a\xf1o"},
 $C:"$1$price",
 $R:0,
 $D(){return{price:C.E}},
 $S:57}
-A.ceW.prototype={
+A.ceY.prototype={
 $1$price(d){return"Solo "+B.j(d)+" / a\xf1o"},
 $C:"$1$price",
 $R:0,
 $D(){return{price:C.E}},
 $S:57}
-A.ceY.prototype={
+A.cf_.prototype={
 $1$price(d){return B.j(d)+" / mes"},
 $C:"$1$price",
 $R:0,
 $D(){return{price:C.E}},
 $S:57}
-A.ceZ.prototype={
+A.cf0.prototype={
 $1$date(d){return"Renueva el "+B.j(d)},
 $C:"$1$date",
 $R:0,
 $D(){return{date:C.E}},
 $S:54}
-A.cf_.prototype={
+A.cf1.prototype={
 $1$date(d){return"Expira el "+B.j(d)},
 $C:"$1$date",
 $R:0,
 $D(){return{date:C.E}},
 $S:54}
-A.cf0.prototype={
+A.cf2.prototype={
 $1$date(d){return"Evaluaci\xf3n gratuita hasta el "+B.j(d)},
 $C:"$1$date",
 $R:0,
 $D(){return{date:C.E}},
 $S:54}
-A.cf1.prototype={
+A.cf3.prototype={
 $2$date$price(d,e){return B.j(e)+" a partir del "+B.j(d)},
 $C:"$2$date$price",
 $R:0,
 $D(){return{date:C.E,price:C.E}},
-$S:258}
-A.cf2.prototype={
+$S:224}
+A.cf4.prototype={
 $1$time(d){return"Todos los d\xedas a las "+B.j(d)},
 $C:"$1$time",
 $R:0,
 $D(){return{time:C.E}},
-$S:257}
-A.cf3.prototype={
+$S:226}
+A.cf5.prototype={
 $2$day$time(d,e){return"Cada "+B.j(d)+" a las "+B.j(e)},
 $C:"$2$day$time",
 $R:0,
 $D(){return{day:C.E,time:C.E}},
-$S:256}
-A.cf4.prototype={
+$S:227}
+A.cf6.prototype={
 $2$date$time(d,e){return"El "+B.j(d)+" a las "+B.j(e)},
 $C:"$2$date$time",
 $R:0,
 $D(){return{date:C.E,time:C.E}},
-$S:255}
-A.cf5.prototype={
+$S:228}
+A.cf7.prototype={
 $1$provider(d){return"Vincular "+B.j(d)},
 $C:"$1$provider",
 $R:0,
 $D(){return{provider:C.E}},
 $S:78}
-A.cf6.prototype={
+A.cf8.prototype={
 $1$provider(d){return B.j(d)+" vinculado"},
 $C:"$1$provider",
 $R:0,
 $D(){return{provider:C.E}},
 $S:78}
-A.cf8.prototype={
+A.cfa.prototype={
 $2$amount$type(d,e){return"Recompensa ganada: "+B.j(d)+" "+B.j(e)},
 $C:"$2$amount$type",
 $R:0,
 $D(){return{amount:C.E,type:C.E}},
-$S:254}
-A.cf9.prototype={
+$S:229}
+A.cfb.prototype={
 $1$email(d){return"Usuario no encontrado: "+B.j(d)},
 $C:"$1$email",
 $R:0,
 $D(){return{email:C.E}},
-$S:253}
-A.cfa.prototype={
+$S:230}
+A.cfc.prototype={
 $1$phone(d){return y.y+B.j(d)},
 $C:"$1$phone",
 $R:0,
 $D(){return{phone:C.E}},
-$S:252}
-A.cfb.prototype={
+$S:231}
+A.cfd.prototype={
 $1$name(d){return"\xa1Hola, "+B.j(d)+"!"},
 $C:"$1$name",
 $R:0,
 $D(){return{name:C.E}},
-$S:251}
-A.cfc.prototype={
+$S:232}
+A.cfe.prototype={
 $1$count(d){return B.j(d)+" cards"},
 $C:"$1$count",
 $R:0,
 $D(){return{count:C.E}},
 $S:34}
-A.cfd.prototype={
+A.cff.prototype={
 $1$date(d){return"Creado el "+B.j(d)},
 $C:"$1$date",
 $R:0,
 $D(){return{date:C.E}},
 $S:54}
-A.cfe.prototype={
+A.cfg.prototype={
 $2$page$total(d,e){return"P\xe1gina "+B.j(d)+" de "+B.j(e)},
 $C:"$2$page$total",
 $R:0,
 $D(){return{page:C.E,total:C.E}},
 $S:109};(function inheritance(){var w=a.mixin,v=a.inherit,u=a.inheritMany
-v(A.aUa,B.jO)
-v(A.aBb,A.aUa)
-v(A.c88,B.a65)
-v(A.c7J,B.a5T)
-v(A.c8q,B.a6e)
-v(A.c7Z,B.a60)
-v(A.c9d,B.a6D)
-v(A.c7F,B.a5R)
-v(A.c8K,B.a6o)
-v(A.c8g,B.a69)
-v(A.c9F,B.a6R)
-v(A.c9D,B.a6Q)
-v(A.c9p,B.a6J)
-v(A.c8A,B.a6j)
-v(A.c9n,B.a6I)
-v(A.c9B,B.a6P)
+v(A.aUb,B.jO)
+v(A.aBd,A.aUb)
 v(A.c8a,B.a66)
-v(A.c9z,B.a6O)
-v(A.c8C,B.a6k)
-v(A.c99,B.a6B)
-v(A.c9l,B.a6H)
-v(A.c97,B.a6A)
-v(A.c86,B.a64)
-v(A.c8u,B.a6g)
-v(A.c8w,B.a6h)
-v(A.c8y,B.a6i)
-v(A.c9r,B.a6K)
-v(A.c7V,B.a5Z)
-v(A.c7M,B.a5V)
-v(A.c7X,B.a6_)
-v(A.c7R,B.a5X)
-v(A.c7H,B.a5S)
-v(A.c7K,B.a5U)
-v(A.c7O,B.a5W)
-v(A.c7T,B.a5Y)
-v(A.c8r,B.a6f)
-v(A.c8o,B.a6d)
-v(A.c8m,B.a6c)
-v(A.c82,B.a62)
-v(A.c84,B.a63)
+v(A.c7L,B.a5U)
+v(A.c8s,B.a6f)
 v(A.c80,B.a61)
 v(A.c9f,B.a6E)
+v(A.c7H,B.a5S)
+v(A.c8M,B.a6p)
+v(A.c8i,B.a6a)
+v(A.c9H,B.a6S)
+v(A.c9F,B.a6R)
+v(A.c9r,B.a6K)
+v(A.c8C,B.a6k)
+v(A.c9p,B.a6J)
+v(A.c9D,B.a6Q)
+v(A.c8c,B.a67)
+v(A.c9B,B.a6P)
+v(A.c8E,B.a6l)
 v(A.c9b,B.a6C)
+v(A.c9n,B.a6I)
+v(A.c99,B.a6B)
+v(A.c88,B.a65)
+v(A.c8w,B.a6h)
+v(A.c8y,B.a6i)
+v(A.c8A,B.a6j)
+v(A.c9t,B.a6L)
+v(A.c7X,B.a6_)
+v(A.c7O,B.a5W)
+v(A.c7Z,B.a60)
+v(A.c7T,B.a5Y)
+v(A.c7J,B.a5T)
+v(A.c7M,B.a5V)
+v(A.c7Q,B.a5X)
+v(A.c7V,B.a5Z)
+v(A.c8t,B.a6g)
+v(A.c8q,B.a6e)
+v(A.c8o,B.a6d)
+v(A.c84,B.a63)
+v(A.c86,B.a64)
+v(A.c82,B.a62)
 v(A.c9h,B.a6F)
+v(A.c9d,B.a6D)
 v(A.c9j,B.a6G)
-v(A.c8L,B.a6p)
+v(A.c9l,B.a6H)
 v(A.c8N,B.a6q)
 v(A.c8P,B.a6r)
-v(A.c90,B.a6x)
-v(A.c8E,B.a6l)
 v(A.c8R,B.a6s)
 v(A.c92,B.a6y)
-v(A.c8I,B.a6n)
-v(A.c8T,B.a6t)
-v(A.c8k,B.a6b)
-v(A.c8i,B.a6a)
-v(A.c8c,B.a67)
-v(A.c9v,B.a6M)
-v(A.c9x,B.a6N)
-v(A.c9t,B.a6L)
-v(A.c8Z,B.a6w)
-v(A.c8X,B.a6v)
-v(A.c94,B.a6z)
 v(A.c8G,B.a6m)
+v(A.c8T,B.a6t)
+v(A.c94,B.a6z)
+v(A.c8K,B.a6o)
 v(A.c8V,B.a6u)
+v(A.c8m,B.a6c)
+v(A.c8k,B.a6b)
 v(A.c8e,B.a68)
-u(B.uK,[A.cfk,A.ceF,A.ceG,A.ceH,A.ceI,A.ceJ,A.ceK,A.ceL,A.ceN,A.ceO,A.ceP,A.ceQ,A.ceR,A.ceS,A.ceT,A.ceU,A.ceV,A.ceW,A.ceY,A.ceZ,A.cf_,A.cf0,A.cf1,A.cf2,A.cf3,A.cf4,A.cf5,A.cf6,A.cf8,A.cf9,A.cfa,A.cfb,A.cfc,A.cfd,A.cfe])
-w(A.aUa,B.nN)})()
-B.crP(b.typeUniverse,JSON.parse('{"aBb":{"jO":[],"nN":["jb","jO"]}}'))
+v(A.c9x,B.a6N)
+v(A.c9z,B.a6O)
+v(A.c9v,B.a6M)
+v(A.c90,B.a6x)
+v(A.c8Z,B.a6w)
+v(A.c96,B.a6A)
+v(A.c8I,B.a6n)
+v(A.c8X,B.a6v)
+v(A.c8g,B.a69)
+u(B.uM,[A.cfm,A.ceH,A.ceI,A.ceJ,A.ceK,A.ceL,A.ceM,A.ceN,A.ceP,A.ceQ,A.ceR,A.ceS,A.ceT,A.ceU,A.ceV,A.ceW,A.ceX,A.ceY,A.cf_,A.cf0,A.cf1,A.cf2,A.cf3,A.cf4,A.cf5,A.cf6,A.cf7,A.cf8,A.cfa,A.cfb,A.cfc,A.cfd,A.cfe,A.cff,A.cfg])
+w(A.aUb,B.nN)})()
+B.crS(b.typeUniverse,JSON.parse('{"aBd":{"jO":[],"nN":["jb","jO"]}}'))
 var y={I:"- Lorem ipsum dolor sit amet, consectetur adipiscing elit.",R:"Abre la pesta\xf1a Usuarios para gestionar todas las cuentas.",b:"Activa Face ID o un c\xf3digo del dispositivo en Ajustes.",c:"Activa Face ID, Touch ID o c\xf3digo en Ajustes.",S:"Activa Touch ID o un c\xf3digo del dispositivo en Ajustes.",d:"Activa desbloqueo biom\xe9trico o bloqueo de pantalla en Ajustes.",e:"Administre las categor\xedas oficiales de la biblioteca. Los PDF vinculados a una categor\xeda eliminada no se borrar\xe1n.",p:"Advertencia: esta acci\xf3n es permanente y no se puede deshacer.",u:"Advertencia: esta acci\xf3n es permanente. Perder\xe1s tu suscripci\xf3n activa, y crear una cuenta nueva m\xe1s tarde (incluso con el mismo correo) no la recuperar\xe1.",H:"Al abrir confirmar\xe1s con Face ID o Touch ID\u2014sigues con sesi\xf3n iniciada.",t:"Al abrir confirmar\xe1s con Face ID\u2014sigues con sesi\xf3n iniciada.",z:"Al abrir confirmar\xe1s con Touch ID\u2014sigues con sesi\xf3n iniciada.",W:"Al abrir verificar\xe1s con huella digital\u2014sigues con sesi\xf3n iniciada.",s:"Al abrir verificar\xe1s con reconocimiento facial\u2014sigues con sesi\xf3n iniciada.",x:"Algo sali\xf3 mal. Por favor, int\xe9ntalo de nuevo.",E:"A\xf1ade huella o reconocimiento facial en Ajustes.",A:"A\xfan no hay comentarios. \xa1S\xe9 el primero en comentar!",F:"Compara Gratis y Premium y elige la facturaci\xf3n mensual o anual que mejor te encaje.",n:"Configura huella digital o bloqueo de pantalla en ajustes.",i:"Configura reconocimiento facial o bloqueo de pantalla en ajustes.",m:"Confirma con Face ID o Touch ID para activar el bloqueo",j:"Confirma con Face ID para activar el bloqueo",K:"Confirma con Touch ID para activar el bloqueo",v:"Confirma con huella digital para activar el bloqueo",g:"Confirma con huella o rostro para activar el bloqueo",k:"Confirma con reconocimiento facial para activar el bloqueo",U:"Confirma en el tel\xe9fono para activar el bloqueo",O:"Correo, contrase\xf1a incorrectos o este correo no est\xe1 registrado",o:"Correo, login social y recuperaci\xf3n de contrase\xf1a. Seguro y listo para publicar.",P:"Cuando alguien cree una cuenta, aparecer\xe1 aqu\xed.",h:"Cuando un usuario env\xede una idea, aparecer\xe1 aqu\xed.",q:"Define el titulo y, si quieres, una descripcion y la prioridad.",B:"Define una contrase\xf1a para tambi\xe9n iniciar sesi\xf3n con correo y contrase\xf1a, adem\xe1s del inicio de sesi\xf3n social.",_:"Describe el recurso o la mejora en detalle...",T:"Descripci\xf3n muy corta. Agrega m\xe1s detalles",X:"Disponible solo en la app nativa (iOS / Android)",a:"El permiso ayuda a ajustar comunicaciones a tu perfil. No muestra anuncios dentro de la app.",fu:"El t\xedtulo y la descripci\xf3n son obligatorios",Z:"Elige lo que mejor te represente. Puedes omitir si prefieres.",f:"Escribo, resumo y respondo cualquier cosa en segundos.",go:"Esta es una vista previa de administrador. Las acciones de compra est\xe1n desactivadas.",Y:"Esta suscripci\xf3n se realiz\xf3 en otra plataforma y no se puede gestionar ni cancelar aqu\xed. Inicia sesi\xf3n en tu cuenta en la plataforma donde la compraste.",cn:"Esto nos ayuda a personalizar tu experiencia.",aa:"Exige Face ID al abrir con sesi\xf3n iniciada.",cs:"Exige Touch ID al abrir con sesi\xf3n iniciada.",d5:"Exige desbloqueo facial al abrir con sesi\xf3n iniciada.",a0:"Exige huella digital al abrir con sesi\xf3n iniciada.",fc:"Exige huella digital o desbloqueo facial al abrir con sesi\xf3n iniciada.",gW:"Ganaste $312.40 esta semana de 14 nuevas suscripciones.",gv:"Has iniciado sesi\xf3n con tu n\xfamero de tel\xe9fono",G:"Hasta 3 l\xedneas en la lista de la app (m\xe1x. 140 caracteres)",dB:"Hay una versi\xf3n m\xe1s nueva de la app. Actualiza para tener las \xfaltimas mejoras y correcciones.",y:"Hemos enviado un c\xf3digo de verificaci\xf3n a ",fm:"Inicia sesi\xf3n para continuar tu experiencia",gF:"Int\xe9ntalo de nuevo en unos instantes. Si sigue ocurriendo, es posible que los productos de la tienda a\xfan est\xe9n terminando la configuraci\xf3n.",M:"La b\xfasqueda escane\xf3 un conjunto limitado. Pueden faltar coincidencias.",aF:"La contrase\xf1a debe tener al menos 6 caracteres",gk:"La notificaci\xf3n se enviar\xe1 a todos los usuarios suscritos.",r:"La revisaremos y te daremos una respuesta",l:"Las opciones de suscripci\xf3n a\xfan no est\xe1n disponibles",e0:"Listo. Aqu\xed tienes los 3 puntos clave de hoy.",h9:"Mensual vs anual lado a lado, con tabla free vs premium.",ba:"Necesitas ser admin para ver esto. Define role: admin en el registro de tu usuario en el backend. La app no puede cambiar este campo; la validaci\xf3n est\xe1 en el servidor.",bE:"Ning\xfan PDF p\xfablico enviado por otros usuarios a\xfan.",dK:"No encontramos una suscripci\xf3n activa para restaurar.",dF:"No recibimos confirmaci\xf3n del pago. Si ya pagaste, toca Restaurar.",cz:'No se encontraron resultados para "{query}".',c0:"No se pudieron cargar los usuarios. Aseg\xfarate de ser admin.",L:"No se pudo actualizar tu perfil. Int\xe9ntalo de nuevo.",V:"No se pudo crear la contrase\xf1a. Int\xe9ntalo de nuevo.",J:"No se pudo vincular la cuenta. Int\xe9ntalo de nuevo.",f1:"Nota: Si no recibes un email, por favor revisa tu carpeta de spam",aZ:"Pantalla que se abre cuando el usuario toca la notificaci\xf3n.",fP:"Paywall de conversi\xf3n para onboarding o bloqueo fuerte.",c9:"Paywalls, suscripciones y prueba gratis listos para producci\xf3n. Sin crear backend de cobros.",h1:"Pediremos una verificaci\xf3n r\xe1pida en el tel\xe9fono cuando abras con sesi\xf3n iniciada.",C:"Pide Face ID o Touch ID al abrir con la sesi\xf3n iniciada.",co:"Por favor, complete todos los campos requeridos.",e3:"Puedes usar cualquiera de los dos\u2014sigues dentro.",cU:"Quien tenga el plan premium aparece en este filtro.",dl:"Recibe un recordatorio para volver a la app",f3:"Renueva hasta cancelar. Gestiona en configuraci\xf3n.",eT:"Renueva hasta cancelar. Gestiona en la tienda.",Q:"Se eliminaran permanentemente todas las tarjetas de esta columna.",cg:"Sin bloqueo, quien tenga el tel\xe9fono desbloqueado puede usar la app hasta que cierres sesi\xf3n.",bx:"Solicitudes y sugerencias enviadas por tus usuarios. M\xe1rcalas como visibles para mostrarlas en la app, u oc\xfaltalas si no corresponden.",eq:"Solo te escribiremos cuando de verdad importe. Nada de spam.",D:"S\xe9 el primero en sugerir una funci\xf3n o mejora.",ci:"Te enviaremos un c\xf3digo de verificaci\xf3n para confirmar tu identidad",cu:"Te enviaremos un enlace para restablecerla",w:"Te hemos enviado un email con un enlace para restablecer tu contrase\xf1a",N:"Toca un paywall para previsualizarlo. Copia su c\xf3digo para decirle al asistente cu\xe1l usar.",gq:"Toggle de prueba gratis, normalmente en el anual. Mensual cobra al instante.",cO:"Tu contrase\xf1a debe tener al menos 5 caracteres",h4:"Tu tiempo es limitado.\nNo vivas la vida de otra persona.\nTen el coraje de seguir tu intuici\xf3n.\nTodo lo dem\xe1s es secundario.",dn:"Un asistente conversacional listo para usar, ya integrado.",eP:"Un solo plan con beneficios y un CTA. Ideal para apps de un tier.",fN:"Una confirmaci\xf3n r\xe1pida al abrir\u2014sigues con la sesi\xf3n.",aK:"Una rese\xf1a en la tienda marca la diferencia. Toma unos segundos y nos ayuda mucho a crecer.",dQ:"Ver todos los PDFs subidos por este usuario",bD:"Visible solo para administradores y en modo de desarrollo.",eu:"\xbfActivar bloqueo con reconocimiento facial?",fo:"\xbfEst\xe1 seguro de que desea eliminar esta categor\xeda?"}
-var x={h:B.a_("I<k>"),g:B.a_("k"),c:B.a_("r2<jb,jO>")}};
-(a=>{a["7Vo/qS7PdfnH/0op6xh0ZjCm2Nw="]=a.current})($__dart_deferred_initializers__);
+var x={h:B.a_("I<k>"),g:B.a_("k"),c:B.a_("r3<jb,jO>")}};
+(a=>{a["R96tbrRTQ9hQGKNvRUQJ/VIHRtw="]=a.current})($__dart_deferred_initializers__);
