@@ -34,7 +34,6 @@ class AuthorProfilePage extends ConsumerWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: KasySpacing.xl),
                     CircleAvatar(

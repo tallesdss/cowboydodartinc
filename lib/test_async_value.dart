@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  final av = AsyncValue<List<String>>.data(['a']);
-  print(av.value);
+  const av = AsyncData<List<String>>(['a']);
+  assert(av.value.single == 'a');
 }

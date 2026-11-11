@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:cowboydodartinc/components/components.dart';
 import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
@@ -138,7 +136,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         _selectedFilePath = file.path;
         _selectedFileBytes = file.bytes;
         _selectedFileName = file.name;
-        _selectedFileSize = (file.size / (1024 * 1024)); // MB
+        _selectedFileSize = file.size / (1024 * 1024); // MB
 
         // Auto-fill some fields to help the user
         _titleController.text = _selectedFileName!
@@ -365,7 +363,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
                   child: authorsAsync.when(
                     data: (authors) {
                       return DropdownButtonFormField<LibraryAuthor>(
-                        value: _selectedAuthor,
+                        initialValue: _selectedAuthor,
                         isExpanded: true,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(

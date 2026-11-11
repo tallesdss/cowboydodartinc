@@ -48,8 +48,15 @@ class KasyUserAvatar extends ConsumerWidget {
       AuthenticatedUserData(:final avatarPath) => avatarPath,
       _ => null,
     };
+    final int? avatarUpdatedAt = switch (user) {
+      AuthenticatedUserData(:final lastUpdateDate) => lastUpdateDate?.millisecondsSinceEpoch,
+      _ => null,
+    };
     if (avatarPath != null && avatarPath.isNotEmpty) {
-      final bustedUrl = cacheBustedAvatarUrl(avatarPath, user.lastUpdateDate?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch);
+      final bustedUrl = cacheBustedAvatarUrl(
+        avatarPath,
+        avatarUpdatedAt ?? DateTime.now().millisecondsSinceEpoch,
+      );
       return _avatar(NetworkImage(bustedUrl));
     }
 

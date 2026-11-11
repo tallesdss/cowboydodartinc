@@ -12560,22 +12560,23 @@ class _SwipeActionPreviewState extends State<_SwipeActionPreview> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (final item in _items)
-          widget.useConfirm
-              ? KasySwipeAction.withConfirm(
-                  key: ValueKey('swipe_confirm_${item.id}'),
-                  onDismissed: () =>
-                      setState(() => _items.removeWhere((i) => i.id == item.id)),
-                  confirm: _confirm,
-                  tone: widget.tone,
-                  icon: widget.icon ?? KasyIcons.trash,
-                  child: _SwipePreviewTile(item: item),
-                )
-              : KasySwipeAction(
-                  key: ValueKey('swipe_${item.id}'),
-                  onDismissed: () =>
-                      setState(() => _items.removeWhere((i) => i.id == item.id)),
-                  tone: widget.tone,
-                  icon: widget.icon ?? KasyIcons.trash,
+          if (widget.useConfirm)
+            KasySwipeAction.withConfirm(
+              key: ValueKey('swipe_confirm_${item.id}'),
+              onDismissed: () =>
+                  setState(() => _items.removeWhere((i) => i.id == item.id)),
+              confirm: _confirm,
+              tone: widget.tone,
+              icon: widget.icon ?? KasyIcons.trash,
+              child: _SwipePreviewTile(item: item),
+            )
+          else
+            KasySwipeAction(
+              key: ValueKey('swipe_${item.id}'),
+              onDismissed: () =>
+                  setState(() => _items.removeWhere((i) => i.id == item.id)),
+              tone: widget.tone,
+              icon: widget.icon ?? KasyIcons.trash,
                   child: _SwipePreviewTile(item: item),
                 ),
       ],

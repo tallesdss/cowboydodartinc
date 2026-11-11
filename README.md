@@ -1,6 +1,6 @@
-# Kasy App
+# Cowboy do Dart Inc.
 
-Flutter app com backend Supabase — gerado pelo kasy.
+Aplicativo Flutter com backend Firebase (Authentication, Firestore, Storage e Cloud Functions), gerado pelo Kasy.
 
 ---
 
@@ -38,27 +38,31 @@ Alternativas: `make run` ou `flutter run` funcionam, mas sem os extras do `kasy 
 - iOS: conecte o iPhone → confie neste computador → Xcode → Window → Devices → parear
 - Android: Configurações → Opções do desenvolvedor → ativar depuração USB
 
-**Deploy do banco de dados** (quando estiver pronto):
+**Deploy das regras do banco e do armazenamento:**
 
 ```sh
-supabase link --project-ref SEU_PROJECT_REF
-supabase db push
+firebase login
+firebase use cowboydodartinc-r162vk
+firebase deploy --only firestore:rules,storage
 ```
 
-**Deploy das Edge Functions**:
+**Deploy das Cloud Functions:**
 
 ```sh
-supabase functions deploy delete-user-account   # obrigatória para exclusão de conta
-supabase functions deploy revenuecat-webhook   # se usar RevenueCat
-supabase functions deploy send-push-notification   # se usar push
+firebase deploy --only functions
 ```
 
-**Secrets do servidor** (se usar RevenueCat):
+O projeto Firebase padrão também está definido em `.firebaserc`. Antes de publicar, confirme o projeto ativo com `firebase use`.
+
+**Segredos das Cloud Functions** (configure apenas os usados pelos módulos ativos):
 
 ```sh
-supabase secrets set REVENUECAT_WEBHOOK_KEY="sua_chave"
-supabase secrets set META_ACCESS_TOKEN="seu_token"   # opcional
-supabase secrets set META_DATASET_ID="seu_dataset"   # opcional
+firebase functions:secrets:set REVENUECAT_WEBHOOK_KEY
+firebase functions:secrets:set META_ACCESS_TOKEN
+firebase functions:secrets:set META_DATASET_ID
+firebase functions:secrets:set AI_API_KEY
+firebase functions:secrets:set STRIPE_SECRET_KEY
+firebase functions:secrets:set STRIPE_WEBHOOK_SECRET
 ```
 
 ---
@@ -88,8 +92,6 @@ Ficam no arquivo **`.env`** na raiz do projeto (cada chave tem um comentário ex
 
 | Variável | Módulo | Como obter |
 |----------|--------|------------|
-| `BACKEND_URL` | Supabase | Dashboard Supabase → Project Settings → API → Project URL |
-| `SUPABASE_TOKEN` | Supabase | Dashboard Supabase → Project Settings → API → anon key |
 | `RC_TEST_KEY` | RevenueCat | Dashboard RevenueCat → Apps → Test Store (chave `test_`, vale iOS+Android, usada automaticamente em simulador) |
 | `RC_IOS_PROD_KEY` | RevenueCat | Dashboard RevenueCat → Apps → App Store (chave `appl_`, usada automaticamente em iPhone físico) |
 | `RC_ANDROID_PROD_KEY` | RevenueCat | Dashboard RevenueCat → Apps → Google Play (chave `goog_`, usada automaticamente em Android físico) |

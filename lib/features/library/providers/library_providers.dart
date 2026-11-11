@@ -10,8 +10,6 @@ part 'library_providers.g.dart';
 // ----------------------------------------------------
 @riverpod
 class Categories extends _$Categories {
-  late final LibraryFirebaseRepository _repository;
-
   @override
   Stream<List<LibraryCategory>> build() {
     return ref.watch(libraryFirebaseRepositoryProvider).watchCategories();
@@ -49,7 +47,7 @@ class Categories extends _$Categories {
 @riverpod
 class Authors extends _$Authors {
   @override
-  Future<List<LibraryAuthor>> build() async {
+  Future<List<LibraryAuthor>> build() {
     return ref.watch(libraryFirebaseRepositoryProvider).getAuthors();
   }
 
@@ -73,8 +71,6 @@ class Authors extends _$Authors {
 // ----------------------------------------------------
 @riverpod
 class Pdfs extends _$Pdfs {
-  late final LibraryFirebaseRepository _repository;
-
   @override
   Stream<List<PdfDocument>> build() {
     return ref.watch(libraryFirebaseRepositoryProvider).watchPdfs();
@@ -114,8 +110,6 @@ class Pdfs extends _$Pdfs {
 // ----------------------------------------------------
 @riverpod
 class Comments extends _$Comments {
-  late final LibraryFirebaseRepository _repository;
-
   @override
   Stream<List<LibraryComment>> build(String pdfId) {
     return ref.watch(libraryFirebaseRepositoryProvider).watchComments(pdfId);
@@ -145,8 +139,6 @@ class Comments extends _$Comments {
 // ----------------------------------------------------
 @riverpod
 class Favorites extends _$Favorites {
-  late final LibraryFirebaseRepository _repository;
-
   @override
   Stream<List<String>> build() {
     return ref.watch(libraryFirebaseRepositoryProvider).watchFavorites();

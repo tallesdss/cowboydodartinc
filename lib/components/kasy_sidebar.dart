@@ -457,7 +457,7 @@ class _KasySidebarState extends State<KasySidebar> {
           opacity: animation,
           child: SizeTransition(
             sizeFactor: animation,
-            axisAlignment: -1,
+            alignment: Alignment.topCenter,
             child: child,
           ),
         );

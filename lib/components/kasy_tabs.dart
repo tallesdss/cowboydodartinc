@@ -580,9 +580,10 @@ class _PrimaryTabState extends State<_PrimaryTab> {
                     // Expanded). Hug mode lays out in an unbounded scroll view,
                     // where a Flexible child would have no bound to flex within.
                     if (hasLabel)
-                      widget.expand
-                          ? Flexible(child: labelWidget)
-                          : labelWidget,
+                      if (widget.expand)
+                        Flexible(child: labelWidget)
+                      else
+                        labelWidget,
                   ],
                 ),
         ),

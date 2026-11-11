@@ -1,7 +1,5 @@
-# Supabase backend: replaces Firebase pubspec dependencies.
-# Firebase-specific: firebase_auth, cloud_firestore, firebase_storage, cloud_functions, home_widget
-# Supabase: supabase_flutter
-# Shared: firebase_core, firebase_messaging, firebase_remote_config (FCM + Remote Config)
+# The app currently uses Firebase Authentication, Firestore, Storage and Cloud
+# Functions. Supabase files in the repository are not initialized by the app.
 
 name: cowboydodartinc
 description: "A new Flutter project."
@@ -29,11 +27,7 @@ dependencies:
   facebook_app_events: ^0.24.0
   file_picker: ^11.0.3
   firebase_app_installations: ^0.4.0+7
-  # Web-only Google sign-in: on web, google_sign_in v7 can't do imperative auth, so we
-  # get the Google ID token via Firebase's popup (zero manual config, reuses the
-  # Firebase web client + authorized domains) and hand it to Supabase signInWithIdToken.
-  # Supabase stays the auth backend; mobile keeps the native google_sign_in flow.
-  # Kept before firebase_core so the deps stay alphabetical (sort_pub_dependencies).
+  # Google sign-in uses Firebase Auth on web (popup) and on native (Google credential).
   firebase_auth: ^6.1.4
   firebase_core: ^4.5.0
   firebase_messaging: ^16.1.2

@@ -354,7 +354,7 @@ class FirebaseDeviceApi implements DeviceApi {
         }
       }
       const platform = MethodChannel('kasy_kit/advertising_id');
-      return platform.invokeMethod<String>('getAdvertisingId');
+      return await platform.invokeMethod<String>('getAdvertisingId');
     } catch (e, trace) {
       Logger().e('Error getting mobile advertiser id: $e, $trace');
       return null;
