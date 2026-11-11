@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cowboydodartinc/components/components.dart';
-import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/core/widgets/responsive_layout.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
@@ -78,21 +77,18 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = ref.watch(userStateNotifierProvider).user.idOrNull;
     final pdfs = ref.watch(pdfsProvider).value ?? [];
     final favorites = ref.watch(favoritesProvider).value ?? [];
     final categories = ref.watch(categoriesProvider).value ?? [];
     final authors = ref.watch(authorsProvider).value ?? [];
 
-    // Other users: any PDF where createdBy != userId
-    final otherUsersPdfs = pdfs.where((pdf) {
-      final isFromOther = pdf.createdBy != userId;
+    final publicPdfs = pdfs.where((pdf) {
       final matchesSearch = pdf.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
           pdf.author.toLowerCase().contains(_searchQuery.toLowerCase()) ||
           pdf.tags.any((t) => t.toLowerCase().contains(_searchQuery.toLowerCase()));
       final matchesCategory = _selectedCategoryId == 'all' || pdf.categoryIds.contains(_selectedCategoryId);
       final matchesAuthor = _selectedAuthorId == 'all' || pdf.authorId == _selectedAuthorId;
-      return isFromOther && matchesSearch && matchesCategory && matchesAuthor;
+      return pdf.isPublic && matchesSearch && matchesCategory && matchesAuthor;
     }).toList();
 
     return KasyScreen(
@@ -184,7 +180,7 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
               // Public PDFs Grid
               if (_isLoading)
                 const _PdfsGridSkeleton()
-              else if (otherUsersPdfs.isEmpty)
+              else if (publicPdfs.isEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: KasySpacing.xl),
                   child: KasyEmptyState(
@@ -203,9 +199,9 @@ class _ExplorePageState extends ConsumerState<ExplorePage> {
                     crossAxisSpacing: KasySpacing.md,
                     childAspectRatio: isSmall ? 0.7 : 0.75,
                   ),
-                  itemCount: otherUsersPdfs.length,
+                  itemCount: publicPdfs.length,
                   itemBuilder: (context, index) {
-                    final pdf = otherUsersPdfs[index];
+                    final pdf = publicPdfs[index];
                     final isFav = favorites.contains(pdf.id);
 
                     return KasyCard(

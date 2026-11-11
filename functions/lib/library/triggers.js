@@ -56,8 +56,9 @@ exports.onCommentWritten = (0, firestore_1.onDocumentWritten)("comments/{comment
     let totalRating = 0;
     const count = commentsSnapshot.size;
     commentsSnapshot.forEach((doc) => {
+        var _a, _b, _c;
         const data = doc.data();
-        totalRating += (data.rating || data.nota || 0);
+        totalRating += ((_c = (_b = (_a = data.nota) !== null && _a !== void 0 ? _a : data.avaliacao) !== null && _b !== void 0 ? _b : data.rating) !== null && _c !== void 0 ? _c : 0);
     });
     const averageRating = count > 0 ? (totalRating / count) : 0;
     // Atualizar o documento do PDF com a nota média e quantidade de comentários

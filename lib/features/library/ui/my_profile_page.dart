@@ -154,6 +154,10 @@ class MyProfilePage extends ConsumerWidget {
                               pdf.author,
                               style: context.kasyTextTheme.cardSubtitle,
                             ),
+                            const SizedBox(height: KasySpacing.xs),
+                            KasyTag(
+                              label: pdf.isPublic ? t.library.public_badge : t.library.private_badge,
+                            ),
                           ],
                         ),
                       ),

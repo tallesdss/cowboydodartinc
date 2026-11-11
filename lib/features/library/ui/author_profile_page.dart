@@ -75,7 +75,9 @@ class AuthorProfilePage extends ConsumerWidget {
               ),
               pdfsAsync.when(
                 data: (allPdfs) {
-                  final authorPdfs = allPdfs.where((p) => p.authorId == author.id || p.author == author.name).toList();
+                    final authorPdfs = allPdfs
+                      .where((pdf) => pdf.isPublic && (pdf.authorId == author.id || pdf.author == author.name))
+                      .toList();
 
                   if (authorPdfs.isEmpty) {
                     return SliverToBoxAdapter(
@@ -129,19 +131,6 @@ class AuthorProfilePage extends ConsumerWidget {
                                         style: context.kasyTextTheme.cardSubtitle,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(height: KasySpacing.sm),
-                                      GestureDetector(
-                                        onTap: () {
-                                          context.push('/profile/${pdf.createdBy}');
-                                        },
-                                        child: Text(
-                                          'Enviado por: Perfil do Cadastrador',
-                                          style: context.kasyTextTheme.bodyLarge.copyWith(
-                                            color: context.colors.primary,
-                                            decoration: TextDecoration.underline,
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   ),

@@ -11,10 +11,8 @@ class ProfilesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authorsAsync = ref.watch(authorsProvider);
     final pdfs = ref.watch(pdfsProvider).value ?? [];
-
-    // Extract unique authors (uploaders)
-    final uniqueAuthors = pdfs.map((pdf) => pdf.author).toSet().toList();
 
     return KasyScreen(
       appBar: PreferredSize(
@@ -27,69 +25,80 @@ class ProfilesPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Explore os perfis dos criadores de conteúdo',
+            t.library.authors,
             style: context.kasyTextTheme.sectionTitle,
           ),
           const SizedBox(height: KasySpacing.md),
-          if (uniqueAuthors.isEmpty)
-            const Padding(
-              padding: EdgeInsets.only(top: KasySpacing.xl),
-              child: KasyEmptyState(
-                title: 'Nenhum perfil encontrado',
-                subtitle: 'Nenhum usuário publicou PDFs ainda.',
-                icon: Icons.people_outline,
-              ),
-            )
-          else
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 320,
-                mainAxisSpacing: KasySpacing.md,
-                crossAxisSpacing: KasySpacing.md,
-                childAspectRatio: 1.3,
-              ),
-              itemCount: uniqueAuthors.length,
-              itemBuilder: (context, index) {
-                final author = uniqueAuthors[index];
-                final authorPdfsCount = pdfs.where((p) => p.author == author).length;
-
-                return KasyCard(
-                  onTap: () => context.push('/library/uploader/${Uri.encodeComponent(author)}'),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 28,
-                        backgroundColor: context.colors.primary.withAlpha(20),
-                        child: Text(
-                          author.isNotEmpty ? author[0].toUpperCase() : 'U',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: context.colors.primary,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: KasySpacing.sm),
-                      Text(
-                        author,
-                        style: context.kasyTextTheme.cardTitle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: KasySpacing.xs),
-                      Text(
-                        '$authorPdfsCount ${t.library.pdfs.toLowerCase()}',
-                        style: context.kasyTextTheme.cardSubtitle,
-                      ),
-                    ],
+          authorsAsync.when(
+            data: (authors) {
+              if (authors.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: KasySpacing.xl),
+                  child: KasyEmptyState(
+                    title: t.library.no_authors,
+                    subtitle: t.library.no_pdfs,
+                    icon: Icons.people_outline,
                   ),
                 );
-              },
+              }
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 320,
+                  mainAxisSpacing: KasySpacing.md,
+                  crossAxisSpacing: KasySpacing.md,
+                  childAspectRatio: 1.3,
+                ),
+                itemCount: authors.length,
+                itemBuilder: (context, index) {
+                  final author = authors[index];
+                    final authorPdfsCount = pdfs.where((pdf) => pdf.isPublic &&
+                      (pdf.authorId == author.id || pdf.author == author.name)).length;
+
+                  return KasyCard(
+                    onTap: () => context.push('/library/author/${author.id}'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 28,
+                          backgroundColor: context.colors.primary.withAlpha(20),
+                          child: Text(
+                            author.name.isNotEmpty ? author.name[0].toUpperCase() : 'A',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: context.colors.primary,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: KasySpacing.sm),
+                        Text(
+                          author.name,
+                          style: context.kasyTextTheme.cardTitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: KasySpacing.xs),
+                        Text(
+                          '$authorPdfsCount ${t.library.pdfs.toLowerCase()}',
+                          style: context.kasyTextTheme.cardSubtitle,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stackTrace) => KasyEmptyState(
+              title: t.library.no_authors,
+              subtitle: error.toString(),
+              icon: Icons.error_outline,
             ),
+          ),
         ],
       ),
     );

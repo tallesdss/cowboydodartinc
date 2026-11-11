@@ -10,6 +10,7 @@
     "deploy": "firebase deploy --only functions",
     "deploy-prod": "firebase deploy --only functions -P production",
     "logs": "firebase functions:log",
+    "migrate:pdf-visibility": "npm run build && node lib/library/migrate_legacy_pdfs.js",
     "test": "jest",
     "test-watch": "jest --watchAll"
   },

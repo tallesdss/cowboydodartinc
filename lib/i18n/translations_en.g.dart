@@ -1678,6 +1678,36 @@ class TranslationsLibraryEn {
 	/// en: 'Title'
 	String get pdf_title => 'Title';
 
+	/// en: 'Authors'
+	String get authors => 'Authors';
+
+	/// en: 'No authors registered yet'
+	String get no_authors => 'No authors registered yet';
+
+	/// en: 'Public: visible to the community'
+	String get pdf_public => 'Public: visible to the community';
+
+	/// en: 'Private: visible only to you'
+	String get pdf_private => 'Private: visible only to you';
+
+	/// en: 'Public'
+	String get public_badge => 'Public';
+
+	/// en: 'Private'
+	String get private_badge => 'Private';
+
+	/// en: 'PDFs must be 50 MB or smaller.'
+	String get upload_too_large => 'PDFs must be 50 MB or smaller.';
+
+	/// en: 'PDF not found'
+	String get pdf_not_found => 'PDF not found';
+
+	/// en: 'Could not load this PDF'
+	String get pdf_load_error => 'Could not load this PDF';
+
+	/// en: 'This PDF is private or unavailable.'
+	String get private_pdf_unavailable => 'This PDF is private or unavailable.';
+
 	/// en: 'Description'
 	String get pdf_desc => 'Description';
 
@@ -1762,8 +1792,8 @@ class TranslationsLibraryEn {
 	/// en: 'Click to upload your PDF'
 	String get upload_box_title => 'Click to upload your PDF';
 
-	/// en: 'Supported format: PDF (Max 10MB)'
-	String get upload_box_subtitle => 'Supported format: PDF (Max 10MB)';
+	/// en: 'Supported format: PDF (Max 50MB)'
+	String get upload_box_subtitle => 'Supported format: PDF (Max 50MB)';
 
 	/// en: 'PDF Preview'
 	String get pdf_preview => 'PDF Preview';
@@ -1780,8 +1810,8 @@ class TranslationsLibraryEn {
 	/// en: 'Visit profile'
 	String get visit_profile => 'Visit profile';
 
-	/// en: 'No public PDFs uploaded by others yet.'
-	String get no_public_pdfs => 'No public PDFs uploaded by others yet.';
+	/// en: 'No public PDFs match your search yet.'
+	String get no_public_pdfs => 'No public PDFs match your search yet.';
 
 	/// en: 'Uploaded by'
 	String get uploaded_by => 'Uploaded by';
@@ -4442,6 +4472,16 @@ extension on Translations {
 			'library.edit_pdf' => 'Edit PDF',
 			'library.delete_pdf' => 'Delete PDF',
 			'library.pdf_title' => 'Title',
+			'library.authors' => 'Authors',
+			'library.no_authors' => 'No authors registered yet',
+			'library.pdf_public' => 'Public: visible to the community',
+			'library.pdf_private' => 'Private: visible only to you',
+			'library.public_badge' => 'Public',
+			'library.private_badge' => 'Private',
+			'library.upload_too_large' => 'PDFs must be 50 MB or smaller.',
+			'library.pdf_not_found' => 'PDF not found',
+			'library.pdf_load_error' => 'Could not load this PDF',
+			'library.private_pdf_unavailable' => 'This PDF is private or unavailable.',
 			'library.pdf_desc' => 'Description',
 			'library.pdf_author' => 'Author',
 			'library.pdf_url' => 'PDF File URL',
@@ -4470,13 +4510,13 @@ extension on Translations {
 			'library.send_pdf' => 'Send PDF',
 			'library.no_client_pdfs' => 'No PDFs sent by clients yet.',
 			'library.upload_box_title' => 'Click to upload your PDF',
-			'library.upload_box_subtitle' => 'Supported format: PDF (Max 10MB)',
+			'library.upload_box_subtitle' => 'Supported format: PDF (Max 50MB)',
 			'library.pdf_preview' => 'PDF Preview',
 			'library.pages' => 'Pages',
 			'library.change_file' => 'Change File',
 			'library.explore' => 'Explore',
 			'library.visit_profile' => 'Visit profile',
-			'library.no_public_pdfs' => 'No public PDFs uploaded by others yet.',
+			'library.no_public_pdfs' => 'No public PDFs match your search yet.',
 			'library.uploaded_by' => 'Uploaded by',
 			'library.sent_by' => 'Sent by',
 			'library.public_profile' => 'Public Profile',

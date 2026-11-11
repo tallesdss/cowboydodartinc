@@ -32,6 +32,7 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
   Uint8List? _selectedFileBytes;
   String? _selectedFileName;
   double? _selectedFileSize;
+  bool _isPublic = true;
   
   bool _isUploading = false;
 
@@ -72,12 +73,18 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
 
     setState(() => _isUploading = true);
 
+    String? uploadedStoragePath;
     try {
       final userId = ref.read(userStateNotifierProvider).user.idOrNull ?? 'unknown';
       final repo = ref.read(libraryFirebaseRepositoryProvider);
-      
-      final downloadUrl = await repo.uploadPdfFile(
-        fileName: _selectedFileName!,
+
+      if (userId == 'unknown' || repo.currentUserId.isEmpty) {
+        throw Exception('Entre na sua conta antes de enviar um PDF.');
+      }
+
+      final pdfId = repo.newPdfId();
+      uploadedStoragePath = await repo.uploadPdfFile(
+        pdfId: pdfId,
         filePath: _selectedFilePath,
         fileBytes: _selectedFileBytes,
       );
@@ -89,12 +96,14 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
           .toList();
 
       await ref.read(pdfsProvider.notifier).addPdf(
+        id: pdfId,
         title: _titleController.text,
         description: _descController.text,
         categoryIds: _selectedCategoryIds,
         author: _selectedAuthor!.name,
         authorId: _selectedAuthor!.id,
-        fileUrl: downloadUrl,
+        storagePath: uploadedStoragePath,
+        isPublic: _isPublic,
         thumbnailUrl: '',
         tags: tags,
         createdBy: userId,
@@ -109,6 +118,11 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
         context.pop();
       }
     } catch (e) {
+      if (uploadedStoragePath != null) {
+        try {
+          await ref.read(libraryFirebaseRepositoryProvider).deleteUploadedPdfFile(uploadedStoragePath);
+        } catch (_) {}
+      }
       if (mounted) {
         showKasyToast(
           context,
@@ -130,8 +144,17 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
       withData: kIsWeb,
     );
 
+    if (!mounted) return;
     if (result != null && (result.files.single.path != null || result.files.single.bytes != null)) {
       final file = result.files.single;
+      if (file.size > 50 * 1024 * 1024) {
+        showKasyToast(
+          context,
+          title: t.library.upload_too_large,
+          tone: KasyToastTone.warning,
+        );
+        return;
+      }
       setState(() {
         _selectedFilePath = file.path;
         _selectedFileBytes = file.bytes;
@@ -399,6 +422,13 @@ class _ManagePdfsPageState extends ConsumerState<ManagePdfsPage> {
               controller: _tagsController,
               label: t.library.pdf_tags,
               hint: 'Digite as tags separadas por vírgula (ex: Contract, Doc)',
+            ),
+            const SizedBox(height: KasySpacing.lg),
+
+            KasyCheckbox(
+              label: _isPublic ? t.library.pdf_public : t.library.pdf_private,
+              value: _isPublic,
+              onChanged: (value) => setState(() => _isPublic = value),
             ),
             const SizedBox(height: KasySpacing.lg),
 

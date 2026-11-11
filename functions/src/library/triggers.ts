@@ -25,7 +25,7 @@ export const onCommentWritten = onDocumentWritten("comments/{commentId}", async 
 
   commentsSnapshot.forEach((doc) => {
     const data = doc.data();
-    totalRating += (data.rating || data.nota || 0);
+    totalRating += (data.nota ?? data.avaliacao ?? data.rating ?? 0);
   });
 
   const averageRating = count > 0 ? (totalRating / count) : 0;

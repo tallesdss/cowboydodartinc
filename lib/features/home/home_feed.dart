@@ -1,4 +1,5 @@
 import 'package:cowboydodartinc/components/components.dart';
+import 'package:cowboydodartinc/core/states/user_state_notifier.dart';
 import 'package:cowboydodartinc/core/theme/theme.dart';
 import 'package:cowboydodartinc/features/library/providers/library_providers.dart';
 import 'package:cowboydodartinc/i18n/translations.g.dart';
@@ -13,9 +14,9 @@ class HomeFeed extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pdfs = ref.watch(pdfsProvider).value ?? [];
     final favorites = ref.watch(favoritesProvider).value ?? [];
+    final userId = ref.watch(userStateNotifierProvider).user.idOrNull;
 
-    // Filter PDFs sent by clients
-    final clientPdfs = pdfs.where((pdf) => pdf.createdBy == 'cliente').toList();
+    final myPdfs = pdfs.where((pdf) => pdf.createdBy == userId).toList();
 
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
@@ -52,11 +53,11 @@ class HomeFeed extends ConsumerWidget {
                 const SizedBox(height: KasySpacing.lg),
 
                 // PDFs List/Grid
-                if (clientPdfs.isEmpty)
+                if (myPdfs.isEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: KasySpacing.xxl),
                     child: KasyEmptyState(
-                      title: t.library.no_client_pdfs,
+                      title: t.library.no_pdfs,
                       subtitle: t.library.no_comments, // Reuse or fallback subtitle
                       icon: Icons.picture_as_pdf_outlined,
                       action: KasyButton(
@@ -77,9 +78,9 @@ class HomeFeed extends ConsumerWidget {
                       crossAxisSpacing: KasySpacing.md,
                       childAspectRatio: 0.75,
                     ),
-                    itemCount: clientPdfs.length,
+                    itemCount: myPdfs.length,
                     itemBuilder: (context, index) {
-                      final pdf = clientPdfs[index];
+                      final pdf = myPdfs[index];
                       final isFav = favorites.contains(pdf.id);
 
                       return KasyCard(

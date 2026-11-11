@@ -77,23 +77,27 @@ class Pdfs extends _$Pdfs {
   }
 
   Future<void> addPdf({
+    required String id,
     required String title,
     required String description,
     required List<String> categoryIds,
     required String author,
     String? authorId,
-    required String fileUrl,
+    required String storagePath,
+    required bool isPublic,
     required String thumbnailUrl,
     required List<String> tags,
     required String createdBy,
   }) async {
     await ref.read(libraryFirebaseRepositoryProvider).addPdf(
+      id: id,
       title: title,
       description: description,
       categoryIds: categoryIds,
       author: author,
       authorId: authorId,
-      fileUrl: fileUrl,
+      storagePath: storagePath,
+      isPublic: isPublic,
       thumbnailUrl: thumbnailUrl,
       tags: tags,
       createdBy: createdBy,

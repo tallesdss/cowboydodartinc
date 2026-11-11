@@ -160,24 +160,6 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                       ),
                     ),
                     const SizedBox(height: KasySpacing.xs),
-                    GestureDetector(
-                      onTap: () {
-                        if (pdf.createdBy.isNotEmpty) {
-                          context.push('/library/uploader/${pdf.createdBy}');
-                        }
-                      },
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: Text(
-                          'Enviado por: Usuário Cadastrador',
-                          style: context.kasyTextTheme.caption.copyWith(
-                            color: context.colors.primary,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: KasySpacing.xs),
                     // Rating display
                     Row(
                       children: [
@@ -219,12 +201,7 @@ class _PdfDetailPageState extends ConsumerState<PdfDetailPage> {
                 child: KasyButton(
                   label: t.library.read,
                   icon: Icons.chrome_reader_mode,
-                  onPressed: () async {
-                    final uri = Uri.parse(pdf.fileUrl);
-                    if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri, mode: LaunchMode.externalApplication);
-                    }
-                  },
+                  onPressed: () => context.push('/library/pdf/${pdf.id}/read'),
                 ),
               ),
               const SizedBox(width: KasySpacing.md),

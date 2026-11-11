@@ -121,10 +121,12 @@ class PdfDocument {
   final String author;
   final String? authorId;
   final String fileUrl;
+  final String storagePath;
   final String thumbnailUrl;
   final List<String> tags;
   final DateTime createdAt;
   final String createdBy;
+  final bool isPublic;
   final int views;
   final int downloads;
 
@@ -136,10 +138,12 @@ class PdfDocument {
     required this.author,
     this.authorId,
     required this.fileUrl,
+    this.storagePath = '',
     required this.thumbnailUrl,
     required this.tags,
     required this.createdAt,
     required this.createdBy,
+    this.isPublic = true,
     this.views = 0,
     this.downloads = 0,
   });
@@ -152,10 +156,12 @@ class PdfDocument {
     String? author,
     String? authorId,
     String? fileUrl,
+    String? storagePath,
     String? thumbnailUrl,
     List<String>? tags,
     DateTime? createdAt,
     String? createdBy,
+    bool? isPublic,
     int? views,
     int? downloads,
   }) {
@@ -167,10 +173,12 @@ class PdfDocument {
       author: author ?? this.author,
       authorId: authorId ?? this.authorId,
       fileUrl: fileUrl ?? this.fileUrl,
+      storagePath: storagePath ?? this.storagePath,
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
       tags: tags ?? this.tags,
       createdAt: createdAt ?? this.createdAt,
       createdBy: createdBy ?? this.createdBy,
+      isPublic: isPublic ?? this.isPublic,
       views: views ?? this.views,
       downloads: downloads ?? this.downloads,
     );
@@ -185,10 +193,12 @@ class PdfDocument {
       'author': author,
       if (authorId != null) 'authorId': authorId,
       'fileUrl': fileUrl,
+      'storagePath': storagePath,
       'thumbnailUrl': thumbnailUrl,
       'tags': tags,
       'createdAt': createdAt.toIso8601String(),
       'createdBy': createdBy,
+      'isPublic': isPublic,
       'views': views,
       'downloads': downloads,
     };
@@ -203,10 +213,12 @@ class PdfDocument {
       author: map['author'] as String,
       authorId: map['authorId'] as String?,
       fileUrl: map['fileUrl'] as String,
+      storagePath: map['storagePath'] as String? ?? '',
       thumbnailUrl: map['thumbnailUrl'] as String,
       tags: List<String>.from(map['tags'] as List),
       createdAt: DateTime.parse(map['createdAt'] as String),
       createdBy: map['createdBy'] as String,
+      isPublic: map['isPublic'] as bool? ?? true,
       views: map['views'] as int? ?? 0,
       downloads: map['downloads'] as int? ?? 0,
     );

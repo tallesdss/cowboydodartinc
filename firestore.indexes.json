@@ -1,5 +1,22 @@
 {
-    "indexes": [],
+    "indexes": [
+        {
+            "collectionGroup": "pdfs",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {"fieldPath": "is_public", "order": "ASCENDING"},
+                {"fieldPath": "criado_em", "order": "DESCENDING"}
+            ]
+        },
+        {
+            "collectionGroup": "pdfs",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {"fieldPath": "autor_id", "order": "ASCENDING"},
+                {"fieldPath": "criado_em", "order": "DESCENDING"}
+            ]
+        }
+    ],
     "fieldOverrides": [
         {
             "collectionGroup": "votes",

@@ -11,6 +11,19 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') == 'admin';
     }
 
+    function ownsPdf() {
+      return request.auth != null
+        && resource.data.get('autor_id', '') == request.auth.uid;
+    }
+
+    function canReadPdf(pdfId) {
+      return exists(/databases/$(database)/documents/pdfs/$(pdfId))
+        && (isAdmin()
+          || get(/databases/$(database)/documents/pdfs/$(pdfId)).data.get('is_public', true) == true
+          || (request.auth != null
+            && get(/databases/$(database)/documents/pdfs/$(pdfId)).data.get('autor_id', '') == request.auth.uid));
+    }
+
     match /users/{id} {
       allow read, delete: if request.auth.uid != null && request.auth.uid == id;
       // Owners update their own profile, but NEVER their own `role`
@@ -83,18 +96,32 @@ service cloud.firestore {
       allow create, update, delete: if request.auth.uid != null;
     }
     match /pdfs/{pdfId} {
-      allow read: if request.auth.uid != null;
-      allow create: if isAdmin() || (request.auth.uid != null && request.resource.data.autor_id == request.auth.uid);
-      allow update, delete: if isAdmin() || (request.auth.uid != null && resource.data.autor_id == request.auth.uid);
+      allow read: if isAdmin() || resource.data.get('is_public', true) == true || ownsPdf();
+      allow create: if request.auth != null
+        && request.resource.data.autor_id == request.auth.uid
+        && request.resource.data.is_public is bool
+        && request.resource.data.storage_path == 'community_pdfs/' + request.auth.uid + '/' + pdfId;
+      allow update: if isAdmin() || (ownsPdf()
+        && request.resource.data.autor_id == resource.data.autor_id
+        && request.resource.data.storage_path == resource.data.storage_path
+        && request.resource.data.is_public is bool);
+      allow delete: if isAdmin() || ownsPdf();
     }
     match /comments/{commentId} {
-      allow read: if request.auth.uid != null;
-      allow create: if request.auth.uid != null && request.resource.data.usuario_id == request.auth.uid;
-      allow update, delete: if isAdmin() || (request.auth.uid != null && resource.data.usuario_id == request.auth.uid);
+      allow read: if request.auth != null && canReadPdf(resource.data.get('pdf_id', ''));
+      allow create: if request.auth != null
+        && request.resource.data.usuario_id == request.auth.uid
+        && canReadPdf(request.resource.data.get('pdf_id', ''));
+      allow update, delete: if isAdmin() || (request.auth != null
+        && resource.data.usuario_id == request.auth.uid
+        && canReadPdf(resource.data.get('pdf_id', '')));
     }
     match /bookmarks/{bookmarkId} {
-      allow read, delete: if request.auth.uid != null && resource.data.usuario_id == request.auth.uid;
-      allow create: if request.auth.uid != null && request.resource.data.usuario_id == request.auth.uid;
+      allow read, delete: if request.auth != null
+        && resource.data.usuario_id == request.auth.uid;
+      allow create: if request.auth != null
+        && request.resource.data.usuario_id == request.auth.uid
+        && canReadPdf(request.resource.data.get('pdf_id', ''));
       allow update: if false;
     }
 
